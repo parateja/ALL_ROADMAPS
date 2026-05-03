@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #0a0a1a;
+    --bg2: #0d0d2b;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.10);
+    --glass-hover: rgba(255,255,255,0.08);
+    --beginner: #00f5c4;
+    --beginner-glow: rgba(0,245,196,0.3);
+    --intermediate: #f5a623;
+    --intermediate-glow: rgba(245,166,35,0.3);
+    --advanced: #f5365c;
+    --advanced-glow: rgba(245,54,92,0.3);
+    --accent: #7b61ff;
+    --accent2: #00c9ff;
+    --h1-color: #00f5c4;
+    --h2-color: #f5a623;
+    --h3-color: #7b61ff;
+    --h4-color: #00c9ff;
+    --text: #c8d6e5;
+    --subtext: rgba(200,214,229,0.7);
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg1);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(123,97,255,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(0,245,196,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(0,201,255,0.05) 0%, transparent 70%);
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* STAR BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 40%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.35) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .site-header {
+    text-align: center;
+    padding: 60px 0 50px;
+    position: relative;
+  }
+
+  .js-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f7df1e, #e6c800);
+    color: #000;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 2.2rem;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(247,223,30,0.5), 0 0 80px rgba(247,223,30,0.2);
+    margin-bottom: 24px;
+    animation: badgePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(247,223,30,0.5), 0 0 80px rgba(247,223,30,0.2); }
+    50% { box-shadow: 0 0 60px rgba(247,223,30,0.8), 0 0 120px rgba(247,223,30,0.4); }
+  }
+
+  .site-header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00f5c4, #7b61ff, #00c9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+
+  .site-header p {
+    color: var(--subtext);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  /* DOWNLOAD BTN */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    background: linear-gradient(135deg, rgba(123,97,255,0.3), rgba(0,201,255,0.3));
+    border: 1px solid rgba(123,97,255,0.5);
+    color: var(--white);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(123,97,255,0.2);
+  }
+
+  .download-btn:hover {
+    background: linear-gradient(135deg, rgba(123,97,255,0.5), rgba(0,201,255,0.5));
+    box-shadow: 0 0 40px rgba(123,97,255,0.5);
+    transform: translateY(-2px);
+  }
+
+  /* NAV */
+  .nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .nav-pill {
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+  }
+
+  .nav-pill.beginner {
+    color: var(--beginner);
+    border-color: rgba(0,245,196,0.3);
+    background: rgba(0,245,196,0.08);
+  }
+  .nav-pill.beginner:hover { background: rgba(0,245,196,0.2); box-shadow: 0 0 20px var(--beginner-glow); }
+
+  .nav-pill.intermediate {
+    color: var(--intermediate);
+    border-color: rgba(245,166,35,0.3);
+    background: rgba(245,166,35,0.08);
+  }
+  .nav-pill.intermediate:hover { background: rgba(245,166,35,0.2); box-shadow: 0 0 20px var(--intermediate-glow); }
+
+  .nav-pill.advanced {
+    color: var(--advanced);
+    border-color: rgba(245,54,92,0.3);
+    background: rgba(245,54,92,0.08);
+  }
+  .nav-pill.advanced:hover { background: rgba(245,54,92,0.2); box-shadow: 0 0 20px var(--advanced-glow); }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 70px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 36px;
+    padding: 24px 32px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background: linear-gradient(135deg, currentColor, transparent);
+  }
+
+  .section-header.beginner {
+    background: rgba(0,245,196,0.06);
+    border: 1px solid rgba(0,245,196,0.2);
+    box-shadow: 0 0 40px rgba(0,245,196,0.06), inset 0 1px 0 rgba(0,245,196,0.15);
+  }
+
+  .section-header.intermediate {
+    background: rgba(245,166,35,0.06);
+    border: 1px solid rgba(245,166,35,0.2);
+    box-shadow: 0 0 40px rgba(245,166,35,0.06), inset 0 1px 0 rgba(245,166,35,0.15);
+  }
+
+  .section-header.advanced {
+    background: rgba(245,54,92,0.06);
+    border: 1px solid rgba(245,54,92,0.2);
+    box-shadow: 0 0 40px rgba(245,54,92,0.06), inset 0 1px 0 rgba(245,54,92,0.15);
+  }
+
+  .section-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .section-header.beginner .section-title { color: var(--beginner); text-shadow: 0 0 20px var(--beginner-glow); }
+  .section-header.intermediate .section-title { color: var(--intermediate); text-shadow: 0 0 20px var(--intermediate-glow); }
+  .section-header.advanced .section-title { color: var(--advanced); text-shadow: 0 0 20px var(--advanced-glow); }
+
+  .section-subtitle {
+    color: var(--subtext);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  /* TOPIC CARD */
+  .topic-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .topic-card:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .topic-card.beginner-card { border-left: 3px solid var(--beginner); }
+  .topic-card.intermediate-card { border-left: 3px solid var(--intermediate); }
+  .topic-card.advanced-card { border-left: 3px solid var(--advanced); }
+
+  .topic-header {
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .topic-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topic-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  .beginner-card .topic-num { background: rgba(0,245,196,0.15); color: var(--beginner); }
+  .intermediate-card .topic-num { background: rgba(245,166,35,0.15); color: var(--intermediate); }
+  .advanced-card .topic-num { background: rgba(245,54,92,0.15); color: var(--advanced); }
+
+  /* H2 style for topic titles */
+  .topic-main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .beginner-card .topic-main-title { color: var(--h2-color); }
+  .intermediate-card .topic-main-title { color: var(--h2-color); }
+  .advanced-card .topic-main-title { color: var(--h2-color); }
+
+  .chevron {
+    font-size: 0.85rem;
+    color: var(--subtext);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .topic-card.open .chevron { transform: rotate(180deg); }
+
+  .topic-body {
+    display: none;
+    padding: 0 24px 22px;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 0;
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  /* SUBTOPIC GROUP */
+  .subtopic-group {
+    margin-top: 18px;
+  }
+
+  /* H3 style */
+  .subtopic-group-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--h3-color);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(123,97,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subtopic-group-title::before {
+    content: '▸';
+    color: var(--h3-color);
+    font-size: 0.8rem;
+  }
+
+  /* H4 style */
+  .sub-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--h4-color);
+    letter-spacing: 1px;
+    margin: 12px 0 8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sub-group-title::before {
+    content: '◆';
+    font-size: 0.55rem;
+    color: var(--h4-color);
+  }
+
+  .subtopic-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 7px;
+  }
+
+  .subtopic-list li {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: var(--text);
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .subtopic-list li:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.1);
+    transform: translateX(3px);
+  }
+
+  .subtopic-list li::before {
+    content: '→';
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .beginner-card .subtopic-list li::before { color: var(--beginner); }
+  .intermediate-card .subtopic-list li::before { color: var(--intermediate); }
+  .advanced-card .subtopic-list li::before { color: var(--advanced); }
+
+  /* FOOTER */
+  .site-footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--subtext);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeInUp 0.5s ease both; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg1); }
+  ::-webkit-scrollbar-thumb { background: rgba(123,97,255,0.4); border-radius: 3px; }
+
+  /* GLOW LINES */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    margin: 10px 0 40px;
+    opacity: 0.4;
+  }
+
+  .code-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--h4-color);
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="js-badge">JS</div>
+    <h1>JavaScript Complete Roadmap</h1>
+    <p>From Zero to Advanced — Every Topic, Every Subtopic, Nothing Missed</p>
+    <a href="#" class="download-btn" onclick="downloadPage(); return false;">
+      ⬇ DOWNLOAD ROADMAP
+    </a>
+  </header>
+
+  <div class="glow-line"></div>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <a href="#beginner" class="nav-pill beginner">🟢 Beginner</a>
+    <a href="#intermediate" class="nav-pill intermediate">🟠 Intermediate</a>
+    <a href="#advanced" class="nav-pill advanced">🔴 Advanced</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--                    BEGINNER SECTION                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section" id="beginner">
+    <div class="section-header beginner">
+      <span class="section-icon">🟢</span>
+      <div>
+        <div class="section-title">BEGINNER</div>
+        <div class="section-subtitle">Core Foundations · 15 Main Topics</div>
+      </div>
+    </div>
+
+    <!-- 1. Introduction to JavaScript -->
+    <div class="topic-card beginner-card" id="b1">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">01</span>
+          <span class="topic-main-title">Introduction to JavaScript</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Overview</div>
+          <ul class="subtopic-list">
+            <li>What is JavaScript?</li>
+            <li>History & Evolution of JavaScript</li>
+            <li>JavaScript vs HTML vs CSS</li>
+            <li>How JavaScript works in a browser</li>
+            <li>JavaScript Engine (V8, SpiderMonkey)</li>
+            <li>Client-side vs Server-side JavaScript</li>
+            <li>ECMAScript & JavaScript versions (ES5, ES6+)</li>
+            <li>JavaScript use cases (Web, Mobile, Desktop, Server)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Setting Up Environment</div>
+          <ul class="subtopic-list">
+            <li>Browser DevTools (Console, Sources, Network)</li>
+            <li>Text Editors (VS Code setup)</li>
+            <li>Installing Node.js & npm</li>
+            <li>Running JS in browser vs terminal</li>
+            <li>First "Hello World" program</li>
+            <li>Linking JS to HTML (&lt;script&gt; tag)</li>
+            <li>External vs Inline vs Internal JS</li>
+            <li>defer & async attributes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Variables & Data Types -->
+    <div class="topic-card beginner-card" id="b2">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">02</span>
+          <span class="topic-main-title">Variables & Data Types</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Variables</div>
+          <ul class="subtopic-list">
+            <li>var — declaration & hoisting</li>
+            <li>let — block scoping</li>
+            <li>const — constants & immutability</li>
+            <li>var vs let vs const</li>
+            <li>Variable naming rules & conventions</li>
+            <li>Hoisting behavior</li>
+            <li>Temporal Dead Zone (TDZ)</li>
+            <li>Re-declaration & Re-assignment rules</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Primitive Data Types</div>
+          <ul class="subtopic-list">
+            <li>Number (integer & float)</li>
+            <li>String</li>
+            <li>Boolean</li>
+            <li>undefined</li>
+            <li>null</li>
+            <li>Symbol (ES6)</li>
+            <li>BigInt (ES2020)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Non-Primitive Types</div>
+          <ul class="subtopic-list">
+            <li>Object</li>
+            <li>Array</li>
+            <li>Function</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Type System</div>
+          <ul class="subtopic-list">
+            <li>typeof operator</li>
+            <li>Type Coercion (implicit & explicit)</li>
+            <li>Type Conversion (parseInt, parseFloat, String(), Number(), Boolean())</li>
+            <li>Truthy & Falsy values</li>
+            <li>NaN & Infinity</li>
+            <li>null vs undefined</li>
+            <li>Dynamic typing in JS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Operators -->
+    <div class="topic-card beginner-card" id="b3">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">03</span>
+          <span class="topic-main-title">Operators</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">All Operator Types</div>
+          <ul class="subtopic-list">
+            <li>Arithmetic Operators (+, -, *, /, %, **)</li>
+            <li>Assignment Operators (=, +=, -=, *=, /=, %=, **=)</li>
+            <li>Comparison Operators (==, ===, !=, !==, &lt;, &gt;, &lt;=, &gt;=)</li>
+            <li>Logical Operators (&&, ||, !)</li>
+            <li>Bitwise Operators (&, |, ^, ~, &lt;&lt;, &gt;&gt;, &gt;&gt;&gt;)</li>
+            <li>String Operators (concatenation)</li>
+            <li>Ternary Operator (condition ? a : b)</li>
+            <li>typeof Operator</li>
+            <li>instanceof Operator</li>
+            <li>in Operator</li>
+            <li>delete Operator</li>
+            <li>void Operator</li>
+            <li>Nullish Coalescing (??) ES2020</li>
+            <li>Optional Chaining (?.) ES2020</li>
+            <li>Spread Operator (...)</li>
+            <li>Comma Operator</li>
+            <li>Logical Assignment Operators (&&=, ||=, ??=) ES2021</li>
+            <li>Operator Precedence & Associativity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Control Flow -->
+    <div class="topic-card beginner-card" id="b4">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">04</span>
+          <span class="topic-main-title">Control Flow & Conditionals</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Conditional Statements</div>
+          <ul class="subtopic-list">
+            <li>if statement</li>
+            <li>if...else statement</li>
+            <li>if...else if...else chain</li>
+            <li>Nested if statements</li>
+            <li>switch statement</li>
+            <li>switch with fall-through</li>
+            <li>switch with default case</li>
+            <li>Ternary operator as conditional</li>
+            <li>Short-circuit evaluation</li>
+            <li>Nullish coalescing for defaults</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Loops</div>
+          <ul class="subtopic-list">
+            <li>for loop</li>
+            <li>while loop</li>
+            <li>do...while loop</li>
+            <li>for...in loop (object keys)</li>
+            <li>for...of loop (iterables)</li>
+            <li>Nested loops</li>
+            <li>break statement</li>
+            <li>continue statement</li>
+            <li>Labeled statements</li>
+            <li>Infinite loops & prevention</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Exception Handling</div>
+          <ul class="subtopic-list">
+            <li>try...catch</li>
+            <li>finally block</li>
+            <li>throw statement</li>
+            <li>Error types (TypeError, RangeError, ReferenceError, SyntaxError, URIError, EvalError)</li>
+            <li>Custom Error classes</li>
+            <li>Error object properties (message, name, stack)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Functions -->
+    <div class="topic-card beginner-card" id="b5">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">05</span>
+          <span class="topic-main-title">Functions</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Function Declarations & Expressions</div>
+          <ul class="subtopic-list">
+            <li>Function Declaration (function keyword)</li>
+            <li>Function Expression (anonymous)</li>
+            <li>Named Function Expression</li>
+            <li>Arrow Functions (=>) ES6</li>
+            <li>Function Hoisting</li>
+            <li>Immediately Invoked Function Expression (IIFE)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Parameters & Arguments</div>
+          <ul class="subtopic-list">
+            <li>Parameters vs Arguments</li>
+            <li>Default Parameters ES6</li>
+            <li>Rest Parameters (...args)</li>
+            <li>arguments object</li>
+            <li>Passing by value vs by reference</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Return & Scope</div>
+          <ul class="subtopic-list">
+            <li>return statement</li>
+            <li>Returning multiple values (object/array)</li>
+            <li>Global scope</li>
+            <li>Function scope</li>
+            <li>Block scope</li>
+            <li>Lexical scope</li>
+            <li>Scope chain</li>
+            <li>Closures (basic introduction)</li>
+            <li>Pure functions</li>
+            <li>Side effects</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Special Functions</div>
+          <ul class="subtopic-list">
+            <li>Callback functions</li>
+            <li>Higher-order functions</li>
+            <li>Recursive functions</li>
+            <li>Generator functions (function*)</li>
+            <li>Async functions (intro)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Arrays -->
+    <div class="topic-card beginner-card" id="b6">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">06</span>
+          <span class="topic-main-title">Arrays</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Array Basics</div>
+          <ul class="subtopic-list">
+            <li>Creating arrays (literal, Array constructor)</li>
+            <li>Accessing elements (index)</li>
+            <li>Array length property</li>
+            <li>Modifying elements</li>
+            <li>Multi-dimensional arrays</li>
+            <li>Sparse arrays</li>
+            <li>Array destructuring</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Array Methods — Mutating</div>
+          <ul class="subtopic-list">
+            <li>push() & pop()</li>
+            <li>shift() & unshift()</li>
+            <li>splice()</li>
+            <li>reverse()</li>
+            <li>sort()</li>
+            <li>fill()</li>
+            <li>copyWithin()</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Array Methods — Non-Mutating</div>
+          <ul class="subtopic-list">
+            <li>map()</li>
+            <li>filter()</li>
+            <li>reduce() & reduceRight()</li>
+            <li>forEach()</li>
+            <li>find() & findIndex()</li>
+            <li>findLast() & findLastIndex()</li>
+            <li>some() & every()</li>
+            <li>includes()</li>
+            <li>indexOf() & lastIndexOf()</li>
+            <li>slice()</li>
+            <li>concat()</li>
+            <li>join()</li>
+            <li>flat() & flatMap()</li>
+            <li>Array.from()</li>
+            <li>Array.of()</li>
+            <li>Array.isArray()</li>
+            <li>entries(), keys(), values()</li>
+            <li>at()</li>
+            <li>toSorted(), toReversed(), toSpliced(), with() ES2023</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Array Patterns</div>
+          <ul class="subtopic-list">
+            <li>Spread in arrays</li>
+            <li>Chaining array methods</li>
+            <li>Cloning arrays</li>
+            <li>Merging arrays</li>
+            <li>Array iteration patterns</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Objects -->
+    <div class="topic-card beginner-card" id="b7">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">07</span>
+          <span class="topic-main-title">Objects</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Object Basics</div>
+          <ul class="subtopic-list">
+            <li>Object literal syntax</li>
+            <li>Properties & values</li>
+            <li>Accessing properties (dot & bracket notation)</li>
+            <li>Adding & deleting properties</li>
+            <li>Property shorthand ES6</li>
+            <li>Computed property names ES6</li>
+            <li>Nested objects</li>
+            <li>Object destructuring</li>
+            <li>Destructuring with defaults & renaming</li>
+            <li>Spread operator with objects</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Object Methods & Properties</div>
+          <ul class="subtopic-list">
+            <li>Object.keys()</li>
+            <li>Object.values()</li>
+            <li>Object.entries()</li>
+            <li>Object.assign()</li>
+            <li>Object.freeze() & Object.seal()</li>
+            <li>Object.create()</li>
+            <li>Object.defineProperty()</li>
+            <li>Object.defineProperties()</li>
+            <li>Object.getOwnPropertyNames()</li>
+            <li>Object.fromEntries()</li>
+            <li>Object.hasOwn() ES2022</li>
+            <li>hasOwnProperty()</li>
+            <li>in operator</li>
+            <li>Property enumeration</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Methods Inside Objects</div>
+          <ul class="subtopic-list">
+            <li>Defining methods in objects</li>
+            <li>Method shorthand ES6</li>
+            <li>this keyword in objects</li>
+            <li>Getter & Setter (get, set)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Strings -->
+    <div class="topic-card beginner-card" id="b8">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">08</span>
+          <span class="topic-main-title">Strings</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">String Basics & Methods</div>
+          <ul class="subtopic-list">
+            <li>String literals (single, double, backticks)</li>
+            <li>Template Literals ES6</li>
+            <li>String interpolation</li>
+            <li>Tagged template literals</li>
+            <li>Escape characters</li>
+            <li>Unicode & special characters</li>
+            <li>length property</li>
+            <li>Accessing characters (index, at())</li>
+            <li>charAt() & charCodeAt()</li>
+            <li>indexOf() & lastIndexOf()</li>
+            <li>includes()</li>
+            <li>startsWith() & endsWith()</li>
+            <li>slice() & substring()</li>
+            <li>toUpperCase() & toLowerCase()</li>
+            <li>trim(), trimStart(), trimEnd()</li>
+            <li>padStart() & padEnd()</li>
+            <li>repeat()</li>
+            <li>replace() & replaceAll()</li>
+            <li>split()</li>
+            <li>concat()</li>
+            <li>match() & matchAll()</li>
+            <li>search()</li>
+            <li>String.fromCharCode()</li>
+            <li>String.raw()</li>
+            <li>Strings are immutable</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Numbers & Math -->
+    <div class="topic-card beginner-card" id="b9">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">09</span>
+          <span class="topic-main-title">Numbers & Math</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Number Methods & Properties</div>
+          <ul class="subtopic-list">
+            <li>Number() conversion</li>
+            <li>parseInt() & parseFloat()</li>
+            <li>toFixed() & toPrecision()</li>
+            <li>toString() (with radix)</li>
+            <li>Number.isInteger()</li>
+            <li>Number.isFinite()</li>
+            <li>Number.isNaN()</li>
+            <li>Number.isSafeInteger()</li>
+            <li>Number.MAX_VALUE / MIN_VALUE / MAX_SAFE_INTEGER</li>
+            <li>Number.EPSILON</li>
+            <li>Number.POSITIVE_INFINITY / NEGATIVE_INFINITY</li>
+            <li>NaN behavior</li>
+            <li>Floating point precision issues</li>
+            <li>BigInt arithmetic</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Math Object</div>
+          <ul class="subtopic-list">
+            <li>Math.PI & Math.E</li>
+            <li>Math.round(), Math.ceil(), Math.floor()</li>
+            <li>Math.trunc()</li>
+            <li>Math.abs()</li>
+            <li>Math.max() & Math.min()</li>
+            <li>Math.pow() & Math.sqrt()</li>
+            <li>Math.cbrt()</li>
+            <li>Math.random()</li>
+            <li>Math.log(), Math.log2(), Math.log10()</li>
+            <li>Math.sign()</li>
+            <li>Math.hypot()</li>
+            <li>Trigonometric methods (sin, cos, tan, etc.)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. DOM Manipulation -->
+    <div class="topic-card beginner-card" id="b10">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">10</span>
+          <span class="topic-main-title">DOM Manipulation</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">DOM Structure</div>
+          <ul class="subtopic-list">
+            <li>What is the DOM?</li>
+            <li>DOM tree & nodes</li>
+            <li>document object</li>
+            <li>window object</li>
+            <li>Node types (Element, Text, Comment, etc.)</li>
+            <li>Parent, Child, Sibling relationships</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Selecting Elements</div>
+          <ul class="subtopic-list">
+            <li>getElementById()</li>
+            <li>getElementsByClassName()</li>
+            <li>getElementsByTagName()</li>
+            <li>querySelector()</li>
+            <li>querySelectorAll()</li>
+            <li>closest()</li>
+            <li>matches()</li>
+            <li>HTMLCollection vs NodeList</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Manipulating Elements</div>
+          <ul class="subtopic-list">
+            <li>innerHTML & innerText & textContent</li>
+            <li>outerHTML</li>
+            <li>createElement()</li>
+            <li>appendChild() & append()</li>
+            <li>prepend()</li>
+            <li>insertBefore()</li>
+            <li>insertAdjacentHTML() / Element()</li>
+            <li>removeChild() & remove()</li>
+            <li>replaceChild() & replaceWith()</li>
+            <li>cloneNode()</li>
+            <li>getAttribute() & setAttribute()</li>
+            <li>removeAttribute()</li>
+            <li>dataset (data-* attributes)</li>
+            <li>classList API (add, remove, toggle, contains, replace)</li>
+            <li>className property</li>
+            <li>style property (inline styles)</li>
+            <li>getComputedStyle()</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">DOM Traversal</div>
+          <ul class="subtopic-list">
+            <li>parentNode & parentElement</li>
+            <li>children & childNodes</li>
+            <li>firstChild / lastChild / firstElementChild / lastElementChild</li>
+            <li>nextSibling / previousSibling / nextElementSibling / previousElementSibling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Events -->
+    <div class="topic-card beginner-card" id="b11">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">11</span>
+          <span class="topic-main-title">Events</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Event Basics</div>
+          <ul class="subtopic-list">
+            <li>addEventListener()</li>
+            <li>removeEventListener()</li>
+            <li>Event object & properties</li>
+            <li>event.target vs event.currentTarget</li>
+            <li>Inline HTML event handlers</li>
+            <li>DOM property event handlers (onclick, etc.)</li>
+            <li>Once option in addEventListener</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Event Types</div>
+          <ul class="subtopic-list">
+            <li>Mouse events (click, dblclick, mousedown, mouseup, mousemove, mouseover, mouseout, mouseenter, mouseleave, contextmenu)</li>
+            <li>Keyboard events (keydown, keyup, keypress)</li>
+            <li>Form events (submit, change, input, focus, blur, reset, select)</li>
+            <li>Window events (load, DOMContentLoaded, resize, scroll, unload, beforeunload)</li>
+            <li>Touch events (touchstart, touchend, touchmove, touchcancel)</li>
+            <li>Drag events (drag, dragstart, dragend, dragover, drop)</li>
+            <li>Clipboard events (copy, cut, paste)</li>
+            <li>Media events (play, pause, ended, timeupdate)</li>
+            <li>Animation & Transition events</li>
+            <li>Custom Events (CustomEvent API)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Event Flow</div>
+          <ul class="subtopic-list">
+            <li>Event bubbling</li>
+            <li>Event capturing</li>
+            <li>stopPropagation()</li>
+            <li>stopImmediatePropagation()</li>
+            <li>preventDefault()</li>
+            <li>Event delegation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. BOM (Browser Object Model) -->
+    <div class="topic-card beginner-card" id="b12">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">12</span>
+          <span class="topic-main-title">BOM — Browser Object Model</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Window & Related Objects</div>
+          <ul class="subtopic-list">
+            <li>window object overview</li>
+            <li>window.alert(), confirm(), prompt()</li>
+            <li>window.open() & close()</li>
+            <li>window.innerWidth / innerHeight</li>
+            <li>window.outerWidth / outerHeight</li>
+            <li>window.scrollX / scrollY</li>
+            <li>window.scrollTo() / scrollBy()</li>
+            <li>window.print()</li>
+            <li>location object (href, pathname, host, hash, search, origin)</li>
+            <li>location.assign(), replace(), reload()</li>
+            <li>history object (back, forward, go, pushState, replaceState)</li>
+            <li>navigator object (userAgent, language, platform, onLine, geolocation)</li>
+            <li>screen object (width, height, availWidth, availHeight)</li>
+            <li>Timers — setTimeout(), clearTimeout()</li>
+            <li>Timers — setInterval(), clearInterval()</li>
+            <li>requestAnimationFrame() & cancelAnimationFrame()</li>
+            <li>queueMicrotask()</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Date & Time -->
+    <div class="topic-card beginner-card" id="b13">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">13</span>
+          <span class="topic-main-title">Date & Time</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Date Object</div>
+          <ul class="subtopic-list">
+            <li>new Date() — creating dates</li>
+            <li>Date.now()</li>
+            <li>Date.parse()</li>
+            <li>getFullYear(), getMonth(), getDate()</li>
+            <li>getHours(), getMinutes(), getSeconds(), getMilliseconds()</li>
+            <li>getDay() (day of week)</li>
+            <li>getTime() — timestamp</li>
+            <li>getTimezoneOffset()</li>
+            <li>setFullYear(), setMonth(), setDate() etc.</li>
+            <li>toLocaleDateString() & toLocaleTimeString()</li>
+            <li>toISOString()</li>
+            <li>toUTCString()</li>
+            <li>Intl.DateTimeFormat API</li>
+            <li>Date arithmetic</li>
+            <li>Comparing dates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Regular Expressions -->
+    <div class="topic-card beginner-card" id="b14">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">14</span>
+          <span class="topic-main-title">Regular Expressions</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Regex Fundamentals</div>
+          <ul class="subtopic-list">
+            <li>Regex literal syntax /pattern/flags</li>
+            <li>new RegExp() constructor</li>
+            <li>Flags: g, i, m, s, u, y, d</li>
+            <li>Character classes: \d, \w, \s, \D, \W, \S</li>
+            <li>Anchors: ^ and $</li>
+            <li>Quantifiers: *, +, ?, {n}, {n,}, {n,m}</li>
+            <li>Greedy vs Lazy quantifiers</li>
+            <li>Character sets [ ] and ranges</li>
+            <li>Negated character sets [^]</li>
+            <li>Dot (.) metacharacter</li>
+            <li>Alternation (|)</li>
+            <li>Groups: capturing ( ), non-capturing (?:)</li>
+            <li>Named capturing groups (?&lt;name&gt;)</li>
+            <li>Backreferences \1, \2</li>
+            <li>Lookahead (?=) and negative lookahead (?!)</li>
+            <li>Lookbehind (?&lt;=) and negative lookbehind (?&lt;!)</li>
+            <li>test() method</li>
+            <li>exec() method</li>
+            <li>match(), matchAll(), replace(), replaceAll(), search(), split() with regex</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. JSON -->
+    <div class="topic-card beginner-card" id="b15">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">15</span>
+          <span class="topic-main-title">JSON</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">JSON Fundamentals</div>
+          <ul class="subtopic-list">
+            <li>What is JSON?</li>
+            <li>JSON data types</li>
+            <li>JSON syntax rules</li>
+            <li>JSON.parse() — string to object</li>
+            <li>JSON.stringify() — object to string</li>
+            <li>JSON.stringify() with replacer & space</li>
+            <li>JSON.parse() with reviver</li>
+            <li>Handling nested JSON</li>
+            <li>JSON vs JS objects differences</li>
+            <li>Deep cloning with JSON</li>
+            <li>JSON limitations (undefined, functions, circular refs)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- end beginner -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--                  INTERMEDIATE SECTION                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section" id="intermediate">
+    <div class="section-header intermediate">
+      <span class="section-icon">🟠</span>
+      <div>
+        <div class="section-title">INTERMEDIATE</div>
+        <div class="section-subtitle">Deep Dive Concepts · 15 Main Topics</div>
+      </div>
+    </div>
+
+    <!-- 1. Scope, Closures & Hoisting -->
+    <div class="topic-card intermediate-card" id="i1">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">01</span>
+          <span class="topic-main-title">Scope, Closures & Hoisting</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Scope Deep Dive</div>
+          <ul class="subtopic-list">
+            <li>Lexical environment</li>
+            <li>Execution context (Global, Function, Block)</li>
+            <li>Execution context stack (Call Stack)</li>
+            <li>Variable environment</li>
+            <li>Scope chain lookup</li>
+            <li>Global vs local scope conflicts</li>
+            <li>Module scope</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Hoisting</div>
+          <ul class="subtopic-list">
+            <li>Variable hoisting (var)</li>
+            <li>Function declaration hoisting</li>
+            <li>Function expression hoisting</li>
+            <li>let/const in Temporal Dead Zone</li>
+            <li>Class hoisting</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Closures</div>
+          <ul class="subtopic-list">
+            <li>What is a closure?</li>
+            <li>How closures capture variables</li>
+            <li>Closure in loops (classic var bug)</li>
+            <li>Practical closure patterns</li>
+            <li>Memoization using closures</li>
+            <li>Private variables via closures</li>
+            <li>Module pattern with closures</li>
+            <li>Closure memory considerations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. this Keyword -->
+    <div class="topic-card intermediate-card" id="i2">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">02</span>
+          <span class="topic-main-title">this Keyword</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">this Binding Rules</div>
+          <ul class="subtopic-list">
+            <li>Default binding (global object / undefined in strict)</li>
+            <li>Implicit binding (object method)</li>
+            <li>Explicit binding: call(), apply(), bind()</li>
+            <li>new binding (constructor)</li>
+            <li>Arrow functions & lexical this</li>
+            <li>this in class methods</li>
+            <li>this in callbacks</li>
+            <li>this in event handlers</li>
+            <li>this in setInterval/setTimeout</li>
+            <li>Losing this & fix patterns</li>
+            <li>globalThis (ES2020)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Prototypes & Inheritance -->
+    <div class="topic-card intermediate-card" id="i3">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">03</span>
+          <span class="topic-main-title">Prototypes & Prototype-based Inheritance</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Prototype System</div>
+          <ul class="subtopic-list">
+            <li>__proto__ vs prototype property</li>
+            <li>Prototype chain</li>
+            <li>Object.getPrototypeOf()</li>
+            <li>Object.setPrototypeOf()</li>
+            <li>hasOwnProperty() vs inherited</li>
+            <li>Property shadowing</li>
+            <li>Object.create() for prototype setup</li>
+            <li>Constructor functions</li>
+            <li>new keyword internals</li>
+            <li>instanceof operator</li>
+            <li>Function.prototype</li>
+            <li>Prototype pollution (security)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Classes (ES6+) -->
+    <div class="topic-card intermediate-card" id="i4">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">04</span>
+          <span class="topic-main-title">Classes (ES6+)</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Class Features</div>
+          <ul class="subtopic-list">
+            <li>class declaration & expression</li>
+            <li>constructor method</li>
+            <li>Instance methods</li>
+            <li>Static methods & properties</li>
+            <li>Getters & setters in class</li>
+            <li>extends keyword (inheritance)</li>
+            <li>super keyword (parent constructor & methods)</li>
+            <li>Private fields (#field) ES2022</li>
+            <li>Private methods (#method()) ES2022</li>
+            <li>Public class fields</li>
+            <li>Static private fields & methods</li>
+            <li>Class hoisting behavior</li>
+            <li>instanceof with classes</li>
+            <li>Abstract class pattern</li>
+            <li>Mixins pattern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Asynchronous JavaScript -->
+    <div class="topic-card intermediate-card" id="i5">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">05</span>
+          <span class="topic-main-title">Asynchronous JavaScript</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Event Loop & Concurrency</div>
+          <ul class="subtopic-list">
+            <li>JavaScript single-threaded model</li>
+            <li>Call Stack</li>
+            <li>Web APIs / Node APIs</li>
+            <li>Callback Queue (Task Queue / Macrotask Queue)</li>
+            <li>Microtask Queue</li>
+            <li>Event Loop mechanism</li>
+            <li>Microtasks vs Macrotasks priority</li>
+            <li>Starvation of macrotasks</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Callbacks</div>
+          <ul class="subtopic-list">
+            <li>Callback pattern</li>
+            <li>Callback Hell (Pyramid of Doom)</li>
+            <li>Error-first callbacks (Node.js convention)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Promises</div>
+          <ul class="subtopic-list">
+            <li>What is a Promise?</li>
+            <li>Promise states: pending, fulfilled, rejected</li>
+            <li>new Promise() constructor (resolve, reject)</li>
+            <li>.then() & .catch() & .finally()</li>
+            <li>Promise chaining</li>
+            <li>Returning promises from .then()</li>
+            <li>Promise.resolve() & Promise.reject()</li>
+            <li>Promise.all()</li>
+            <li>Promise.allSettled()</li>
+            <li>Promise.any()</li>
+            <li>Promise.race()</li>
+            <li>Promisifying callbacks</li>
+            <li>Unhandled promise rejections</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Async / Await</div>
+          <ul class="subtopic-list">
+            <li>async function syntax</li>
+            <li>await expression</li>
+            <li>Error handling with try/catch in async</li>
+            <li>async with Promise.all()</li>
+            <li>Top-level await (ES2022)</li>
+            <li>Sequential vs parallel async execution</li>
+            <li>async class methods</li>
+            <li>Async iteration (for await...of)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Fetch API & AJAX -->
+    <div class="topic-card intermediate-card" id="i6">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">06</span>
+          <span class="topic-main-title">Fetch API & AJAX</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">AJAX & Fetch</div>
+          <ul class="subtopic-list">
+            <li>XMLHttpRequest (XHR) — old way</li>
+            <li>XHR open(), send(), onload, onerror, onreadystatechange</li>
+            <li>readyState values</li>
+            <li>fetch() — modern API</li>
+            <li>fetch options: method, headers, body, mode, credentials, cache</li>
+            <li>Response object: .json(), .text(), .blob(), .arrayBuffer()</li>
+            <li>Response status & ok</li>
+            <li>GET requests</li>
+            <li>POST / PUT / PATCH / DELETE requests</li>
+            <li>Sending JSON data</li>
+            <li>Sending FormData</li>
+            <li>Request & Response objects</li>
+            <li>Headers object</li>
+            <li>AbortController & AbortSignal</li>
+            <li>Timeout with AbortController</li>
+            <li>CORS basics</li>
+            <li>Same-origin policy</li>
+            <li>Preflight requests</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. ES6+ Modern JavaScript -->
+    <div class="topic-card intermediate-card" id="i7">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">07</span>
+          <span class="topic-main-title">ES6+ Modern JavaScript Features</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">ES6 (2015)</div>
+          <ul class="subtopic-list">
+            <li>let & const</li>
+            <li>Arrow functions</li>
+            <li>Template literals</li>
+            <li>Destructuring (arrays & objects)</li>
+            <li>Default parameters</li>
+            <li>Rest & Spread operators</li>
+            <li>Classes</li>
+            <li>Modules (import/export)</li>
+            <li>Promises</li>
+            <li>Symbols</li>
+            <li>Iterators & Iterables protocol</li>
+            <li>Generators (function*)</li>
+            <li>Map & Set</li>
+            <li>WeakMap & WeakSet</li>
+            <li>Proxy & Reflect</li>
+            <li>for...of loop</li>
+            <li>computed property names</li>
+            <li>Property shorthand</li>
+            <li>Method shorthand</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">ES2017 — ES2025</div>
+          <ul class="subtopic-list">
+            <li>ES2017: async/await, Object.entries/values, String padding, SharedArrayBuffer</li>
+            <li>ES2018: Async iteration, Rest/Spread for objects, Promise.finally(), Regex improvements</li>
+            <li>ES2019: Array flat/flatMap, Object.fromEntries, String trimStart/trimEnd, Optional catch binding</li>
+            <li>ES2020: Optional chaining ?., Nullish coalescing ??, BigInt, Promise.allSettled, globalThis, dynamic import()</li>
+            <li>ES2021: Logical assignment (&&=, ||=, ??=), String replaceAll, Promise.any, WeakRef, FinalizationRegistry, numeric separators</li>
+            <li>ES2022: Top-level await, Class private fields/methods, static class blocks, Object.hasOwn, at() method, Error cause</li>
+            <li>ES2023: Array findLast/findLastIndex, toSorted/toReversed/toSpliced/with, Hashbang grammar</li>
+            <li>ES2024: Promise.withResolvers, Object.groupBy, Map.groupBy, RegExp v flag, ArrayBuffer transfer</li>
+            <li>ES2025: Iterator helpers, Set methods (union, intersection, difference), RegExp duplicate named groups, import attributes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Modules -->
+    <div class="topic-card intermediate-card" id="i8">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">08</span>
+          <span class="topic-main-title">JavaScript Modules</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Module Systems</div>
+          <ul class="subtopic-list">
+            <li>Why modules? (namespacing, reuse)</li>
+            <li>CommonJS (require / module.exports) — Node.js</li>
+            <li>AMD (Asynchronous Module Definition)</li>
+            <li>UMD (Universal Module Definition)</li>
+            <li>ES Modules (ESM) — import / export</li>
+            <li>Named exports & imports</li>
+            <li>Default exports & imports</li>
+            <li>Re-exporting (export ... from)</li>
+            <li>Namespace imports (import * as)</li>
+            <li>Dynamic import() — code splitting</li>
+            <li>import.meta</li>
+            <li>type="module" in script tag</li>
+            <li>Module scope & strict mode default</li>
+            <li>Circular dependencies</li>
+            <li>Tree shaking</li>
+            <li>ESM vs CJS interoperability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Iterators & Generators -->
+    <div class="topic-card intermediate-card" id="i9">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">09</span>
+          <span class="topic-main-title">Iterators & Generators</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Iterators</div>
+          <ul class="subtopic-list">
+            <li>Iterator protocol (next(), {value, done})</li>
+            <li>Iterable protocol (Symbol.iterator)</li>
+            <li>Making custom iterables</li>
+            <li>for...of with custom iterables</li>
+            <li>Built-in iterables (Array, String, Map, Set, arguments)</li>
+            <li>Infinite iterators</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Generators</div>
+          <ul class="subtopic-list">
+            <li>function* syntax</li>
+            <li>yield expression</li>
+            <li>Generator object & next()</li>
+            <li>Passing values to next()</li>
+            <li>return() & throw() on generator</li>
+            <li>yield* delegation</li>
+            <li>Infinite sequences with generators</li>
+            <li>Async generators (async function*)</li>
+            <li>for await...of with async generators</li>
+            <li>Use cases: lazy evaluation, custom iterables, state machines</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Map, Set, WeakMap, WeakSet -->
+    <div class="topic-card intermediate-card" id="i10">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">10</span>
+          <span class="topic-main-title">Map, Set, WeakMap & WeakSet</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Map</div>
+          <ul class="subtopic-list">
+            <li>new Map() — creating maps</li>
+            <li>set(), get(), has(), delete(), clear()</li>
+            <li>Map size property</li>
+            <li>Iteration: forEach, for...of, keys(), values(), entries()</li>
+            <li>Map vs Object comparison</li>
+            <li>Map from array (Map constructor)</li>
+            <li>Any value as key (objects, functions)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Set</div>
+          <ul class="subtopic-list">
+            <li>new Set() — creating sets</li>
+            <li>add(), has(), delete(), clear()</li>
+            <li>Set size property</li>
+            <li>Iteration: forEach, for...of, values(), entries()</li>
+            <li>Set to array conversion</li>
+            <li>Removing duplicates with Set</li>
+            <li>Set operations: union, intersection, difference</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">WeakMap & WeakSet</div>
+          <ul class="subtopic-list">
+            <li>WeakMap — object keys, no iteration</li>
+            <li>WeakSet — object values, no iteration</li>
+            <li>Weak references & garbage collection</li>
+            <li>Use cases (private data, caching)</li>
+            <li>WeakRef & FinalizationRegistry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Error Handling (Advanced) -->
+    <div class="topic-card intermediate-card" id="i11">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">11</span>
+          <span class="topic-main-title">Error Handling (Advanced)</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Advanced Error Patterns</div>
+          <ul class="subtopic-list">
+            <li>Custom Error classes (extending Error)</li>
+            <li>Error cause property (ES2022)</li>
+            <li>Error chaining</li>
+            <li>Handling errors in async/await</li>
+            <li>Handling errors in Promises</li>
+            <li>Global error handlers (window.onerror, window.onunhandledrejection)</li>
+            <li>Error boundaries (React concept)</li>
+            <li>Operational vs programmer errors</li>
+            <li>Fail-fast vs fail-safe patterns</li>
+            <li>Retry logic patterns</li>
+            <li>AggregateError</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Storage APIs -->
+    <div class="topic-card intermediate-card" id="i12">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">12</span>
+          <span class="topic-main-title">Web Storage & Cookies</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Storage APIs</div>
+          <ul class="subtopic-list">
+            <li>localStorage — getItem, setItem, removeItem, clear, key</li>
+            <li>sessionStorage — same API, session lifetime</li>
+            <li>localStorage vs sessionStorage</li>
+            <li>Storing objects (JSON serialization)</li>
+            <li>Storage event (cross-tab sync)</li>
+            <li>IndexedDB — transactional DB in browser</li>
+            <li>IDBDatabase, IDBTransaction, IDBObjectStore</li>
+            <li>IndexedDB CRUD operations</li>
+            <li>Cookies — document.cookie</li>
+            <li>Cookie attributes: expires, max-age, path, domain, secure, HttpOnly, SameSite</li>
+            <li>Reading & writing cookies manually</li>
+            <li>CookieStore API</li>
+            <li>Cache API</li>
+            <li>Storage quota & estimation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Forms & Form Validation -->
+    <div class="topic-card intermediate-card" id="i13">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">13</span>
+          <span class="topic-main-title">Forms & Form Validation</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Form APIs & Validation</div>
+          <ul class="subtopic-list">
+            <li>HTMLFormElement API</li>
+            <li>form.elements collection</li>
+            <li>FormData API</li>
+            <li>Accessing form field values</li>
+            <li>submit event & preventDefault()</li>
+            <li>Input types & their properties</li>
+            <li>Constraint Validation API</li>
+            <li>checkValidity() & reportValidity()</li>
+            <li>setCustomValidity()</li>
+            <li>validity object properties</li>
+            <li>Custom validation logic</li>
+            <li>Real-time validation (input events)</li>
+            <li>File input & FileReader API</li>
+            <li>Drag & Drop file upload</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Functional Programming -->
+    <div class="topic-card intermediate-card" id="i14">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">14</span>
+          <span class="topic-main-title">Functional Programming in JavaScript</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">FP Concepts & Patterns</div>
+          <ul class="subtopic-list">
+            <li>First-class & higher-order functions</li>
+            <li>Pure functions</li>
+            <li>Immutability</li>
+            <li>Side effects & referential transparency</li>
+            <li>Function composition</li>
+            <li>Currying</li>
+            <li>Partial application</li>
+            <li>Memoization</li>
+            <li>Functors (map concept)</li>
+            <li>Monads (flatMap / chaining concept)</li>
+            <li>Point-free style</li>
+            <li>Recursion & tail call optimization</li>
+            <li>Transducers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Design Patterns -->
+    <div class="topic-card intermediate-card" id="i15">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">15</span>
+          <span class="topic-main-title">JavaScript Design Patterns</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Creational Patterns</div>
+          <ul class="subtopic-list">
+            <li>Singleton pattern</li>
+            <li>Factory pattern</li>
+            <li>Abstract Factory</li>
+            <li>Builder pattern</li>
+            <li>Prototype pattern</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Structural Patterns</div>
+          <ul class="subtopic-list">
+            <li>Adapter pattern</li>
+            <li>Decorator pattern</li>
+            <li>Facade pattern</li>
+            <li>Proxy pattern</li>
+            <li>Mixin pattern</li>
+            <li>Composite pattern</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Behavioral Patterns</div>
+          <ul class="subtopic-list">
+            <li>Observer / PubSub pattern</li>
+            <li>Strategy pattern</li>
+            <li>Command pattern</li>
+            <li>Iterator pattern</li>
+            <li>State pattern</li>
+            <li>Mediator pattern</li>
+            <li>Chain of Responsibility</li>
+            <li>Template Method pattern</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">JS Specific Patterns</div>
+          <ul class="subtopic-list">
+            <li>Module pattern (IIFE-based)</li>
+            <li>Revealing Module pattern</li>
+            <li>Namespace pattern</li>
+            <li>Pub/Sub with EventEmitter</li>
+            <li>Flux / Redux pattern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- end intermediate -->
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--                    ADVANCED SECTION                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section" id="advanced">
+    <div class="section-header advanced">
+      <span class="section-icon">🔴</span>
+      <div>
+        <div class="section-title">ADVANCED</div>
+        <div class="section-subtitle">Expert-Level Mastery · 15 Main Topics</div>
+      </div>
+    </div>
+
+    <!-- 1. Memory Management -->
+    <div class="topic-card advanced-card" id="a1">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">01</span>
+          <span class="topic-main-title">Memory Management & Garbage Collection</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Memory in JS</div>
+          <ul class="subtopic-list">
+            <li>Stack vs Heap memory</li>
+            <li>Value types vs Reference types in memory</li>
+            <li>Memory allocation lifecycle</li>
+            <li>Garbage collection algorithms (Mark-and-Sweep)</li>
+            <li>Generational garbage collection</li>
+            <li>Reference counting (old approach)</li>
+            <li>Memory leaks — causes & prevention</li>
+            <li>Common leak patterns (closures, timers, event listeners, DOM refs)</li>
+            <li>WeakRef & FinalizationRegistry</li>
+            <li>Chrome DevTools Memory panel</li>
+            <li>Heap snapshots & heap timeline</li>
+            <li>Retained size vs shallow size</li>
+            <li>Object pooling pattern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Performance Optimization -->
+    <div class="topic-card advanced-card" id="a2">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">02</span>
+          <span class="topic-main-title">Performance Optimization</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Performance Techniques</div>
+          <ul class="subtopic-list">
+            <li>Debouncing</li>
+            <li>Throttling</li>
+            <li>Lazy loading</li>
+            <li>Code splitting & dynamic import</li>
+            <li>Memoization</li>
+            <li>Virtual DOM concept</li>
+            <li>Reflow & Repaint — minimizing DOM manipulation</li>
+            <li>DocumentFragment for batch DOM updates</li>
+            <li>requestAnimationFrame for animations</li>
+            <li>requestIdleCallback</li>
+            <li>Avoiding layout thrashing</li>
+            <li>Web Workers for CPU-heavy tasks</li>
+            <li>WASM integration</li>
+            <li>Critical rendering path</li>
+            <li>JavaScript bundling & minification</li>
+            <li>Tree shaking</li>
+            <li>Profiling with Chrome DevTools Performance panel</li>
+            <li>Lighthouse metrics</li>
+            <li>Core Web Vitals (LCP, FID, CLS, INP, FCP, TTFB)</li>
+            <li>Script loading strategies (defer, async, module)</li>
+            <li>Prefetching & preloading resources</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Advanced Async Patterns -->
+    <div class="topic-card advanced-card" id="a3">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">03</span>
+          <span class="topic-main-title">Advanced Async Patterns</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Concurrency & Patterns</div>
+          <ul class="subtopic-list">
+            <li>Concurrency vs parallelism in JS</li>
+            <li>Task scheduling strategies</li>
+            <li>Async queues</li>
+            <li>Semaphore / rate limiting pattern</li>
+            <li>Retry with exponential backoff</li>
+            <li>Promise combinators deep dive</li>
+            <li>Cancellation with AbortController</li>
+            <li>Async iterators pattern</li>
+            <li>Reactive programming concepts</li>
+            <li>RxJS Observables (intro)</li>
+            <li>Subject, BehaviorSubject, ReplaySubject</li>
+            <li>Observable operators (map, filter, mergeMap, switchMap, concatMap, exhaustMap)</li>
+            <li>Backpressure handling</li>
+            <li>Stream processing</li>
+            <li>Channels pattern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Proxy & Reflect -->
+    <div class="topic-card advanced-card" id="a4">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">04</span>
+          <span class="topic-main-title">Proxy & Reflect</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Proxy API</div>
+          <ul class="subtopic-list">
+            <li>new Proxy(target, handler)</li>
+            <li>get trap</li>
+            <li>set trap</li>
+            <li>has trap</li>
+            <li>deleteProperty trap</li>
+            <li>apply trap (function proxy)</li>
+            <li>construct trap (new)</li>
+            <li>defineProperty trap</li>
+            <li>getOwnPropertyDescriptor trap</li>
+            <li>ownKeys trap</li>
+            <li>getPrototypeOf & setPrototypeOf traps</li>
+            <li>Revocable proxies (Proxy.revocable)</li>
+            <li>Use cases: validation, logging, reactive data</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Reflect API</div>
+          <ul class="subtopic-list">
+            <li>Reflect.get() & Reflect.set()</li>
+            <li>Reflect.has()</li>
+            <li>Reflect.deleteProperty()</li>
+            <li>Reflect.apply()</li>
+            <li>Reflect.construct()</li>
+            <li>Reflect.defineProperty()</li>
+            <li>Reflect.ownKeys()</li>
+            <li>Reflect.getPrototypeOf() & setPrototypeOf()</li>
+            <li>Proxy + Reflect forwarding pattern</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Metaprogramming -->
+    <div class="topic-card advanced-card" id="a5">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">05</span>
+          <span class="topic-main-title">Metaprogramming</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Metaprogramming Features</div>
+          <ul class="subtopic-list">
+            <li>Symbol well-known symbols (Symbol.iterator, Symbol.toPrimitive, Symbol.toStringTag, Symbol.hasInstance, Symbol.isConcatSpreadable, Symbol.species)</li>
+            <li>Symbol.asyncIterator</li>
+            <li>Property descriptors (enumerable, configurable, writable)</li>
+            <li>Object.getOwnPropertyDescriptor()</li>
+            <li>Object.defineProperty() advanced</li>
+            <li>Accessor properties (get/set)</li>
+            <li>Sealed & frozen objects</li>
+            <li>Decorators (TC39 proposal — Stage 3+)</li>
+            <li>Class decorators</li>
+            <li>Method decorators</li>
+            <li>Field decorators</li>
+            <li>Tagged template literals for DSLs</li>
+            <li>eval() & Function constructor (dangers)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Web APIs (Advanced) -->
+    <div class="topic-card advanced-card" id="a6">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">06</span>
+          <span class="topic-main-title">Advanced Web APIs</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Browser APIs</div>
+          <ul class="subtopic-list">
+            <li>Intersection Observer API</li>
+            <li>MutationObserver API</li>
+            <li>ResizeObserver API</li>
+            <li>PerformanceObserver API</li>
+            <li>Performance API (marks, measures, navigation, resource timing)</li>
+            <li>Web Animations API (WAAPI)</li>
+            <li>Canvas API (2D context)</li>
+            <li>WebGL (intro to 3D graphics)</li>
+            <li>Web Audio API</li>
+            <li>MediaDevices API (camera, mic)</li>
+            <li>WebRTC (peer-to-peer)</li>
+            <li>Web Speech API (recognition & synthesis)</li>
+            <li>Geolocation API</li>
+            <li>Notifications API</li>
+            <li>Vibration API</li>
+            <li>Clipboard API</li>
+            <li>File System Access API</li>
+            <li>Web Share API</li>
+            <li>Screen Orientation API</li>
+            <li>Battery Status API</li>
+            <li>Gamepad API</li>
+            <li>Payment Request API</li>
+            <li>Web Bluetooth API</li>
+            <li>WebUSB API</li>
+            <li>Web NFC API</li>
+            <li>Credential Management API</li>
+            <li>Encoding API (TextEncoder/TextDecoder)</li>
+            <li>Streams API (ReadableStream, WritableStream, TransformStream)</li>
+            <li>Compression API</li>
+            <li>Web Crypto API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Service Workers & PWA -->
+    <div class="topic-card advanced-card" id="a7">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">07</span>
+          <span class="topic-main-title">Service Workers & PWA</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Service Workers</div>
+          <ul class="subtopic-list">
+            <li>Service Worker lifecycle (install, activate, fetch)</li>
+            <li>Registering a Service Worker</li>
+            <li>Caching strategies (Cache First, Network First, Stale-While-Revalidate, Network Only, Cache Only)</li>
+            <li>Cache Storage API</li>
+            <li>Background Sync API</li>
+            <li>Background Fetch API</li>
+            <li>Push Notifications (Push API + Notifications API)</li>
+            <li>Web Push protocol</li>
+            <li>Workbox library</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Progressive Web Apps</div>
+          <ul class="subtopic-list">
+            <li>Web App Manifest</li>
+            <li>Add to Home Screen</li>
+            <li>Offline-first architecture</li>
+            <li>App shell model</li>
+            <li>Installable PWA criteria</li>
+            <li>PWA audit with Lighthouse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Web Workers -->
+    <div class="topic-card advanced-card" id="a8">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">08</span>
+          <span class="topic-main-title">Web Workers & Multithreading</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Worker Types & APIs</div>
+          <ul class="subtopic-list">
+            <li>Dedicated Workers</li>
+            <li>Shared Workers</li>
+            <li>Service Workers (revisited)</li>
+            <li>postMessage() & onmessage</li>
+            <li>Transferable objects</li>
+            <li>SharedArrayBuffer & Atomics</li>
+            <li>Worker module scripts</li>
+            <li>Comlink library</li>
+            <li>Worker thread pool pattern</li>
+            <li>CPU-intensive use cases</li>
+            <li>Worker limitations (no DOM access)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. WebSockets & Real-time -->
+    <div class="topic-card advanced-card" id="a9">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">09</span>
+          <span class="topic-main-title">WebSockets & Real-time Communication</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Real-time APIs</div>
+          <ul class="subtopic-list">
+            <li>WebSocket protocol (ws:// / wss://)</li>
+            <li>new WebSocket() — creating connection</li>
+            <li>WebSocket events: open, message, close, error</li>
+            <li>Sending & receiving data</li>
+            <li>Binary data over WebSocket (ArrayBuffer, Blob)</li>
+            <li>Connection lifecycle management</li>
+            <li>Reconnect strategies</li>
+            <li>Heartbeat / ping-pong</li>
+            <li>Server-Sent Events (EventSource)</li>
+            <li>SSE vs WebSocket comparison</li>
+            <li>Long polling pattern</li>
+            <li>WebTransport API</li>
+            <li>Socket.io library</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Security -->
+    <div class="topic-card advanced-card" id="a10">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">10</span>
+          <span class="topic-main-title">JavaScript Security</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Security Concepts & Attacks</div>
+          <ul class="subtopic-list">
+            <li>XSS — Cross-Site Scripting (reflected, stored, DOM-based)</li>
+            <li>XSS prevention (sanitization, Content Security Policy)</li>
+            <li>CSRF — Cross-Site Request Forgery</li>
+            <li>CSRF tokens</li>
+            <li>SameSite cookie attribute</li>
+            <li>SQL Injection (via JS backend)</li>
+            <li>Prototype pollution attacks</li>
+            <li>Clickjacking & X-Frame-Options</li>
+            <li>CORS misconfigurations</li>
+            <li>Dependency vulnerabilities (supply chain attacks)</li>
+            <li>Sensitive data exposure in JS</li>
+            <li>Subresource Integrity (SRI)</li>
+            <li>Content Security Policy (CSP) headers</li>
+            <li>Trusted Types API</li>
+            <li>DOMPurify for sanitization</li>
+            <li>Secure cookie flags (Secure, HttpOnly, SameSite)</li>
+            <li>JWT security best practices</li>
+            <li>Web Crypto API for encryption</li>
+            <li>Timing attacks</li>
+            <li>iframe sandboxing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. TypeScript -->
+    <div class="topic-card advanced-card" id="a11">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">11</span>
+          <span class="topic-main-title">TypeScript</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">TypeScript Fundamentals</div>
+          <ul class="subtopic-list">
+            <li>TypeScript vs JavaScript</li>
+            <li>TypeScript installation & tsconfig.json</li>
+            <li>Static typing basics</li>
+            <li>Primitive types annotation</li>
+            <li>Type inference</li>
+            <li>any, unknown, never, void</li>
+            <li>Union types (|)</li>
+            <li>Intersection types (&)</li>
+            <li>Type aliases (type)</li>
+            <li>Interfaces (interface)</li>
+            <li>interface vs type alias</li>
+            <li>Optional & readonly properties</li>
+            <li>Tuple types</li>
+            <li>Enum types (const enum, numeric, string)</li>
+            <li>Literal types</li>
+            <li>Type assertions (as, &lt;Type&gt;)</li>
+            <li>Non-null assertion (!)</li>
+            <li>Function types & overloads</li>
+            <li>Generics (&lt;T&gt;)</li>
+            <li>Generic constraints (extends)</li>
+            <li>Conditional types</li>
+            <li>Mapped types</li>
+            <li>Template literal types</li>
+            <li>Utility types (Partial, Required, Pick, Omit, Record, Exclude, Extract, ReturnType, Parameters, InstanceType, NonNullable, Awaited)</li>
+            <li>keyof & typeof operators</li>
+            <li>Decorators in TypeScript</li>
+            <li>Declaration files (.d.ts)</li>
+            <li>Module augmentation</li>
+            <li>Strict mode settings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Testing -->
+    <div class="topic-card advanced-card" id="a12">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">12</span>
+          <span class="topic-main-title">Testing JavaScript</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Testing Types & Tools</div>
+          <ul class="subtopic-list">
+            <li>Unit testing concepts</li>
+            <li>Integration testing concepts</li>
+            <li>End-to-End (E2E) testing concepts</li>
+            <li>Test-Driven Development (TDD)</li>
+            <li>Behavior-Driven Development (BDD)</li>
+            <li>Jest — test framework</li>
+            <li>Vitest — Vite-native test framework</li>
+            <li>Mocha & Chai</li>
+            <li>Jasmine</li>
+            <li>describe(), it(), test() blocks</li>
+            <li>expect() & matchers</li>
+            <li>beforeEach / afterEach / beforeAll / afterAll</li>
+            <li>Mocking (jest.fn(), jest.mock())</li>
+            <li>Spies & stubs</li>
+            <li>Snapshot testing</li>
+            <li>Testing async code</li>
+            <li>Code coverage (istanbul/c8)</li>
+            <li>Testing DOM (jsdom)</li>
+            <li>React Testing Library</li>
+            <li>Playwright — E2E testing</li>
+            <li>Cypress — E2E testing</li>
+            <li>Puppeteer — headless browser</li>
+            <li>Visual regression testing</li>
+            <li>Performance testing</li>
+            <li>Accessibility testing (axe-core)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Build Tools & Toolchain -->
+    <div class="topic-card advanced-card" id="a13">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">13</span>
+          <span class="topic-main-title">Build Tools & Modern Toolchain</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Package Management</div>
+          <ul class="subtopic-list">
+            <li>npm — init, install, scripts, publish</li>
+            <li>package.json & package-lock.json</li>
+            <li>Semantic versioning (semver)</li>
+            <li>npm vs yarn vs pnpm</li>
+            <li>npx</li>
+            <li>Workspaces & monorepos</li>
+            <li>npm audit & security</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Bundlers</div>
+          <ul class="subtopic-list">
+            <li>Webpack — config, loaders, plugins, code splitting</li>
+            <li>Vite — dev server, build, plugins</li>
+            <li>Rollup — library bundling</li>
+            <li>Parcel — zero-config</li>
+            <li>esbuild — ultra-fast bundling</li>
+            <li>Turbopack</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Transpilers & Compilers</div>
+          <ul class="subtopic-list">
+            <li>Babel — JS compilation, presets, plugins</li>
+            <li>SWC (Speedy Web Compiler)</li>
+            <li>TypeScript compiler (tsc)</li>
+            <li>Polyfills & browserslist</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Linting & Formatting</div>
+          <ul class="subtopic-list">
+            <li>ESLint — configuration, rules, plugins</li>
+            <li>Prettier — code formatting</li>
+            <li>Stylelint</li>
+            <li>Husky (git hooks)</li>
+            <li>lint-staged</li>
+            <li>EditorConfig</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">CI/CD & Dev Tools</div>
+          <ul class="subtopic-list">
+            <li>GitHub Actions for JS projects</li>
+            <li>Continuous Integration pipelines</li>
+            <li>Environment variables (.env)</li>
+            <li>dotenv</li>
+            <li>Docker basics for JS apps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Node.js -->
+    <div class="topic-card advanced-card" id="a14">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">14</span>
+          <span class="topic-main-title">Node.js</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Node.js Core</div>
+          <ul class="subtopic-list">
+            <li>Node.js architecture & event loop</li>
+            <li>libuv & thread pool</li>
+            <li>CommonJS modules (require, module.exports)</li>
+            <li>ESM in Node.js</li>
+            <li>process object (argv, env, exit, cwd, stdout, stderr)</li>
+            <li>global object in Node</li>
+            <li>__dirname & __filename</li>
+            <li>Buffer class</li>
+            <li>Streams (Readable, Writable, Duplex, Transform)</li>
+            <li>Stream piping & pipeline</li>
+            <li>EventEmitter class</li>
+            <li>Custom events</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Built-in Modules</div>
+          <ul class="subtopic-list">
+            <li>fs module (readFile, writeFile, appendFile, unlink, stat, readdir, mkdir, watch)</li>
+            <li>fs/promises & fsSync</li>
+            <li>path module (join, resolve, basename, dirname, extname)</li>
+            <li>os module</li>
+            <li>http module — creating HTTP server</li>
+            <li>https module</li>
+            <li>url module & URL class</li>
+            <li>querystring / URLSearchParams</li>
+            <li>crypto module (hashing, HMAC, encryption)</li>
+            <li>child_process (spawn, exec, fork)</li>
+            <li>worker_threads module</li>
+            <li>cluster module</li>
+            <li>net module (TCP)</li>
+            <li>dns module</li>
+            <li>readline module</li>
+            <li>zlib module (compression)</li>
+            <li>events module</li>
+            <li>util module (promisify, inspect, types)</li>
+            <li>timers/promises</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Node.js Ecosystem</div>
+          <ul class="subtopic-list">
+            <li>Express.js framework</li>
+            <li>Fastify framework</li>
+            <li>Koa.js</li>
+            <li>NestJS (TypeScript-first)</li>
+            <li>Hono (edge runtime)</li>
+            <li>REST API design</li>
+            <li>GraphQL with Node</li>
+            <li>Database connections (MongoDB, PostgreSQL, MySQL, SQLite)</li>
+            <li>ORMs (Prisma, Sequelize, TypeORM, Drizzle)</li>
+            <li>Authentication (JWT, sessions, OAuth2, Passport.js)</li>
+            <li>File uploads (Multer)</li>
+            <li>WebSocket server (ws, Socket.io)</li>
+            <li>Job queues (Bull, BullMQ)</li>
+            <li>Caching (Redis, node-cache)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. JavaScript Internals -->
+    <div class="topic-card advanced-card" id="a15">
+      <div class="topic-header" onclick="toggle(this)">
+        <div class="topic-title-wrap">
+          <span class="topic-num">15</span>
+          <span class="topic-main-title">JavaScript Engine Internals & Compilation</span>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">How JS Engines Work</div>
+          <ul class="subtopic-list">
+            <li>Parsing — lexical analysis (tokenizer) & syntax analysis (AST)</li>
+            <li>Abstract Syntax Tree (AST)</li>
+            <li>Interpreter vs JIT Compilation</li>
+            <li>Ignition (interpreter) & TurboFan (compiler) in V8</li>
+            <li>Bytecode generation</li>
+            <li>Inline caching (IC)</li>
+            <li>Hidden classes & shapes</li>
+            <li>Deoptimization & bailout</li>
+            <li>Profiling-guided optimization</li>
+            <li>SpiderMonkey (Firefox) internals</li>
+            <li>JavaScriptCore (Safari) — Nitro</li>
+            <li>V8 optimizations tips</li>
+            <li>Writing optimization-friendly code</li>
+            <li>Source maps</li>
+            <li>WASM — WebAssembly integration with JS</li>
+            <li>WASM binary format basics</li>
+            <li>JS ↔ WASM interoperability</li>
+            <li>AssemblyScript</li>
+            <li>Emscripten basics</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">Specification & Standards</div>
+          <ul class="subtopic-list">
+            <li>Reading the ECMAScript spec</li>
+            <li>TC39 process & proposal stages</li>
+            <li>Abstract operations in spec</li>
+            <li>Internal slots [[Slot]] notation</li>
+            <li>Completion records</li>
+            <li>Language types vs specification types</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- end advanced -->
+
+  <footer class="site-footer">
+    <div class="glow-line"></div>
+    <p>⚡ JavaScript Complete Roadmap · 45 Topics · 400+ Subtopics · Beginner → Advanced</p>
+    <p style="margin-top:8px; font-size:0.8rem; opacity:0.5;">Open all cards to study · Use bookmarks to navigate sections</p>
+  </footer>
+
+</div>
+
+<script>
+function toggle(headerEl) {
+  const card = headerEl.closest('.topic-card');
+  card.classList.toggle('open');
+}
+
+function expandAll() {
+  document.querySelectorAll('.topic-card').forEach(c => c.classList.add('open'));
+}
+
+function downloadPage() {
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'javascript-roadmap.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// Open first card of each section by default
+document.querySelectorAll('.topic-card:first-of-type').forEach(c => c.classList.add('open'));
+</script>
+</body>
+</html>

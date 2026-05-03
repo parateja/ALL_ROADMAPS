@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pandas Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #020818;
+    --bg-mid: #050f2a;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-hover: rgba(255,255,255,0.08);
+    --accent-cyan: #00f5ff;
+    --accent-purple: #bf5af2;
+    --accent-green: #30d158;
+    --accent-orange: #ff9f0a;
+    --accent-pink: #ff375f;
+    --h1-color: #00f5ff;
+    --h2-color: #bf5af2;
+    --h3-color: #30d158;
+    --h4-color: #ff9f0a;
+    --text-main: rgba(255,255,255,0.88);
+    --text-sub: rgba(255,255,255,0.55);
+    --beginner: #30d158;
+    --intermediate: #ff9f0a;
+    --advanced: #ff375f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-main);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,245,255,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(191,90,242,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 50% 50%, rgba(48,209,88,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid lines */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .site-header {
+    text-align: center;
+    padding: 60px 0 50px;
+    position: relative;
+  }
+
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0,245,255,0.06);
+    border: 1px solid rgba(0,245,255,0.2);
+    border-radius: 50px;
+    padding: 8px 24px;
+    margin-bottom: 28px;
+    backdrop-filter: blur(20px);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    letter-spacing: 2px;
+  }
+
+  .logo-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    color: var(--accent-cyan);
+    text-shadow: 0 0 40px rgba(0,245,255,0.4), 0 0 80px rgba(0,245,255,0.15);
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .main-subtitle {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.05rem;
+    color: var(--text-sub);
+    letter-spacing: 1px;
+    margin-bottom: 36px;
+  }
+
+  /* Nav pills */
+  .nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .nav-pill {
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    backdrop-filter: blur(20px);
+  }
+
+  .nav-pill.beginner {
+    background: rgba(48,209,88,0.1);
+    border: 1px solid rgba(48,209,88,0.35);
+    color: var(--beginner);
+  }
+  .nav-pill.beginner:hover { background: rgba(48,209,88,0.2); box-shadow: 0 0 20px rgba(48,209,88,0.3); }
+
+  .nav-pill.intermediate {
+    background: rgba(255,159,10,0.1);
+    border: 1px solid rgba(255,159,10,0.35);
+    color: var(--intermediate);
+  }
+  .nav-pill.intermediate:hover { background: rgba(255,159,10,0.2); box-shadow: 0 0 20px rgba(255,159,10,0.3); }
+
+  .nav-pill.advanced {
+    background: rgba(255,55,95,0.1);
+    border: 1px solid rgba(255,55,95,0.35);
+    color: var(--advanced);
+  }
+  .nav-pill.advanced:hover { background: rgba(255,55,95,0.2); box-shadow: 0 0 20px rgba(255,55,95,0.3); }
+
+  /* Download button */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(191,90,242,0.15));
+    border: 1px solid rgba(0,245,255,0.35);
+    border-radius: 50px;
+    padding: 12px 32px;
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(20px);
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  .download-btn:hover {
+    background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(191,90,242,0.25));
+    box-shadow: 0 0 30px rgba(0,245,255,0.3), 0 0 60px rgba(191,90,242,0.15);
+    transform: translateY(-2px);
+  }
+
+  .download-btn svg { width: 18px; height: 18px; }
+
+  /* Section blocks */
+  .section-block {
+    margin-bottom: 60px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding: 20px 28px;
+    border-radius: 16px;
+    backdrop-filter: blur(30px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+  }
+
+  .section-header.beginner {
+    background: rgba(48,209,88,0.07);
+    border: 1px solid rgba(48,209,88,0.25);
+  }
+  .section-header.beginner::before { background: linear-gradient(90deg, var(--beginner), transparent); }
+
+  .section-header.intermediate {
+    background: rgba(255,159,10,0.07);
+    border: 1px solid rgba(255,159,10,0.25);
+  }
+  .section-header.intermediate::before { background: linear-gradient(90deg, var(--intermediate), transparent); }
+
+  .section-header.advanced {
+    background: rgba(255,55,95,0.07);
+    border: 1px solid rgba(255,55,95,0.25);
+  }
+  .section-header.advanced::before { background: linear-gradient(90deg, var(--advanced), transparent); }
+
+  .section-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .section-title-wrap h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+
+  .section-title-wrap.beginner h2 { color: var(--beginner); text-shadow: 0 0 20px rgba(48,209,88,0.4); }
+  .section-title-wrap.intermediate h2 { color: var(--intermediate); text-shadow: 0 0 20px rgba(255,159,10,0.4); }
+  .section-title-wrap.advanced h2 { color: var(--advanced); text-shadow: 0 0 20px rgba(255,55,95,0.4); }
+
+  .section-title-wrap p {
+    font-size: 0.82rem;
+    color: var(--text-sub);
+    margin-top: 3px;
+    letter-spacing: 1px;
+  }
+
+  .topic-count {
+    margin-left: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--text-sub);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* Topic cards */
+  .topics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .topic-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(30px);
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .topic-card:hover {
+    background: var(--glass-hover);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateX(4px);
+  }
+
+  .topic-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .topic-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--text-sub);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* H1 = main section — handled separately */
+  /* H2 = topic title */
+  .h2-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--h2-color);
+    text-shadow: 0 0 15px rgba(191,90,242,0.35);
+    letter-spacing: 1.5px;
+    flex: 1;
+  }
+
+  .expand-arrow {
+    font-size: 0.7rem;
+    color: var(--text-sub);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .topic-card.open .expand-arrow { transform: rotate(180deg); }
+
+  .topic-body {
+    display: none;
+    padding: 0 24px 22px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin-top: 0;
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  /* H3 subtopic */
+  .h3-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--h3-color);
+    margin: 18px 0 10px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .h3-title::before {
+    content: '▸';
+    font-size: 0.75rem;
+    color: var(--accent-green);
+  }
+
+  /* H4 sub-subtopic */
+  .h4-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--h4-color);
+    margin: 12px 0 6px;
+    padding-left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .h4-title::before {
+    content: '◆';
+    font-size: 0.5rem;
+    color: var(--accent-orange);
+  }
+
+  /* Sub-items */
+  .sub-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 6px 0 10px;
+  }
+
+  .sub-list li {
+    font-size: 0.82rem;
+    color: var(--text-sub);
+    padding: 3px 0;
+    position: relative;
+    padding-left: 16px;
+    line-height: 1.5;
+  }
+
+  .sub-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent-cyan);
+    font-size: 1.2rem;
+    line-height: 1;
+    top: 2px;
+  }
+
+  .sub-list.h4-list { padding-left: 36px; }
+  .sub-list.h4-list li::before { color: var(--accent-orange); }
+
+  /* Code tag */
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    background: rgba(0,245,255,0.07);
+    border: 1px solid rgba(0,245,255,0.12);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent-cyan);
+  }
+
+  /* Bookmark anchor offset */
+  .anchor-target {
+    scroll-margin-top: 90px;
+  }
+
+  /* Sticky top bar */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(2,8,24,0.85);
+    backdrop-filter: blur(30px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sticky-link {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    text-decoration: none;
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .sticky-link.b { color: var(--beginner); border: 1px solid rgba(48,209,88,0.2); }
+  .sticky-link.i { color: var(--intermediate); border: 1px solid rgba(255,159,10,0.2); }
+  .sticky-link.a { color: var(--advanced); border: 1px solid rgba(255,55,95,0.2); }
+  .sticky-link:hover { background: rgba(255,255,255,0.05); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--text-sub);
+    font-size: 0.78rem;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.2); border-radius: 4px; }
+
+  @media (max-width: 640px) {
+    .main-title { font-size: 1.8rem; }
+    .section-header { padding: 14px 16px; }
+    .topic-card-header { padding: 14px 16px; }
+    .topic-body { padding: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sticky-nav">
+  <a href="#beginner" class="sticky-link b">⬡ BEGINNER</a>
+  <a href="#intermediate" class="sticky-link i">⬡ INTERMEDIATE</a>
+  <a href="#advanced" class="sticky-link a">⬡ ADVANCED</a>
+  <button onclick="downloadPage()" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.2);color:var(--accent-cyan);font-family:'Fira Code',monospace;font-size:0.72rem;padding:4px 16px;border-radius:20px;cursor:pointer;letter-spacing:1px;">↓ SAVE</button>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo-badge">PANDAS · COMPLETE ROADMAP · 2025</div>
+    <h1 class="main-title">PANDAS<br>ROADMAP</h1>
+    <p class="main-subtitle">From Zero to Data Mastery — Every Topic, Every Subtopic</p>
+    <div class="nav-pills">
+      <a href="#beginner" class="nav-pill beginner">🟢 Beginner</a>
+      <a href="#intermediate" class="nav-pill intermediate">🟠 Intermediate</a>
+      <a href="#advanced" class="nav-pill advanced">🔴 Advanced</a>
+    </div>
+    <button class="download-btn" onclick="downloadPage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Roadmap
+    </button>
+  </header>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- BEGINNER SECTION -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="beginner" class="anchor-target section-block" style="animation-delay:0.1s">
+    <div class="section-header beginner">
+      <span class="section-icon">🟢</span>
+      <div class="section-title-wrap beginner">
+        <h2>BEGINNER</h2>
+        <p>Foundation & Core Concepts</p>
+      </div>
+      <span class="topic-count">Topics 1–8</span>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- 1 -->
+      <div class="topic-card" id="topic-1">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">01</span>
+          <span class="h2-title">## Introduction to Pandas</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### What is Pandas?</div>
+          <ul class="sub-list">
+            <li>Definition and purpose of Pandas library</li>
+            <li>Role of Pandas in data science ecosystem</li>
+            <li>Pandas vs NumPy vs plain Python lists</li>
+            <li>Use cases: data cleaning, analysis, manipulation</li>
+          </ul>
+          <div class="h3-title">### History & Versions</div>
+          <ul class="sub-list">
+            <li>Origin of Pandas (Wes McKinney, 2008)</li>
+            <li>Major version milestones (0.x → 1.x → 2.x)</li>
+            <li>Key changes in Pandas 2.0 (PyArrow backend, Copy-on-Write)</li>
+          </ul>
+          <div class="h3-title">### Installation & Setup</div>
+          <ul class="sub-list">
+            <li>Installing with <code>pip install pandas</code></li>
+            <li>Installing with <code>conda install pandas</code></li>
+            <li>Verifying installation: <code>pd.__version__</code></li>
+            <li>Setting up Jupyter Notebook / JupyterLab environment</li>
+            <li>Setting up VS Code with Python extension</li>
+          </ul>
+          <div class="h3-title">### Importing Pandas</div>
+          <ul class="sub-list">
+            <li>Standard alias convention: <code>import pandas as pd</code></li>
+            <li>Importing alongside NumPy: <code>import numpy as np</code></li>
+            <li>Checking available options: <code>pd.options</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="topic-card" id="topic-2">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">02</span>
+          <span class="h2-title">## Pandas Data Structures</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Series</div>
+          <ul class="sub-list">
+            <li>Definition: 1D labeled array</li>
+            <li>Creating Series from list, dict, ndarray, scalar</li>
+            <li>Series index and values attributes</li>
+            <li>Series dtype and inferred types</li>
+            <li>Named Series (<code>name</code> attribute)</li>
+            <li>Series with custom index</li>
+          </ul>
+          <div class="h4-title">#### Series Operations</div>
+          <ul class="sub-list h4-list">
+            <li>Arithmetic operations on Series</li>
+            <li>Boolean operations on Series</li>
+            <li>Alignment by index during operations</li>
+            <li>Vectorized string/numeric operations</li>
+          </ul>
+          <div class="h3-title">### DataFrame</div>
+          <ul class="sub-list">
+            <li>Definition: 2D labeled tabular data structure</li>
+            <li>Creating DataFrame from dict of lists</li>
+            <li>Creating DataFrame from list of dicts</li>
+            <li>Creating DataFrame from 2D NumPy array</li>
+            <li>Creating DataFrame from another DataFrame</li>
+            <li>Creating DataFrame from CSV, Excel, JSON (overview)</li>
+            <li><code>index</code>, <code>columns</code>, <code>values</code>, <code>dtypes</code>, <code>shape</code> attributes</li>
+            <li><code>ndim</code>, <code>size</code>, <code>axes</code> attributes</li>
+          </ul>
+          <div class="h3-title">### Index Objects</div>
+          <ul class="sub-list">
+            <li>Default RangeIndex</li>
+            <li>Int64Index, Float64Index</li>
+            <li>StringIndex / Index with object dtype</li>
+            <li>DatetimeIndex (overview)</li>
+            <li>Index immutability</li>
+            <li>Index methods: <code>union</code>, <code>intersection</code>, <code>difference</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="topic-card" id="topic-3">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">03</span>
+          <span class="h2-title">## Reading & Writing Data (I/O)</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Reading CSV Files</div>
+          <ul class="sub-list">
+            <li><code>pd.read_csv()</code> — all major parameters</li>
+            <li><code>sep</code>, <code>delimiter</code>, <code>header</code>, <code>names</code></li>
+            <li><code>index_col</code>, <code>usecols</code>, <code>dtype</code></li>
+            <li><code>nrows</code>, <code>skiprows</code>, <code>skipfooter</code></li>
+            <li><code>na_values</code>, <code>keep_default_na</code></li>
+            <li><code>parse_dates</code>, <code>infer_datetime_format</code></li>
+            <li><code>encoding</code>, <code>compression</code></li>
+            <li><code>chunksize</code> for large files</li>
+          </ul>
+          <div class="h3-title">### Writing CSV Files</div>
+          <ul class="sub-list">
+            <li><code>df.to_csv()</code> — all major parameters</li>
+            <li><code>index</code>, <code>header</code>, <code>sep</code>, <code>columns</code></li>
+            <li><code>encoding</code>, <code>compression</code>, <code>float_format</code></li>
+          </ul>
+          <div class="h3-title">### Reading Excel Files</div>
+          <ul class="sub-list">
+            <li><code>pd.read_excel()</code></li>
+            <li><code>sheet_name</code>, <code>header</code>, <code>usecols</code>, <code>skiprows</code></li>
+            <li>Reading multiple sheets into dict of DataFrames</li>
+            <li>Engine options: <code>openpyxl</code>, <code>xlrd</code></li>
+          </ul>
+          <div class="h3-title">### Writing Excel Files</div>
+          <ul class="sub-list">
+            <li><code>df.to_excel()</code></li>
+            <li>Using <code>ExcelWriter</code> for multiple sheets</li>
+          </ul>
+          <div class="h3-title">### Reading JSON</div>
+          <ul class="sub-list">
+            <li><code>pd.read_json()</code></li>
+            <li><code>orient</code> parameter: records, split, index, columns, values</li>
+            <li>Reading JSON from URL or file</li>
+          </ul>
+          <div class="h3-title">### Writing JSON</div>
+          <ul class="sub-list">
+            <li><code>df.to_json()</code> — orient options</li>
+          </ul>
+          <div class="h3-title">### Other I/O Formats (Overview)</div>
+          <ul class="sub-list">
+            <li><code>pd.read_html()</code> — scraping HTML tables</li>
+            <li><code>pd.read_clipboard()</code></li>
+            <li><code>pd.read_parquet()</code> / <code>df.to_parquet()</code></li>
+            <li><code>pd.read_feather()</code> / <code>df.to_feather()</code></li>
+            <li><code>pd.read_pickle()</code> / <code>df.to_pickle()</code></li>
+            <li><code>pd.read_sql()</code> / <code>df.to_sql()</code></li>
+            <li><code>pd.read_hdf()</code> / <code>df.to_hdf()</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="topic-card" id="topic-4">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">04</span>
+          <span class="h2-title">## Viewing & Inspecting Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Basic Inspection Methods</div>
+          <ul class="sub-list">
+            <li><code>df.head(n)</code>, <code>df.tail(n)</code></li>
+            <li><code>df.sample(n)</code>, <code>df.sample(frac)</code></li>
+            <li><code>df.shape</code>, <code>df.ndim</code>, <code>df.size</code></li>
+            <li><code>df.dtypes</code>, <code>df.columns</code>, <code>df.index</code></li>
+            <li><code>df.info()</code> — null counts, memory usage</li>
+            <li><code>df.describe()</code> — statistical summary</li>
+            <li><code>df.describe(include='all')</code></li>
+            <li><code>df.memory_usage(deep=True)</code></li>
+          </ul>
+          <div class="h3-title">### Counting & Unique Values</div>
+          <ul class="sub-list">
+            <li><code>df['col'].unique()</code></li>
+            <li><code>df['col'].nunique()</code></li>
+            <li><code>df['col'].value_counts()</code></li>
+            <li><code>df['col'].value_counts(normalize=True)</code></li>
+          </ul>
+          <div class="h3-title">### Display Options</div>
+          <ul class="sub-list">
+            <li><code>pd.set_option('display.max_rows', n)</code></li>
+            <li><code>pd.set_option('display.max_columns', n)</code></li>
+            <li><code>pd.set_option('display.float_format', ...)</code></li>
+            <li><code>pd.reset_option('all')</code></li>
+            <li>Using <code>pd.option_context()</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="topic-card" id="topic-5">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">05</span>
+          <span class="h2-title">## Selecting & Indexing Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Column Selection</div>
+          <ul class="sub-list">
+            <li>Single column: <code>df['col']</code> → Series</li>
+            <li>Multiple columns: <code>df[['col1','col2']]</code> → DataFrame</li>
+            <li>Attribute access: <code>df.col</code> (limitations)</li>
+          </ul>
+          <div class="h3-title">### Row Selection</div>
+          <ul class="sub-list">
+            <li>Slicing with <code>df[start:stop]</code></li>
+            <li>Boolean masking: <code>df[df['col'] > value]</code></li>
+          </ul>
+          <div class="h3-title">### .loc[] — Label-Based Indexing</div>
+          <ul class="sub-list">
+            <li>Single label row: <code>df.loc[label]</code></li>
+            <li>List of labels: <code>df.loc[[l1, l2]]</code></li>
+            <li>Slice of labels: <code>df.loc[l1:l2]</code> (inclusive)</li>
+            <li>Row + column selection: <code>df.loc[row, col]</code></li>
+            <li>Boolean array with .loc</li>
+            <li>Callable with .loc</li>
+          </ul>
+          <div class="h3-title">### .iloc[] — Integer Position-Based Indexing</div>
+          <ul class="sub-list">
+            <li>Single integer: <code>df.iloc[0]</code></li>
+            <li>List of integers: <code>df.iloc[[0,2,4]]</code></li>
+            <li>Slice: <code>df.iloc[0:5]</code> (exclusive end)</li>
+            <li>Row + column: <code>df.iloc[0:5, 1:3]</code></li>
+            <li>Negative indexing</li>
+          </ul>
+          <div class="h3-title">### .at[] and .iat[]</div>
+          <ul class="sub-list">
+            <li><code>df.at[label, col]</code> — fast scalar label access</li>
+            <li><code>df.iat[row_int, col_int]</code> — fast scalar integer access</li>
+          </ul>
+          <div class="h3-title">### Boolean Indexing</div>
+          <ul class="sub-list">
+            <li>Single condition filtering</li>
+            <li>Multiple conditions with <code>&</code>, <code>|</code>, <code>~</code></li>
+            <li><code>df.query()</code> — string expressions</li>
+            <li><code>df.isin()</code> for membership tests</li>
+            <li><code>df.between()</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="topic-card" id="topic-6">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">06</span>
+          <span class="h2-title">## Adding, Modifying & Dropping Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Adding Columns</div>
+          <ul class="sub-list">
+            <li>Direct assignment: <code>df['new_col'] = values</code></li>
+            <li><code>df.assign()</code> for chaining</li>
+            <li>Adding computed columns</li>
+            <li><code>df.insert(loc, col, value)</code></li>
+          </ul>
+          <div class="h3-title">### Modifying Values</div>
+          <ul class="sub-list">
+            <li>Setting values with .loc and .iloc</li>
+            <li><code>df['col'] = df['col'].apply(func)</code></li>
+            <li><code>df.replace(old, new)</code></li>
+            <li><code>df.replace({old1: new1, old2: new2})</code></li>
+            <li><code>df.where(cond, other)</code></li>
+            <li><code>df.mask(cond, other)</code></li>
+            <li><code>df.update(other_df)</code></li>
+          </ul>
+          <div class="h3-title">### Dropping Rows & Columns</div>
+          <ul class="sub-list">
+            <li><code>df.drop(labels, axis=0/1)</code></li>
+            <li><code>df.drop(columns=[...])</code></li>
+            <li><code>df.drop(index=[...])</code></li>
+            <li><code>inplace=True</code> vs returning new DataFrame</li>
+          </ul>
+          <div class="h3-title">### Renaming</div>
+          <ul class="sub-list">
+            <li><code>df.rename(columns={'old':'new'})</code></li>
+            <li><code>df.rename(index={'old':'new'})</code></li>
+            <li><code>df.columns = [...]</code> direct reassignment</li>
+            <li><code>df.add_prefix()</code>, <code>df.add_suffix()</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="topic-card" id="topic-7">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">07</span>
+          <span class="h2-title">## Handling Missing Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Detecting Missing Values</div>
+          <ul class="sub-list">
+            <li><code>df.isnull()</code> / <code>df.isna()</code></li>
+            <li><code>df.notnull()</code> / <code>df.notna()</code></li>
+            <li><code>df.isnull().sum()</code> — count per column</li>
+            <li><code>df.isnull().sum().sum()</code> — total count</li>
+            <li><code>df.isnull().any()</code></li>
+            <li>Heatmap visualization of missing data</li>
+          </ul>
+          <div class="h3-title">### Dropping Missing Values</div>
+          <ul class="sub-list">
+            <li><code>df.dropna()</code> — default drops rows with any NaN</li>
+            <li><code>axis=0</code> (rows) vs <code>axis=1</code> (columns)</li>
+            <li><code>how='any'</code> vs <code>how='all'</code></li>
+            <li><code>thresh=n</code> — minimum non-null values</li>
+            <li><code>subset=[...]</code> — check specific columns</li>
+          </ul>
+          <div class="h3-title">### Filling Missing Values</div>
+          <ul class="sub-list">
+            <li><code>df.fillna(value)</code></li>
+            <li>Fill with scalar, dict, Series, or DataFrame</li>
+            <li><code>method='ffill'</code> — forward fill</li>
+            <li><code>method='bfill'</code> — backward fill</li>
+            <li><code>limit=n</code> — max consecutive fills</li>
+            <li><code>df.ffill()</code> / <code>df.bfill()</code> (shorthand)</li>
+          </ul>
+          <div class="h3-title">### Interpolation</div>
+          <ul class="sub-list">
+            <li><code>df.interpolate(method='linear')</code></li>
+            <li>Methods: linear, polynomial, spline, time</li>
+            <li>Direction: forward, backward, both</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="topic-card" id="topic-8">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">08</span>
+          <span class="h2-title">## Basic Data Operations & Statistics</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Arithmetic Operations</div>
+          <ul class="sub-list">
+            <li>Element-wise: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>, <code>**</code></li>
+            <li><code>df.add()</code>, <code>df.sub()</code>, <code>df.mul()</code>, <code>df.div()</code></li>
+            <li>Broadcasting: scalar, Series, DataFrame</li>
+            <li><code>fill_value</code> in arithmetic methods</li>
+          </ul>
+          <div class="h3-title">### Aggregation / Reduction Functions</div>
+          <ul class="sub-list">
+            <li><code>df.sum()</code>, <code>df.mean()</code>, <code>df.median()</code></li>
+            <li><code>df.min()</code>, <code>df.max()</code></li>
+            <li><code>df.std()</code>, <code>df.var()</code></li>
+            <li><code>df.count()</code>, <code>df.nunique()</code></li>
+            <li><code>df.sem()</code> — standard error of mean</li>
+            <li><code>df.mad()</code> — mean absolute deviation</li>
+            <li><code>df.prod()</code>, <code>df.cumsum()</code>, <code>df.cumprod()</code></li>
+            <li><code>df.cummax()</code>, <code>df.cummin()</code></li>
+            <li><code>skipna=True</code> parameter</li>
+            <li><code>axis=0</code> (column-wise) vs <code>axis=1</code> (row-wise)</li>
+          </ul>
+          <div class="h3-title">### Sorting</div>
+          <ul class="sub-list">
+            <li><code>df.sort_values(by='col')</code></li>
+            <li><code>ascending=True/False</code></li>
+            <li>Sorting by multiple columns</li>
+            <li><code>na_position='first'/'last'</code></li>
+            <li><code>df.sort_index()</code></li>
+            <li><code>df.nlargest(n, col)</code></li>
+            <li><code>df.nsmallest(n, col)</code></li>
+          </ul>
+          <div class="h3-title">### Ranking</div>
+          <ul class="sub-list">
+            <li><code>df['col'].rank()</code></li>
+            <li>Methods: average, min, max, first, dense</li>
+            <li><code>ascending</code>, <code>na_option</code>, <code>pct=True</code></li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid beginner -->
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- INTERMEDIATE SECTION -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="intermediate" class="anchor-target section-block" style="animation-delay:0.2s">
+    <div class="section-header intermediate">
+      <span class="section-icon">🟠</span>
+      <div class="section-title-wrap intermediate">
+        <h2>INTERMEDIATE</h2>
+        <p>Data Wrangling & Transformation</p>
+      </div>
+      <span class="topic-count">Topics 9–18</span>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- 9 -->
+      <div class="topic-card" id="topic-9">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">09</span>
+          <span class="h2-title">## Data Cleaning & Preprocessing</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Duplicate Handling</div>
+          <ul class="sub-list">
+            <li><code>df.duplicated()</code></li>
+            <li><code>subset</code>, <code>keep='first'/'last'/False</code></li>
+            <li><code>df.drop_duplicates()</code></li>
+          </ul>
+          <div class="h3-title">### Data Type Conversion</div>
+          <ul class="sub-list">
+            <li><code>df['col'].astype(dtype)</code></li>
+            <li><code>pd.to_numeric()</code>, <code>errors='coerce'</code></li>
+            <li><code>pd.to_datetime()</code></li>
+            <li><code>pd.to_timedelta()</code></li>
+            <li><code>df.convert_dtypes()</code> — best-fit dtypes</li>
+            <li><code>df.infer_objects()</code></li>
+          </ul>
+          <div class="h3-title">### String Cleaning</div>
+          <ul class="sub-list">
+            <li><code>df['col'].str.strip()</code>, <code>.str.lstrip()</code>, <code>.str.rstrip()</code></li>
+            <li><code>df['col'].str.lower()</code>, <code>.str.upper()</code>, <code>.str.title()</code></li>
+            <li><code>df['col'].str.replace(pat, repl, regex=True)</code></li>
+            <li>Removing special characters with regex</li>
+            <li><code>df['col'].str.split()</code>, <code>.str.join()</code></li>
+          </ul>
+          <div class="h3-title">### Outlier Detection</div>
+          <ul class="sub-list">
+            <li>IQR method for outlier bounds</li>
+            <li>Z-score method</li>
+            <li>Clipping with <code>df.clip(lower, upper)</code></li>
+          </ul>
+          <div class="h3-title">### Column Name Cleaning</div>
+          <ul class="sub-list">
+            <li>Stripping whitespace from column names</li>
+            <li>Converting to lowercase</li>
+            <li>Replacing spaces with underscores</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="topic-card" id="topic-10">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">10</span>
+          <span class="h2-title">## String Methods (str accessor)</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Case & Padding</div>
+          <ul class="sub-list">
+            <li><code>.str.lower()</code>, <code>.str.upper()</code>, <code>.str.title()</code>, <code>.str.capitalize()</code>, <code>.str.swapcase()</code></li>
+            <li><code>.str.zfill()</code>, <code>.str.center()</code>, <code>.str.ljust()</code>, <code>.str.rjust()</code></li>
+          </ul>
+          <div class="h3-title">### Searching & Matching</div>
+          <ul class="sub-list">
+            <li><code>.str.contains(pat, regex=True)</code></li>
+            <li><code>.str.startswith()</code>, <code>.str.endswith()</code></li>
+            <li><code>.str.match()</code></li>
+            <li><code>.str.fullmatch()</code></li>
+            <li><code>.str.find()</code>, <code>.str.rfind()</code></li>
+            <li><code>.str.index()</code></li>
+          </ul>
+          <div class="h3-title">### Extraction & Splitting</div>
+          <ul class="sub-list">
+            <li><code>.str.extract(pat)</code> — named groups</li>
+            <li><code>.str.extractall(pat)</code></li>
+            <li><code>.str.split(pat, expand=True)</code></li>
+            <li><code>.str.rsplit()</code></li>
+            <li><code>.str.partition()</code>, <code>.str.rpartition()</code></li>
+            <li><code>.str.get(i)</code> — get element by index</li>
+            <li><code>.str.slice(start, stop)</code></li>
+          </ul>
+          <div class="h3-title">### Replacement & Concatenation</div>
+          <ul class="sub-list">
+            <li><code>.str.replace(pat, repl, regex=True)</code></li>
+            <li><code>.str.cat(others, sep)</code></li>
+            <li><code>.str.repeat(n)</code></li>
+            <li><code>.str.pad(width, side, fillchar)</code></li>
+          </ul>
+          <div class="h3-title">### Length & Count</div>
+          <ul class="sub-list">
+            <li><code>.str.len()</code></li>
+            <li><code>.str.count(pat)</code></li>
+          </ul>
+          <div class="h3-title">### List-type Strings</div>
+          <ul class="sub-list">
+            <li><code>.str.get_dummies(sep)</code></li>
+            <li><code>.str.join()</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="topic-card" id="topic-11">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">11</span>
+          <span class="h2-title">## Apply, Map & Transform</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### apply()</div>
+          <ul class="sub-list">
+            <li><code>df['col'].apply(func)</code> — element-wise on Series</li>
+            <li><code>df.apply(func, axis=0/1)</code> — row or column-wise</li>
+            <li>Using lambda functions</li>
+            <li>Passing additional arguments with <code>args</code> and <code>kwargs</code></li>
+            <li><code>result_type='expand'/'reduce'/'broadcast'</code></li>
+          </ul>
+          <div class="h3-title">### map()</div>
+          <ul class="sub-list">
+            <li><code>series.map(dict)</code> — value substitution</li>
+            <li><code>series.map(func)</code> — function application</li>
+            <li><code>na_action='ignore'</code></li>
+            <li>Difference between <code>map()</code>, <code>apply()</code>, <code>applymap()</code></li>
+          </ul>
+          <div class="h3-title">### applymap() / map() on DataFrame</div>
+          <ul class="sub-list">
+            <li><code>df.applymap(func)</code> (Pandas < 2.1)</li>
+            <li><code>df.map(func)</code> (Pandas >= 2.1)</li>
+            <li>Element-wise transformation across entire DataFrame</li>
+          </ul>
+          <div class="h3-title">### transform()</div>
+          <ul class="sub-list">
+            <li><code>df['col'].transform(func)</code></li>
+            <li>Returns same-shaped result as input</li>
+            <li>Using with GroupBy for group-level transformations</li>
+            <li>Multiple functions: <code>transform(['mean','std'])</code></li>
+          </ul>
+          <div class="h3-title">### pipe()</div>
+          <ul class="sub-list">
+            <li><code>df.pipe(func)</code> for chaining custom functions</li>
+            <li>Passing additional arguments</li>
+            <li>Method chaining pattern</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="topic-card" id="topic-12">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">12</span>
+          <span class="h2-title">## GroupBy & Aggregation</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### GroupBy Basics</div>
+          <ul class="sub-list">
+            <li><code>df.groupby('col')</code> — single key</li>
+            <li><code>df.groupby(['col1','col2'])</code> — multiple keys</li>
+            <li>GroupBy object: lazy evaluation</li>
+            <li><code>as_index=False</code>, <code>sort=False</code></li>
+            <li><code>observed=True</code> for Categorical</li>
+            <li>Grouping by Index: <code>level</code> parameter</li>
+            <li>Grouping by function or dict</li>
+          </ul>
+          <div class="h3-title">### Aggregation Functions</div>
+          <ul class="sub-list">
+            <li>Single agg: <code>.sum()</code>, <code>.mean()</code>, <code>.count()</code></li>
+            <li><code>.agg('func')</code> — string shortcut</li>
+            <li><code>.agg(['f1','f2'])</code> — multiple functions</li>
+            <li><code>.agg({'col1':'mean','col2':'sum'})</code> — per-column</li>
+            <li>Named aggregations with <code>pd.NamedAgg</code></li>
+            <li><code>.aggregate()</code> alias</li>
+          </ul>
+          <div class="h3-title">### Transform with GroupBy</div>
+          <ul class="sub-list">
+            <li>Group-level normalization</li>
+            <li>Filling NaN with group mean</li>
+            <li>Computing z-score within groups</li>
+          </ul>
+          <div class="h3-title">### Filter with GroupBy</div>
+          <ul class="sub-list">
+            <li><code>.filter(func)</code> — keep/drop entire groups</li>
+          </ul>
+          <div class="h3-title">### apply() with GroupBy</div>
+          <ul class="sub-list">
+            <li>Applying custom function per group</li>
+            <li>Returning scalar, Series, or DataFrame per group</li>
+            <li><code>group_keys</code> parameter</li>
+          </ul>
+          <div class="h3-title">### Iteration & Groups</div>
+          <ul class="sub-list">
+            <li><code>for name, group in df.groupby('col')</code></li>
+            <li><code>groupby.get_group('key')</code></li>
+            <li><code>groupby.groups</code> — dict of index labels</li>
+            <li><code>groupby.ngroups</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="topic-card" id="topic-13">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">13</span>
+          <span class="h2-title">## Merging, Joining & Concatenating</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### pd.concat()</div>
+          <ul class="sub-list">
+            <li>Concatenating DataFrames vertically (<code>axis=0</code>)</li>
+            <li>Concatenating DataFrames horizontally (<code>axis=1</code>)</li>
+            <li><code>ignore_index=True</code></li>
+            <li><code>keys</code> parameter for hierarchical index</li>
+            <li><code>join='inner'/'outer'</code></li>
+            <li><code>verify_integrity=True</code></li>
+          </ul>
+          <div class="h3-title">### pd.merge()</div>
+          <ul class="sub-list">
+            <li>INNER JOIN: <code>how='inner'</code></li>
+            <li>LEFT JOIN: <code>how='left'</code></li>
+            <li>RIGHT JOIN: <code>how='right'</code></li>
+            <li>OUTER JOIN: <code>how='outer'</code></li>
+            <li>CROSS JOIN: <code>how='cross'</code></li>
+            <li>Merging on single key: <code>on='col'</code></li>
+            <li>Merging on multiple keys: <code>on=['c1','c2']</code></li>
+            <li>Different column names: <code>left_on</code>, <code>right_on</code></li>
+            <li>Merging on index: <code>left_index</code>, <code>right_index</code></li>
+            <li>Handling duplicate column names: <code>suffixes</code></li>
+            <li><code>validate</code>: '1:1', '1:m', 'm:1', 'm:m'</li>
+            <li><code>indicator=True</code> — merge source column</li>
+          </ul>
+          <div class="h3-title">### DataFrame.join()</div>
+          <ul class="sub-list">
+            <li>Joining on index</li>
+            <li><code>how</code>, <code>on</code>, <code>lsuffix</code>, <code>rsuffix</code></li>
+            <li>Joining multiple DataFrames at once</li>
+          </ul>
+          <div class="h3-title">### Merge Asof</div>
+          <ul class="sub-list">
+            <li><code>pd.merge_asof()</code> — approximate merge</li>
+            <li>Direction: backward, forward, nearest</li>
+            <li>Use case: time-series merging</li>
+          </ul>
+          <div class="h3-title">### Merge Ordered</div>
+          <ul class="sub-list">
+            <li><code>pd.merge_ordered()</code></li>
+            <li><code>fill_method</code> parameter</li>
+          </ul>
+          <div class="h3-title">### compare()</div>
+          <ul class="sub-list">
+            <li><code>df1.compare(df2)</code> — highlight differences</li>
+            <li><code>align_axis</code>, <code>keep_shape</code>, <code>keep_equal</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="topic-card" id="topic-14">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">14</span>
+          <span class="h2-title">## Reshaping & Pivoting</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### pivot()</div>
+          <ul class="sub-list">
+            <li><code>df.pivot(index, columns, values)</code></li>
+            <li>Wide to long, long to wide conversions</li>
+            <li>Error on duplicated entries</li>
+          </ul>
+          <div class="h3-title">### pivot_table()</div>
+          <ul class="sub-list">
+            <li><code>df.pivot_table(values, index, columns, aggfunc)</code></li>
+            <li>Multiple aggfuncs</li>
+            <li><code>margins=True</code> — subtotals/grand totals</li>
+            <li><code>fill_value</code>, <code>dropna</code></li>
+            <li>Multiple values columns</li>
+          </ul>
+          <div class="h3-title">### melt()</div>
+          <ul class="sub-list">
+            <li><code>df.melt(id_vars, value_vars)</code> — wide to long</li>
+            <li><code>var_name</code>, <code>value_name</code></li>
+            <li><code>ignore_index</code></li>
+          </ul>
+          <div class="h3-title">### stack() & unstack()</div>
+          <ul class="sub-list">
+            <li><code>df.stack(level)</code> — columns to row index (MultiIndex)</li>
+            <li><code>df.unstack(level)</code> — row index to columns</li>
+            <li>Working with MultiIndex after stack/unstack</li>
+          </ul>
+          <div class="h3-title">### wide_to_long()</div>
+          <ul class="sub-list">
+            <li><code>pd.wide_to_long(df, stubnames, i, j)</code></li>
+            <li>Handling multiple stubnames</li>
+          </ul>
+          <div class="h3-title">### explode()</div>
+          <ul class="sub-list">
+            <li><code>df.explode('col')</code> — expand list-like column</li>
+            <li>Exploding multiple columns simultaneously</li>
+          </ul>
+          <div class="h3-title">### crosstab()</div>
+          <ul class="sub-list">
+            <li><code>pd.crosstab(index, columns)</code></li>
+            <li><code>values</code>, <code>aggfunc</code>, <code>margins</code>, <code>normalize</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="topic-card" id="topic-15">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">15</span>
+          <span class="h2-title">## MultiIndex (Hierarchical Indexing)</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Creating MultiIndex</div>
+          <ul class="sub-list">
+            <li><code>pd.MultiIndex.from_tuples()</code></li>
+            <li><code>pd.MultiIndex.from_arrays()</code></li>
+            <li><code>pd.MultiIndex.from_product()</code></li>
+            <li><code>pd.MultiIndex.from_frame()</code></li>
+            <li>Setting MultiIndex: <code>df.set_index(['c1','c2'])</code></li>
+          </ul>
+          <div class="h3-title">### Indexing with MultiIndex</div>
+          <ul class="sub-list">
+            <li>Outer level selection: <code>df.loc['L1']</code></li>
+            <li>Inner level selection: <code>df.loc[('L1','L2')]</code></li>
+            <li><code>pd.IndexSlice</code> for advanced slicing</li>
+            <li>Cross-section: <code>df.xs(key, level)</code></li>
+          </ul>
+          <div class="h3-title">### Operations on MultiIndex</div>
+          <ul class="sub-list">
+            <li><code>df.swaplevel()</code></li>
+            <li><code>df.sort_index(level)</code></li>
+            <li><code>df.reset_index()</code> — flatten MultiIndex</li>
+            <li><code>df.droplevel(level)</code></li>
+          </ul>
+          <div class="h3-title">### GroupBy with MultiIndex</div>
+          <ul class="sub-list">
+            <li>GroupBy on index levels</li>
+            <li>Aggregating across index levels</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="topic-card" id="topic-16">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">16</span>
+          <span class="h2-title">## Date & Time (DateTime)</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Creating DateTime Data</div>
+          <ul class="sub-list">
+            <li><code>pd.to_datetime()</code> — parsing strings, timestamps, epoch</li>
+            <li><code>format</code> parameter, <code>errors='coerce'</code></li>
+            <li><code>pd.Timestamp()</code></li>
+            <li><code>pd.date_range(start, end, freq, periods)</code></li>
+            <li><code>pd.bdate_range()</code> — business day range</li>
+            <li><code>pd.period_range()</code></li>
+            <li><code>pd.timedelta_range()</code></li>
+          </ul>
+          <div class="h3-title">### dt Accessor</div>
+          <ul class="sub-list">
+            <li><code>.dt.year</code>, <code>.dt.month</code>, <code>.dt.day</code></li>
+            <li><code>.dt.hour</code>, <code>.dt.minute</code>, <code>.dt.second</code></li>
+            <li><code>.dt.microsecond</code>, <code>.dt.nanosecond</code></li>
+            <li><code>.dt.dayofweek</code>, <code>.dt.day_name()</code></li>
+            <li><code>.dt.dayofyear</code>, <code>.dt.weekofyear</code></li>
+            <li><code>.dt.quarter</code>, <code>.dt.is_month_start</code>, <code>.dt.is_month_end</code></li>
+            <li><code>.dt.is_year_start</code>, <code>.dt.is_year_end</code></li>
+            <li><code>.dt.is_leap_year</code></li>
+            <li><code>.dt.date</code>, <code>.dt.time</code></li>
+            <li><code>.dt.tz_localize()</code>, <code>.dt.tz_convert()</code></li>
+          </ul>
+          <div class="h3-title">### Timedelta</div>
+          <ul class="sub-list">
+            <li><code>pd.Timedelta()</code></li>
+            <li>Arithmetic: date + timedelta, date - date</li>
+            <li><code>.dt.total_seconds()</code></li>
+            <li><code>.dt.days</code>, <code>.dt.seconds</code>, <code>.dt.microseconds</code></li>
+          </ul>
+          <div class="h3-title">### Resampling</div>
+          <ul class="sub-list">
+            <li><code>df.resample('freq')</code> — downsampling & upsampling</li>
+            <li>Frequency aliases: D, W, M, Q, Y, H, T, S</li>
+            <li><code>.resample().sum()</code>, <code>.mean()</code>, <code>.ohlc()</code></li>
+            <li><code>closed</code>, <code>label</code> parameters</li>
+            <li><code>origin</code> parameter</li>
+          </ul>
+          <div class="h3-title">### Date Offsets & Periods</div>
+          <ul class="sub-list">
+            <li><code>pd.DateOffset()</code></li>
+            <li><code>pd.offsets.MonthEnd()</code>, <code>BusinessDay()</code> etc.</li>
+            <li><code>pd.Period()</code>, <code>pd.PeriodIndex</code></li>
+            <li>Period arithmetic</li>
+          </ul>
+          <div class="h3-title">### Time Zones</div>
+          <ul class="sub-list">
+            <li>Localizing naive timestamps</li>
+            <li>Converting between time zones</li>
+            <li>Handling DST</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="topic-card" id="topic-17">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">17</span>
+          <span class="h2-title">## Categorical Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Creating Categoricals</div>
+          <ul class="sub-list">
+            <li><code>pd.Categorical(values, categories, ordered)</code></li>
+            <li><code>df['col'].astype('category')</code></li>
+            <li><code>pd.CategoricalDtype(categories, ordered)</code></li>
+          </ul>
+          <div class="h3-title">### Categorical Properties</div>
+          <ul class="sub-list">
+            <li><code>.cat.categories</code></li>
+            <li><code>.cat.codes</code></li>
+            <li><code>.cat.ordered</code></li>
+          </ul>
+          <div class="h3-title">### Categorical Operations</div>
+          <ul class="sub-list">
+            <li><code>.cat.set_categories()</code></li>
+            <li><code>.cat.add_categories()</code></li>
+            <li><code>.cat.remove_categories()</code></li>
+            <li><code>.cat.remove_unused_categories()</code></li>
+            <li><code>.cat.rename_categories()</code></li>
+            <li><code>.cat.reorder_categories()</code></li>
+            <li><code>.cat.as_ordered()</code>, <code>.cat.as_unordered()</code></li>
+          </ul>
+          <div class="h3-title">### Memory Benefits</div>
+          <ul class="sub-list">
+            <li>Memory comparison: object vs category</li>
+            <li>When to use Categorical for performance</li>
+          </ul>
+          <div class="h3-title">### Binning & Discretization</div>
+          <ul class="sub-list">
+            <li><code>pd.cut(x, bins)</code> — equal-width bins</li>
+            <li><code>pd.qcut(x, q)</code> — equal-frequency bins (quantile)</li>
+            <li><code>labels</code>, <code>right</code>, <code>include_lowest</code></li>
+            <li>Returning bins as Categorical</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="topic-card" id="topic-18">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">18</span>
+          <span class="h2-title">## Visualization with Pandas</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Built-in Plotting (Matplotlib backend)</div>
+          <ul class="sub-list">
+            <li><code>df.plot()</code> — line plot</li>
+            <li><code>df.plot.bar()</code>, <code>df.plot.barh()</code></li>
+            <li><code>df.plot.hist(bins)</code></li>
+            <li><code>df.plot.box()</code></li>
+            <li><code>df.plot.scatter(x, y, c, s)</code></li>
+            <li><code>df.plot.area()</code></li>
+            <li><code>df.plot.pie()</code></li>
+            <li><code>df.plot.kde()</code> / <code>.density()</code></li>
+            <li><code>df.plot.hexbin(x, y, gridsize)</code></li>
+          </ul>
+          <div class="h3-title">### Plot Configuration</div>
+          <ul class="sub-list">
+            <li><code>figsize</code>, <code>title</code>, <code>xlabel</code>, <code>ylabel</code></li>
+            <li><code>legend</code>, <code>color</code>, <code>style</code>, <code>alpha</code></li>
+            <li><code>subplots=True</code>, <code>layout=(r,c)</code></li>
+            <li><code>sharex</code>, <code>sharey</code></li>
+            <li><code>grid=True</code></li>
+            <li>Saving with <code>plt.savefig()</code></li>
+          </ul>
+          <div class="h3-title">### Plotting Backends</div>
+          <ul class="sub-list">
+            <li>Switching to Plotly: <code>pd.options.plotting.backend='plotly'</code></li>
+            <li>Bokeh backend</li>
+            <li>Hvplot backend</li>
+          </ul>
+          <div class="h3-title">### DataFrame Styling</div>
+          <ul class="sub-list">
+            <li><code>df.style.highlight_max()</code>, <code>.highlight_min()</code></li>
+            <li><code>df.style.background_gradient()</code></li>
+            <li><code>df.style.bar()</code></li>
+            <li><code>df.style.format()</code></li>
+            <li><code>df.style.set_caption()</code></li>
+            <li>Conditional formatting with <code>df.style.applymap()</code></li>
+            <li>Exporting styled DataFrame to Excel/HTML</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid intermediate -->
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ADVANCED SECTION -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="advanced" class="anchor-target section-block" style="animation-delay:0.3s">
+    <div class="section-header advanced">
+      <span class="section-icon">🔴</span>
+      <div class="section-title-wrap advanced">
+        <h2>ADVANCED</h2>
+        <p>Performance, Extensions & Production Patterns</p>
+      </div>
+      <span class="topic-count">Topics 19–30</span>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- 19 -->
+      <div class="topic-card" id="topic-19">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">19</span>
+          <span class="h2-title">## Advanced Indexing & Selection</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Advanced .loc/.iloc Patterns</div>
+          <ul class="sub-list">
+            <li>Chained indexing pitfalls and SettingWithCopyWarning</li>
+            <li>Copy vs View: when each is returned</li>
+            <li>Copy-on-Write (CoW) in Pandas 2.0+</li>
+            <li>Using callables in .loc/.iloc</li>
+          </ul>
+          <div class="h3-title">### pd.IndexSlice Advanced</div>
+          <ul class="sub-list">
+            <li>Multi-level slicing with IndexSlice</li>
+            <li>Combining slices across levels</li>
+          </ul>
+          <div class="h3-title">### Fancy Indexing</div>
+          <ul class="sub-list">
+            <li>Boolean arrays with multiple conditions</li>
+            <li>Combining boolean and label indexing</li>
+            <li><code>df.take(indices)</code></li>
+          </ul>
+          <div class="h3-title">### Reindexing</div>
+          <ul class="sub-list">
+            <li><code>df.reindex(new_index)</code></li>
+            <li><code>method='ffill'/'bfill'</code></li>
+            <li><code>fill_value</code></li>
+            <li><code>df.reindex_like(other)</code></li>
+            <li><code>df.align(other, join)</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="topic-card" id="topic-20">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">20</span>
+          <span class="h2-title">## Window Functions</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Rolling Window</div>
+          <ul class="sub-list">
+            <li><code>df.rolling(window)</code></li>
+            <li><code>min_periods</code>, <code>center</code>, <code>win_type</code></li>
+            <li>Rolling aggregations: <code>.mean()</code>, <code>.sum()</code>, <code>.std()</code>, <code>.min()</code>, <code>.max()</code>, <code>.corr()</code>, <code>.cov()</code></li>
+            <li>Rolling with custom functions: <code>.apply(func, raw=True)</code></li>
+            <li>Variable window (offset-based) for time series</li>
+          </ul>
+          <div class="h3-title">### Expanding Window</div>
+          <ul class="sub-list">
+            <li><code>df.expanding(min_periods)</code></li>
+            <li>Expanding aggregations</li>
+            <li>Difference between rolling and expanding</li>
+          </ul>
+          <div class="h3-title">### Exponential Weighted (EWM)</div>
+          <ul class="sub-list">
+            <li><code>df.ewm(span, com, halflife, alpha)</code></li>
+            <li><code>adjust=True/False</code></li>
+            <li><code>.mean()</code>, <code>.std()</code>, <code>.var()</code>, <code>.corr()</code>, <code>.cov()</code></li>
+          </ul>
+          <div class="h3-title">### GroupBy + Rolling</div>
+          <ul class="sub-list">
+            <li>Rolling within groups</li>
+            <li>Handling group boundaries</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="topic-card" id="topic-21">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">21</span>
+          <span class="h2-title">## Performance Optimization</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Memory Optimization</div>
+          <ul class="sub-list">
+            <li>Downcasting numeric types with <code>pd.to_numeric(downcast)</code></li>
+            <li>Using <code>category</code> dtype for low-cardinality strings</li>
+            <li>Sparse data structures: <code>pd.arrays.SparseArray</code></li>
+            <li><code>df.memory_usage(deep=True)</code></li>
+            <li>Reducing precision: float64 → float32</li>
+          </ul>
+          <div class="h3-title">### Vectorization vs Loops</div>
+          <ul class="sub-list">
+            <li>Why Python loops are slow with Pandas</li>
+            <li>Replacing loops with vectorized operations</li>
+            <li>NumPy ufuncs in Pandas</li>
+            <li>When to use <code>apply()</code> vs vectorization</li>
+          </ul>
+          <div class="h3-title">### eval() & query()</div>
+          <ul class="sub-list">
+            <li><code>df.eval('expr')</code> — expression evaluation</li>
+            <li><code>inplace=True</code> in eval</li>
+            <li><code>df.query('expr')</code> — filtering</li>
+            <li>Local variables with <code>@var</code> in eval/query</li>
+            <li>Performance advantages for large DataFrames</li>
+          </ul>
+          <div class="h3-title">### Chunking Large Files</div>
+          <ul class="sub-list">
+            <li><code>pd.read_csv(chunksize=n)</code> → TextFileReader</li>
+            <li>Processing chunks iteratively</li>
+            <li>Aggregating results from chunks</li>
+          </ul>
+          <div class="h3-title">### Efficient Data Storage Formats</div>
+          <ul class="sub-list">
+            <li>Parquet vs CSV vs Feather vs HDF5 performance</li>
+            <li>Column-oriented storage benefits</li>
+            <li>Compression options (snappy, gzip, brotli)</li>
+          </ul>
+          <div class="h3-title">### PyArrow Backend (Pandas 2.0+)</div>
+          <ul class="sub-list">
+            <li>Enabling ArrowDtype</li>
+            <li>Performance benefits of Arrow-backed DataFrames</li>
+            <li>Nullable integer/float/string types</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 22 -->
+      <div class="topic-card" id="topic-22">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">22</span>
+          <span class="h2-title">## Advanced GroupBy Patterns</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Named Aggregations</div>
+          <ul class="sub-list">
+            <li><code>df.groupby('col').agg(new_name=('col','func'))</code></li>
+            <li><code>pd.NamedAgg(column, aggfunc)</code></li>
+          </ul>
+          <div class="h3-title">### Custom Aggregation Functions</div>
+          <ul class="sub-list">
+            <li>First/last N values per group</li>
+            <li>Custom percentile functions</li>
+            <li>Multi-output custom functions</li>
+          </ul>
+          <div class="h3-title">### GroupBy with transform for Feature Engineering</div>
+          <ul class="sub-list">
+            <li>Group-level mean imputation</li>
+            <li>Lag features within groups</li>
+            <li>Cumulative statistics per group</li>
+            <li>Percent of group total</li>
+          </ul>
+          <div class="h3-title">### Resample with GroupBy</div>
+          <ul class="sub-list">
+            <li>Combining groupby and resample</li>
+            <li>Multi-level groupby + time resampling</li>
+          </ul>
+          <div class="h3-title">### Groupby with Rolling</div>
+          <ul class="sub-list">
+            <li><code>df.groupby('col').rolling(n).mean()</code></li>
+            <li>Resetting index after groupby-rolling</li>
+          </ul>
+          <div class="h3-title">### Groupby with Cumulative Operations</div>
+          <ul class="sub-list">
+            <li><code>.cumsum()</code>, <code>.cumprod()</code>, <code>.cummax()</code>, <code>.cummin()</code> per group</li>
+            <li>Cumulative count per group</li>
+            <li>Rank within group</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="topic-card" id="topic-23">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">23</span>
+          <span class="h2-title">## Advanced Time Series</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Time Series Indexing</div>
+          <ul class="sub-list">
+            <li>Partial string indexing: <code>df['2023']</code>, <code>df['2023-06']</code></li>
+            <li>Truncating: <code>df.truncate(before, after)</code></li>
+            <li>Shifting: <code>df.shift(periods, freq)</code></li>
+            <li>Differencing: <code>df.diff(periods)</code></li>
+          </ul>
+          <div class="h3-title">### Frequency Conversion</div>
+          <ul class="sub-list">
+            <li>Downsampling with resample (e.g., hourly → daily)</li>
+            <li>Upsampling and interpolation</li>
+            <li>OHLC aggregation: <code>.resample('D').ohlc()</code></li>
+            <li>Custom frequency with <code>pd.tseries.offsets</code></li>
+          </ul>
+          <div class="h3-title">### Lag & Lead Features</div>
+          <ul class="sub-list">
+            <li>Lag: <code>df.shift(n)</code></li>
+            <li>Lead: <code>df.shift(-n)</code></li>
+            <li>Rolling lag correlation</li>
+          </ul>
+          <div class="h3-title">### Holiday & Business Day Calendars</div>
+          <ul class="sub-list">
+            <li><code>pd.offsets.CustomBusinessDay()</code></li>
+            <li><code>pd.offsets.CustomBusinessHour()</code></li>
+            <li>Defining custom holidays</li>
+          </ul>
+          <div class="h3-title">### Time Series Plotting</div>
+          <ul class="sub-list">
+            <li>Plotting datetime-indexed DataFrames</li>
+            <li>Formatting date tick labels</li>
+            <li>Multiple time series on same axis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="topic-card" id="topic-24">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">24</span>
+          <span class="h2-title">## Extension Types & Nullable Data</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Nullable Integer Types</div>
+          <ul class="sub-list">
+            <li><code>pd.Int8Dtype()</code>, <code>pd.Int16Dtype()</code>, <code>pd.Int32Dtype()</code>, <code>pd.Int64Dtype()</code></li>
+            <li><code>pd.UInt8Dtype()</code> … <code>pd.UInt64Dtype()</code></li>
+            <li>Difference from NumPy int (supports NA)</li>
+            <li><code>df.astype('Int64')</code></li>
+          </ul>
+          <div class="h3-title">### Nullable Boolean</div>
+          <ul class="sub-list">
+            <li><code>pd.BooleanDtype()</code></li>
+            <li>Three-valued logic with NA</li>
+          </ul>
+          <div class="h3-title">### StringDtype</div>
+          <ul class="sub-list">
+            <li><code>pd.StringDtype()</code></li>
+            <li>Difference from object dtype</li>
+            <li>NA handling in string operations</li>
+          </ul>
+          <div class="h3-title">### ArrowDtype (Pandas 2.0+)</div>
+          <ul class="sub-list">
+            <li><code>pd.ArrowDtype(pa.int64())</code></li>
+            <li>All Arrow types as Pandas dtypes</li>
+            <li>Performance benefits</li>
+          </ul>
+          <div class="h3-title">### Custom Extension Arrays</div>
+          <ul class="sub-list">
+            <li><code>pd.api.extensions.ExtensionArray</code></li>
+            <li><code>pd.api.extensions.ExtensionDtype</code></li>
+            <li>Registering custom dtypes</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="topic-card" id="topic-25">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">25</span>
+          <span class="h2-title">## Advanced I/O & Database Integration</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### SQL Integration</div>
+          <ul class="sub-list">
+            <li><code>pd.read_sql(query, con)</code></li>
+            <li><code>pd.read_sql_query()</code></li>
+            <li><code>pd.read_sql_table()</code></li>
+            <li><code>df.to_sql(name, con, if_exists, index)</code></li>
+            <li>Using SQLAlchemy engine</li>
+            <li>Using sqlite3 connection</li>
+            <li>Chunked reading from SQL</li>
+          </ul>
+          <div class="h3-title">### Parquet Advanced</div>
+          <ul class="sub-list">
+            <li>Partition by columns: <code>partition_cols</code></li>
+            <li>Schema evolution</li>
+            <li>Reading partitioned datasets with filters</li>
+            <li>PyArrow vs fastparquet engine</li>
+          </ul>
+          <div class="h3-title">### HDF5 / HDFStore</div>
+          <ul class="sub-list">
+            <li><code>pd.HDFStore(path)</code></li>
+            <li>Storing and retrieving multiple DataFrames</li>
+            <li>Fixed vs table format</li>
+            <li>Querying with <code>where</code> clauses</li>
+          </ul>
+          <div class="h3-title">### Reading from Cloud & URLs</div>
+          <ul class="sub-list">
+            <li>Reading from S3 with <code>s3://</code> paths</li>
+            <li>Google Cloud Storage with <code>gcs://</code></li>
+            <li>Reading from HTTP URLs</li>
+            <li><code>storage_options</code> parameter</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="topic-card" id="topic-26">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">26</span>
+          <span class="h2-title">## Copy-on-Write (CoW) — Pandas 2.0+</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### What is Copy-on-Write?</div>
+          <ul class="sub-list">
+            <li>CoW semantics: any modification creates a new object</li>
+            <li>Enabling CoW: <code>pd.options.mode.copy_on_write = True</code></li>
+            <li>Why CoW eliminates SettingWithCopyWarning</li>
+          </ul>
+          <div class="h3-title">### Migration from Old Behavior</div>
+          <ul class="sub-list">
+            <li>Identifying code that relied on views</li>
+            <li>Refactoring chained indexing patterns</li>
+            <li>Testing with CoW enabled</li>
+          </ul>
+          <div class="h3-title">### Performance Impact of CoW</div>
+          <ul class="sub-list">
+            <li>Lazy copy mechanism</li>
+            <li>When CoW is beneficial vs costly</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="topic-card" id="topic-27">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">27</span>
+          <span class="h2-title">## Parallel & Distributed Pandas</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Modin</div>
+          <ul class="sub-list">
+            <li>Drop-in replacement: <code>import modin.pandas as pd</code></li>
+            <li>Backends: Ray, Dask, MPI</li>
+            <li>When Modin is faster than Pandas</li>
+            <li>Limitations and fallback to Pandas</li>
+          </ul>
+          <div class="h3-title">### Dask DataFrames</div>
+          <ul class="sub-list">
+            <li><code>dask.dataframe</code> overview</li>
+            <li>Lazy evaluation and task graphs</li>
+            <li>Pandas API compatibility</li>
+            <li>Reading large datasets with Dask</li>
+            <li>Calling <code>.compute()</code></li>
+          </ul>
+          <div class="h3-title">### Swifter</div>
+          <ul class="sub-list">
+            <li><code>df.swifter.apply(func)</code></li>
+            <li>Automatic parallelization of apply</li>
+          </ul>
+          <div class="h3-title">### Pandarallel</div>
+          <ul class="sub-list">
+            <li><code>pandarallel.initialize()</code></li>
+            <li><code>df.parallel_apply()</code></li>
+          </ul>
+          <div class="h3-title">### Polars Interoperability</div>
+          <ul class="sub-list">
+            <li>Converting Pandas ↔ Polars DataFrames</li>
+            <li>When to migrate to Polars for performance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="topic-card" id="topic-28">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">28</span>
+          <span class="h2-title">## Advanced Data Transformation Patterns</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Method Chaining Best Practices</div>
+          <ul class="sub-list">
+            <li>Building readable pipelines with <code>.pipe()</code></li>
+            <li>Debugging chains with intermediate inspection</li>
+            <li>Wrapping chains in functions</li>
+          </ul>
+          <div class="h3-title">### Feature Engineering with Pandas</div>
+          <ul class="sub-list">
+            <li>Interaction features</li>
+            <li>Polynomial features</li>
+            <li>Date-derived features (day_of_week, is_weekend, etc.)</li>
+            <li>Lag features, rolling features</li>
+            <li>Target encoding (group mean)</li>
+            <li>Label encoding vs one-hot encoding</li>
+            <li><code>pd.get_dummies()</code> — one-hot encoding</li>
+            <li>Frequency encoding</li>
+          </ul>
+          <div class="h3-title">### Complex Filtering Patterns</div>
+          <ul class="sub-list">
+            <li>Filtering with custom functions</li>
+            <li>Nested boolean logic</li>
+            <li>Filtering based on group statistics</li>
+          </ul>
+          <div class="h3-title">### Flattening & Normalizing Nested JSON</div>
+          <ul class="sub-list">
+            <li><code>pd.json_normalize(data)</code></li>
+            <li><code>record_path</code>, <code>meta</code> parameters</li>
+            <li>Handling deeply nested structures</li>
+            <li><code>max_level</code> parameter</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="topic-card" id="topic-29">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">29</span>
+          <span class="h2-title">## Pandas Internals & Internals API</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Block Manager (Internal)</div>
+          <ul class="sub-list">
+            <li>How Pandas stores data internally (blocks)</li>
+            <li>Consolidation of blocks</li>
+            <li>Why mixed dtypes create multiple blocks</li>
+          </ul>
+          <div class="h3-title">### Pandas Testing Utilities</div>
+          <ul class="sub-list">
+            <li><code>pd.testing.assert_frame_equal()</code></li>
+            <li><code>pd.testing.assert_series_equal()</code></li>
+            <li><code>pd.testing.assert_index_equal()</code></li>
+            <li>Parameters: <code>check_dtype</code>, <code>check_like</code>, <code>rtol</code>, <code>atol</code></li>
+          </ul>
+          <div class="h3-title">### Accessor API</div>
+          <ul class="sub-list">
+            <li><code>pd.api.extensions.register_dataframe_accessor()</code></li>
+            <li><code>pd.api.extensions.register_series_accessor()</code></li>
+            <li>Building custom namespace accessors</li>
+          </ul>
+          <div class="h3-title">### Deprecation & Migration</div>
+          <ul class="sub-list">
+            <li>Tracking deprecation warnings</li>
+            <li>Using <code>pd.util.version.Version</code></li>
+            <li>Migrating code across major versions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="topic-card" id="topic-30">
+        <div class="topic-card-header" onclick="toggleCard(this)">
+          <span class="topic-num">30</span>
+          <span class="h2-title">## Integration with Scientific Python Ecosystem</span>
+          <span class="expand-arrow">▼</span>
+        </div>
+        <div class="topic-body">
+          <div class="h3-title">### Pandas & NumPy</div>
+          <ul class="sub-list">
+            <li>Converting: <code>df.to_numpy()</code>, <code>df.values</code></li>
+            <li>Creating DataFrame from NumPy arrays</li>
+            <li>Using NumPy functions on Pandas objects</li>
+            <li>NumPy universal functions (ufuncs) with Pandas</li>
+          </ul>
+          <div class="h3-title">### Pandas & Scikit-learn</div>
+          <ul class="sub-list">
+            <li>Feeding DataFrames to sklearn estimators</li>
+            <li>Using <code>ColumnTransformer</code> with DataFrame columns</li>
+            <li><code>set_output(transform='pandas')</code> — pandas output</li>
+            <li>Feature names from sklearn transformers</li>
+          </ul>
+          <div class="h3-title">### Pandas & Matplotlib / Seaborn</div>
+          <ul class="sub-list">
+            <li>Passing DataFrame columns to Matplotlib</li>
+            <li>Seaborn's native DataFrame support</li>
+            <li>Facet grids with Pandas data</li>
+          </ul>
+          <div class="h3-title">### Pandas & PyArrow</div>
+          <ul class="sub-list">
+            <li>Converting Pandas ↔ Arrow Tables</li>
+            <li><code>pa.Table.from_pandas()</code></li>
+            <li><code>table.to_pandas()</code></li>
+            <li>Zero-copy reads</li>
+          </ul>
+          <div class="h3-title">### Pandas & SQLAlchemy</div>
+          <ul class="sub-list">
+            <li>Creating engines for different databases</li>
+            <li>Reading/writing with ORM models</li>
+            <li>Connection pooling considerations</li>
+          </ul>
+          <div class="h3-title">### Pandas & Statsmodels</div>
+          <ul class="sub-list">
+            <li>Formula-style modeling with DataFrames</li>
+            <li>Passing DataFrames to OLS, GLM etc.</li>
+          </ul>
+          <div class="h3-title">### Pandas & TensorFlow / PyTorch</div>
+          <ul class="sub-list">
+            <li>Converting DataFrame to tf.data.Dataset</li>
+            <li>Converting to PyTorch tensors</li>
+            <li>Preprocessing pipelines with Pandas before model training</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid advanced -->
+  </div>
+
+  <div class="footer">
+    <p>© 2025 · PANDAS COMPLETE ROADMAP · All Topics & Subtopics Included</p>
+    <p style="margin-top:6px;font-size:0.68rem;">30 Main Topics · 3 Sections · 100% Coverage</p>
+  </div>
+
+</div><!-- end wrapper -->
+
+<script>
+  function toggleCard(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  // Open first card in each section by default
+  document.querySelectorAll('.topics-grid').forEach(grid => {
+    const first = grid.querySelector('.topic-card');
+    if (first) first.classList.add('open');
+  });
+
+  // Expand all / collapse all
+  function expandAll() {
+    document.querySelectorAll('.topic-card').forEach(c => c.classList.add('open'));
+  }
+  function collapseAll() {
+    document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('open'));
+  }
+
+  // Download
+  function downloadPage() {
+    const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'Pandas_Complete_Roadmap.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Stagger animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, {threshold: 0.05});
+
+  document.querySelectorAll('.topic-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.4s ease ${i * 0.03}s, transform 0.4s ease ${i * 0.03}s, background 0.3s, border-color 0.3s, box-shadow 0.3s`;
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>

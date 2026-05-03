@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a14;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-hover: rgba(255,255,255,0.08);
+    --beginner: #00f5a0;
+    --beginner-glow: rgba(0,245,160,0.3);
+    --intermediate: #f5a000;
+    --intermediate-glow: rgba(245,160,0,0.3);
+    --advanced: #f50057;
+    --advanced-glow: rgba(245,0,87,0.3);
+    --accent: #7c3aed;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --heading-color: #a78bfa;
+    --subheading-color: #34d399;
+    --topic-color: #fbbf24;
+    --subtopic-color: #60a5fa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124,58,237,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0,245,160,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,160,0,0.05) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Grid lines */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(0,245,160,0.2));
+    border: 1px solid rgba(124,58,237,0.5);
+    border-radius: 50px;
+    padding: 6px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #a78bfa;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  h1.main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(36px, 7vw, 80px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #a78bfa, #34d399, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+  }
+
+  /* DOWNLOAD BTN */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.6), rgba(0,245,160,0.3));
+    border: 1px solid rgba(124,58,237,0.7);
+    border-radius: 12px;
+    padding: 14px 28px;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(124,58,237,0.3);
+  }
+
+  .download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(124,58,237,0.6);
+    background: linear-gradient(135deg, rgba(124,58,237,0.8), rgba(0,245,160,0.5));
+  }
+
+  .download-btn svg { width: 18px; height: 18px; }
+
+  /* NAV PILLS */
+  .nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .nav-pill {
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    border: 1px solid;
+  }
+
+  .pill-beginner { color: var(--beginner); border-color: var(--beginner); background: rgba(0,245,160,0.08); }
+  .pill-intermediate { color: var(--intermediate); border-color: var(--intermediate); background: rgba(245,160,0,0.08); }
+  .pill-advanced { color: var(--advanced); border-color: var(--advanced); background: rgba(245,0,87,0.08); }
+
+  .nav-pill:hover { transform: scale(1.05); filter: brightness(1.3); }
+
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 60px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    background: var(--glass);
+    box-shadow: 0 8px 60px rgba(0,0,0,0.4);
+  }
+
+  .section-header {
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+  }
+
+  .beginner .section-header::before { background: linear-gradient(135deg, var(--beginner), transparent); }
+  .intermediate .section-header::before { background: linear-gradient(135deg, var(--intermediate), transparent); }
+  .advanced .section-header::before { background: linear-gradient(135deg, var(--advanced), transparent); }
+
+  .section-badge {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .beginner .section-badge { background: rgba(0,245,160,0.15); border: 1px solid rgba(0,245,160,0.4); }
+  .intermediate .section-badge { background: rgba(245,160,0,0.15); border: 1px solid rgba(245,160,0,0.4); }
+  .advanced .section-badge { background: rgba(245,0,87,0.15); border: 1px solid rgba(245,0,87,0.4); }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .beginner .section-title { color: var(--beginner); text-shadow: 0 0 30px var(--beginner-glow); }
+  .intermediate .section-title { color: var(--intermediate); text-shadow: 0 0 30px var(--intermediate-glow); }
+  .advanced .section-title { color: var(--advanced); text-shadow: 0 0 30px var(--advanced-glow); }
+
+  .section-meta {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    text-align: right;
+  }
+
+  /* TOC */
+  .toc {
+    padding: 24px 36px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .toc-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .toc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .toc-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .beginner .toc-link { color: var(--beginner); border-color: rgba(0,245,160,0.3); background: rgba(0,245,160,0.05); }
+  .intermediate .toc-link { color: var(--intermediate); border-color: rgba(245,160,0,0.3); background: rgba(245,160,0,0.05); }
+  .advanced .toc-link { color: var(--advanced); border-color: rgba(245,0,87,0.3); background: rgba(245,0,87,0.05); }
+
+  .toc-link:hover { filter: brightness(1.4); transform: translateY(-1px); }
+
+  /* CONTENT */
+  .section-content { padding: 12px 0; }
+
+  /* TOPIC CARD */
+  .topic-card {
+    margin: 8px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .topic-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+    transform: translateX(4px);
+  }
+
+  .topic-header {
+    padding: 18px 24px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .topic-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  /* HEADING STYLES */
+  h2.topic-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--heading-color);
+    letter-spacing: 1px;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  h3.subtopic-group {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--subheading-color);
+    padding: 12px 24px 8px 64px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3.subtopic-group::before { content: '◈'; font-size: 12px; opacity: 0.7; }
+
+  h4.sub-group {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--topic-color);
+    padding: 8px 24px 4px 80px;
+    letter-spacing: 1px;
+  }
+
+  /* SUBTOPICS LIST */
+  .subtopics {
+    padding: 0 24px 16px 64px;
+  }
+
+  .subtopic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .subtopic-item::before {
+    content: '→';
+    color: var(--subtopic-color);
+    font-size: 13px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .sub-subtopic {
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .sub-subtopic::before { content: '·'; color: var(--muted); }
+
+  /* CODE TAG */
+  code {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #c4b5fd;
+  }
+
+  /* DIVIDER */
+  .topic-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    margin: 4px 24px;
+  }
+
+  /* ANCHOR TARGETS */
+  .anchor-target { scroll-margin-top: 80px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.5); border-radius: 3px; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7c3aed, #00f5a0, #f5a000);
+    z-index: 9999;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px rgba(124,58,237,0.8);
+  }
+
+  @media (max-width: 600px) {
+    .section-header { padding: 20px; }
+    .topic-header { padding: 14px 16px; }
+    .subtopics { padding-left: 32px; }
+    h3.subtopic-group { padding-left: 32px; }
+    h4.sub-group { padding-left: 48px; }
+    .topic-card { margin: 6px 12px; }
+    .toc { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">Complete Developer Roadmap 2025</div>
+  <h1 class="main-title">HTML ROADMAP</h1>
+  <p class="subtitle">Beginner → Intermediate → Advanced · Every Topic · Every Subtopic</p>
+  <a href="#" class="download-btn" id="downloadBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+    </svg>
+    Download Roadmap
+  </a>
+</header>
+
+<!-- NAV PILLS -->
+<nav class="nav-pills">
+  <a href="#beginner" class="nav-pill pill-beginner">⬢ Beginner</a>
+  <a href="#intermediate" class="nav-pill pill-intermediate">⬡ Intermediate</a>
+  <a href="#advanced" class="nav-pill pill-advanced">⬣ Advanced</a>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- BEGINNER SECTION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section beginner" id="beginner">
+  <div class="section-header">
+    <div class="section-badge">🌱</div>
+    <div>
+      <h2 class="section-title" id="beginner-title">BEGINNER</h2>
+      <div style="font-size:13px;color:var(--muted);font-family:'Rajdhani',sans-serif;margin-top:2px;">Foundation & Core Concepts</div>
+    </div>
+    <div class="section-meta">Level 01<br>Start Here</div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Quick Navigation</div>
+    <div class="toc-links">
+      <a href="#b1" class="toc-link">Introduction</a>
+      <a href="#b2" class="toc-link">Basic Structure</a>
+      <a href="#b3" class="toc-link">Text Elements</a>
+      <a href="#b4" class="toc-link">Links & Images</a>
+      <a href="#b5" class="toc-link">Lists</a>
+      <a href="#b6" class="toc-link">Tables</a>
+      <a href="#b7" class="toc-link">Forms & Inputs</a>
+      <a href="#b8" class="toc-link">Block & Inline</a>
+      <a href="#b9" class="toc-link">Semantic HTML</a>
+      <a href="#b10" class="toc-link">Media Elements</a>
+      <a href="#b11" class="toc-link">Attributes</a>
+      <a href="#b12" class="toc-link">Character Entities</a>
+    </div>
+  </div>
+
+  <div class="section-content">
+
+    <!-- B1 -->
+    <div class="topic-card anchor-target" id="b1">
+      <div class="topic-header">
+        <span class="topic-num">01</span>
+        <h2 class="topic-title">Introduction to HTML</h2>
+      </div>
+      <h3 class="subtopic-group">What is HTML?</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Full form — HyperText Markup Language</div>
+        <div class="subtopic-item">Role of HTML in web development (structure layer)</div>
+        <div class="subtopic-item">Difference between HTML, CSS, and JavaScript</div>
+        <div class="subtopic-item">How browsers interpret HTML</div>
+        <div class="subtopic-item">HTML vs XHTML — Key differences</div>
+      </div>
+      <h3 class="subtopic-group">History & Versions</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">HTML 1.0 (1993) — Original specification</div>
+        <div class="subtopic-item">HTML 2.0, HTML 3.2, HTML 4.01</div>
+        <div class="subtopic-item">XHTML 1.0 and 1.1</div>
+        <div class="subtopic-item">HTML5 — Current living standard</div>
+        <div class="subtopic-item">W3C vs WHATWG — Who maintains HTML?</div>
+      </div>
+      <h3 class="subtopic-group">Setting Up Environment</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Choosing a code editor — VS Code, Notepad++, Sublime Text</div>
+        <div class="subtopic-item">Installing VS Code and useful extensions (Live Server, Prettier)</div>
+        <div class="subtopic-item">Browser developer tools — Chrome DevTools, Firefox Inspector</div>
+        <div class="subtopic-item">Creating your first <code>.html</code> file</div>
+        <div class="subtopic-item">Viewing HTML files locally in browser</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B2 -->
+    <div class="topic-card anchor-target" id="b2">
+      <div class="topic-header">
+        <span class="topic-num">02</span>
+        <h2 class="topic-title">Basic HTML Document Structure</h2>
+      </div>
+      <h3 class="subtopic-group">DOCTYPE Declaration</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;!DOCTYPE html&gt;</code> — What it means and why it's needed</div>
+        <div class="subtopic-item">Legacy doctypes (HTML 4.01 Strict, Transitional, Frameset)</div>
+        <div class="subtopic-item">Quirks mode vs Standards mode</div>
+      </div>
+      <h3 class="subtopic-group">Root & Head Elements</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;html&gt;</code> — Root element, <code>lang</code> attribute</div>
+        <div class="subtopic-item"><code>&lt;head&gt;</code> — Metadata container</div>
+        <div class="subtopic-item"><code>&lt;title&gt;</code> — Browser tab title</div>
+        <div class="subtopic-item"><code>&lt;meta charset="UTF-8"&gt;</code> — Character encoding</div>
+        <div class="subtopic-item"><code>&lt;meta name="viewport"&gt;</code> — Responsive viewport</div>
+        <div class="subtopic-item"><code>&lt;meta name="description"&gt;</code>, <code>keywords</code>, <code>author</code></div>
+        <div class="subtopic-item"><code>&lt;link&gt;</code> — External CSS, favicon linking</div>
+        <div class="subtopic-item"><code>&lt;script&gt;</code> — JavaScript linking in head vs body</div>
+        <div class="subtopic-item"><code>&lt;style&gt;</code> — Internal CSS</div>
+        <div class="subtopic-item"><code>&lt;base&gt;</code> — Base URL for relative links</div>
+      </div>
+      <h3 class="subtopic-group">Body Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;body&gt;</code> — Visible content container</div>
+        <div class="subtopic-item">Anatomy of an HTML element: opening tag, content, closing tag</div>
+        <div class="subtopic-item">Self-closing / void elements — <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;img&gt;</code>, etc.</div>
+        <div class="subtopic-item">Nested elements and parent-child relationships</div>
+        <div class="subtopic-item">HTML comments — <code>&lt;!-- comment --&gt;</code></div>
+        <div class="subtopic-item">Whitespace handling in HTML</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B3 -->
+    <div class="topic-card anchor-target" id="b3">
+      <div class="topic-header">
+        <span class="topic-num">03</span>
+        <h2 class="topic-title">Text Content & Formatting Elements</h2>
+      </div>
+      <h3 class="subtopic-group">Headings</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> — Six levels of headings</div>
+        <div class="subtopic-item">Heading hierarchy and SEO importance</div>
+        <div class="subtopic-item">One <code>&lt;h1&gt;</code> per page best practice</div>
+      </div>
+      <h3 class="subtopic-group">Paragraphs & Line Breaks</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;p&gt;</code> — Paragraph element</div>
+        <div class="subtopic-item"><code>&lt;br&gt;</code> — Line break (void element)</div>
+        <div class="subtopic-item"><code>&lt;hr&gt;</code> — Thematic break / horizontal rule</div>
+        <div class="subtopic-item"><code>&lt;pre&gt;</code> — Preformatted text (preserves whitespace)</div>
+      </div>
+      <h3 class="subtopic-group">Inline Text Formatting</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;strong&gt;</code> — Strong importance (bold)</div>
+        <div class="subtopic-item"><code>&lt;em&gt;</code> — Emphasis (italic)</div>
+        <div class="subtopic-item"><code>&lt;b&gt;</code> — Bold (stylistic, no semantic meaning)</div>
+        <div class="subtopic-item"><code>&lt;i&gt;</code> — Italic (stylistic, technical terms, foreign words)</div>
+        <div class="subtopic-item"><code>&lt;u&gt;</code> — Underline</div>
+        <div class="subtopic-item"><code>&lt;s&gt;</code> and <code>&lt;del&gt;</code> — Strikethrough / deleted text</div>
+        <div class="subtopic-item"><code>&lt;ins&gt;</code> — Inserted text</div>
+        <div class="subtopic-item"><code>&lt;mark&gt;</code> — Highlighted text</div>
+        <div class="subtopic-item"><code>&lt;small&gt;</code> — Smaller text (fine print)</div>
+        <div class="subtopic-item"><code>&lt;sub&gt;</code> — Subscript text</div>
+        <div class="subtopic-item"><code>&lt;sup&gt;</code> — Superscript text</div>
+        <div class="subtopic-item"><code>&lt;abbr&gt;</code> — Abbreviation with title attribute</div>
+        <div class="subtopic-item"><code>&lt;cite&gt;</code> — Citation of creative works</div>
+        <div class="subtopic-item"><code>&lt;q&gt;</code> — Inline quotation</div>
+        <div class="subtopic-item"><code>&lt;blockquote&gt;</code> — Block-level quotation with <code>cite</code></div>
+        <div class="subtopic-item"><code>&lt;code&gt;</code> — Inline code</div>
+        <div class="subtopic-item"><code>&lt;kbd&gt;</code> — Keyboard input</div>
+        <div class="subtopic-item"><code>&lt;samp&gt;</code> — Sample output</div>
+        <div class="subtopic-item"><code>&lt;var&gt;</code> — Variable in math/programming</div>
+        <div class="subtopic-item"><code>&lt;dfn&gt;</code> — Definition term</div>
+        <div class="subtopic-item"><code>&lt;time&gt;</code> — Date/time element with <code>datetime</code> attribute</div>
+        <div class="subtopic-item"><code>&lt;span&gt;</code> — Generic inline container</div>
+        <div class="subtopic-item"><code>&lt;bdi&gt;</code> — Bidirectional isolation</div>
+        <div class="subtopic-item"><code>&lt;bdo&gt;</code> — Bidirectional override</div>
+        <div class="subtopic-item"><code>&lt;wbr&gt;</code> — Word break opportunity</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B4 -->
+    <div class="topic-card anchor-target" id="b4">
+      <div class="topic-header">
+        <span class="topic-num">04</span>
+        <h2 class="topic-title">Links & Images</h2>
+      </div>
+      <h3 class="subtopic-group">Anchor Element &lt;a&gt;</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>href</code> attribute — absolute vs relative URLs</div>
+        <div class="subtopic-item"><code>target</code> attribute — <code>_blank</code>, <code>_self</code>, <code>_parent</code>, <code>_top</code></div>
+        <div class="subtopic-item"><code>rel</code> attribute — <code>noopener</code>, <code>noreferrer</code>, <code>nofollow</code></div>
+        <div class="subtopic-item"><code>download</code> attribute — Force file download</div>
+        <div class="subtopic-item"><code>title</code> attribute — Tooltip on hover</div>
+        <div class="subtopic-item">Linking to email — <code>mailto:</code></div>
+        <div class="subtopic-item">Linking to phone — <code>tel:</code></div>
+        <div class="subtopic-item">Fragment links / Anchor links — <code>#id</code></div>
+        <div class="subtopic-item">Linking to sections within same page</div>
+        <div class="subtopic-item">Image as a hyperlink</div>
+      </div>
+      <h3 class="subtopic-group">Image Element &lt;img&gt;</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>src</code> attribute — Path to image (absolute, relative, data URI)</div>
+        <div class="subtopic-item"><code>alt</code> attribute — Accessibility and SEO</div>
+        <div class="subtopic-item"><code>width</code> and <code>height</code> attributes — Prevent layout shift</div>
+        <div class="subtopic-item"><code>loading="lazy"</code> — Lazy loading attribute</div>
+        <div class="subtopic-item"><code>decoding</code> attribute</div>
+        <div class="subtopic-item">Supported formats — JPEG, PNG, GIF, SVG, WebP, AVIF</div>
+        <div class="subtopic-item">Decorative vs meaningful images (empty <code>alt</code>)</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B5 -->
+    <div class="topic-card anchor-target" id="b5">
+      <div class="topic-header">
+        <span class="topic-num">05</span>
+        <h2 class="topic-title">Lists</h2>
+      </div>
+      <h3 class="subtopic-group">Unordered Lists</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;ul&gt;</code> — Unordered (bulleted) list</div>
+        <div class="subtopic-item"><code>&lt;li&gt;</code> — List item element</div>
+        <div class="subtopic-item">Nested unordered lists</div>
+      </div>
+      <h3 class="subtopic-group">Ordered Lists</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;ol&gt;</code> — Ordered (numbered) list</div>
+        <div class="subtopic-item"><code>type</code> attribute — 1, A, a, I, i</div>
+        <div class="subtopic-item"><code>start</code> attribute — Custom starting number</div>
+        <div class="subtopic-item"><code>reversed</code> attribute — Reverse numbering</div>
+        <div class="subtopic-item"><code>value</code> on <code>&lt;li&gt;</code> — Custom item number</div>
+        <div class="subtopic-item">Nested ordered lists</div>
+      </div>
+      <h3 class="subtopic-group">Description Lists</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;dl&gt;</code> — Description list container</div>
+        <div class="subtopic-item"><code>&lt;dt&gt;</code> — Term/name</div>
+        <div class="subtopic-item"><code>&lt;dd&gt;</code> — Description/definition</div>
+        <div class="subtopic-item">Multiple <code>&lt;dd&gt;</code> for one <code>&lt;dt&gt;</code></div>
+        <div class="subtopic-item">Use cases — Glossaries, metadata pairs</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B6 -->
+    <div class="topic-card anchor-target" id="b6">
+      <div class="topic-header">
+        <span class="topic-num">06</span>
+        <h2 class="topic-title">Tables</h2>
+      </div>
+      <h3 class="subtopic-group">Table Structure</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;table&gt;</code> — Table container</div>
+        <div class="subtopic-item"><code>&lt;thead&gt;</code> — Table head section</div>
+        <div class="subtopic-item"><code>&lt;tbody&gt;</code> — Table body section</div>
+        <div class="subtopic-item"><code>&lt;tfoot&gt;</code> — Table footer section</div>
+        <div class="subtopic-item"><code>&lt;tr&gt;</code> — Table row</div>
+        <div class="subtopic-item"><code>&lt;th&gt;</code> — Table header cell</div>
+        <div class="subtopic-item"><code>&lt;td&gt;</code> — Table data cell</div>
+        <div class="subtopic-item"><code>&lt;caption&gt;</code> — Table caption/title</div>
+      </div>
+      <h3 class="subtopic-group">Table Attributes</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>colspan</code> — Span across multiple columns</div>
+        <div class="subtopic-item"><code>rowspan</code> — Span across multiple rows</div>
+        <div class="subtopic-item"><code>scope</code> on <code>&lt;th&gt;</code> — <code>col</code>, <code>row</code>, <code>colgroup</code>, <code>rowgroup</code></div>
+        <div class="subtopic-item"><code>headers</code> attribute — Associate data cells with headers</div>
+        <div class="subtopic-item"><code>&lt;colgroup&gt;</code> and <code>&lt;col&gt;</code> — Column grouping and styling</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B7 -->
+    <div class="topic-card anchor-target" id="b7">
+      <div class="topic-header">
+        <span class="topic-num">07</span>
+        <h2 class="topic-title">Forms & Input Elements</h2>
+      </div>
+      <h3 class="subtopic-group">Form Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;form&gt;</code> — Form container</div>
+        <div class="subtopic-item"><code>action</code> attribute — Where data is sent</div>
+        <div class="subtopic-item"><code>method</code> attribute — <code>GET</code> vs <code>POST</code></div>
+        <div class="subtopic-item"><code>enctype</code> — <code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>, <code>text/plain</code></div>
+        <div class="subtopic-item"><code>novalidate</code> attribute — Disable browser validation</div>
+        <div class="subtopic-item"><code>autocomplete</code> attribute</div>
+      </div>
+      <h3 class="subtopic-group">Input Types</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>type="text"</code> — Single-line text</div>
+        <div class="subtopic-item"><code>type="password"</code> — Password field</div>
+        <div class="subtopic-item"><code>type="email"</code> — Email validation</div>
+        <div class="subtopic-item"><code>type="number"</code> — Numeric input</div>
+        <div class="subtopic-item"><code>type="tel"</code> — Telephone number</div>
+        <div class="subtopic-item"><code>type="url"</code> — URL input</div>
+        <div class="subtopic-item"><code>type="search"</code> — Search field</div>
+        <div class="subtopic-item"><code>type="date"</code> — Date picker</div>
+        <div class="subtopic-item"><code>type="time"</code> — Time picker</div>
+        <div class="subtopic-item"><code>type="datetime-local"</code> — Date and time</div>
+        <div class="subtopic-item"><code>type="month"</code> — Month picker</div>
+        <div class="subtopic-item"><code>type="week"</code> — Week picker</div>
+        <div class="subtopic-item"><code>type="color"</code> — Color picker</div>
+        <div class="subtopic-item"><code>type="range"</code> — Slider</div>
+        <div class="subtopic-item"><code>type="file"</code> — File upload</div>
+        <div class="subtopic-item"><code>type="checkbox"</code> — Checkbox</div>
+        <div class="subtopic-item"><code>type="radio"</code> — Radio button</div>
+        <div class="subtopic-item"><code>type="submit"</code> — Submit button</div>
+        <div class="subtopic-item"><code>type="reset"</code> — Reset button</div>
+        <div class="subtopic-item"><code>type="button"</code> — Generic button</div>
+        <div class="subtopic-item"><code>type="image"</code> — Image submit button</div>
+        <div class="subtopic-item"><code>type="hidden"</code> — Hidden field</div>
+      </div>
+      <h3 class="subtopic-group">Input Attributes</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>name</code>, <code>id</code>, <code>value</code></div>
+        <div class="subtopic-item"><code>placeholder</code> — Hint text</div>
+        <div class="subtopic-item"><code>required</code> — Mandatory field</div>
+        <div class="subtopic-item"><code>disabled</code>, <code>readonly</code></div>
+        <div class="subtopic-item"><code>checked</code>, <code>selected</code></div>
+        <div class="subtopic-item"><code>min</code>, <code>max</code>, <code>step</code> — Range constraints</div>
+        <div class="subtopic-item"><code>minlength</code>, <code>maxlength</code> — Text length</div>
+        <div class="subtopic-item"><code>pattern</code> — Regex validation</div>
+        <div class="subtopic-item"><code>autocomplete</code> — Autofill hints</div>
+        <div class="subtopic-item"><code>autofocus</code> — Focus on load</div>
+        <div class="subtopic-item"><code>multiple</code> — Multiple values (file, email)</div>
+        <div class="subtopic-item"><code>accept</code> — File type filter</div>
+        <div class="subtopic-item"><code>list</code> — Link to <code>&lt;datalist&gt;</code></div>
+        <div class="subtopic-item"><code>form</code> — Associate input with external form</div>
+        <div class="subtopic-item"><code>formaction</code>, <code>formmethod</code>, <code>formnovalidate</code></div>
+        <div class="subtopic-item"><code>size</code> — Visible width of input</div>
+        <div class="subtopic-item"><code>spellcheck</code> — Spell checking</div>
+      </div>
+      <h3 class="subtopic-group">Other Form Elements</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;textarea&gt;</code> — Multi-line text, <code>rows</code>, <code>cols</code>, <code>resize</code></div>
+        <div class="subtopic-item"><code>&lt;select&gt;</code> — Dropdown list</div>
+        <div class="subtopic-item"><code>&lt;option&gt;</code> — Individual option in select</div>
+        <div class="subtopic-item"><code>&lt;optgroup&gt;</code> — Group options with <code>label</code></div>
+        <div class="subtopic-item"><code>&lt;label&gt;</code> — Accessible label, <code>for</code> attribute</div>
+        <div class="subtopic-item"><code>&lt;fieldset&gt;</code> — Group related fields</div>
+        <div class="subtopic-item"><code>&lt;legend&gt;</code> — Fieldset caption</div>
+        <div class="subtopic-item"><code>&lt;button&gt;</code> — Button element, <code>type</code> attribute</div>
+        <div class="subtopic-item"><code>&lt;datalist&gt;</code> — Predefined options for input</div>
+        <div class="subtopic-item"><code>&lt;output&gt;</code> — Result of calculation</div>
+        <div class="subtopic-item"><code>&lt;progress&gt;</code> — Progress bar</div>
+        <div class="subtopic-item"><code>&lt;meter&gt;</code> — Scalar measurement</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B8 -->
+    <div class="topic-card anchor-target" id="b8">
+      <div class="topic-header">
+        <span class="topic-num">08</span>
+        <h2 class="topic-title">Block vs Inline Elements</h2>
+      </div>
+      <h3 class="subtopic-group">Block-Level Elements</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Definition — Start on a new line, take full width</div>
+        <div class="subtopic-item">Examples — <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;-&lt;h6&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;table&gt;</code>, <code>&lt;form&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;section&gt;</code></div>
+        <div class="subtopic-item"><code>&lt;div&gt;</code> — Generic block container</div>
+      </div>
+      <h3 class="subtopic-group">Inline Elements</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Definition — Flow within text, take only needed width</div>
+        <div class="subtopic-item">Examples — <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;input&gt;</code></div>
+        <div class="subtopic-item"><code>&lt;span&gt;</code> — Generic inline container</div>
+      </div>
+      <h3 class="subtopic-group">Inline-Block</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Behaves inline but accepts width/height/margin</div>
+        <div class="subtopic-item">Controlled via CSS <code>display</code> property</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B9 -->
+    <div class="topic-card anchor-target" id="b9">
+      <div class="topic-header">
+        <span class="topic-num">09</span>
+        <h2 class="topic-title">Semantic HTML Elements</h2>
+      </div>
+      <h3 class="subtopic-group">Page Layout Semantics</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;header&gt;</code> — Introductory content, navigation links</div>
+        <div class="subtopic-item"><code>&lt;nav&gt;</code> — Navigation links block</div>
+        <div class="subtopic-item"><code>&lt;main&gt;</code> — Primary content of the page</div>
+        <div class="subtopic-item"><code>&lt;footer&gt;</code> — Footer of page or section</div>
+        <div class="subtopic-item"><code>&lt;aside&gt;</code> — Tangentially related content, sidebars</div>
+        <div class="subtopic-item"><code>&lt;section&gt;</code> — Thematic grouping of content</div>
+        <div class="subtopic-item"><code>&lt;article&gt;</code> — Self-contained independent content</div>
+      </div>
+      <h3 class="subtopic-group">Content Semantics</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;figure&gt;</code> — Self-contained figure (images, diagrams)</div>
+        <div class="subtopic-item"><code>&lt;figcaption&gt;</code> — Caption for figure</div>
+        <div class="subtopic-item"><code>&lt;details&gt;</code> — Disclosure widget (expandable)</div>
+        <div class="subtopic-item"><code>&lt;summary&gt;</code> — Visible heading for details</div>
+        <div class="subtopic-item"><code>&lt;dialog&gt;</code> — Modal dialog box</div>
+        <div class="subtopic-item"><code>&lt;address&gt;</code> — Contact information</div>
+        <div class="subtopic-item"><code>&lt;hgroup&gt;</code> — Group of headings</div>
+        <div class="subtopic-item"><code>&lt;search&gt;</code> — Search landmark (HTML 5.3)</div>
+      </div>
+      <h3 class="subtopic-group">Why Semantics Matter</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Accessibility — Screen reader interpretation</div>
+        <div class="subtopic-item">SEO benefits — Search engine understanding</div>
+        <div class="subtopic-item">Maintainability — Easier to read and debug</div>
+        <div class="subtopic-item"><code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> vs semantic alternatives</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B10 -->
+    <div class="topic-card anchor-target" id="b10">
+      <div class="topic-header">
+        <span class="topic-num">10</span>
+        <h2 class="topic-title">Media Elements</h2>
+      </div>
+      <h3 class="subtopic-group">Audio Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;audio&gt;</code> — Embed audio content</div>
+        <div class="subtopic-item"><code>src</code>, <code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>preload</code></div>
+        <div class="subtopic-item"><code>&lt;source&gt;</code> — Multiple audio formats (MP3, OGG, WAV)</div>
+        <div class="subtopic-item">Fallback text for unsupported browsers</div>
+      </div>
+      <h3 class="subtopic-group">Video Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;video&gt;</code> — Embed video content</div>
+        <div class="subtopic-item"><code>src</code>, <code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>preload</code></div>
+        <div class="subtopic-item"><code>width</code>, <code>height</code>, <code>poster</code> — Poster image</div>
+        <div class="subtopic-item"><code>playsinline</code> — Mobile inline playback</div>
+        <div class="subtopic-item"><code>&lt;source&gt;</code> — Multiple video formats (MP4, WebM, OGG)</div>
+        <div class="subtopic-item"><code>&lt;track&gt;</code> — Subtitles, captions (WebVTT)</div>
+      </div>
+      <h3 class="subtopic-group">Other Embedding</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;iframe&gt;</code> — Embed another webpage</div>
+        <div class="subtopic-item"><code>iframe</code> attributes — <code>src</code>, <code>width</code>, <code>height</code>, <code>title</code>, <code>sandbox</code>, <code>allow</code>, <code>loading</code></div>
+        <div class="subtopic-item"><code>&lt;embed&gt;</code> — Plugin-based embedded content</div>
+        <div class="subtopic-item"><code>&lt;object&gt;</code> — External resource embedding</div>
+        <div class="subtopic-item"><code>&lt;param&gt;</code> — Parameters for object element</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B11 -->
+    <div class="topic-card anchor-target" id="b11">
+      <div class="topic-header">
+        <span class="topic-num">11</span>
+        <h2 class="topic-title">HTML Attributes (Global)</h2>
+      </div>
+      <h3 class="subtopic-group">Universal Attributes</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>id</code> — Unique identifier</div>
+        <div class="subtopic-item"><code>class</code> — CSS class names (space-separated)</div>
+        <div class="subtopic-item"><code>style</code> — Inline CSS styles</div>
+        <div class="subtopic-item"><code>title</code> — Tooltip text</div>
+        <div class="subtopic-item"><code>lang</code> — Language of content</div>
+        <div class="subtopic-item"><code>dir</code> — Text direction — <code>ltr</code>, <code>rtl</code>, <code>auto</code></div>
+        <div class="subtopic-item"><code>tabindex</code> — Tab order control</div>
+        <div class="subtopic-item"><code>accesskey</code> — Keyboard shortcut</div>
+        <div class="subtopic-item"><code>contenteditable</code> — Make element editable</div>
+        <div class="subtopic-item"><code>draggable</code> — Drag and drop</div>
+        <div class="subtopic-item"><code>hidden</code> — Hide element</div>
+        <div class="subtopic-item"><code>spellcheck</code> — Enable/disable spellcheck</div>
+        <div class="subtopic-item"><code>translate</code> — Translation hint for i18n</div>
+        <div class="subtopic-item"><code>data-*</code> — Custom data attributes</div>
+        <div class="subtopic-item"><code>is</code> — Custom element extension</div>
+        <div class="subtopic-item"><code>slot</code> — Web component slot assignment</div>
+        <div class="subtopic-item"><code>part</code> — Shadow DOM part name</div>
+        <div class="subtopic-item"><code>exportparts</code> — Export shadow parts</div>
+        <div class="subtopic-item"><code>inert</code> — Make subtree non-interactive</div>
+        <div class="subtopic-item"><code>popover</code> — Popover API attribute</div>
+        <div class="subtopic-item"><code>enterkeyhint</code> — Virtual keyboard hint</div>
+        <div class="subtopic-item"><code>inputmode</code> — Virtual keyboard type</div>
+        <div class="subtopic-item"><code>nonce</code> — Cryptographic nonce for CSP</div>
+        <div class="subtopic-item"><code>autocapitalize</code> — Capitalization behavior</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- B12 -->
+    <div class="topic-card anchor-target" id="b12">
+      <div class="topic-header">
+        <span class="topic-num">12</span>
+        <h2 class="topic-title">HTML Character Entities</h2>
+      </div>
+      <h3 class="subtopic-group">Named & Numeric Entities</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">What are character entities — escaping reserved characters</div>
+        <div class="subtopic-item"><code>&amp;lt;</code> → &lt; (less than)</div>
+        <div class="subtopic-item"><code>&amp;gt;</code> → &gt; (greater than)</div>
+        <div class="subtopic-item"><code>&amp;amp;</code> → &amp; (ampersand)</div>
+        <div class="subtopic-item"><code>&amp;quot;</code> → " (double quote)</div>
+        <div class="subtopic-item"><code>&amp;apos;</code> → ' (apostrophe)</div>
+        <div class="subtopic-item"><code>&amp;nbsp;</code> → Non-breaking space</div>
+        <div class="subtopic-item"><code>&amp;copy;</code> → © (copyright)</div>
+        <div class="subtopic-item"><code>&amp;reg;</code> → ® (registered trademark)</div>
+        <div class="subtopic-item"><code>&amp;trade;</code> → ™ (trademark)</div>
+        <div class="subtopic-item"><code>&amp;euro;</code> → € (euro)</div>
+        <div class="subtopic-item"><code>&amp;pound;</code> → £ (pound sterling)</div>
+        <div class="subtopic-item">Numeric entities — <code>&amp;#60;</code> and <code>&amp;#x3C;</code></div>
+        <div class="subtopic-item">Unicode in HTML — UTF-8 encoding recommendation</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- INTERMEDIATE SECTION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section intermediate" id="intermediate">
+  <div class="section-header">
+    <div class="section-badge">⚡</div>
+    <div>
+      <h2 class="section-title" id="intermediate-title">INTERMEDIATE</h2>
+      <div style="font-size:13px;color:var(--muted);font-family:'Rajdhani',sans-serif;margin-top:2px;">Deeper Concepts & Practical Skills</div>
+    </div>
+    <div class="section-meta">Level 02<br>Build On It</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Quick Navigation</div>
+    <div class="toc-links">
+      <a href="#i1" class="toc-link">HTML5 APIs</a>
+      <a href="#i2" class="toc-link">Accessibility (ARIA)</a>
+      <a href="#i3" class="toc-link">SEO & Meta Tags</a>
+      <a href="#i4" class="toc-link">Responsive Images</a>
+      <a href="#i5" class="toc-link">Canvas & SVG</a>
+      <a href="#i6" class="toc-link">Multimedia Advanced</a>
+      <a href="#i7" class="toc-link">Forms Validation</a>
+      <a href="#i8" class="toc-link">Web Storage</a>
+      <a href="#i9" class="toc-link">Drag & Drop</a>
+      <a href="#i10" class="toc-link">Microdata & Schemas</a>
+      <a href="#i11" class="toc-link">HTML & CSS Integration</a>
+      <a href="#i12" class="toc-link">HTML & JS Integration</a>
+    </div>
+  </div>
+
+  <div class="section-content">
+
+    <!-- I1 -->
+    <div class="topic-card anchor-target" id="i1">
+      <div class="topic-header">
+        <span class="topic-num">01</span>
+        <h2 class="topic-title">HTML5 APIs Overview</h2>
+      </div>
+      <h3 class="subtopic-group">Core HTML5 Features</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">New structural elements (<code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>, etc.)</div>
+        <div class="subtopic-item">New form input types and attributes</div>
+        <div class="subtopic-item">Native audio/video support</div>
+        <div class="subtopic-item">Canvas 2D API</div>
+        <div class="subtopic-item">SVG inline support</div>
+        <div class="subtopic-item">Drag and Drop API</div>
+        <div class="subtopic-item">Geolocation API</div>
+        <div class="subtopic-item">Web Storage API (localStorage, sessionStorage)</div>
+        <div class="subtopic-item">Web Workers</div>
+        <div class="subtopic-item">WebSockets</div>
+        <div class="subtopic-item">History API — pushState/popState</div>
+        <div class="subtopic-item">File API</div>
+        <div class="subtopic-item">Fullscreen API</div>
+        <div class="subtopic-item">Notifications API</div>
+        <div class="subtopic-item">Visibility API — <code>document.visibilityState</code></div>
+        <div class="subtopic-item">Intersection Observer API</div>
+        <div class="subtopic-item">MutationObserver API</div>
+        <div class="subtopic-item">ResizeObserver API</div>
+        <div class="subtopic-item">Clipboard API</div>
+        <div class="subtopic-item">Payment Request API</div>
+        <div class="subtopic-item">Credential Management API</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I2 -->
+    <div class="topic-card anchor-target" id="i2">
+      <div class="topic-header">
+        <span class="topic-num">02</span>
+        <h2 class="topic-title">Accessibility (A11y) & ARIA</h2>
+      </div>
+      <h3 class="subtopic-group">Web Accessibility Basics</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">WCAG 2.1 / 2.2 — Web Content Accessibility Guidelines</div>
+        <div class="subtopic-item">POUR principles — Perceivable, Operable, Understandable, Robust</div>
+        <div class="subtopic-item">Conformance levels — A, AA, AAA</div>
+        <div class="subtopic-item">Screen readers — NVDA, JAWS, VoiceOver, TalkBack</div>
+        <div class="subtopic-item">Keyboard-only navigation testing</div>
+        <div class="subtopic-item">Color contrast ratios — Minimum 4.5:1 for normal text</div>
+        <div class="subtopic-item">Focus indicators — Never remove without replacement</div>
+        <div class="subtopic-item">Skip navigation links</div>
+      </div>
+      <h3 class="subtopic-group">ARIA (Accessible Rich Internet Applications)</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>role</code> attribute — Landmark, widget, structure, window roles</div>
+        <div class="subtopic-item">Landmark roles — <code>banner</code>, <code>navigation</code>, <code>main</code>, <code>complementary</code>, <code>contentinfo</code>, <code>search</code>, <code>form</code>, <code>region</code></div>
+        <div class="subtopic-item">Widget roles — <code>button</code>, <code>checkbox</code>, <code>combobox</code>, <code>dialog</code>, <code>tab</code>, <code>tablist</code>, <code>tree</code>, <code>slider</code>, <code>spinbutton</code></div>
+        <div class="subtopic-item"><code>aria-label</code> — Accessible name for element</div>
+        <div class="subtopic-item"><code>aria-labelledby</code> — Reference another element as label</div>
+        <div class="subtopic-item"><code>aria-describedby</code> — Additional description</div>
+        <div class="subtopic-item"><code>aria-hidden="true"</code> — Hide from accessibility tree</div>
+        <div class="subtopic-item"><code>aria-live</code> — Live region updates (<code>polite</code>, <code>assertive</code>, <code>off</code>)</div>
+        <div class="subtopic-item"><code>aria-expanded</code> — Expanded/collapsed state</div>
+        <div class="subtopic-item"><code>aria-selected</code>, <code>aria-checked</code>, <code>aria-pressed</code></div>
+        <div class="subtopic-item"><code>aria-disabled</code>, <code>aria-readonly</code>, <code>aria-required</code></div>
+        <div class="subtopic-item"><code>aria-invalid</code> — Form validation state</div>
+        <div class="subtopic-item"><code>aria-current</code> — Current item (<code>page</code>, <code>step</code>, <code>date</code>)</div>
+        <div class="subtopic-item"><code>aria-controls</code>, <code>aria-owns</code></div>
+        <div class="subtopic-item"><code>aria-haspopup</code> — Indicates popup</div>
+        <div class="subtopic-item"><code>aria-level</code>, <code>aria-posinset</code>, <code>aria-setsize</code></div>
+        <div class="subtopic-item"><code>aria-valuemin</code>, <code>aria-valuemax</code>, <code>aria-valuenow</code>, <code>aria-valuetext</code></div>
+        <div class="subtopic-item"><code>aria-atomic</code>, <code>aria-relevant</code>, <code>aria-busy</code></div>
+        <div class="subtopic-item"><code>aria-roledescription</code> — Custom role description</div>
+        <div class="subtopic-item"><code>aria-modal</code> — Indicate modal dialog</div>
+        <div class="subtopic-item"><code>aria-placeholder</code>, <code>aria-multiline</code>, <code>aria-multiselectable</code></div>
+        <div class="subtopic-item">First rule of ARIA — Use native HTML first</div>
+      </div>
+      <h3 class="subtopic-group">Accessible Patterns</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Accessible forms — label association, error messages</div>
+        <div class="subtopic-item">Accessible navigation menus</div>
+        <div class="subtopic-item">Accessible modals — focus trap, <code>aria-modal</code></div>
+        <div class="subtopic-item">Accessible tabs — <code>tablist</code>, <code>tab</code>, <code>tabpanel</code></div>
+        <div class="subtopic-item">Accessible accordions</div>
+        <div class="subtopic-item">Accessible carousels</div>
+        <div class="subtopic-item">Accessible data tables — <code>scope</code>, <code>headers</code>, <code>caption</code></div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I3 -->
+    <div class="topic-card anchor-target" id="i3">
+      <div class="topic-header">
+        <span class="topic-num">03</span>
+        <h2 class="topic-title">SEO & Meta Tags</h2>
+      </div>
+      <h3 class="subtopic-group">Core Meta Tags</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;title&gt;</code> — Page title (50-60 chars) — most important tag</div>
+        <div class="subtopic-item"><code>meta description</code> — Page description (150-160 chars)</div>
+        <div class="subtopic-item"><code>meta robots</code> — <code>index/noindex</code>, <code>follow/nofollow</code>, <code>noarchive</code></div>
+        <div class="subtopic-item"><code>meta canonical</code> (via <code>&lt;link rel="canonical"&gt;</code>) — Canonical URL</div>
+        <div class="subtopic-item"><code>meta keywords</code> — (deprecated but still used)</div>
+        <div class="subtopic-item"><code>meta author</code></div>
+        <div class="subtopic-item"><code>meta theme-color</code> — Browser chrome color</div>
+        <div class="subtopic-item"><code>meta color-scheme</code></div>
+      </div>
+      <h3 class="subtopic-group">Open Graph (OG) Tags</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>og:title</code>, <code>og:description</code>, <code>og:image</code>, <code>og:url</code></div>
+        <div class="subtopic-item"><code>og:type</code> — website, article, product</div>
+        <div class="subtopic-item"><code>og:site_name</code>, <code>og:locale</code></div>
+        <div class="subtopic-item"><code>og:image:width</code>, <code>og:image:height</code>, <code>og:image:alt</code></div>
+        <div class="subtopic-item">Facebook, LinkedIn, WhatsApp preview optimization</div>
+      </div>
+      <h3 class="subtopic-group">Twitter Card Tags</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>twitter:card</code> — <code>summary</code>, <code>summary_large_image</code>, <code>app</code>, <code>player</code></div>
+        <div class="subtopic-item"><code>twitter:title</code>, <code>twitter:description</code>, <code>twitter:image</code></div>
+        <div class="subtopic-item"><code>twitter:site</code>, <code>twitter:creator</code></div>
+      </div>
+      <h3 class="subtopic-group">Link Tags for SEO</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;link rel="canonical"&gt;</code> — Preferred URL</div>
+        <div class="subtopic-item"><code>&lt;link rel="alternate" hreflang&gt;</code> — Multilingual pages</div>
+        <div class="subtopic-item"><code>&lt;link rel="prev/next"&gt;</code> — Pagination</div>
+        <div class="subtopic-item"><code>&lt;link rel="sitemap"&gt;</code> — Sitemap location</div>
+        <div class="subtopic-item"><code>&lt;link rel="manifest"&gt;</code> — PWA manifest</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I4 -->
+    <div class="topic-card anchor-target" id="i4">
+      <div class="topic-header">
+        <span class="topic-num">04</span>
+        <h2 class="topic-title">Responsive Images & Picture Element</h2>
+      </div>
+      <h3 class="subtopic-group">Responsive Image Attributes</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>srcset</code> — Multiple image sources for different resolutions</div>
+        <div class="subtopic-item"><code>sizes</code> — Media condition to display width mapping</div>
+        <div class="subtopic-item">Width descriptor <code>w</code> vs pixel density descriptor <code>x</code></div>
+      </div>
+      <h3 class="subtopic-group">Picture Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;picture&gt;</code> — Art direction and format selection</div>
+        <div class="subtopic-item"><code>&lt;source media=""&gt;</code> — Media query-based source</div>
+        <div class="subtopic-item"><code>&lt;source type=""&gt;</code> — Format-based source (WebP, AVIF)</div>
+        <div class="subtopic-item">Fallback <code>&lt;img&gt;</code> inside <code>&lt;picture&gt;</code></div>
+        <div class="subtopic-item">Art direction — Different crop/composition per breakpoint</div>
+        <div class="subtopic-item">Format fallback — AVIF → WebP → JPEG/PNG</div>
+      </div>
+      <h3 class="subtopic-group">Image Performance</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>loading="lazy"</code> — Native lazy loading</div>
+        <div class="subtopic-item"><code>loading="eager"</code> — Prioritized loading (LCP images)</div>
+        <div class="subtopic-item"><code>fetchpriority="high"</code> — Priority hints</div>
+        <div class="subtopic-item"><code>decoding="async"</code> — Off-main-thread decoding</div>
+        <div class="subtopic-item">Setting <code>width</code>/<code>height</code> to prevent CLS (layout shift)</div>
+        <div class="subtopic-item">Aspect ratio preservation</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I5 -->
+    <div class="topic-card anchor-target" id="i5">
+      <div class="topic-header">
+        <span class="topic-num">05</span>
+        <h2 class="topic-title">Canvas & SVG</h2>
+      </div>
+      <h3 class="subtopic-group">Canvas Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;canvas&gt;</code> — Raster drawing surface, <code>width</code>, <code>height</code></div>
+        <div class="subtopic-item">2D Context — <code>getContext('2d')</code></div>
+        <div class="subtopic-item">Drawing shapes — rectangles, circles, arcs, paths</div>
+        <div class="subtopic-item">Styling — <code>fillStyle</code>, <code>strokeStyle</code>, <code>lineWidth</code></div>
+        <div class="subtopic-item">Paths — <code>beginPath()</code>, <code>moveTo()</code>, <code>lineTo()</code>, <code>arc()</code>, <code>closePath()</code></div>
+        <div class="subtopic-item">Text on canvas — <code>fillText()</code>, <code>strokeText()</code>, <code>font</code></div>
+        <div class="subtopic-item">Images on canvas — <code>drawImage()</code></div>
+        <div class="subtopic-item">Transformations — <code>translate()</code>, <code>rotate()</code>, <code>scale()</code>, <code>save()</code>, <code>restore()</code></div>
+        <div class="subtopic-item">Gradients — <code>createLinearGradient()</code>, <code>createRadialGradient()</code></div>
+        <div class="subtopic-item">Clipping paths</div>
+        <div class="subtopic-item">Pixel manipulation — <code>getImageData()</code>, <code>putImageData()</code></div>
+        <div class="subtopic-item">Canvas animations — <code>requestAnimationFrame()</code></div>
+        <div class="subtopic-item">WebGL context — <code>getContext('webgl')</code>, 3D graphics</div>
+        <div class="subtopic-item">Canvas accessibility — Fallback content, <code>role</code></div>
+        <div class="subtopic-item">Export canvas — <code>toDataURL()</code>, <code>toBlob()</code></div>
+      </div>
+      <h3 class="subtopic-group">SVG (Scalable Vector Graphics)</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Inline SVG vs external SVG file vs <code>&lt;img&gt;</code> SVG</div>
+        <div class="subtopic-item"><code>&lt;svg&gt;</code> — Container, <code>viewBox</code>, <code>xmlns</code>, <code>width</code>, <code>height</code></div>
+        <div class="subtopic-item">Basic shapes — <code>&lt;rect&gt;</code>, <code>&lt;circle&gt;</code>, <code>&lt;ellipse&gt;</code>, <code>&lt;line&gt;</code>, <code>&lt;polyline&gt;</code>, <code>&lt;polygon&gt;</code></div>
+        <div class="subtopic-item"><code>&lt;path&gt;</code> — Complex paths, <code>d</code> attribute (M, L, C, Q, A, Z)</div>
+        <div class="subtopic-item"><code>&lt;text&gt;</code> — Text in SVG</div>
+        <div class="subtopic-item"><code>&lt;image&gt;</code> — Embedded image in SVG</div>
+        <div class="subtopic-item"><code>&lt;g&gt;</code> — Group element</div>
+        <div class="subtopic-item"><code>&lt;defs&gt;</code>, <code>&lt;use&gt;</code> — Reusable elements</div>
+        <div class="subtopic-item"><code>&lt;symbol&gt;</code> — Reusable symbol (icon system)</div>
+        <div class="subtopic-item">SVG filters — <code>&lt;filter&gt;</code>, <code>&lt;feGaussianBlur&gt;</code>, <code>&lt;feDropShadow&gt;</code></div>
+        <div class="subtopic-item">Gradients — <code>&lt;linearGradient&gt;</code>, <code>&lt;radialGradient&gt;</code></div>
+        <div class="subtopic-item">Patterns — <code>&lt;pattern&gt;</code></div>
+        <div class="subtopic-item">Clipping and masking — <code>&lt;clipPath&gt;</code>, <code>&lt;mask&gt;</code></div>
+        <div class="subtopic-item">SVG animations — <code>&lt;animate&gt;</code>, <code>&lt;animateTransform&gt;</code>, CSS animations</div>
+        <div class="subtopic-item">SMIL animations (deprecated, use CSS/JS instead)</div>
+        <div class="subtopic-item">SVG accessibility — <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>, <code>role</code>, <code>aria-label</code></div>
+        <div class="subtopic-item">Manipulating SVG with JavaScript and CSS</div>
+        <div class="subtopic-item">viewBox and coordinate system</div>
+        <div class="subtopic-item">preserveAspectRatio attribute</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I6 -->
+    <div class="topic-card anchor-target" id="i6">
+      <div class="topic-header">
+        <span class="topic-num">06</span>
+        <h2 class="topic-title">Multimedia & Embedding (Advanced)</h2>
+      </div>
+      <h3 class="subtopic-group">Advanced Audio & Video</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Media playback API — <code>play()</code>, <code>pause()</code>, <code>currentTime</code>, <code>duration</code></div>
+        <div class="subtopic-item">Media events — <code>play</code>, <code>pause</code>, <code>ended</code>, <code>timeupdate</code>, <code>canplay</code>, <code>loadedmetadata</code></div>
+        <div class="subtopic-item"><code>playbackRate</code> — Speed control</div>
+        <div class="subtopic-item"><code>volume</code>, <code>muted</code> — Volume control</div>
+        <div class="subtopic-item">Building custom video controls</div>
+        <div class="subtopic-item"><code>&lt;track kind="subtitles"&gt;</code> — WebVTT subtitles</div>
+        <div class="subtopic-item"><code>&lt;track kind="captions"&gt;</code> — Captions for deaf</div>
+        <div class="subtopic-item"><code>&lt;track kind="chapters"&gt;</code> — Chapter navigation</div>
+        <div class="subtopic-item"><code>&lt;track kind="descriptions"&gt;</code> — Audio descriptions</div>
+        <div class="subtopic-item">Picture-in-picture API — <code>requestPictureInPicture()</code></div>
+        <div class="subtopic-item">Media Capture — getUserMedia() (webcam/mic)</div>
+        <div class="subtopic-item">Media Source Extensions (MSE)</div>
+        <div class="subtopic-item">Encrypted Media Extensions (EME) — DRM</div>
+      </div>
+      <h3 class="subtopic-group">iFrame Advanced</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>sandbox</code> attribute — Restrictions (allow-scripts, allow-forms, etc.)</div>
+        <div class="subtopic-item"><code>allow</code> attribute — Feature policy (camera, microphone, fullscreen)</div>
+        <div class="subtopic-item"><code>referrerpolicy</code> — Control referrer headers</div>
+        <div class="subtopic-item"><code>loading="lazy"</code> on iframes</div>
+        <div class="subtopic-item">Embedding YouTube, Vimeo, Google Maps responsively</div>
+        <div class="subtopic-item">postMessage API — Cross-origin iframe communication</div>
+        <div class="subtopic-item">Security — clickjacking, X-Frame-Options</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I7 -->
+    <div class="topic-card anchor-target" id="i7">
+      <div class="topic-header">
+        <span class="topic-num">07</span>
+        <h2 class="topic-title">Form Validation (Native HTML)</h2>
+      </div>
+      <h3 class="subtopic-group">Built-in Validation</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>required</code> — Field must have value</div>
+        <div class="subtopic-item"><code>pattern</code> — Regex pattern matching</div>
+        <div class="subtopic-item"><code>minlength</code>, <code>maxlength</code> — Text length constraints</div>
+        <div class="subtopic-item"><code>min</code>, <code>max</code> — Numeric/date range</div>
+        <div class="subtopic-item"><code>step</code> — Numeric increment</div>
+        <div class="subtopic-item"><code>type</code> validation — email, url, number auto-validate</div>
+      </div>
+      <h3 class="subtopic-group">Constraint Validation API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>checkValidity()</code> — Check if field is valid</div>
+        <div class="subtopic-item"><code>reportValidity()</code> — Check and show messages</div>
+        <div class="subtopic-item"><code>setCustomValidity()</code> — Custom error message</div>
+        <div class="subtopic-item"><code>validity</code> object — <code>valueMissing</code>, <code>typeMismatch</code>, <code>patternMismatch</code>, <code>tooLong</code>, <code>tooShort</code>, <code>rangeUnderflow</code>, <code>rangeOverflow</code>, <code>stepMismatch</code>, <code>customError</code>, <code>valid</code></div>
+        <div class="subtopic-item"><code>validationMessage</code> — Browser's validation message</div>
+        <div class="subtopic-item"><code>willValidate</code> — Whether element participates in validation</div>
+        <div class="subtopic-item">Styling with CSS pseudo-classes — <code>:valid</code>, <code>:invalid</code>, <code>:required</code>, <code>:optional</code>, <code>:user-invalid</code></div>
+        <div class="subtopic-item">Custom validation with JavaScript</div>
+        <div class="subtopic-item"><code>novalidate</code> on form — Disable native validation</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I8 -->
+    <div class="topic-card anchor-target" id="i8">
+      <div class="topic-header">
+        <span class="topic-num">08</span>
+        <h2 class="topic-title">Web Storage & Offline</h2>
+      </div>
+      <h3 class="subtopic-group">Web Storage API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>localStorage</code> — Persistent storage, no expiry</div>
+        <div class="subtopic-item"><code>sessionStorage</code> — Session-scoped storage</div>
+        <div class="subtopic-item">Methods — <code>setItem()</code>, <code>getItem()</code>, <code>removeItem()</code>, <code>clear()</code></div>
+        <div class="subtopic-item"><code>length</code>, <code>key()</code> — Iteration</div>
+        <div class="subtopic-item">Storage event — Cross-tab communication</div>
+        <div class="subtopic-item">Storage limits — Typically 5-10MB per origin</div>
+        <div class="subtopic-item">Storing JSON — <code>JSON.stringify()</code>/<code>JSON.parse()</code></div>
+      </div>
+      <h3 class="subtopic-group">Cookies vs Storage</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>document.cookie</code> — Reading and writing cookies</div>
+        <div class="subtopic-item">Cookie attributes — <code>expires</code>, <code>max-age</code>, <code>domain</code>, <code>path</code>, <code>secure</code>, <code>HttpOnly</code>, <code>SameSite</code></div>
+        <div class="subtopic-item">Differences — Cookie vs localStorage vs sessionStorage</div>
+      </div>
+      <h3 class="subtopic-group">IndexedDB</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Opening a database — <code>indexedDB.open()</code></div>
+        <div class="subtopic-item">Object stores, indexes, transactions</div>
+        <div class="subtopic-item">CRUD operations on IndexedDB</div>
+        <div class="subtopic-item">Use cases — Large structured data, offline apps</div>
+      </div>
+      <h3 class="subtopic-group">Cache API & Service Workers</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Service Worker lifecycle — install, activate, fetch</div>
+        <div class="subtopic-item">Cache API — <code>caches.open()</code>, <code>cache.add()</code>, <code>cache.match()</code></div>
+        <div class="subtopic-item">Offline-first strategies — Cache-first, Network-first, Stale-while-revalidate</div>
+        <div class="subtopic-item">Web App Manifest — <code>manifest.json</code></div>
+        <div class="subtopic-item">PWA (Progressive Web App) fundamentals</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I9 -->
+    <div class="topic-card anchor-target" id="i9">
+      <div class="topic-header">
+        <span class="topic-num">09</span>
+        <h2 class="topic-title">Drag & Drop API</h2>
+      </div>
+      <h3 class="subtopic-group">Native Drag & Drop</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>draggable="true"</code> — Make element draggable</div>
+        <div class="subtopic-item">Drag events — <code>dragstart</code>, <code>drag</code>, <code>dragend</code></div>
+        <div class="subtopic-item">Drop events — <code>dragenter</code>, <code>dragover</code>, <code>dragleave</code>, <code>drop</code></div>
+        <div class="subtopic-item"><code>event.dataTransfer</code> — Data transfer object</div>
+        <div class="subtopic-item"><code>dataTransfer.setData()</code>, <code>getData()</code></div>
+        <div class="subtopic-item"><code>dataTransfer.effectAllowed</code>, <code>dropEffect</code></div>
+        <div class="subtopic-item"><code>dataTransfer.files</code> — Dragging files from OS</div>
+        <div class="subtopic-item"><code>dataTransfer.setDragImage()</code> — Custom drag image</div>
+        <div class="subtopic-item"><code>event.preventDefault()</code> — Enable drop target</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I10 -->
+    <div class="topic-card anchor-target" id="i10">
+      <div class="topic-header">
+        <span class="topic-num">10</span>
+        <h2 class="topic-title">Microdata, Schema & Structured Data</h2>
+      </div>
+      <h3 class="subtopic-group">Microdata</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>itemscope</code> — Define a microdata item</div>
+        <div class="subtopic-item"><code>itemtype</code> — Schema.org type URL</div>
+        <div class="subtopic-item"><code>itemprop</code> — Property name</div>
+        <div class="subtopic-item"><code>itemid</code> — Unique identifier</div>
+        <div class="subtopic-item"><code>itemref</code> — Reference to external properties</div>
+      </div>
+      <h3 class="subtopic-group">Schema.org Vocabularies</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Person, Organization, Product, Article, Event, LocalBusiness</div>
+        <div class="subtopic-item">BreadcrumbList, FAQPage, HowTo, Recipe, Review</div>
+        <div class="subtopic-item">JSON-LD format (preferred by Google) — <code>&lt;script type="application/ld+json"&gt;</code></div>
+        <div class="subtopic-item">RDFa as alternative to Microdata</div>
+        <div class="subtopic-item">Google Rich Results — Sitelinks, FAQ, How-to, Breadcrumbs</div>
+        <div class="subtopic-item">Testing with Google Rich Results Test Tool</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I11 -->
+    <div class="topic-card anchor-target" id="i11">
+      <div class="topic-header">
+        <span class="topic-num">11</span>
+        <h2 class="topic-title">HTML & CSS Integration</h2>
+      </div>
+      <h3 class="subtopic-group">Linking Methods</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">External stylesheet — <code>&lt;link rel="stylesheet" href=""&gt;</code></div>
+        <div class="subtopic-item">Internal stylesheet — <code>&lt;style&gt;</code> in <code>&lt;head&gt;</code></div>
+        <div class="subtopic-item">Inline styles — <code>style</code> attribute</div>
+        <div class="subtopic-item">Specificity and cascade — Which style wins</div>
+        <div class="subtopic-item"><code>&lt;link media=""&gt;</code> — Conditional stylesheet loading</div>
+      </div>
+      <h3 class="subtopic-group">CSS Custom Properties via HTML</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Setting CSS variables via <code>style</code> attribute</div>
+        <div class="subtopic-item">Data attributes driving CSS — <code>data-theme</code></div>
+        <div class="subtopic-item">Attribute selectors — <code>[data-state="active"]</code></div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- I12 -->
+    <div class="topic-card anchor-target" id="i12">
+      <div class="topic-header">
+        <span class="topic-num">12</span>
+        <h2 class="topic-title">HTML & JavaScript Integration</h2>
+      </div>
+      <h3 class="subtopic-group">Script Loading</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;script src=""&gt;</code> — External script</div>
+        <div class="subtopic-item"><code>defer</code> — Execute after HTML parsed, in order</div>
+        <div class="subtopic-item"><code>async</code> — Execute as soon as downloaded, order not guaranteed</div>
+        <div class="subtopic-item">Inline scripts — When appropriate</div>
+        <div class="subtopic-item"><code>type="module"</code> — ES Modules in HTML</div>
+        <div class="subtopic-item"><code>nomodule</code> — Fallback for non-module browsers</div>
+        <div class="subtopic-item"><code>integrity</code> — Subresource Integrity (SRI)</div>
+        <div class="subtopic-item"><code>crossorigin</code> — CORS handling</div>
+        <div class="subtopic-item">Script blocking — Why position in HTML matters</div>
+      </div>
+      <h3 class="subtopic-group">DOM Interaction</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Selecting elements — <code>getElementById</code>, <code>querySelector</code>, <code>querySelectorAll</code></div>
+        <div class="subtopic-item">Manipulating element content — <code>innerHTML</code>, <code>textContent</code>, <code>innerText</code></div>
+        <div class="subtopic-item">Manipulating attributes — <code>getAttribute</code>, <code>setAttribute</code>, <code>removeAttribute</code></div>
+        <div class="subtopic-item">Class manipulation — <code>classList.add/remove/toggle/contains</code></div>
+        <div class="subtopic-item"><code>data-*</code> attributes — <code>dataset</code> API</div>
+        <div class="subtopic-item">Creating elements — <code>createElement</code>, <code>appendChild</code>, <code>insertBefore</code></div>
+        <div class="subtopic-item">Template literal HTML injection</div>
+        <div class="subtopic-item">Event listeners — <code>addEventListener</code>, event delegation</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ADVANCED SECTION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section advanced" id="advanced">
+  <div class="section-header">
+    <div class="section-badge">🔥</div>
+    <div>
+      <h2 class="section-title" id="advanced-title">ADVANCED</h2>
+      <div style="font-size:13px;color:var(--muted);font-family:'Rajdhani',sans-serif;margin-top:2px;">Expert-Level Mastery</div>
+    </div>
+    <div class="section-meta">Level 03<br>Master It</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Quick Navigation</div>
+    <div class="toc-links">
+      <a href="#a1" class="toc-link">Web Components</a>
+      <a href="#a2" class="toc-link">Performance</a>
+      <a href="#a3" class="toc-link">Security</a>
+      <a href="#a4" class="toc-link">Internationalization</a>
+      <a href="#a5" class="toc-link">PWA & Manifest</a>
+      <a href="#a6" class="toc-link">Shadow DOM</a>
+      <a href="#a7" class="toc-link">Template Element</a>
+      <a href="#a8" class="toc-link">SSR & SSG</a>
+      <a href="#a9" class="toc-link">Web Vitals</a>
+      <a href="#a10" class="toc-link">Browser Rendering</a>
+      <a href="#a11" class="toc-link">WebAssembly</a>
+      <a href="#a12" class="toc-link">Modern HTML APIs</a>
+    </div>
+  </div>
+
+  <div class="section-content">
+
+    <!-- A1 -->
+    <div class="topic-card anchor-target" id="a1">
+      <div class="topic-header">
+        <span class="topic-num">01</span>
+        <h2 class="topic-title">Web Components</h2>
+      </div>
+      <h3 class="subtopic-group">Custom Elements</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Defining custom elements — <code>customElements.define()</code></div>
+        <div class="subtopic-item">Autonomous custom elements — extend <code>HTMLElement</code></div>
+        <div class="subtopic-item">Customized built-in elements — <code>extends</code>, <code>is=""</code></div>
+        <div class="subtopic-item">Custom element lifecycle callbacks — <code>connectedCallback</code>, <code>disconnectedCallback</code>, <code>attributeChangedCallback</code>, <code>adoptedCallback</code></div>
+        <div class="subtopic-item"><code>observedAttributes</code> — Which attributes trigger callbacks</div>
+        <div class="subtopic-item"><code>formAssociated</code> — Form-associated custom elements</div>
+        <div class="subtopic-item">ElementInternals API — <code>attachInternals()</code></div>
+        <div class="subtopic-item">Custom element state machine</div>
+        <div class="subtopic-item">Upgrading existing elements</div>
+        <div class="subtopic-item"><code>customElements.whenDefined()</code> — Waiting for registration</div>
+        <div class="subtopic-item"><code>customElements.get()</code>, <code>customElements.upgrade()</code></div>
+      </div>
+      <h3 class="subtopic-group">HTML Templates</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;template&gt;</code> — Inert HTML template fragment</div>
+        <div class="subtopic-item"><code>template.content</code> — DocumentFragment</div>
+        <div class="subtopic-item">Cloning templates — <code>cloneNode(true)</code>, <code>importNode()</code></div>
+        <div class="subtopic-item"><code>&lt;slot&gt;</code> — Slotting content into templates</div>
+        <div class="subtopic-item">Named slots — <code>&lt;slot name=""&gt;</code> and <code>slot=""</code></div>
+        <div class="subtopic-item">Default slot content</div>
+        <div class="subtopic-item">Slotchange event</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A2 -->
+    <div class="topic-card anchor-target" id="a2">
+      <div class="topic-header">
+        <span class="topic-num">02</span>
+        <h2 class="topic-title">HTML Performance Optimization</h2>
+      </div>
+      <h3 class="subtopic-group">Resource Loading</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;link rel="preload"&gt;</code> — Preload critical resources</div>
+        <div class="subtopic-item"><code>&lt;link rel="prefetch"&gt;</code> — Prefetch future navigation</div>
+        <div class="subtopic-item"><code>&lt;link rel="preconnect"&gt;</code> — Early connection to origin</div>
+        <div class="subtopic-item"><code>&lt;link rel="dns-prefetch"&gt;</code> — DNS resolution ahead of time</div>
+        <div class="subtopic-item"><code>&lt;link rel="prerender"&gt;</code> — Prerender next page</div>
+        <div class="subtopic-item"><code>&lt;link rel="modulepreload"&gt;</code> — Preload ES modules</div>
+        <div class="subtopic-item">Speculation Rules API — <code>&lt;script type="speculationrules"&gt;</code></div>
+        <div class="subtopic-item"><code>fetchpriority</code> attribute — High, low, auto</div>
+        <div class="subtopic-item">Priority Hints for images, scripts, and CSS</div>
+      </div>
+      <h3 class="subtopic-group">HTML Parsing & Rendering</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Parser-blocking scripts — How scripts block HTML parsing</div>
+        <div class="subtopic-item">Render-blocking resources — CSS and fonts</div>
+        <div class="subtopic-item">Async and defer — Script loading strategies</div>
+        <div class="subtopic-item">Critical rendering path — HTML → DOM → CSSOM → Render Tree</div>
+        <div class="subtopic-item">Reflow and repaint — Minimize layout thrashing</div>
+        <div class="subtopic-item">Minimizing DOM depth</div>
+        <div class="subtopic-item">Avoiding large DOM trees (over 1500 nodes)</div>
+        <div class="subtopic-item"><code>content-visibility: auto</code> — Virtualization</div>
+        <div class="subtopic-item"><code>contain</code> property — Layout containment</div>
+      </div>
+      <h3 class="subtopic-group">Image Optimization</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Next-gen formats — WebP, AVIF with <code>&lt;picture&gt;</code> fallback</div>
+        <div class="subtopic-item">Responsive images — <code>srcset</code> and <code>sizes</code></div>
+        <div class="subtopic-item">Lazy loading — <code>loading="lazy"</code></div>
+        <div class="subtopic-item">LCP image optimization — <code>fetchpriority="high"</code>, no <code>loading="lazy"</code></div>
+        <div class="subtopic-item">Preventing CLS — explicit <code>width</code>/<code>height</code> on images</div>
+        <div class="subtopic-item">Image CDN strategies</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A3 -->
+    <div class="topic-card anchor-target" id="a3">
+      <div class="topic-header">
+        <span class="topic-num">03</span>
+        <h2 class="topic-title">HTML Security</h2>
+      </div>
+      <h3 class="subtopic-group">Content Security Policy (CSP)</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;meta http-equiv="Content-Security-Policy"&gt;</code> vs HTTP header</div>
+        <div class="subtopic-item">CSP directives — <code>default-src</code>, <code>script-src</code>, <code>style-src</code>, <code>img-src</code>, <code>connect-src</code>, <code>font-src</code>, <code>frame-src</code></div>
+        <div class="subtopic-item"><code>nonce</code> — Cryptographic nonce for inline scripts</div>
+        <div class="subtopic-item"><code>strict-dynamic</code> — Trusted script propagation</div>
+        <div class="subtopic-item">CSP report-only mode — <code>report-uri</code></div>
+      </div>
+      <h3 class="subtopic-group">XSS (Cross-Site Scripting)</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Reflected XSS, Stored XSS, DOM-based XSS</div>
+        <div class="subtopic-item">Preventing XSS — Avoid <code>innerHTML</code>, use <code>textContent</code></div>
+        <div class="subtopic-item">HTML Sanitization API — <code>setHTML()</code>, Sanitizer API</div>
+        <div class="subtopic-item">Trusted Types API — Sink and source enforcement</div>
+        <div class="subtopic-item">DOMPurify library for sanitization</div>
+      </div>
+      <h3 class="subtopic-group">Clickjacking & CSRF</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Clickjacking — X-Frame-Options, <code>frame-ancestors</code> CSP</div>
+        <div class="subtopic-item"><code>sandbox</code> on iframes — Prevent malicious embeddings</div>
+        <div class="subtopic-item">CSRF tokens in hidden form fields</div>
+        <div class="subtopic-item"><code>SameSite</code> cookie attribute</div>
+        <div class="subtopic-item">Cross-Origin Resource Sharing (CORS) headers</div>
+      </div>
+      <h3 class="subtopic-group">Subresource Integrity (SRI)</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>integrity</code> attribute on <code>&lt;script&gt;</code> and <code>&lt;link&gt;</code></div>
+        <div class="subtopic-item">Generating SRI hashes — SHA-256, SHA-384, SHA-512</div>
+        <div class="subtopic-item"><code>crossorigin="anonymous"</code> — Required for SRI cross-origin</div>
+      </div>
+      <h3 class="subtopic-group">Referrer Policy</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;meta name="referrer"&gt;</code> — Control referrer header</div>
+        <div class="subtopic-item">Values — <code>no-referrer</code>, <code>origin</code>, <code>same-origin</code>, <code>strict-origin-when-cross-origin</code></div>
+        <div class="subtopic-item"><code>referrerpolicy</code> on <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;script&gt;</code></div>
+      </div>
+      <h3 class="subtopic-group">Permissions Policy</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;meta http-equiv="Permissions-Policy"&gt;</code></div>
+        <div class="subtopic-item">Controlling features — camera, microphone, geolocation, payment</div>
+        <div class="subtopic-item"><code>allow</code> attribute on <code>&lt;iframe&gt;</code></div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A4 -->
+    <div class="topic-card anchor-target" id="a4">
+      <div class="topic-header">
+        <span class="topic-num">04</span>
+        <h2 class="topic-title">Internationalization (i18n)</h2>
+      </div>
+      <h3 class="subtopic-group">Language & Direction</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>lang</code> attribute — BCP 47 language tags (en, en-US, ar, zh-Hans)</div>
+        <div class="subtopic-item"><code>dir</code> attribute — <code>ltr</code>, <code>rtl</code>, <code>auto</code></div>
+        <div class="subtopic-item"><code>&lt;bdi&gt;</code>, <code>&lt;bdo&gt;</code> — Bidirectional isolation and override</div>
+        <div class="subtopic-item">Unicode bidirectional algorithm</div>
+        <div class="subtopic-item">CSS logical properties for RTL layouts</div>
+      </div>
+      <h3 class="subtopic-group">Character Encoding</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;meta charset="UTF-8"&gt;</code> — Always use UTF-8</div>
+        <div class="subtopic-item">Unicode, code points, and character ranges</div>
+        <div class="subtopic-item">Emoji and complex scripts</div>
+        <div class="subtopic-item"><code>accept-charset</code> on forms</div>
+      </div>
+      <h3 class="subtopic-group">Localization</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;time datetime=""&gt;</code> — Machine-readable date format</div>
+        <div class="subtopic-item"><code>translate="no"</code> — Prevent translation of specific content</div>
+        <div class="subtopic-item">Providing translated pages — <code>hreflang</code></div>
+        <div class="subtopic-item">Date, number, currency formatting considerations</div>
+        <div class="subtopic-item">Text expansion — Languages take more space</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A5 -->
+    <div class="topic-card anchor-target" id="a5">
+      <div class="topic-header">
+        <span class="topic-num">05</span>
+        <h2 class="topic-title">PWA & Web App Manifest</h2>
+      </div>
+      <h3 class="subtopic-group">Web App Manifest</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;link rel="manifest" href="/manifest.json"&gt;</code></div>
+        <div class="subtopic-item"><code>name</code>, <code>short_name</code> — App name</div>
+        <div class="subtopic-item"><code>icons</code> — Array of icon objects (sizes, type, purpose)</div>
+        <div class="subtopic-item"><code>start_url</code> — Launch URL</div>
+        <div class="subtopic-item"><code>display</code> — <code>standalone</code>, <code>fullscreen</code>, <code>minimal-ui</code>, <code>browser</code></div>
+        <div class="subtopic-item"><code>orientation</code> — Portrait, landscape lock</div>
+        <div class="subtopic-item"><code>theme_color</code>, <code>background_color</code></div>
+        <div class="subtopic-item"><code>scope</code> — Navigation scope</div>
+        <div class="subtopic-item"><code>description</code>, <code>lang</code>, <code>dir</code></div>
+        <div class="subtopic-item"><code>categories</code>, <code>screenshots</code></div>
+        <div class="subtopic-item"><code>shortcuts</code> — App shortcuts (long-press icons)</div>
+        <div class="subtopic-item"><code>share_target</code> — Receive shared content</div>
+        <div class="subtopic-item"><code>protocol_handlers</code> — Register URL protocol</div>
+        <div class="subtopic-item"><code>file_handlers</code> — Open file types</div>
+        <div class="subtopic-item"><code>related_applications</code>, <code>prefer_related_applications</code></div>
+      </div>
+      <h3 class="subtopic-group">Installability</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>beforeinstallprompt</code> event — Custom install button</div>
+        <div class="subtopic-item"><code>appinstalled</code> event — Tracking installs</div>
+        <div class="subtopic-item">iOS meta tags — <code>apple-mobile-web-app-capable</code>, <code>apple-mobile-web-app-status-bar-style</code></div>
+        <div class="subtopic-item"><code>apple-touch-icon</code> — iOS home screen icon</div>
+        <div class="subtopic-item">Microsoft tiles — <code>msapplication-*</code> meta tags</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A6 -->
+    <div class="topic-card anchor-target" id="a6">
+      <div class="topic-header">
+        <span class="topic-num">06</span>
+        <h2 class="topic-title">Shadow DOM</h2>
+      </div>
+      <h3 class="subtopic-group">Shadow DOM Fundamentals</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">What is Shadow DOM — Encapsulation and scoping</div>
+        <div class="subtopic-item"><code>element.attachShadow({ mode: 'open' | 'closed' })</code></div>
+        <div class="subtopic-item">Shadow root, shadow host, shadow tree</div>
+        <div class="subtopic-item">Style encapsulation — CSS does not leak in or out</div>
+        <div class="subtopic-item">Event retargeting in Shadow DOM</div>
+      </div>
+      <h3 class="subtopic-group">Shadow DOM Styling</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>:host</code> pseudo-class — Style shadow host from within</div>
+        <div class="subtopic-item"><code>:host-context()</code> — Style based on ancestor</div>
+        <div class="subtopic-item"><code>::slotted()</code> — Style slotted content</div>
+        <div class="subtopic-item"><code>::part()</code> — Style shadow parts from outside</div>
+        <div class="subtopic-item">CSS custom properties passing through shadow boundary</div>
+        <div class="subtopic-item">Adopted stylesheets — <code>adoptedStyleSheets</code></div>
+      </div>
+      <h3 class="subtopic-group">Declarative Shadow DOM</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;template shadowrootmode="open"&gt;</code> — Server-side rendering of shadow DOM</div>
+        <div class="subtopic-item"><code>shadowrootdelegatesfocus</code>, <code>shadowrootclonable</code>, <code>shadowrootserializable</code></div>
+        <div class="subtopic-item">Benefits for SSR and progressive enhancement</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A7 -->
+    <div class="topic-card anchor-target" id="a7">
+      <div class="topic-header">
+        <span class="topic-num">07</span>
+        <h2 class="topic-title">Template Element & HTML Modules</h2>
+      </div>
+      <h3 class="subtopic-group">Template Element Deep Dive</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;template&gt;</code> — Inert fragment, not rendered until cloned</div>
+        <div class="subtopic-item"><code>template.content</code> — DocumentFragment access</div>
+        <div class="subtopic-item">Scripts and styles inside templates — Not executed until added</div>
+        <div class="subtopic-item">Cloning — <code>document.importNode(template.content, true)</code></div>
+        <div class="subtopic-item">Template with Shadow DOM — Complete component definition</div>
+        <div class="subtopic-item">Using templates for repeated UI patterns</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A8 -->
+    <div class="topic-card anchor-target" id="a8">
+      <div class="topic-header">
+        <span class="topic-num">08</span>
+        <h2 class="topic-title">Server-Side Rendering (SSR) & Static Site Generation (SSG)</h2>
+      </div>
+      <h3 class="subtopic-group">SSR Concepts</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">How HTML is generated server-side before reaching browser</div>
+        <div class="subtopic-item">SSR vs CSR (Client-Side Rendering) — Trade-offs</div>
+        <div class="subtopic-item">Hydration — Attaching event listeners to server-rendered HTML</div>
+        <div class="subtopic-item">Partial hydration and Island architecture</div>
+        <div class="subtopic-item">Streaming HTML — <code>Transfer-Encoding: chunked</code></div>
+        <div class="subtopic-item">Out-of-order streaming</div>
+        <div class="subtopic-item">Suspense boundaries in streaming SSR</div>
+      </div>
+      <h3 class="subtopic-group">SSG Concepts</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Pre-building HTML at build time</div>
+        <div class="subtopic-item">Incremental Static Regeneration (ISR)</div>
+        <div class="subtopic-item">SSG tools — Next.js, Astro, Eleventy, Hugo, Jekyll</div>
+      </div>
+      <h3 class="subtopic-group">HTML Optimization for SSR/SSG</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Minimizing TTFB (Time To First Byte)</div>
+        <div class="subtopic-item">Inline critical CSS in <code>&lt;head&gt;</code></div>
+        <div class="subtopic-item">Preconnect to API origins</div>
+        <div class="subtopic-item">Avoiding render-blocking resources</div>
+        <div class="subtopic-item">HTTP/2 Server Push (deprecated) and 103 Early Hints</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A9 -->
+    <div class="topic-card anchor-target" id="a9">
+      <div class="topic-header">
+        <span class="topic-num">09</span>
+        <h2 class="topic-title">Core Web Vitals & HTML's Role</h2>
+      </div>
+      <h3 class="subtopic-group">Core Web Vitals</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">LCP (Largest Contentful Paint) — Must be under 2.5s</div>
+        <div class="subtopic-item">LCP elements — <code>&lt;img&gt;</code>, <code>&lt;video poster&gt;</code>, background-image, block text</div>
+        <div class="subtopic-item">Improving LCP — preload, fetchpriority, no lazy-load on hero images</div>
+        <div class="subtopic-item">CLS (Cumulative Layout Shift) — Must be under 0.1</div>
+        <div class="subtopic-item">CLS causes — Images without dimensions, dynamically injected content</div>
+        <div class="subtopic-item">Improving CLS — Set explicit width/height, reserve space for ads/embeds</div>
+        <div class="subtopic-item">INP (Interaction to Next Paint) — Must be under 200ms</div>
+        <div class="subtopic-item">FID (First Input Delay) — Replaced by INP</div>
+        <div class="subtopic-item">FCP (First Contentful Paint) — First content appears</div>
+        <div class="subtopic-item">TTFB (Time to First Byte) — Server response time</div>
+        <div class="subtopic-item">Measuring with Lighthouse, PageSpeed Insights, CrUX</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A10 -->
+    <div class="topic-card anchor-target" id="a10">
+      <div class="topic-header">
+        <span class="topic-num">10</span>
+        <h2 class="topic-title">Browser Rendering Pipeline</h2>
+      </div>
+      <h3 class="subtopic-group">Full Rendering Pipeline</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">HTML parsing — Tokenization, tree construction, DOM building</div>
+        <div class="subtopic-item">CSS parsing — CSSOM construction</div>
+        <div class="subtopic-item">Render tree construction — Combining DOM + CSSOM</div>
+        <div class="subtopic-item">Layout (Reflow) — Calculate geometry of each element</div>
+        <div class="subtopic-item">Paint — Draw pixels to layers</div>
+        <div class="subtopic-item">Compositing — Combine layers on GPU</div>
+        <div class="subtopic-item">Speculative parsing — Background parser fetches resources</div>
+        <div class="subtopic-item">Preload scanner</div>
+        <div class="subtopic-item">Layout thrashing — Forced synchronous layouts</div>
+        <div class="subtopic-item">Composited animations — <code>transform</code> and <code>opacity</code> on GPU</div>
+        <div class="subtopic-item"><code>will-change</code> — Hint browser to promote layer</div>
+        <div class="subtopic-item">Layers — Stacking contexts and layer promotion</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A11 -->
+    <div class="topic-card anchor-target" id="a11">
+      <div class="topic-header">
+        <span class="topic-num">11</span>
+        <h2 class="topic-title">WebAssembly & HTML Integration</h2>
+      </div>
+      <h3 class="subtopic-group">WebAssembly Basics</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">What is WebAssembly — Binary instruction format for browsers</div>
+        <div class="subtopic-item">Loading Wasm — <code>fetch()</code> + <code>WebAssembly.instantiateStreaming()</code></div>
+        <div class="subtopic-item">Calling Wasm functions from JavaScript</div>
+        <div class="subtopic-item">Calling JavaScript from Wasm</div>
+        <div class="subtopic-item">Compiling C/C++/Rust to WebAssembly — Emscripten, wasm-pack</div>
+        <div class="subtopic-item">WASI — WebAssembly System Interface</div>
+        <div class="subtopic-item">Wasm in Web Workers</div>
+        <div class="subtopic-item">Use cases — Performance-critical tasks, porting native apps</div>
+      </div>
+    </div>
+
+    <div class="topic-divider"></div>
+
+    <!-- A12 -->
+    <div class="topic-card anchor-target" id="a12">
+      <div class="topic-header">
+        <span class="topic-num">12</span>
+        <h2 class="topic-title">Modern & Emerging HTML APIs</h2>
+      </div>
+      <h3 class="subtopic-group">Popover API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>popover</code> attribute — <code>auto</code>, <code>manual</code></div>
+        <div class="subtopic-item"><code>popovertarget</code>, <code>popovertargetaction</code> — Toggle buttons</div>
+        <div class="subtopic-item"><code>showPopover()</code>, <code>hidePopover()</code>, <code>togglePopover()</code></div>
+        <div class="subtopic-item"><code>:popover-open</code> pseudo-class</div>
+        <div class="subtopic-item"><code>::backdrop</code> pseudo-element for popovers</div>
+        <div class="subtopic-item">Top layer — Popovers always on top</div>
+      </div>
+      <h3 class="subtopic-group">Dialog Element</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>&lt;dialog&gt;</code> — Native modal dialog</div>
+        <div class="subtopic-item"><code>dialog.showModal()</code>, <code>dialog.show()</code>, <code>dialog.close()</code></div>
+        <div class="subtopic-item"><code>open</code> attribute — Dialog visibility</div>
+        <div class="subtopic-item"><code>returnValue</code> — Value from close</div>
+        <div class="subtopic-item"><code>close</code>, <code>cancel</code> events</div>
+        <div class="subtopic-item"><code>::backdrop</code> pseudo-element</div>
+        <div class="subtopic-item">Focus trapping — Automatic in modal mode</div>
+        <div class="subtopic-item">Form submission inside dialog — <code>method="dialog"</code></div>
+      </div>
+      <h3 class="subtopic-group">View Transitions API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>document.startViewTransition()</code></div>
+        <div class="subtopic-item"><code>view-transition-name</code> CSS property</div>
+        <div class="subtopic-item">Cross-document view transitions (navigation)</div>
+        <div class="subtopic-item">Animating <code>::view-transition-old</code>, <code>::view-transition-new</code></div>
+      </div>
+      <h3 class="subtopic-group">Invoker Commands API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>commandfor</code>, <code>command</code> attributes on buttons</div>
+        <div class="subtopic-item">Built-in commands for dialog, popover, details</div>
+        <div class="subtopic-item">Custom commands via <code>CommandEvent</code></div>
+      </div>
+      <h3 class="subtopic-group">Navigation API</h3>
+      <div class="subtopics">
+        <div class="subtopic-item"><code>window.navigation</code> — Modern navigation object</div>
+        <div class="subtopic-item"><code>navigate</code> event — Intercept navigation</div>
+        <div class="subtopic-item">Single-page navigation with <code>NavigateEvent.intercept()</code></div>
+      </div>
+      <h3 class="subtopic-group">Async HTML Rendering</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">DOM Parser API — <code>new DOMParser().parseFromString()</code></div>
+        <div class="subtopic-item">setHTML() Sanitizer API — Safe innerHTML replacement</div>
+        <div class="subtopic-item">Declarative Shadow DOM streaming</div>
+        <div class="subtopic-item">Streaming HTML parsing in browsers</div>
+      </div>
+      <h3 class="subtopic-group">Other Modern APIs</h3>
+      <div class="subtopics">
+        <div class="subtopic-item">Lazy loading for iframes — <code>loading="lazy"</code></div>
+        <div class="subtopic-item"><code>&lt;select&gt;</code> styling improvements (2025)</div>
+        <div class="subtopic-item"><code>&lt;search&gt;</code> element — Semantic search landmark</div>
+        <div class="subtopic-item">Scroll-driven animations via CSS (HTML structure matters)</div>
+        <div class="subtopic-item">Anchor positioning — <code>anchor-name</code>, <code>position-anchor</code></div>
+        <div class="subtopic-item"><code>inert</code> attribute — Non-interactive subtree</div>
+        <div class="subtopic-item"><code>blocking="render"</code> on scripts and links</div>
+        <div class="subtopic-item">Document Picture-in-Picture API</div>
+        <div class="subtopic-item">Screen Wake Lock API</div>
+        <div class="subtopic-item">EyeDropper API</div>
+        <div class="subtopic-item">Web Serial API, Web Bluetooth API, Web USB API</div>
+        <div class="subtopic-item">File System Access API</div>
+        <div class="subtopic-item">Launch Handler API — <code>launch_handler</code> in manifest</div>
+        <div class="subtopic-item">Window Controls Overlay API</div>
+        <div class="subtopic-item">Badging API — <code>navigator.setAppBadge()</code></div>
+        <div class="subtopic-item">Web Share API — <code>navigator.share()</code></div>
+        <div class="subtopic-item">Contact Picker API</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="margin-bottom:8px;">
+    <span style="color:var(--beginner);">▲ BEGINNER</span>
+    &nbsp;·&nbsp;
+    <span style="color:var(--intermediate);">⬡ INTERMEDIATE</span>
+    &nbsp;·&nbsp;
+    <span style="color:var(--advanced);">⬣ ADVANCED</span>
+  </div>
+  <div>HTML Complete Roadmap · 2025 Living Standard · All Topics Covered</div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // Download button
+  document.getElementById('downloadBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'HTML-Complete-Roadmap-2025.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

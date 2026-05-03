@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete SQL Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #020510;
+    --bg-mid: #060d1f;
+    --glass-bg: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.10);
+    --glass-hover: rgba(255,255,255,0.08);
+    --neon-cyan: #00f5ff;
+    --neon-pink: #ff006e;
+    --neon-gold: #ffd700;
+    --neon-green: #39ff14;
+    --neon-purple: #bf5fff;
+    --beginner: #00f5ff;
+    --intermediate: #ff9500;
+    --advanced: #ff006e;
+    --text-primary: rgba(255,255,255,0.92);
+    --text-secondary: rgba(255,255,255,0.60);
+    --h1-color: #00f5ff;
+    --h2-color: #ffd700;
+    --h3-color: #ff9500;
+    --h4-color: #39ff14;
+    --shadow-cyan: 0 0 20px rgba(0,245,255,0.3);
+    --shadow-pink: 0 0 20px rgba(255,0,110,0.3);
+    --shadow-gold: 0 0 20px rgba(255,215,0,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(0,245,255,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 80%, rgba(255,0,110,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(191,95,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0,245,255,0.3);
+    padding: 5px 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: rgba(0,245,255,0.05);
+    text-transform: uppercase;
+  }
+
+  h1.main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--h1-color);
+    text-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 60px rgba(0,245,255,0.3);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .header-sub {
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* DOWNLOAD BUTTON */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(191,95,255,0.15));
+    border: 1px solid rgba(0,245,255,0.4);
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 14px 32px;
+    border-radius: 40px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-cyan), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .download-btn:hover {
+    background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(191,95,255,0.25));
+    box-shadow: 0 0 40px rgba(0,245,255,0.5), 0 0 80px rgba(0,245,255,0.2);
+    transform: translateY(-2px);
+  }
+  .download-btn svg { width: 18px; height: 18px; }
+
+  /* NAV TOC */
+  .toc-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .toc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--neon-gold);
+    text-shadow: var(--shadow-gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .toc-section {
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid;
+  }
+  .toc-section.beg { border-color: rgba(0,245,255,0.2); background: rgba(0,245,255,0.04); }
+  .toc-section.int { border-color: rgba(255,149,0,0.2); background: rgba(255,149,0,0.04); }
+  .toc-section.adv { border-color: rgba(255,0,110,0.2); background: rgba(255,0,110,0.04); }
+
+  .toc-section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .toc-section.beg .toc-section-title { color: var(--beginner); }
+  .toc-section.int .toc-section-title { color: var(--intermediate); }
+  .toc-section.adv .toc-section-title { color: var(--advanced); }
+
+  .toc-links { list-style: none; }
+  .toc-links li { margin-bottom: 4px; }
+  .toc-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .toc-links a::before { content: '›'; opacity: 0.4; }
+  .toc-links a:hover { color: var(--text-primary); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin: 60px 0 30px;
+    position: relative;
+  }
+
+  .section-pill {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    padding: 8px 24px;
+    border-radius: 30px;
+    text-transform: uppercase;
+  }
+  .section-pill.beg {
+    background: rgba(0,245,255,0.1);
+    border: 1px solid rgba(0,245,255,0.4);
+    color: var(--beginner);
+    box-shadow: var(--shadow-cyan);
+  }
+  .section-pill.int {
+    background: rgba(255,149,0,0.1);
+    border: 1px solid rgba(255,149,0,0.4);
+    color: var(--intermediate);
+    box-shadow: 0 0 20px rgba(255,149,0,0.3);
+  }
+  .section-pill.adv {
+    background: rgba(255,0,110,0.1);
+    border: 1px solid rgba(255,0,110,0.4);
+    color: var(--advanced);
+    box-shadow: var(--shadow-pink);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  }
+
+  /* TOPIC CARDS */
+  .topic-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+  .topic-card:hover {
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    padding: 20px 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+  .card-header:hover { background: var(--glass-hover); }
+
+  .card-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    min-width: 30px;
+  }
+
+  .card-title-wrap { flex: 1; }
+
+  /* H2 style */
+  h2.card-h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(15px, 2.5vw, 20px);
+    font-weight: 700;
+    color: var(--h2-color);
+    text-shadow: 0 0 15px rgba(255,215,0,0.4);
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+  }
+
+  .card-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .topic-card.open .card-chevron { transform: rotate(180deg); }
+
+  .card-body {
+    display: none;
+    padding: 0 28px 28px;
+    border-top: 1px solid var(--glass-border);
+  }
+  .topic-card.open .card-body { display: block; }
+
+  /* H3 */
+  h3.sub-h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(13px, 2vw, 16px);
+    font-weight: 700;
+    color: var(--h3-color);
+    text-shadow: 0 0 10px rgba(255,149,0,0.4);
+    margin: 22px 0 10px;
+    letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3.sub-h3::before {
+    content: '◈';
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* H4 */
+  h4.sub-h4 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(13px, 1.8vw, 15px);
+    font-weight: 700;
+    color: var(--h4-color);
+    text-shadow: 0 0 8px rgba(57,255,20,0.3);
+    margin: 16px 0 8px;
+    letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  h4.sub-h4::before {
+    content: '▸';
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Subtopic list */
+  .subtopic-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .subtopic-list li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+  }
+  .subtopic-list li:hover {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .subtopic-list li::before {
+    content: '·';
+    color: var(--neon-cyan);
+    font-size: 20px;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+
+  /* inline single-col list */
+  .subtopic-list.single { grid-template-columns: 1fr; }
+
+  /* Code snippet style */
+  .code-snippet {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,245,255,0.15);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: rgba(0,245,255,0.8);
+    margin: 10px 0;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.5;
+  }
+
+  /* Description text */
+  .desc-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 6px 0 12px;
+    line-height: 1.6;
+  }
+
+  /* Beginner/Int/Adv card accent lines */
+  .topic-card.beg { border-left: 3px solid rgba(0,245,255,0.4); }
+  .topic-card.int { border-left: 3px solid rgba(255,149,0,0.4); }
+  .topic-card.adv { border-left: 3px solid rgba(255,0,110,0.4); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--glass-border);
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Scroll to top */
+  .scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: rgba(0,245,255,0.1);
+    border: 1px solid rgba(0,245,255,0.3);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .scroll-top.visible { opacity: 1; pointer-events: auto; }
+  .scroll-top:hover { background: rgba(0,245,255,0.2); box-shadow: var(--shadow-cyan); }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    z-index: 999;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px rgba(0,245,255,0.5);
+  }
+
+  @media (max-width: 600px) {
+    .subtopic-list { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<header>
+  <div class="header-badge">✦ Complete Learning Path ✦</div>
+  <h1 class="main-title">SQL ROADMAP</h1>
+  <p class="header-sub">From Zero to Expert — Every Topic, Every Subtopic, Structured for Mastery</p>
+  <a href="#" class="download-btn" id="downloadBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    DOWNLOAD ROADMAP
+  </a>
+</header>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc-glass">
+    <div class="toc-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      Bookmark Navigation
+    </div>
+    <div class="toc-grid">
+      <div class="toc-section beg">
+        <div class="toc-section-title">⬡ Beginner</div>
+        <ul class="toc-links">
+          <li><a href="#b1">Introduction to SQL & Databases</a></li>
+          <li><a href="#b2">Database Design Fundamentals</a></li>
+          <li><a href="#b3">Data Types</a></li>
+          <li><a href="#b4">DDL — Data Definition Language</a></li>
+          <li><a href="#b5">DML — Data Manipulation Language</a></li>
+          <li><a href="#b6">Basic SELECT Queries</a></li>
+          <li><a href="#b7">Filtering & Sorting</a></li>
+          <li><a href="#b8">Basic Functions</a></li>
+          <li><a href="#b9">Aggregate Functions & GROUP BY</a></li>
+          <li><a href="#b10">Basic Joins</a></li>
+          <li><a href="#b11">NULL Handling</a></li>
+          <li><a href="#b12">Constraints</a></li>
+        </ul>
+      </div>
+      <div class="toc-section int">
+        <div class="toc-section-title">⬡ Intermediate</div>
+        <ul class="toc-links">
+          <li><a href="#i1">Advanced Joins</a></li>
+          <li><a href="#i2">Subqueries</a></li>
+          <li><a href="#i3">Set Operations</a></li>
+          <li><a href="#i4">Views</a></li>
+          <li><a href="#i5">Indexes</a></li>
+          <li><a href="#i6">Transactions & ACID</a></li>
+          <li><a href="#i7">Stored Procedures</a></li>
+          <li><a href="#i8">Functions (UDF)</a></li>
+          <li><a href="#i9">Triggers</a></li>
+          <li><a href="#i10">Advanced String Functions</a></li>
+          <li><a href="#i11">Date & Time Functions</a></li>
+          <li><a href="#i12">Case Expressions</a></li>
+          <li><a href="#i13">CTEs</a></li>
+          <li><a href="#i14">Normalization</a></li>
+        </ul>
+      </div>
+      <div class="toc-section adv">
+        <div class="toc-section-title">⬡ Advanced</div>
+        <ul class="toc-links">
+          <li><a href="#a1">Window Functions</a></li>
+          <li><a href="#a2">Query Optimization & Execution Plans</a></li>
+          <li><a href="#a3">Advanced Indexing</a></li>
+          <li><a href="#a4">Partitioning</a></li>
+          <li><a href="#a5">Concurrency & Locking</a></li>
+          <li><a href="#a6">Security & Permissions</a></li>
+          <li><a href="#a7">JSON & XML in SQL</a></li>
+          <li><a href="#a8">Recursive Queries</a></li>
+          <li><a href="#a9">Dynamic SQL</a></li>
+          <li><a href="#a10">Replication & High Availability</a></li>
+          <li><a href="#a11">Database Administration</a></li>
+          <li><a href="#a12">Analytical & OLAP SQL</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       BEGINNER SECTION
+  ══════════════════════════════════════════════ -->
+  <div class="section-label" id="beginner">
+    <div class="section-pill beg">⬡ BEGINNER</div>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- B1 -->
+  <div class="topic-card beg" id="b1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">01</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Introduction to SQL & Databases</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## What is a Database?</h3>
+      <ul class="subtopic-list">
+        <li>Definition and purpose of databases</li>
+        <li>Database vs flat files</li>
+        <li>Types of databases (Relational, NoSQL, NewSQL)</li>
+        <li>DBMS vs RDBMS</li>
+        <li>Popular RDBMS: MySQL, PostgreSQL, SQLite, SQL Server, Oracle</li>
+      </ul>
+      <h3 class="sub-h3">## What is SQL?</h3>
+      <ul class="subtopic-list">
+        <li>History of SQL (1970s - E.F. Codd)</li>
+        <li>SQL as a declarative language</li>
+        <li>SQL standards (ANSI SQL, SQL:1999, SQL:2003, SQL:2016)</li>
+        <li>SQL dialects and differences</li>
+        <li>SQL sublanguages: DDL, DML, DCL, TCL, DQL</li>
+      </ul>
+      <h3 class="sub-h3">## Relational Model Concepts</h3>
+      <ul class="subtopic-list">
+        <li>Tables, Rows, Columns</li>
+        <li>Primary Key</li>
+        <li>Foreign Key</li>
+        <li>Schema and Catalog</li>
+        <li>Relationships: One-to-One, One-to-Many, Many-to-Many</li>
+        <li>Cardinality and Degree</li>
+      </ul>
+      <h3 class="sub-h3">## Setting Up SQL Environment</h3>
+      <ul class="subtopic-list">
+        <li>Installing MySQL / PostgreSQL / SQLite</li>
+        <li>GUI Tools: MySQL Workbench, pgAdmin, DBeaver, TablePlus</li>
+        <li>CLI access: mysql, psql, sqlite3</li>
+        <li>Online SQL editors (SQLFiddle, DB Fiddle, W3Schools)</li>
+        <li>Creating your first database</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B2 -->
+  <div class="topic-card beg" id="b2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">02</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Database Design Fundamentals</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Entity-Relationship (ER) Model</h3>
+      <ul class="subtopic-list">
+        <li>Entities and Attributes</li>
+        <li>Simple, Composite, Derived attributes</li>
+        <li>Multivalued attributes</li>
+        <li>Relationships and Participation constraints</li>
+        <li>Weak entities</li>
+        <li>ER Diagram symbols and notation</li>
+        <li>Chen notation vs Crow's Foot notation</li>
+      </ul>
+      <h3 class="sub-h3">## Keys and Identifiers</h3>
+      <ul class="subtopic-list">
+        <li>Candidate Key</li>
+        <li>Primary Key — Natural vs Surrogate</li>
+        <li>Composite Primary Key</li>
+        <li>Foreign Key and Referential Integrity</li>
+        <li>Unique Key</li>
+        <li>Super Key</li>
+        <li>Alternate Key</li>
+      </ul>
+      <h3 class="sub-h3">## Mapping ER to Relational Tables</h3>
+      <ul class="subtopic-list">
+        <li>Entity to Table mapping</li>
+        <li>Relationship to Table mapping</li>
+        <li>One-to-One mapping strategies</li>
+        <li>One-to-Many mapping strategies</li>
+        <li>Many-to-Many junction tables</li>
+        <li>Handling inheritance in relational model</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B3 -->
+  <div class="topic-card beg" id="b3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">03</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Data Types</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Numeric Data Types</h3>
+      <ul class="subtopic-list">
+        <li>INT / INTEGER (TINYINT, SMALLINT, MEDIUMINT, BIGINT)</li>
+        <li>FLOAT and DOUBLE (approximate numerics)</li>
+        <li>DECIMAL / NUMERIC (exact numerics)</li>
+        <li>REAL</li>
+        <li>BIT</li>
+        <li>Unsigned vs Signed integers</li>
+        <li>AUTO_INCREMENT / SERIAL / IDENTITY</li>
+      </ul>
+      <h3 class="sub-h3">## String / Character Data Types</h3>
+      <ul class="subtopic-list">
+        <li>CHAR(n) — fixed length</li>
+        <li>VARCHAR(n) — variable length</li>
+        <li>TEXT, TINYTEXT, MEDIUMTEXT, LONGTEXT</li>
+        <li>NCHAR, NVARCHAR — Unicode types</li>
+        <li>BINARY, VARBINARY</li>
+        <li>BLOB, MEDIUMBLOB, LONGBLOB</li>
+        <li>ENUM and SET (MySQL)</li>
+      </ul>
+      <h3 class="sub-h3">## Date & Time Data Types</h3>
+      <ul class="subtopic-list">
+        <li>DATE — YYYY-MM-DD</li>
+        <li>TIME — HH:MM:SS</li>
+        <li>DATETIME</li>
+        <li>TIMESTAMP</li>
+        <li>YEAR</li>
+        <li>INTERVAL (PostgreSQL)</li>
+        <li>Timezone handling</li>
+      </ul>
+      <h3 class="sub-h3">## Boolean & Other Types</h3>
+      <ul class="subtopic-list">
+        <li>BOOLEAN / BOOL / TINYINT(1)</li>
+        <li>UUID / UNIQUEIDENTIFIER</li>
+        <li>JSON (MySQL 5.7+, PostgreSQL)</li>
+        <li>XML</li>
+        <li>ARRAY (PostgreSQL)</li>
+        <li>Choosing the right data type</li>
+        <li>Storage sizes and performance implications</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B4 -->
+  <div class="topic-card beg" id="b4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">04</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># DDL — Data Definition Language</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## CREATE Statements</h3>
+      <ul class="subtopic-list">
+        <li>CREATE DATABASE</li>
+        <li>CREATE TABLE with column definitions</li>
+        <li>CREATE TABLE AS SELECT</li>
+        <li>CREATE TABLE LIKE (MySQL)</li>
+        <li>CREATE SCHEMA</li>
+        <li>CREATE INDEX</li>
+        <li>CREATE VIEW</li>
+        <li>CREATE SEQUENCE (PostgreSQL, Oracle)</li>
+        <li>IF NOT EXISTS clause</li>
+      </ul>
+      <div class="code-snippet">CREATE TABLE employees (
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  name       VARCHAR(100) NOT NULL,
+  email      VARCHAR(150) UNIQUE,
+  salary     DECIMAL(10,2) DEFAULT 0.00,
+  dept_id    INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</div>
+      <h3 class="sub-h3">## ALTER Statements</h3>
+      <ul class="subtopic-list">
+        <li>ALTER TABLE — ADD COLUMN</li>
+        <li>ALTER TABLE — DROP COLUMN</li>
+        <li>ALTER TABLE — MODIFY / ALTER COLUMN</li>
+        <li>ALTER TABLE — RENAME COLUMN</li>
+        <li>ALTER TABLE — RENAME TABLE</li>
+        <li>ALTER TABLE — ADD/DROP CONSTRAINT</li>
+        <li>ALTER TABLE — ADD/DROP INDEX</li>
+        <li>ALTER DATABASE</li>
+      </ul>
+      <h3 class="sub-h3">## DROP & TRUNCATE Statements</h3>
+      <ul class="subtopic-list">
+        <li>DROP TABLE</li>
+        <li>DROP DATABASE</li>
+        <li>DROP VIEW</li>
+        <li>DROP INDEX</li>
+        <li>TRUNCATE TABLE vs DELETE</li>
+        <li>CASCADE and RESTRICT options</li>
+        <li>IF EXISTS clause</li>
+      </ul>
+      <h3 class="sub-h3">## RENAME Statements</h3>
+      <ul class="subtopic-list">
+        <li>RENAME TABLE</li>
+        <li>RENAME COLUMN</li>
+        <li>RENAME DATABASE</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B5 -->
+  <div class="topic-card beg" id="b5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">05</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># DML — Data Manipulation Language</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## INSERT</h3>
+      <ul class="subtopic-list">
+        <li>INSERT INTO ... VALUES</li>
+        <li>INSERT INTO ... SELECT</li>
+        <li>Multi-row INSERT</li>
+        <li>INSERT IGNORE (MySQL)</li>
+        <li>INSERT OR REPLACE (SQLite)</li>
+        <li>UPSERT / ON CONFLICT (PostgreSQL)</li>
+        <li>ON DUPLICATE KEY UPDATE (MySQL)</li>
+        <li>INSERT with DEFAULT values</li>
+        <li>Returning inserted data (RETURNING clause)</li>
+      </ul>
+      <h3 class="sub-h3">## UPDATE</h3>
+      <ul class="subtopic-list">
+        <li>Basic UPDATE ... SET ... WHERE</li>
+        <li>UPDATE multiple columns</li>
+        <li>UPDATE with subquery</li>
+        <li>UPDATE with JOIN (MySQL)</li>
+        <li>UPDATE FROM (SQL Server, PostgreSQL)</li>
+        <li>Conditional UPDATE with CASE</li>
+        <li>LIMIT with UPDATE (MySQL)</li>
+      </ul>
+      <h3 class="sub-h3">## DELETE</h3>
+      <ul class="subtopic-list">
+        <li>Basic DELETE ... WHERE</li>
+        <li>DELETE with subquery</li>
+        <li>DELETE with JOIN (MySQL)</li>
+        <li>DELETE FROM with USING (PostgreSQL)</li>
+        <li>LIMIT with DELETE (MySQL)</li>
+        <li>Soft delete pattern</li>
+        <li>RETURNING clause in DELETE</li>
+      </ul>
+      <h3 class="sub-h3">## MERGE (UPSERT)</h3>
+      <ul class="subtopic-list">
+        <li>MERGE syntax (SQL Server, Oracle)</li>
+        <li>WHEN MATCHED / WHEN NOT MATCHED</li>
+        <li>INSERT OR UPDATE patterns</li>
+        <li>PostgreSQL ON CONFLICT DO UPDATE</li>
+        <li>MySQL ON DUPLICATE KEY UPDATE</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B6 -->
+  <div class="topic-card beg" id="b6">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">06</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Basic SELECT Queries</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## SELECT Fundamentals</h3>
+      <ul class="subtopic-list">
+        <li>SELECT * vs SELECT column_list</li>
+        <li>Column aliases with AS</li>
+        <li>Table aliases</li>
+        <li>Selecting from multiple tables (comma syntax)</li>
+        <li>SELECT DISTINCT</li>
+        <li>Computed columns / expressions</li>
+        <li>Literal values in SELECT</li>
+      </ul>
+      <div class="code-snippet">SELECT 
+  id,
+  CONCAT(first_name, ' ', last_name) AS full_name,
+  salary * 1.1 AS new_salary,
+  'Active' AS status
+FROM employees;</div>
+      <h3 class="sub-h3">## SQL Query Execution Order</h3>
+      <ul class="subtopic-list single">
+        <li>1. FROM — identify source tables</li>
+        <li>2. JOIN — combine tables</li>
+        <li>3. WHERE — filter rows</li>
+        <li>4. GROUP BY — group rows</li>
+        <li>5. HAVING — filter groups</li>
+        <li>6. SELECT — select columns</li>
+        <li>7. DISTINCT — remove duplicates</li>
+        <li>8. ORDER BY — sort results</li>
+        <li>9. LIMIT / OFFSET — paginate results</li>
+      </ul>
+      <h3 class="sub-h3">## LIMIT and OFFSET</h3>
+      <ul class="subtopic-list">
+        <li>LIMIT n</li>
+        <li>LIMIT n OFFSET m</li>
+        <li>TOP n (SQL Server)</li>
+        <li>FETCH FIRST n ROWS ONLY (Oracle, PostgreSQL)</li>
+        <li>Pagination patterns</li>
+        <li>Keyset / cursor-based pagination</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B7 -->
+  <div class="topic-card beg" id="b7">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">07</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Filtering & Sorting</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## WHERE Clause</h3>
+      <ul class="subtopic-list">
+        <li>Comparison operators: =, !=, &lt;, &gt;, &lt;=, &gt;=</li>
+        <li>&lt;&gt; (not equal)</li>
+        <li>Logical operators: AND, OR, NOT</li>
+        <li>Operator precedence</li>
+        <li>Parentheses for grouping conditions</li>
+      </ul>
+      <h3 class="sub-h3">## Special WHERE Operators</h3>
+      <ul class="subtopic-list">
+        <li>BETWEEN ... AND ...</li>
+        <li>IN (...) / NOT IN (...)</li>
+        <li>IS NULL / IS NOT NULL</li>
+        <li>LIKE — pattern matching</li>
+        <li>ILIKE — case-insensitive LIKE (PostgreSQL)</li>
+        <li>REGEXP / RLIKE — regular expressions</li>
+        <li>EXISTS / NOT EXISTS</li>
+        <li>ANY / SOME / ALL with subqueries</li>
+      </ul>
+      <h3 class="sub-h3">## LIKE Patterns</h3>
+      <ul class="subtopic-list">
+        <li>% — any sequence of characters</li>
+        <li>_ — any single character</li>
+        <li>ESCAPE clause for literal wildcards</li>
+        <li>Pattern matching pitfalls and performance</li>
+        <li>Leading wildcard and index usage</li>
+      </ul>
+      <h3 class="sub-h3">## ORDER BY</h3>
+      <ul class="subtopic-list">
+        <li>ORDER BY column ASC / DESC</li>
+        <li>Multiple column sorting</li>
+        <li>ORDER BY expression</li>
+        <li>ORDER BY column alias</li>
+        <li>ORDER BY column position (1,2,3)</li>
+        <li>NULLS FIRST / NULLS LAST</li>
+        <li>Collation and locale-aware sorting</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B8 -->
+  <div class="topic-card beg" id="b8">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">08</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Basic Functions</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## String Functions</h3>
+      <ul class="subtopic-list">
+        <li>UPPER() / LOWER()</li>
+        <li>LENGTH() / CHAR_LENGTH()</li>
+        <li>CONCAT() / CONCAT_WS()</li>
+        <li>SUBSTRING() / SUBSTR() / MID()</li>
+        <li>LEFT() / RIGHT()</li>
+        <li>TRIM() / LTRIM() / RTRIM()</li>
+        <li>REPLACE()</li>
+        <li>INSTR() / LOCATE() / POSITION()</li>
+        <li>LPAD() / RPAD()</li>
+        <li>REPEAT()</li>
+        <li>REVERSE()</li>
+        <li>FORMAT()</li>
+      </ul>
+      <h3 class="sub-h3">## Numeric Functions</h3>
+      <ul class="subtopic-list">
+        <li>ROUND() / CEIL() / FLOOR()</li>
+        <li>ABS()</li>
+        <li>MOD() / % operator</li>
+        <li>POWER() / POW()</li>
+        <li>SQRT()</li>
+        <li>TRUNCATE()</li>
+        <li>SIGN()</li>
+        <li>RAND() / RANDOM()</li>
+        <li>LOG() / LOG2() / LOG10()</li>
+        <li>EXP()</li>
+        <li>PI()</li>
+        <li>Trigonometric: SIN, COS, TAN</li>
+      </ul>
+      <h3 class="sub-h3">## Conversion Functions</h3>
+      <ul class="subtopic-list">
+        <li>CAST(value AS type)</li>
+        <li>CONVERT(value, type)</li>
+        <li>COALESCE()</li>
+        <li>NULLIF()</li>
+        <li>IFNULL() / ISNULL() / NVL()</li>
+        <li>IF() / IIF()</li>
+        <li>TO_CHAR() (Oracle, PostgreSQL)</li>
+        <li>STR_TO_DATE() (MySQL)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B9 -->
+  <div class="topic-card beg" id="b9">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">09</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Aggregate Functions & GROUP BY</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Aggregate Functions</h3>
+      <ul class="subtopic-list">
+        <li>COUNT(*) vs COUNT(column) vs COUNT(DISTINCT column)</li>
+        <li>SUM()</li>
+        <li>AVG()</li>
+        <li>MIN()</li>
+        <li>MAX()</li>
+        <li>GROUP_CONCAT() / STRING_AGG()</li>
+        <li>VARIANCE() / VAR_POP() / VAR_SAMP()</li>
+        <li>STDDEV() / STDDEV_POP() / STDDEV_SAMP()</li>
+        <li>BIT_AND(), BIT_OR(), BIT_XOR()</li>
+        <li>BOOL_AND(), BOOL_OR() (PostgreSQL)</li>
+        <li>ARRAY_AGG() (PostgreSQL)</li>
+      </ul>
+      <h3 class="sub-h3">## GROUP BY</h3>
+      <ul class="subtopic-list">
+        <li>Basic GROUP BY syntax</li>
+        <li>GROUP BY multiple columns</li>
+        <li>GROUP BY with expressions</li>
+        <li>Grouping rules — SELECT must reference GROUP BY columns</li>
+        <li>Non-aggregated columns and sql_mode (MySQL)</li>
+        <li>GROUP BY with ROLLUP</li>
+        <li>GROUP BY with CUBE</li>
+        <li>GROUPING SETS</li>
+        <li>GROUPING() function</li>
+      </ul>
+      <h3 class="sub-h3">## HAVING Clause</h3>
+      <ul class="subtopic-list">
+        <li>HAVING vs WHERE — when to use each</li>
+        <li>HAVING with aggregate conditions</li>
+        <li>HAVING without GROUP BY</li>
+        <li>HAVING with multiple conditions</li>
+        <li>Performance: filter before GROUP BY with WHERE</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B10 -->
+  <div class="topic-card beg" id="b10">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">10</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Basic Joins</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## INNER JOIN</h3>
+      <ul class="subtopic-list">
+        <li>Syntax: JOIN ... ON ...</li>
+        <li>Matching rows only</li>
+        <li>Joining on primary key and foreign key</li>
+        <li>Joining on non-key columns</li>
+        <li>Joining on multiple conditions</li>
+        <li>Joining more than two tables</li>
+      </ul>
+      <h3 class="sub-h3">## LEFT JOIN (LEFT OUTER JOIN)</h3>
+      <ul class="subtopic-list">
+        <li>All rows from left table</li>
+        <li>NULL for unmatched right rows</li>
+        <li>Finding unmatched rows (anti-join pattern)</li>
+        <li>LEFT JOIN vs INNER JOIN</li>
+        <li>Multiple LEFT JOINs</li>
+      </ul>
+      <h3 class="sub-h3">## RIGHT JOIN (RIGHT OUTER JOIN)</h3>
+      <ul class="subtopic-list">
+        <li>All rows from right table</li>
+        <li>NULL for unmatched left rows</li>
+        <li>Rewriting RIGHT JOIN as LEFT JOIN</li>
+        <li>When to use RIGHT JOIN</li>
+      </ul>
+      <h3 class="sub-h3">## FULL OUTER JOIN</h3>
+      <ul class="subtopic-list">
+        <li>All rows from both tables</li>
+        <li>NULL for unmatched sides</li>
+        <li>Simulating FULL OUTER JOIN in MySQL (UNION of LEFT + RIGHT)</li>
+        <li>Finding rows with no match in either table</li>
+      </ul>
+      <h3 class="sub-h3">## CROSS JOIN</h3>
+      <ul class="subtopic-list">
+        <li>Cartesian product of two tables</li>
+        <li>Use cases: generating combinations</li>
+        <li>Performance implications</li>
+        <li>Implicit CROSS JOIN (comma syntax)</li>
+      </ul>
+      <h3 class="sub-h3">## Self JOIN</h3>
+      <ul class="subtopic-list">
+        <li>Joining a table with itself</li>
+        <li>Using table aliases</li>
+        <li>Hierarchical data (employee → manager)</li>
+        <li>Finding duplicates with self-join</li>
+      </ul>
+      <div class="code-snippet">SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.id;</div>
+    </div>
+  </div>
+
+  <!-- B11 -->
+  <div class="topic-card beg" id="b11">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">11</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># NULL Handling</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Understanding NULL</h3>
+      <ul class="subtopic-list">
+        <li>NULL represents missing/unknown value</li>
+        <li>NULL is not 0, not empty string</li>
+        <li>Three-valued logic: TRUE, FALSE, UNKNOWN</li>
+        <li>NULL propagation in arithmetic</li>
+        <li>NULL in comparisons (= NULL is always false)</li>
+      </ul>
+      <h3 class="sub-h3">## NULL Functions</h3>
+      <ul class="subtopic-list">
+        <li>IS NULL / IS NOT NULL</li>
+        <li>COALESCE(v1, v2, ...) — first non-null</li>
+        <li>NULLIF(a, b) — returns NULL if a=b</li>
+        <li>IFNULL(value, replacement) — MySQL</li>
+        <li>NVL(value, replacement) — Oracle</li>
+        <li>ISNULL(value, replacement) — SQL Server</li>
+      </ul>
+      <h3 class="sub-h3">## NULL in Aggregates & Sorting</h3>
+      <ul class="subtopic-list">
+        <li>COUNT(*) vs COUNT(col) with NULLs</li>
+        <li>SUM/AVG ignore NULLs</li>
+        <li>NULL in GROUP BY (grouped together)</li>
+        <li>NULLS FIRST / NULLS LAST in ORDER BY</li>
+        <li>NULL in UNIQUE constraints</li>
+        <li>NULL in joins</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B12 -->
+  <div class="topic-card beg" id="b12">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">12</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Constraints</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Types of Constraints</h3>
+      <ul class="subtopic-list">
+        <li>NOT NULL constraint</li>
+        <li>UNIQUE constraint</li>
+        <li>PRIMARY KEY constraint</li>
+        <li>FOREIGN KEY constraint</li>
+        <li>CHECK constraint</li>
+        <li>DEFAULT constraint</li>
+      </ul>
+      <h3 class="sub-h3">## Column-level vs Table-level Constraints</h3>
+      <ul class="subtopic-list">
+        <li>Inline column definition</li>
+        <li>Table-level constraint after columns</li>
+        <li>Named constraints with CONSTRAINT keyword</li>
+        <li>Composite unique constraints</li>
+      </ul>
+      <h3 class="sub-h3">## Foreign Key Actions</h3>
+      <ul class="subtopic-list">
+        <li>ON DELETE CASCADE</li>
+        <li>ON DELETE SET NULL</li>
+        <li>ON DELETE RESTRICT / NO ACTION</li>
+        <li>ON UPDATE CASCADE</li>
+        <li>ON UPDATE SET DEFAULT</li>
+        <li>Deferred constraint checking (PostgreSQL)</li>
+      </ul>
+      <h3 class="sub-h3">## Modifying Constraints</h3>
+      <ul class="subtopic-list">
+        <li>ALTER TABLE ADD CONSTRAINT</li>
+        <li>ALTER TABLE DROP CONSTRAINT</li>
+        <li>Disabling / enabling constraints</li>
+        <li>Validating existing data against constraints</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       INTERMEDIATE SECTION
+  ══════════════════════════════════════════════ -->
+  <div class="section-label" id="intermediate">
+    <div class="section-pill int">⬡ INTERMEDIATE</div>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- I1 -->
+  <div class="topic-card int" id="i1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">13</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Advanced Joins</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## NATURAL JOIN</h3>
+      <ul class="subtopic-list">
+        <li>Automatic join on same-named columns</li>
+        <li>Risks and ambiguity</li>
+        <li>When to avoid NATURAL JOIN</li>
+      </ul>
+      <h3 class="sub-h3">## USING Clause</h3>
+      <ul class="subtopic-list">
+        <li>JOIN ... USING (column)</li>
+        <li>Differences from JOIN ON</li>
+        <li>Column name requirements</li>
+      </ul>
+      <h3 class="sub-h3">## Non-Equi Joins</h3>
+      <ul class="subtopic-list">
+        <li>Joining on range conditions</li>
+        <li>BETWEEN in join conditions</li>
+        <li>Use cases: salary grades, date ranges</li>
+        <li>Performance considerations</li>
+      </ul>
+      <h3 class="sub-h3">## Anti-Join & Semi-Join</h3>
+      <ul class="subtopic-list">
+        <li>Anti-join: NOT IN, NOT EXISTS, LEFT JOIN ... IS NULL</li>
+        <li>Semi-join: IN, EXISTS</li>
+        <li>Performance comparison of anti-join approaches</li>
+        <li>NULL traps with NOT IN</li>
+      </ul>
+      <h3 class="sub-h3">## Lateral Join</h3>
+      <ul class="subtopic-list">
+        <li>LATERAL keyword (PostgreSQL, MySQL 8+)</li>
+        <li>CROSS APPLY / OUTER APPLY (SQL Server)</li>
+        <li>Correlated subquery as table source</li>
+        <li>Top-N per group pattern</li>
+      </ul>
+      <h3 class="sub-h3">## Multiple Table Joins Best Practices</h3>
+      <ul class="subtopic-list">
+        <li>Join order and optimizer hints</li>
+        <li>Reducing Cartesian products</li>
+        <li>Aliasing for readability</li>
+        <li>Covering indexes for join columns</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I2 -->
+  <div class="topic-card int" id="i2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">14</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Subqueries</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Types of Subqueries</h3>
+      <ul class="subtopic-list">
+        <li>Scalar subquery — returns single value</li>
+        <li>Row subquery — returns single row</li>
+        <li>Table / Column subquery — returns result set</li>
+        <li>Correlated subquery — references outer query</li>
+        <li>Non-correlated subquery — independent</li>
+      </ul>
+      <h3 class="sub-h3">## Subquery Placement</h3>
+      <ul class="subtopic-list">
+        <li>Subquery in SELECT clause</li>
+        <li>Subquery in FROM clause (derived table)</li>
+        <li>Subquery in WHERE clause</li>
+        <li>Subquery in HAVING clause</li>
+        <li>Subquery in INSERT, UPDATE, DELETE</li>
+      </ul>
+      <h3 class="sub-h3">## Correlated Subqueries</h3>
+      <ul class="subtopic-list">
+        <li>How correlation works</li>
+        <li>EXISTS with correlated subquery</li>
+        <li>NOT EXISTS for anti-join</li>
+        <li>Correlated subquery in SELECT</li>
+        <li>Performance: correlated vs join</li>
+        <li>Rewriting correlated as JOIN or CTE</li>
+      </ul>
+      <h3 class="sub-h3">## Derived Tables (Inline Views)</h3>
+      <ul class="subtopic-list">
+        <li>Subquery in FROM clause</li>
+        <li>Naming derived tables with alias</li>
+        <li>Multi-level derived tables</li>
+        <li>Derived table vs CTE</li>
+        <li>Aggregating after grouping</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I3 -->
+  <div class="topic-card int" id="i3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">15</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Set Operations</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## UNION</h3>
+      <ul class="subtopic-list">
+        <li>UNION — removes duplicates</li>
+        <li>UNION ALL — keeps duplicates (faster)</li>
+        <li>Column count and type compatibility</li>
+        <li>Column names from first SELECT</li>
+        <li>ORDER BY with UNION</li>
+        <li>Using UNION for full outer join simulation</li>
+      </ul>
+      <h3 class="sub-h3">## INTERSECT</h3>
+      <ul class="subtopic-list">
+        <li>Returns rows in both result sets</li>
+        <li>INTERSECT ALL</li>
+        <li>Simulating INTERSECT with INNER JOIN</li>
+        <li>Support across databases</li>
+      </ul>
+      <h3 class="sub-h3">## EXCEPT / MINUS</h3>
+      <ul class="subtopic-list">
+        <li>EXCEPT (SQL standard, PostgreSQL, SQL Server)</li>
+        <li>MINUS (Oracle)</li>
+        <li>EXCEPT ALL</li>
+        <li>Simulating EXCEPT with LEFT JOIN / NOT IN</li>
+        <li>Use cases: finding differences between tables</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I4 -->
+  <div class="topic-card int" id="i4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">16</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Views</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Simple Views</h3>
+      <ul class="subtopic-list">
+        <li>CREATE VIEW syntax</li>
+        <li>Querying a view like a table</li>
+        <li>View as abstraction layer</li>
+        <li>Updatable views — rules and limitations</li>
+        <li>WITH CHECK OPTION</li>
+        <li>DROP VIEW / ALTER VIEW</li>
+        <li>CREATE OR REPLACE VIEW</li>
+      </ul>
+      <h3 class="sub-h3">## Materialized Views</h3>
+      <ul class="subtopic-list">
+        <li>What is a materialized view</li>
+        <li>CREATE MATERIALIZED VIEW (PostgreSQL, Oracle)</li>
+        <li>REFRESH MATERIALIZED VIEW</li>
+        <li>WITH DATA / WITH NO DATA</li>
+        <li>Concurrently refreshing</li>
+        <li>Indexed materialized views (SQL Server)</li>
+        <li>Materialized view vs cache table</li>
+        <li>Use cases: pre-aggregated reporting</li>
+      </ul>
+      <h3 class="sub-h3">## View Use Cases & Best Practices</h3>
+      <ul class="subtopic-list">
+        <li>Security: restricting column/row access</li>
+        <li>Simplifying complex joins</li>
+        <li>Logical independence</li>
+        <li>Performance: views are not always faster</li>
+        <li>Nested views — avoid deep nesting</li>
+        <li>Documenting views</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I5 -->
+  <div class="topic-card int" id="i5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">17</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Indexes</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Index Fundamentals</h3>
+      <ul class="subtopic-list">
+        <li>What is an index and why it speeds queries</li>
+        <li>Trade-off: read speed vs write speed</li>
+        <li>Index data structures overview</li>
+        <li>Automatic indexes (PRIMARY KEY, UNIQUE)</li>
+        <li>CREATE INDEX syntax</li>
+        <li>DROP INDEX syntax</li>
+      </ul>
+      <h3 class="sub-h3">## Types of Indexes</h3>
+      <ul class="subtopic-list">
+        <li>B-Tree Index — default, range queries</li>
+        <li>Hash Index — equality only</li>
+        <li>Full-Text Index — text search</li>
+        <li>Spatial / GiST Index — geometric data</li>
+        <li>Clustered vs Non-Clustered Index</li>
+        <li>Unique Index</li>
+        <li>Partial / Filtered Index</li>
+        <li>Composite (Multi-Column) Index</li>
+        <li>Covering Index</li>
+        <li>Expression / Function-Based Index</li>
+        <li>Invisible Index (MySQL 8+)</li>
+      </ul>
+      <h3 class="sub-h3">## Index Design Principles</h3>
+      <ul class="subtopic-list">
+        <li>Selectivity — cardinality matters</li>
+        <li>Left-prefix rule for composite indexes</li>
+        <li>Index on JOIN columns</li>
+        <li>Index on WHERE, ORDER BY, GROUP BY columns</li>
+        <li>Avoid over-indexing</li>
+        <li>Index maintenance and REBUILD / REINDEX</li>
+        <li>Using EXPLAIN to check index usage</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I6 -->
+  <div class="topic-card int" id="i6">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">18</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Transactions & ACID Properties</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## ACID Properties</h3>
+      <ul class="subtopic-list">
+        <li>Atomicity — all or nothing</li>
+        <li>Consistency — valid state to valid state</li>
+        <li>Isolation — concurrent transactions invisible to each other</li>
+        <li>Durability — committed data persists</li>
+        <li>Real-world ACID examples</li>
+      </ul>
+      <h3 class="sub-h3">## TCL — Transaction Control Language</h3>
+      <ul class="subtopic-list">
+        <li>BEGIN / START TRANSACTION</li>
+        <li>COMMIT — make changes permanent</li>
+        <li>ROLLBACK — undo changes</li>
+        <li>SAVEPOINT name</li>
+        <li>ROLLBACK TO SAVEPOINT</li>
+        <li>RELEASE SAVEPOINT</li>
+        <li>Implicit vs explicit transactions</li>
+        <li>Autocommit mode</li>
+      </ul>
+      <h3 class="sub-h3">## Isolation Levels</h3>
+      <ul class="subtopic-list">
+        <li>READ UNCOMMITTED — dirty reads allowed</li>
+        <li>READ COMMITTED — default in most DBs</li>
+        <li>REPEATABLE READ — default in MySQL InnoDB</li>
+        <li>SERIALIZABLE — strictest</li>
+        <li>Phenomena: Dirty Read, Non-Repeatable Read, Phantom Read</li>
+        <li>SET TRANSACTION ISOLATION LEVEL</li>
+        <li>Snapshot Isolation (PostgreSQL)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I7 -->
+  <div class="topic-card int" id="i7">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">19</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Stored Procedures</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Creating Stored Procedures</h3>
+      <ul class="subtopic-list">
+        <li>CREATE PROCEDURE syntax</li>
+        <li>DELIMITER change (MySQL)</li>
+        <li>IN, OUT, INOUT parameters</li>
+        <li>BEGIN ... END block</li>
+        <li>CALL statement</li>
+        <li>DROP PROCEDURE / ALTER PROCEDURE</li>
+        <li>SHOW CREATE PROCEDURE</li>
+      </ul>
+      <h3 class="sub-h3">## Procedural Logic</h3>
+      <ul class="subtopic-list">
+        <li>Variables: DECLARE, SET, SELECT INTO</li>
+        <li>IF ... THEN ... ELSEIF ... ELSE ... END IF</li>
+        <li>CASE statement in procedures</li>
+        <li>WHILE ... DO ... END WHILE</li>
+        <li>REPEAT ... UNTIL ... END REPEAT</li>
+        <li>LOOP ... LEAVE ... END LOOP</li>
+        <li>ITERATE (continue)</li>
+        <li>Labels for nested loops</li>
+      </ul>
+      <h3 class="sub-h3">## Cursors</h3>
+      <ul class="subtopic-list">
+        <li>DECLARE CURSOR FOR SELECT</li>
+        <li>OPEN cursor</li>
+        <li>FETCH cursor INTO variables</li>
+        <li>CLOSE cursor</li>
+        <li>NOT FOUND handler</li>
+        <li>Cursor-based loops</li>
+        <li>Performance — cursors are usually slow</li>
+      </ul>
+      <h3 class="sub-h3">## Error Handling in Procedures</h3>
+      <ul class="subtopic-list">
+        <li>DECLARE CONTINUE HANDLER</li>
+        <li>DECLARE EXIT HANDLER</li>
+        <li>SQLEXCEPTION, SQLWARNING, NOT FOUND</li>
+        <li>SIGNAL SQLSTATE — raise custom errors</li>
+        <li>RESIGNAL</li>
+        <li>GET DIAGNOSTICS</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I8 -->
+  <div class="topic-card int" id="i8">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">20</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># User-Defined Functions (UDF)</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Scalar Functions</h3>
+      <ul class="subtopic-list">
+        <li>CREATE FUNCTION syntax</li>
+        <li>RETURNS data_type</li>
+        <li>RETURN statement</li>
+        <li>Deterministic vs Non-Deterministic</li>
+        <li>Using UDF in SELECT, WHERE, ORDER BY</li>
+        <li>DROP FUNCTION</li>
+      </ul>
+      <h3 class="sub-h3">## Table-Valued Functions (SQL Server / PostgreSQL)</h3>
+      <ul class="subtopic-list">
+        <li>Inline table-valued functions</li>
+        <li>Multi-statement table-valued functions</li>
+        <li>RETURNS TABLE syntax</li>
+        <li>SETOF RECORD (PostgreSQL)</li>
+        <li>Using TVF in FROM clause</li>
+      </ul>
+      <h3 class="sub-h3">## Function vs Stored Procedure</h3>
+      <ul class="subtopic-list">
+        <li>Must return a value vs optional</li>
+        <li>DML restrictions in functions</li>
+        <li>Transaction control in functions</li>
+        <li>Calling context differences</li>
+        <li>When to use which</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I9 -->
+  <div class="topic-card int" id="i9">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">21</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Triggers</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Trigger Fundamentals</h3>
+      <ul class="subtopic-list">
+        <li>What is a trigger</li>
+        <li>DML triggers: INSERT, UPDATE, DELETE</li>
+        <li>DDL triggers</li>
+        <li>BEFORE vs AFTER triggers</li>
+        <li>INSTEAD OF triggers (views, SQL Server)</li>
+        <li>Row-level vs Statement-level triggers</li>
+        <li>OLD and NEW row references</li>
+      </ul>
+      <h3 class="sub-h3">## Creating Triggers</h3>
+      <ul class="subtopic-list">
+        <li>CREATE TRIGGER syntax</li>
+        <li>FOR EACH ROW clause</li>
+        <li>Trigger body and BEGIN...END</li>
+        <li>WHEN condition (PostgreSQL)</li>
+        <li>Trigger execution order (MySQL: multiple triggers)</li>
+        <li>DROP TRIGGER</li>
+        <li>SHOW TRIGGERS</li>
+      </ul>
+      <h3 class="sub-h3">## Trigger Use Cases</h3>
+      <ul class="subtopic-list">
+        <li>Audit logging — track changes automatically</li>
+        <li>Enforcing business rules</li>
+        <li>Maintaining denormalized summary tables</li>
+        <li>Automatic timestamp updates</li>
+        <li>Cascading actions beyond FK limits</li>
+        <li>Preventing invalid data</li>
+      </ul>
+      <h3 class="sub-h3">## Trigger Pitfalls</h3>
+      <ul class="subtopic-list">
+        <li>Hidden side effects</li>
+        <li>Performance overhead on bulk DML</li>
+        <li>Recursive trigger loops</li>
+        <li>Debugging difficulty</li>
+        <li>Order of trigger execution</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I10 -->
+  <div class="topic-card int" id="i10">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">22</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Advanced String Functions</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## String Searching & Matching</h3>
+      <ul class="subtopic-list">
+        <li>REGEXP / RLIKE — MySQL regex</li>
+        <li>REGEXP_LIKE() — Oracle, MySQL 8+</li>
+        <li>SIMILAR TO — PostgreSQL</li>
+        <li>~ and ~* — PostgreSQL regex operators</li>
+        <li>REGEXP_REPLACE()</li>
+        <li>REGEXP_SUBSTR() / REGEXP_EXTRACT()</li>
+        <li>REGEXP_INSTR()</li>
+        <li>REGEXP_COUNT() (Oracle)</li>
+      </ul>
+      <h3 class="sub-h3">## String Splitting & Parsing</h3>
+      <ul class="subtopic-list">
+        <li>SUBSTRING_INDEX() — MySQL</li>
+        <li>SPLIT_PART() — PostgreSQL</li>
+        <li>STRING_TO_TABLE() — PostgreSQL 14+</li>
+        <li>STRING_SPLIT() — SQL Server</li>
+        <li>Parsing delimited data</li>
+        <li>JSON_TABLE() for structured string data</li>
+      </ul>
+      <h3 class="sub-h3">## String Aggregation</h3>
+      <ul class="subtopic-list">
+        <li>GROUP_CONCAT(col ORDER BY x SEPARATOR ',')</li>
+        <li>STRING_AGG(col, ',') — SQL Server, PostgreSQL</li>
+        <li>LISTAGG() — Oracle</li>
+        <li>Deduplication with DISTINCT</li>
+        <li>Ordering aggregated strings</li>
+      </ul>
+      <h3 class="sub-h3">## Text Search</h3>
+      <ul class="subtopic-list">
+        <li>Full-text index creation</li>
+        <li>MATCH() ... AGAINST() — MySQL</li>
+        <li>CONTAINS() — SQL Server</li>
+        <li>to_tsvector / to_tsquery — PostgreSQL</li>
+        <li>Boolean mode vs natural language mode</li>
+        <li>SOUNDEX() and DIFFERENCE() — phonetic matching</li>
+        <li>Levenshtein / edit distance (extension)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I11 -->
+  <div class="topic-card int" id="i11">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">23</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Date & Time Functions</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Current Date/Time Functions</h3>
+      <ul class="subtopic-list">
+        <li>NOW() / CURRENT_TIMESTAMP</li>
+        <li>CURDATE() / CURRENT_DATE</li>
+        <li>CURTIME() / CURRENT_TIME</li>
+        <li>SYSDATE() (MySQL — time of execution)</li>
+        <li>UTC_NOW() / UTC_DATE() / UTC_TIME()</li>
+        <li>GETDATE() / GETUTCDATE() (SQL Server)</li>
+        <li>SYSTIMESTAMP (Oracle)</li>
+        <li>clock_timestamp() (PostgreSQL)</li>
+      </ul>
+      <h3 class="sub-h3">## Date Extraction & Formatting</h3>
+      <ul class="subtopic-list">
+        <li>YEAR() / MONTH() / DAY()</li>
+        <li>HOUR() / MINUTE() / SECOND()</li>
+        <li>DAYOFWEEK() / DAYNAME()</li>
+        <li>WEEK() / WEEKOFYEAR()</li>
+        <li>QUARTER()</li>
+        <li>EXTRACT(part FROM date)</li>
+        <li>DATE_FORMAT() — MySQL</li>
+        <li>TO_CHAR(date, format) — Oracle, PostgreSQL</li>
+        <li>FORMAT(date, format) — SQL Server</li>
+      </ul>
+      <h3 class="sub-h3">## Date Arithmetic</h3>
+      <ul class="subtopic-list">
+        <li>DATE_ADD() / DATE_SUB() — MySQL</li>
+        <li>DATEADD() — SQL Server</li>
+        <li>INTERVAL syntax in PostgreSQL</li>
+        <li>DATEDIFF() — difference between dates</li>
+        <li>TIMESTAMPDIFF() — MySQL</li>
+        <li>AGE() — PostgreSQL</li>
+        <li>Adding months, years, days</li>
+        <li>Business days calculation</li>
+      </ul>
+      <h3 class="sub-h3">## Timezone Handling</h3>
+      <ul class="subtopic-list">
+        <li>CONVERT_TZ() — MySQL</li>
+        <li>AT TIME ZONE — SQL Server, PostgreSQL</li>
+        <li>TIMESTAMP WITH TIME ZONE (PostgreSQL)</li>
+        <li>Storing UTC in database</li>
+        <li>Daylight saving time issues</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I12 -->
+  <div class="topic-card int" id="i12">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">24</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># CASE Expressions</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Simple CASE</h3>
+      <ul class="subtopic-list">
+        <li>CASE value WHEN ... THEN ... END</li>
+        <li>ELSE clause</li>
+        <li>NULL when no match and no ELSE</li>
+        <li>Using CASE in SELECT, WHERE, ORDER BY</li>
+      </ul>
+      <h3 class="sub-h3">## Searched CASE</h3>
+      <ul class="subtopic-list">
+        <li>CASE WHEN condition THEN ... END</li>
+        <li>Multiple WHEN conditions</li>
+        <li>CASE with AND/OR conditions</li>
+        <li>Nested CASE expressions</li>
+        <li>CASE inside aggregate functions</li>
+      </ul>
+      <h3 class="sub-h3">## CASE Patterns</h3>
+      <ul class="subtopic-list">
+        <li>Pivot / conditional aggregation with CASE</li>
+        <li>Categorization / bucketing</li>
+        <li>NULL substitution</li>
+        <li>Flag columns</li>
+        <li>Custom sort order</li>
+        <li>Conditional COUNT / SUM using CASE</li>
+      </ul>
+      <div class="code-snippet">SELECT 
+  name,
+  salary,
+  CASE 
+    WHEN salary >= 100000 THEN 'Senior'
+    WHEN salary >= 60000  THEN 'Mid-Level'
+    ELSE 'Junior'
+  END AS seniority,
+  SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) AS active_count
+FROM employees GROUP BY dept_id;</div>
+    </div>
+  </div>
+
+  <!-- I13 -->
+  <div class="topic-card int" id="i13">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">25</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Common Table Expressions (CTEs)</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Non-Recursive CTEs</h3>
+      <ul class="subtopic-list">
+        <li>WITH cte_name AS (...) SELECT ...</li>
+        <li>Multiple CTEs in one WITH clause</li>
+        <li>Referencing one CTE in another</li>
+        <li>CTE vs derived table / subquery</li>
+        <li>CTE in INSERT, UPDATE, DELETE</li>
+        <li>CTEs for code readability</li>
+        <li>Performance: CTE vs temp table</li>
+      </ul>
+      <h3 class="sub-h3">## Recursive CTEs</h3>
+      <ul class="subtopic-list">
+        <li>WITH RECURSIVE syntax</li>
+        <li>Anchor member (base case)</li>
+        <li>Recursive member</li>
+        <li>UNION ALL connecting parts</li>
+        <li>Termination condition</li>
+        <li>Hierarchical tree traversal</li>
+        <li>Generating number sequences</li>
+        <li>Date series generation</li>
+        <li>Path tracking in traversal</li>
+        <li>Cycle detection</li>
+        <li>Maximum recursion depth limits</li>
+      </ul>
+      <div class="code-snippet">WITH RECURSIVE org_chart AS (
+  SELECT id, name, manager_id, 0 AS level
+  FROM employees WHERE manager_id IS NULL
+  UNION ALL
+  SELECT e.id, e.name, e.manager_id, oc.level + 1
+  FROM employees e
+  JOIN org_chart oc ON e.manager_id = oc.id
+)
+SELECT * FROM org_chart ORDER BY level;</div>
+    </div>
+  </div>
+
+  <!-- I14 -->
+  <div class="topic-card int" id="i14">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">26</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Normalization</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Normal Forms</h3>
+      <ul class="subtopic-list">
+        <li>First Normal Form (1NF) — atomicity, no repeating groups</li>
+        <li>Second Normal Form (2NF) — full functional dependency</li>
+        <li>Third Normal Form (3NF) — no transitive dependency</li>
+        <li>Boyce-Codd Normal Form (BCNF)</li>
+        <li>Fourth Normal Form (4NF) — no multi-valued dependencies</li>
+        <li>Fifth Normal Form (5NF) — no join dependencies</li>
+        <li>Domain-Key Normal Form (DKNF)</li>
+      </ul>
+      <h3 class="sub-h3">## Functional Dependencies</h3>
+      <ul class="subtopic-list">
+        <li>Full vs Partial functional dependency</li>
+        <li>Transitive dependency</li>
+        <li>Armstrong's axioms (Reflexivity, Augmentation, Transitivity)</li>
+        <li>Closure of a set of attributes</li>
+        <li>Finding candidate keys</li>
+        <li>Minimal cover / canonical cover</li>
+      </ul>
+      <h3 class="sub-h3">## Denormalization</h3>
+      <ul class="subtopic-list">
+        <li>When to denormalize</li>
+        <li>Denormalization techniques</li>
+        <li>Redundant columns for performance</li>
+        <li>Pre-aggregated columns</li>
+        <li>OLTP vs OLAP design differences</li>
+        <li>Star schema and Snowflake schema</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ADVANCED SECTION
+  ══════════════════════════════════════════════ -->
+  <div class="section-label" id="advanced">
+    <div class="section-pill adv">⬡ ADVANCED</div>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- A1 -->
+  <div class="topic-card adv" id="a1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">27</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Window Functions (Analytical Functions)</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Window Function Syntax</h3>
+      <ul class="subtopic-list">
+        <li>function() OVER (window_spec)</li>
+        <li>PARTITION BY clause</li>
+        <li>ORDER BY within OVER()</li>
+        <li>ROWS vs RANGE frame</li>
+        <li>BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</li>
+        <li>Named windows: WINDOW clause</li>
+        <li>Window functions vs GROUP BY</li>
+      </ul>
+      <h3 class="sub-h3">## Ranking Functions</h3>
+      <ul class="subtopic-list">
+        <li>ROW_NUMBER() — unique row number</li>
+        <li>RANK() — gaps on ties</li>
+        <li>DENSE_RANK() — no gaps on ties</li>
+        <li>NTILE(n) — divide into n buckets</li>
+        <li>PERCENT_RANK() — relative rank 0 to 1</li>
+        <li>CUME_DIST() — cumulative distribution</li>
+        <li>Top-N per group using ROW_NUMBER()</li>
+      </ul>
+      <h3 class="sub-h3">## Value / Offset Functions</h3>
+      <ul class="subtopic-list">
+        <li>LAG(col, n, default) — previous row value</li>
+        <li>LEAD(col, n, default) — next row value</li>
+        <li>FIRST_VALUE(col) — first value in window</li>
+        <li>LAST_VALUE(col) — last value in window</li>
+        <li>NTH_VALUE(col, n) — nth value in window</li>
+        <li>Year-over-year comparison with LAG</li>
+        <li>Running difference with LAG</li>
+      </ul>
+      <h3 class="sub-h3">## Aggregate Window Functions</h3>
+      <ul class="subtopic-list">
+        <li>SUM() OVER() — running total</li>
+        <li>AVG() OVER() — moving average</li>
+        <li>COUNT() OVER()</li>
+        <li>MIN() / MAX() OVER()</li>
+        <li>Cumulative sum vs partitioned sum</li>
+        <li>7-day moving average</li>
+        <li>Percentage of total</li>
+      </ul>
+      <div class="code-snippet">SELECT 
+  name, dept, salary,
+  ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC) AS rank_in_dept,
+  SUM(salary) OVER (PARTITION BY dept) AS dept_total,
+  LAG(salary) OVER (ORDER BY hire_date) AS prev_salary
+FROM employees;</div>
+    </div>
+  </div>
+
+  <!-- A2 -->
+  <div class="topic-card adv" id="a2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">28</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Query Optimization & Execution Plans</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Query Execution Plan Analysis</h3>
+      <ul class="subtopic-list">
+        <li>EXPLAIN statement (MySQL, PostgreSQL)</li>
+        <li>EXPLAIN ANALYZE — actual run stats</li>
+        <li>EXPLAIN FORMAT=JSON / FORMAT=TREE</li>
+        <li>Execution plan nodes: Seq Scan, Index Scan, Bitmap Scan</li>
+        <li>Nested Loop, Hash Join, Merge Join</li>
+        <li>Sort, Aggregate, Limit nodes</li>
+        <li>Cost estimation by optimizer</li>
+        <li>Actual vs estimated rows</li>
+        <li>Reading SQL Server execution plans</li>
+      </ul>
+      <h3 class="sub-h3">## Query Optimizer</h3>
+      <ul class="subtopic-list">
+        <li>Rule-Based vs Cost-Based optimizer</li>
+        <li>Statistics and cardinality estimation</li>
+        <li>Updating statistics: ANALYZE / UPDATE STATISTICS</li>
+        <li>Histogram statistics</li>
+        <li>Parameter sniffing (SQL Server)</li>
+        <li>Plan cache and reuse</li>
+        <li>Optimizer hints</li>
+        <li>USE INDEX / FORCE INDEX — MySQL</li>
+        <li>/*+ HINT */ — Oracle hints</li>
+      </ul>
+      <h3 class="sub-h3">## Common Performance Patterns</h3>
+      <ul class="subtopic-list">
+        <li>Sargable vs non-sargable predicates</li>
+        <li>Avoiding functions on indexed columns in WHERE</li>
+        <li>SELECT * performance implications</li>
+        <li>N+1 query problem</li>
+        <li>Avoiding implicit type conversions</li>
+        <li>Batch processing vs row-by-row</li>
+        <li>Temp tables vs CTEs vs subqueries for performance</li>
+        <li>Query rewriting techniques</li>
+      </ul>
+      <h3 class="sub-h3">## Profiling & Monitoring</h3>
+      <ul class="subtopic-list">
+        <li>MySQL slow query log</li>
+        <li>pg_stat_statements (PostgreSQL)</li>
+        <li>Performance Schema (MySQL)</li>
+        <li>sys.dm_exec_query_stats (SQL Server)</li>
+        <li>SHOW PROCESSLIST (MySQL)</li>
+        <li>pg_activity / pg_stat_activity</li>
+        <li>Identifying long-running queries</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A3 -->
+  <div class="topic-card adv" id="a3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">29</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Advanced Indexing</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## B-Tree Internals</h3>
+      <ul class="subtopic-list">
+        <li>B-Tree vs B+ Tree structure</li>
+        <li>Page splits and tree rebalancing</li>
+        <li>Fill factor / fillfactor setting</li>
+        <li>Index bloat and VACUUM</li>
+        <li>Page size considerations</li>
+      </ul>
+      <h3 class="sub-h3">## Covering Indexes</h3>
+      <ul class="subtopic-list">
+        <li>Index-only scan concept</li>
+        <li>INCLUDE clause (PostgreSQL, SQL Server)</li>
+        <li>Covering all SELECT columns in index</li>
+        <li>Query tuning with covering indexes</li>
+      </ul>
+      <h3 class="sub-h3">## Partial & Filtered Indexes</h3>
+      <ul class="subtopic-list">
+        <li>CREATE INDEX ... WHERE condition</li>
+        <li>Indexing only active/non-null rows</li>
+        <li>Smaller, faster partial indexes</li>
+        <li>Filtered index in SQL Server</li>
+      </ul>
+      <h3 class="sub-h3">## Specialized Index Types</h3>
+      <ul class="subtopic-list">
+        <li>GIN Index — full text, JSONB, arrays (PostgreSQL)</li>
+        <li>GiST Index — geometry, range types</li>
+        <li>SP-GiST Index — space-partitioned structures</li>
+        <li>BRIN Index — block range, time-series data</li>
+        <li>Columnstore Index (SQL Server)</li>
+        <li>Inverted index for full text</li>
+      </ul>
+      <h3 class="sub-h3">## Index Maintenance</h3>
+      <ul class="subtopic-list">
+        <li>REINDEX (PostgreSQL)</li>
+        <li>ALTER INDEX REBUILD (SQL Server)</li>
+        <li>ANALYZE / UPDATE STATISTICS</li>
+        <li>Detecting unused indexes</li>
+        <li>Index fragmentation monitoring</li>
+        <li>Online index rebuilds</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A4 -->
+  <div class="topic-card adv" id="a4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">30</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Partitioning</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Partitioning Strategies</h3>
+      <ul class="subtopic-list">
+        <li>Range partitioning — by date, ID range</li>
+        <li>List partitioning — by discrete values</li>
+        <li>Hash partitioning — by hash of key</li>
+        <li>Key partitioning (MySQL)</li>
+        <li>Composite partitioning — range + hash</li>
+      </ul>
+      <h3 class="sub-h3">## Table Partitioning in Practice</h3>
+      <ul class="subtopic-list">
+        <li>PARTITION BY RANGE ... (PostgreSQL, MySQL)</li>
+        <li>Creating partition tables and attaching</li>
+        <li>Partition pruning — skipping irrelevant partitions</li>
+        <li>Global vs local indexes on partitions</li>
+        <li>Partition elimination in queries</li>
+        <li>Adding, dropping, splitting, merging partitions</li>
+        <li>Row Movement (Oracle)</li>
+      </ul>
+      <h3 class="sub-h3">## Sharding vs Partitioning</h3>
+      <ul class="subtopic-list">
+        <li>Vertical partitioning vs horizontal partitioning</li>
+        <li>Sharding across multiple servers</li>
+        <li>Shard key selection</li>
+        <li>Cross-shard queries</li>
+        <li>Consistent hashing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A5 -->
+  <div class="topic-card adv" id="a5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">31</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Concurrency & Locking</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Lock Types</h3>
+      <ul class="subtopic-list">
+        <li>Shared (Read) Lock</li>
+        <li>Exclusive (Write) Lock</li>
+        <li>Intent Locks</li>
+        <li>Table-level vs Row-level vs Page-level locking</li>
+        <li>Lock escalation</li>
+        <li>Gap locks and Next-key locks (InnoDB)</li>
+        <li>Advisory locks (PostgreSQL)</li>
+      </ul>
+      <h3 class="sub-h3">## Deadlocks</h3>
+      <ul class="subtopic-list">
+        <li>What causes a deadlock</li>
+        <li>Deadlock detection and victim selection</li>
+        <li>Deadlock prevention strategies</li>
+        <li>Consistent lock ordering</li>
+        <li>Retry logic in applications</li>
+        <li>Deadlock logs and analysis</li>
+        <li>SHOW ENGINE INNODB STATUS (MySQL)</li>
+      </ul>
+      <h3 class="sub-h3">## Optimistic vs Pessimistic Locking</h3>
+      <ul class="subtopic-list">
+        <li>Pessimistic: SELECT ... FOR UPDATE</li>
+        <li>SELECT ... FOR SHARE / LOCK IN SHARE MODE</li>
+        <li>SKIP LOCKED / NOWAIT</li>
+        <li>Optimistic: version column / timestamp check</li>
+        <li>OCC with compare-and-swap</li>
+        <li>Optimistic locking in ORMs</li>
+      </ul>
+      <h3 class="sub-h3">## MVCC — Multi-Version Concurrency Control</h3>
+      <ul class="subtopic-list">
+        <li>How MVCC eliminates read locks</li>
+        <li>Snapshot read vs current read</li>
+        <li>Undo log / rollback segment</li>
+        <li>Visibility rules per transaction</li>
+        <li>MVCC in PostgreSQL (heap versions)</li>
+        <li>MVCC in InnoDB (undo log)</li>
+        <li>VACUUM and dead tuple cleanup</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A6 -->
+  <div class="topic-card adv" id="a6">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">32</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Security & Permissions (DCL)</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## DCL — Data Control Language</h3>
+      <ul class="subtopic-list">
+        <li>GRANT — give privileges</li>
+        <li>REVOKE — remove privileges</li>
+        <li>Object privileges: SELECT, INSERT, UPDATE, DELETE, EXECUTE</li>
+        <li>System/Admin privileges</li>
+        <li>WITH GRANT OPTION</li>
+        <li>GRANT ALL PRIVILEGES</li>
+        <li>Privilege hierarchy: global → database → table → column</li>
+      </ul>
+      <h3 class="sub-h3">## Users & Roles</h3>
+      <ul class="subtopic-list">
+        <li>CREATE USER</li>
+        <li>ALTER USER / SET PASSWORD</li>
+        <li>DROP USER</li>
+        <li>CREATE ROLE</li>
+        <li>GRANT role TO user</li>
+        <li>SET ROLE</li>
+        <li>Role hierarchy and inheritance</li>
+        <li>Predefined roles (DBA, CONNECT, etc.)</li>
+      </ul>
+      <h3 class="sub-h3">## Row-Level Security (RLS)</h3>
+      <ul class="subtopic-list">
+        <li>ALTER TABLE ENABLE ROW LEVEL SECURITY (PostgreSQL)</li>
+        <li>CREATE POLICY</li>
+        <li>USING and WITH CHECK clauses</li>
+        <li>Policies for SELECT, INSERT, UPDATE, DELETE</li>
+        <li>Bypassing RLS (BYPASSRLS role)</li>
+        <li>RLS in SQL Server (Security Predicate)</li>
+      </ul>
+      <h3 class="sub-h3">## SQL Injection Prevention</h3>
+      <ul class="subtopic-list">
+        <li>What is SQL injection</li>
+        <li>Parameterized queries / prepared statements</li>
+        <li>Input validation and whitelisting</li>
+        <li>Stored procedures as a defense layer</li>
+        <li>Principle of least privilege</li>
+        <li>ORM parameterization</li>
+        <li>Escaping vs parameterization</li>
+      </ul>
+      <h3 class="sub-h3">## Encryption & Auditing</h3>
+      <ul class="subtopic-list">
+        <li>Encrypting data at rest (TDE)</li>
+        <li>Column-level encryption</li>
+        <li>AES_ENCRYPT() / AES_DECRYPT() (MySQL)</li>
+        <li>pgcrypto extension (PostgreSQL)</li>
+        <li>Audit logging and triggers</li>
+        <li>MySQL Audit Plugin</li>
+        <li>pgaudit (PostgreSQL)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A7 -->
+  <div class="topic-card adv" id="a7">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">33</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># JSON & XML in SQL</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## JSON in MySQL</h3>
+      <ul class="subtopic-list">
+        <li>JSON data type</li>
+        <li>JSON_OBJECT() / JSON_ARRAY()</li>
+        <li>JSON_EXTRACT() / -> and ->> operators</li>
+        <li>JSON_SET() / JSON_INSERT() / JSON_REPLACE()</li>
+        <li>JSON_REMOVE()</li>
+        <li>JSON_CONTAINS() / JSON_SEARCH()</li>
+        <li>JSON_TABLE() — shredding JSON to rows</li>
+        <li>JSON_ARRAYAGG() / JSON_OBJECTAGG()</li>
+        <li>Indexing JSON with generated columns</li>
+        <li>JSON validity check: JSON_VALID()</li>
+      </ul>
+      <h3 class="sub-h3">## JSONB in PostgreSQL</h3>
+      <ul class="subtopic-list">
+        <li>JSON vs JSONB — binary stored, indexed</li>
+        <li>->, ->>, #>, #>> operators</li>
+        <li>@> contains operator</li>
+        <li>&lt;@ contained by operator</li>
+        <li>? key exists operator</li>
+        <li>jsonb_set() / jsonb_insert()</li>
+        <li>jsonb_each() / jsonb_array_elements()</li>
+        <li>GIN index on JSONB</li>
+        <li>jsonb_path_query() — JSON path</li>
+      </ul>
+      <h3 class="sub-h3">## XML in SQL</h3>
+      <ul class="subtopic-list">
+        <li>XML data type (SQL Server, PostgreSQL)</li>
+        <li>FOR XML (SQL Server) — row to XML</li>
+        <li>OPENXML (SQL Server) — XML to rows</li>
+        <li>XQuery and XPath</li>
+        <li>xmlelement() / xmlagg() (PostgreSQL)</li>
+        <li>XML Schema validation</li>
+        <li>XMLTABLE() standard</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A8 -->
+  <div class="topic-card adv" id="a8">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">34</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Recursive Queries & Hierarchical Data</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Hierarchical Data Models</h3>
+      <ul class="subtopic-list">
+        <li>Adjacency list model — parent_id column</li>
+        <li>Nested sets model</li>
+        <li>Closure table model</li>
+        <li>Path enumeration model</li>
+        <li>Comparing models: query complexity vs write complexity</li>
+      </ul>
+      <h3 class="sub-h3">## Recursive CTEs in Depth</h3>
+      <ul class="subtopic-list">
+        <li>Tree traversal: top-down and bottom-up</li>
+        <li>Building full path string</li>
+        <li>Calculating depth/level</li>
+        <li>Finding all descendants</li>
+        <li>Finding all ancestors</li>
+        <li>Detecting cycles</li>
+        <li>MAXRECURSION option (SQL Server)</li>
+        <li>max_execution_time guard</li>
+      </ul>
+      <h3 class="sub-h3">## CONNECT BY (Oracle)</h3>
+      <ul class="subtopic-list">
+        <li>CONNECT BY PRIOR</li>
+        <li>START WITH clause</li>
+        <li>LEVEL pseudocolumn</li>
+        <li>CONNECT_BY_PATH()</li>
+        <li>CONNECT_BY_ISLEAF</li>
+        <li>NOCYCLE option</li>
+        <li>SYS_CONNECT_BY_PATH()</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A9 -->
+  <div class="topic-card adv" id="a9">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">35</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Dynamic SQL</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Dynamic SQL Fundamentals</h3>
+      <ul class="subtopic-list">
+        <li>What is dynamic SQL and when to use it</li>
+        <li>Building SQL strings at runtime</li>
+        <li>Security risks: SQL injection via dynamic SQL</li>
+        <li>Parameterization in dynamic SQL</li>
+        <li>Debugging dynamic SQL</li>
+      </ul>
+      <h3 class="sub-h3">## Dynamic SQL in MySQL</h3>
+      <ul class="subtopic-list">
+        <li>PREPARE statement</li>
+        <li>EXECUTE statement</li>
+        <li>DEALLOCATE PREPARE</li>
+        <li>Using user variables in PREPARE</li>
+        <li>Dynamic PIVOT using PREPARE</li>
+      </ul>
+      <h3 class="sub-h3">## Dynamic SQL in SQL Server</h3>
+      <ul class="subtopic-list">
+        <li>EXEC / EXECUTE() with string</li>
+        <li>sp_executesql with parameters</li>
+        <li>OUTPUT parameters in dynamic SQL</li>
+        <li>Dynamic ORDER BY column</li>
+        <li>Dynamic PIVOT with STRING_AGG</li>
+        <li>Avoiding string concatenation risks</li>
+      </ul>
+      <h3 class="sub-h3">## Dynamic SQL in PostgreSQL</h3>
+      <ul class="subtopic-list">
+        <li>EXECUTE ... USING in PL/pgSQL</li>
+        <li>format() function for safe SQL building</li>
+        <li>quote_ident() and quote_literal()</li>
+        <li>Dynamic table/column names</li>
+        <li>PERFORM vs EXECUTE</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A10 -->
+  <div class="topic-card adv" id="a10">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">36</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Replication & High Availability</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Replication Concepts</h3>
+      <ul class="subtopic-list">
+        <li>Primary (Master) / Replica (Slave) setup</li>
+        <li>Synchronous vs Asynchronous replication</li>
+        <li>Statement-based vs Row-based vs Mixed replication</li>
+        <li>Binary log (MySQL binlog)</li>
+        <li>WAL — Write-Ahead Log (PostgreSQL)</li>
+        <li>Replication lag monitoring</li>
+        <li>Read replicas for scaling reads</li>
+      </ul>
+      <h3 class="sub-h3">## High Availability Architectures</h3>
+      <ul class="subtopic-list">
+        <li>Primary-Replica failover</li>
+        <li>Multi-Primary / Group Replication (MySQL)</li>
+        <li>Patroni — PostgreSQL HA</li>
+        <li>MHA (Master High Availability Manager)</li>
+        <li>Galera Cluster (MariaDB/MySQL)</li>
+        <li>Always On Availability Groups (SQL Server)</li>
+        <li>Connection pooling: PgBouncer, ProxySQL</li>
+      </ul>
+      <h3 class="sub-h3">## Backup & Recovery</h3>
+      <ul class="subtopic-list">
+        <li>Logical backup: mysqldump, pg_dump</li>
+        <li>Physical backup: xtrabackup, pg_basebackup</li>
+        <li>Point-in-Time Recovery (PITR)</li>
+        <li>Incremental backups</li>
+        <li>Backup strategies: full, differential, incremental</li>
+        <li>RTO and RPO objectives</li>
+        <li>Testing backups and restore drills</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A11 -->
+  <div class="topic-card adv" id="a11">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">37</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Database Administration Topics</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## Configuration & Tuning</h3>
+      <ul class="subtopic-list">
+        <li>InnoDB buffer pool size (MySQL)</li>
+        <li>shared_buffers, work_mem, effective_cache_size (PostgreSQL)</li>
+        <li>max_connections tuning</li>
+        <li>Thread pool configuration</li>
+        <li>Disk I/O: SSD vs HDD considerations</li>
+        <li>redo log / WAL size tuning</li>
+        <li>Connection timeout and idle settings</li>
+      </ul>
+      <h3 class="sub-h3">## Storage Engines (MySQL)</h3>
+      <ul class="subtopic-list">
+        <li>InnoDB — ACID, row-level locking, FK support</li>
+        <li>MyISAM — table-level locking, full-text search</li>
+        <li>MEMORY / HEAP — in-memory tables</li>
+        <li>ARCHIVE — compressed, insert-only</li>
+        <li>CSV storage engine</li>
+        <li>NDB (MySQL Cluster)</li>
+        <li>Choosing the right storage engine</li>
+      </ul>
+      <h3 class="sub-h3">## Maintenance Tasks</h3>
+      <ul class="subtopic-list">
+        <li>VACUUM / VACUUM FULL / AUTOVACUUM (PostgreSQL)</li>
+        <li>ANALYZE — update planner statistics</li>
+        <li>OPTIMIZE TABLE (MySQL)</li>
+        <li>CHECK TABLE / REPAIR TABLE</li>
+        <li>Table bloat monitoring</li>
+        <li>Dead tuple / dead row cleanup</li>
+        <li>Log rotation and management</li>
+        <li>Disk space monitoring</li>
+      </ul>
+      <h3 class="sub-h3">## Schema Migration</h3>
+      <ul class="subtopic-list">
+        <li>Online DDL (zero-downtime migrations)</li>
+        <li>pt-online-schema-change (MySQL)</li>
+        <li>pg_repack (PostgreSQL)</li>
+        <li>Migration tools: Flyway, Liquibase, Alembic</li>
+        <li>Versioned migration scripts</li>
+        <li>Rollback strategies</li>
+        <li>Blue-green deployment patterns</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A12 -->
+  <div class="topic-card adv" id="a12">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">38</span>
+      <div class="card-title-wrap"><h2 class="card-h2"># Analytical & OLAP SQL</h2></div>
+      <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="card-body">
+      <h3 class="sub-h3">## OLAP vs OLTP</h3>
+      <ul class="subtopic-list">
+        <li>OLTP: transactional, row-store, normalized</li>
+        <li>OLAP: analytical, column-store, denormalized</li>
+        <li>HTAP — hybrid transactional/analytical</li>
+        <li>Data warehouse concepts</li>
+        <li>ETL vs ELT pipelines</li>
+        <li>MPP databases: Redshift, BigQuery, Snowflake</li>
+      </ul>
+      <h3 class="sub-h3">## Data Warehousing SQL</h3>
+      <ul class="subtopic-list">
+        <li>Star schema queries</li>
+        <li>Snowflake schema queries</li>
+        <li>Dimension tables and fact tables</li>
+        <li>Slowly Changing Dimensions (SCD Type 1, 2, 3)</li>
+        <li>Conformed dimensions</li>
+        <li>Aggregate (summary) tables</li>
+        <li>Pre-computing rollups</li>
+      </ul>
+      <h3 class="sub-h3">## Advanced Analytical Functions</h3>
+      <ul class="subtopic-list">
+        <li>ROLLUP — subtotals and grand total</li>
+        <li>CUBE — all combinations of groupings</li>
+        <li>GROUPING SETS — specific grouping combinations</li>
+        <li>GROUPING() / GROUPING_ID()</li>
+        <li>Pivot tables with CASE + GROUP BY</li>
+        <li>Unpivot / EAV model querying</li>
+        <li>Cohort analysis SQL</li>
+        <li>Funnel analysis SQL</li>
+        <li>Retention analysis SQL</li>
+        <li>Time-series gap filling</li>
+        <li>Median and percentile calculations</li>
+        <li>PERCENTILE_CONT() / PERCENTILE_DISC()</li>
+        <li>MODE() function</li>
+        <li>Histogram bucketing with WIDTH_BUCKET()</li>
+      </ul>
+      <div class="code-snippet">-- Cohort Retention Analysis
+SELECT 
+  DATE_FORMAT(first_purchase, '%Y-%m') AS cohort_month,
+  TIMESTAMPDIFF(MONTH, first_purchase, order_date) AS month_number,
+  COUNT(DISTINCT customer_id) AS retained_customers
+FROM (
+  SELECT customer_id, order_date,
+    MIN(order_date) OVER (PARTITION BY customer_id) AS first_purchase
+  FROM orders
+) t
+GROUP BY cohort_month, month_number
+ORDER BY cohort_month, month_number;</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  ✦ Complete SQL Roadmap — Beginner to Advanced ✦ &nbsp;|&nbsp; All Topics & Subtopics Covered
+</footer>
+
+<script>
+  // Toggle cards
+  function toggleCard(header) {
+    const card = header.closest('.topic-card');
+    card.classList.toggle('open');
+  }
+
+  // Open all cards by default on load
+  document.querySelectorAll('.topic-card').forEach(card => card.classList.add('open'));
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const total = doc.scrollHeight - doc.clientHeight;
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', scrolled > 400);
+  });
+
+  // Download button
+  document.getElementById('downloadBtn').addEventListener('click', e => {
+    e.preventDefault();
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SQL_Complete_Roadmap.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+</body>
+</html>

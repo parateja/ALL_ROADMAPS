@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React JS Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #020818;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.10);
+    --glass-hover: rgba(255,255,255,0.08);
+    --cyan: #00f5ff;
+    --pink: #ff2d9f;
+    --purple: #a855f7;
+    --green: #00ff88;
+    --orange: #ff7a00;
+    --yellow: #ffe03a;
+    --blue: #4488ff;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --beginner: #00ff88;
+    --intermediate: #ff7a00;
+    --advanced: #ff2d9f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,245,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(168,85,247,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,45,159,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    opacity: 0;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--op, 0.6); transform: scale(1); }
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(168,85,247,0.15));
+    border: 1px solid rgba(0,245,255,0.3);
+    border-radius: 50px;
+    padding: 8px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: pulse-border 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,245,255,0.2); }
+    50% { box-shadow: 0 0 20px 5px rgba(0,245,255,0.1); }
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 1.05rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 36px;
+  }
+
+  /* Download button */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(0,245,255,0.25), 0 0 60px rgba(168,85,247,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .download-btn:hover::before { opacity: 1; }
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0,245,255,0.4), 0 0 80px rgba(168,85,247,0.2);
+  }
+
+  /* Nav tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-tab.beginner {
+    color: var(--beginner);
+    border-color: var(--beginner);
+    background: rgba(0,255,136,0.05);
+  }
+  .nav-tab.beginner:hover, .nav-tab.beginner.active {
+    background: rgba(0,255,136,0.12);
+    box-shadow: 0 0 20px rgba(0,255,136,0.3);
+  }
+
+  .nav-tab.intermediate {
+    color: var(--intermediate);
+    border-color: var(--intermediate);
+    background: rgba(255,122,0,0.05);
+  }
+  .nav-tab.intermediate:hover, .nav-tab.intermediate.active {
+    background: rgba(255,122,0,0.12);
+    box-shadow: 0 0 20px rgba(255,122,0,0.3);
+  }
+
+  .nav-tab.advanced {
+    color: var(--advanced);
+    border-color: var(--advanced);
+    background: rgba(255,45,159,0.05);
+  }
+  .nav-tab.advanced:hover, .nav-tab.advanced.active {
+    background: rgba(255,45,159,0.12);
+    box-shadow: 0 0 20px rgba(255,45,159,0.3);
+  }
+
+  /* Section header */
+  .section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 24px 32px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+  }
+
+  .section-header.beginner {
+    background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(0,255,136,0.02));
+    border: 1px solid rgba(0,255,136,0.25);
+    box-shadow: 0 0 40px rgba(0,255,136,0.08) inset, 0 0 30px rgba(0,255,136,0.05);
+  }
+
+  .section-header.intermediate {
+    background: linear-gradient(135deg, rgba(255,122,0,0.08), rgba(255,122,0,0.02));
+    border: 1px solid rgba(255,122,0,0.25);
+    box-shadow: 0 0 40px rgba(255,122,0,0.08) inset, 0 0 30px rgba(255,122,0,0.05);
+  }
+
+  .section-header.advanced {
+    background: linear-gradient(135deg, rgba(255,45,159,0.08), rgba(255,45,159,0.02));
+    border: 1px solid rgba(255,45,159,0.25);
+    box-shadow: 0 0 40px rgba(255,45,159,0.08) inset, 0 0 30px rgba(255,45,159,0.05);
+  }
+
+  .section-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .section-title.beginner { color: var(--beginner); text-shadow: 0 0 20px rgba(0,255,136,0.5); }
+  .section-title.intermediate { color: var(--intermediate); text-shadow: 0 0 20px rgba(255,122,0,0.5); }
+  .section-title.advanced { color: var(--advanced); text-shadow: 0 0 20px rgba(255,45,159,0.5); }
+
+  .section-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Topic cards */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .topic-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .topic-card:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .topic-card.beginner:hover { border-color: rgba(0,255,136,0.3); box-shadow: 0 8px 30px rgba(0,255,136,0.1); }
+  .topic-card.intermediate:hover { border-color: rgba(255,122,0,0.3); box-shadow: 0 8px 30px rgba(255,122,0,0.1); }
+  .topic-card.advanced:hover { border-color: rgba(255,45,159,0.3); box-shadow: 0 8px 30px rgba(255,45,159,0.1); }
+
+  .topic-header {
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+
+  .topic-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .topic-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+
+  .beginner .topic-num { background: rgba(0,255,136,0.12); color: var(--beginner); border: 1px solid rgba(0,255,136,0.2); }
+  .intermediate .topic-num { background: rgba(255,122,0,0.12); color: var(--intermediate); border: 1px solid rgba(255,122,0,0.2); }
+  .advanced .topic-num { background: rgba(255,45,159,0.12); color: var(--advanced); border: 1px solid rgba(255,45,159,0.2); }
+
+  /* H2-style topic title - bigger, colored */
+  .topic-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .beginner .topic-title { color: #00ffaa; }
+  .intermediate .topic-title { color: #ffaa44; }
+  .advanced .topic-title { color: #ff66bb; }
+
+  .toggle-icon {
+    color: var(--muted);
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .topic-card.open .toggle-icon { transform: rotate(180deg); }
+
+  .topic-body {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  /* H3 subtopic group */
+  .subtopic-group {
+    margin-top: 16px;
+  }
+
+  .subtopic-group-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .beginner .subtopic-group-title { color: #4dffbe; background: rgba(0,255,136,0.08); border-left: 3px solid var(--beginner); }
+  .intermediate .subtopic-group-title { color: #ffbb66; background: rgba(255,122,0,0.08); border-left: 3px solid var(--intermediate); }
+  .advanced .subtopic-group-title { color: #ff88cc; background: rgba(255,45,159,0.08); border-left: 3px solid var(--advanced); }
+
+  /* H4 sub-subtopic */
+  .sub-subtopic-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 12px 0 6px 0;
+    opacity: 0.85;
+  }
+
+  .subtopics-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px;
+    margin-left: 0;
+  }
+
+  .subtopics-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: var(--muted);
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+
+  .subtopics-list li:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .subtopics-list li::before {
+    content: '▸';
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    margin-top: 1px;
+  }
+
+  .beginner .subtopics-list li::before { color: var(--beginner); }
+  .intermediate .subtopics-list li::before { color: var(--intermediate); }
+  .advanced .subtopics-list li::before { color: var(--advanced); }
+
+  /* Bookmark anchor */
+  .section-anchor { scroll-margin-top: 30px; }
+
+  /* Progress dots */
+  .progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 40px 0 20px;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .dot.beginner { background: var(--beginner); }
+  .dot.intermediate { background: var(--intermediate); }
+  .dot.advanced { background: var(--advanced); }
+
+  /* Divider */
+  .glow-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), var(--pink), transparent);
+    margin: 50px 0;
+    opacity: 0.3;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    .subtopics-list { grid-template-columns: 1fr; }
+    .section-header { padding: 18px 20px; }
+    .topic-header { padding: 14px 16px; }
+    .topic-body { padding: 0 16px 16px; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeInUp 0.6s ease both; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+
+  /* Scan line effect */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    animation: scan 8s linear infinite;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes scan {
+    from { top: -3px; }
+    to { top: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<header>
+  <div class="logo-badge">⚛ Complete Learning Path 2024–2025</div>
+  <h1>REACT JS ROADMAP</h1>
+  <p class="subtitle">From Zero to Production — Every Topic, Every Subtopic</p>
+
+  <a href="#" class="download-btn" onclick="downloadPage(event)">
+    <span>⬇</span> DOWNLOAD ROADMAP
+  </a>
+</header>
+
+<div class="container">
+
+  <!-- Bookmark Nav -->
+  <div class="nav-tabs">
+    <a href="#beginner" class="nav-tab beginner">🌱 BEGINNER</a>
+    <a href="#intermediate" class="nav-tab intermediate">🔥 INTERMEDIATE</a>
+    <a href="#advanced" class="nav-tab advanced">🚀 ADVANCED</a>
+  </div>
+
+  <!-- ===== BEGINNER SECTION ===== -->
+  <div class="section" id="beginner">
+    <div class="section-header beginner section-anchor">
+      <div class="section-icon">🌱</div>
+      <div>
+        <div class="section-title beginner">BEGINNER</div>
+        <div class="section-desc">Foundation concepts to kickstart your React journey</div>
+      </div>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 1 -->
+      <div class="topic-card beginner" id="prerequisites">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">01</span>
+            <span class="topic-title">Prerequisites — JavaScript, HTML & CSS Essentials</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">JavaScript Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>Variables: var, let, const</li>
+              <li>Data Types & Type Coercion</li>
+              <li>Operators & Expressions</li>
+              <li>Conditionals: if/else, switch</li>
+              <li>Loops: for, while, for...of, for...in</li>
+              <li>Functions: Declaration & Expression</li>
+              <li>Arrow Functions</li>
+              <li>Scope & Closures</li>
+              <li>Hoisting</li>
+              <li>this Keyword</li>
+              <li>Prototypes & Prototype Chain</li>
+              <li>Classes & OOP Basics</li>
+              <li>Destructuring: Array & Object</li>
+              <li>Spread & Rest Operators</li>
+              <li>Template Literals</li>
+              <li>Short-circuit Evaluation</li>
+              <li>Optional Chaining (?.) </li>
+              <li>Nullish Coalescing (??)</li>
+              <li>Array Methods: map, filter, reduce, find, some, every, flat, flatMap</li>
+              <li>Object Methods: Object.keys, values, entries, assign, freeze</li>
+              <li>Promises & .then().catch()</li>
+              <li>async / await</li>
+              <li>Error Handling: try/catch/finally</li>
+              <li>Modules: import / export (ES6)</li>
+              <li>Event Loop & Microtasks</li>
+              <li>JSON: parse & stringify</li>
+              <li>localStorage & sessionStorage</li>
+              <li>Fetch API & XMLHttpRequest</li>
+              <li>DOM Manipulation Basics</li>
+              <li>Event Handling & Bubbling</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">HTML Essentials</div>
+            <ul class="subtopics-list">
+              <li>Semantic HTML5 Tags</li>
+              <li>Forms & Input Elements</li>
+              <li>Accessibility (ARIA basics)</li>
+              <li>Meta Tags & SEO Basics</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">CSS Essentials</div>
+            <ul class="subtopics-list">
+              <li>Selectors, Specificity & Cascade</li>
+              <li>Box Model</li>
+              <li>Flexbox</li>
+              <li>CSS Grid</li>
+              <li>Responsive Design & Media Queries</li>
+              <li>CSS Variables (Custom Properties)</li>
+              <li>Transitions & Animations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-card beginner" id="intro-react">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">02</span>
+            <span class="topic-title">Introduction to React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">What & Why React</div>
+            <ul class="subtopics-list">
+              <li>What is React?</li>
+              <li>Why React? (Declarative, Component-based)</li>
+              <li>React vs Angular vs Vue</li>
+              <li>History & Versions of React</li>
+              <li>React 18 & React 19 Key Features</li>
+              <li>Single Page Application (SPA) Concept</li>
+              <li>Virtual DOM — What & Why</li>
+              <li>Reconciliation Algorithm (Diffing)</li>
+              <li>React Fiber Architecture</li>
+              <li>React Rendering Lifecycle Overview</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Setting Up Environment</div>
+            <ul class="subtopics-list">
+              <li>Node.js & npm/yarn/pnpm Setup</li>
+              <li>Create React App (CRA)</li>
+              <li>Vite + React Setup</li>
+              <li>Project Folder Structure</li>
+              <li>package.json Understanding</li>
+              <li>ESLint & Prettier Configuration</li>
+              <li>VS Code Extensions for React</li>
+              <li>React DevTools Browser Extension</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-card beginner" id="jsx">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">03</span>
+            <span class="topic-title">JSX — JavaScript XML</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">JSX Core Concepts</div>
+            <ul class="subtopics-list">
+              <li>What is JSX?</li>
+              <li>JSX vs HTML Differences</li>
+              <li>JSX Transpilation (Babel)</li>
+              <li>React.createElement() Under the Hood</li>
+              <li>Embedding Expressions with {}</li>
+              <li>JSX Attributes (className, htmlFor, etc.)</li>
+              <li>Self-closing Tags</li>
+              <li>Returning Single Root Element</li>
+              <li>React Fragments: <> </> and React.Fragment</li>
+              <li>Conditional Rendering in JSX</li>
+              <li>Ternary Operator in JSX</li>
+              <li>Short-circuit (&&) Rendering</li>
+              <li>Rendering Lists with .map()</li>
+              <li>Keys in Lists — Why Important</li>
+              <li>Inline Styles in JSX</li>
+              <li>Comments in JSX</li>
+              <li>JSX Spread Attributes</li>
+              <li>Whitespace & Text in JSX</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-card beginner" id="components">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">04</span>
+            <span class="topic-title">Components — The Building Blocks</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Function Components</div>
+            <ul class="subtopics-list">
+              <li>Function Component Syntax</li>
+              <li>Returning JSX from Components</li>
+              <li>Naming Conventions (PascalCase)</li>
+              <li>Default Exports vs Named Exports</li>
+              <li>Composing Components</li>
+              <li>Nesting Components</li>
+              <li>Component File Organization</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Class Components (Legacy)</div>
+            <ul class="subtopics-list">
+              <li>Class Component Syntax</li>
+              <li>render() Method</li>
+              <li>Component Lifecycle Methods Overview</li>
+              <li>Why Function Components Replaced Class Components</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Component Patterns</div>
+            <ul class="subtopics-list">
+              <li>Presentational vs Container Components</li>
+              <li>Pure Components</li>
+              <li>Component Tree & Component Hierarchy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 5 -->
+      <div class="topic-card beginner" id="props">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">05</span>
+            <span class="topic-title">Props — Passing Data to Components</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Props Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>What are Props?</li>
+              <li>Passing Props to Components</li>
+              <li>Receiving Props in Function Components</li>
+              <li>Destructuring Props</li>
+              <li>Default Props</li>
+              <li>Props are Read-only (Immutability)</li>
+              <li>Passing Different Data Types as Props</li>
+              <li>Passing Functions as Props</li>
+              <li>Passing JSX as Props</li>
+              <li>children Prop</li>
+              <li>Prop Drilling — What & When it's a Problem</li>
+              <li>Spread Operator with Props</li>
+              <li>Rest Props Pattern</li>
+              <li>Forwarding Props</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">PropTypes (Runtime Validation)</div>
+            <ul class="subtopics-list">
+              <li>Installing prop-types</li>
+              <li>Defining PropTypes for Components</li>
+              <li>PropTypes: string, number, bool, array, object, func, node, element</li>
+              <li>isRequired Validation</li>
+              <li>shape & arrayOf PropTypes</li>
+              <li>oneOf & oneOfType</li>
+              <li>Custom PropType Validators</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 6 -->
+      <div class="topic-card beginner" id="state">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">06</span>
+            <span class="topic-title">State — Managing Component Data</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">useState Hook</div>
+            <ul class="subtopics-list">
+              <li>What is State?</li>
+              <li>Props vs State Differences</li>
+              <li>useState Syntax & Usage</li>
+              <li>State Initialization</li>
+              <li>Lazy Initialization of State</li>
+              <li>Updating State with Setter Function</li>
+              <li>Functional Updates (prev => ...)</li>
+              <li>Batching State Updates</li>
+              <li>Automatic Batching in React 18</li>
+              <li>State is Asynchronous</li>
+              <li>State with Objects</li>
+              <li>State with Arrays</li>
+              <li>Immutable State Updates</li>
+              <li>Multiple State Variables</li>
+              <li>Derived State</li>
+              <li>Lifting State Up</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Class Component State (Legacy)</div>
+            <ul class="subtopics-list">
+              <li>this.state & this.setState()</li>
+              <li>setState Callback</li>
+              <li>Functional setState</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 7 -->
+      <div class="topic-card beginner" id="events">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">07</span>
+            <span class="topic-title">Event Handling in React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Event System</div>
+            <ul class="subtopics-list">
+              <li>Synthetic Events in React</li>
+              <li>React's Event Delegation</li>
+              <li>onClick, onChange, onSubmit, onFocus, onBlur</li>
+              <li>onKeyDown, onKeyUp, onKeyPress</li>
+              <li>onMouseEnter, onMouseLeave, onMouseOver</li>
+              <li>onScroll, onWheel Events</li>
+              <li>onDragStart, onDrop Events</li>
+              <li>event.preventDefault()</li>
+              <li>event.stopPropagation()</li>
+              <li>Passing Arguments to Event Handlers</li>
+              <li>Event Pooling (Legacy)</li>
+              <li>Controlled vs Uncontrolled Inputs</li>
+              <li>Form Handling Basics</li>
+              <li>Multiple Input Handling with Single Handler</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 8 -->
+      <div class="topic-card beginner" id="conditional-rendering">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">08</span>
+            <span class="topic-title">Conditional Rendering & Lists</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Conditional Rendering</div>
+            <ul class="subtopics-list">
+              <li>if/else in JSX (outside return)</li>
+              <li>Ternary Operator (condition ? A : B)</li>
+              <li>Short-circuit &&</li>
+              <li>Nullish Coalescing ?? in JSX</li>
+              <li>Switch Statements for Rendering</li>
+              <li>Returning null to Hide Components</li>
+              <li>Conditional CSS Classes</li>
+              <li>Multiple Conditions Pattern</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Rendering Lists</div>
+            <ul class="subtopics-list">
+              <li>Rendering Arrays with .map()</li>
+              <li>Key Prop — Purpose & Rules</li>
+              <li>Keys Should Be Stable & Unique</li>
+              <li>Why Index as Key is Bad Practice</li>
+              <li>Filtering Lists</li>
+              <li>Sorting Lists Before Rendering</li>
+              <li>Nested Lists</li>
+              <li>Rendering Objects (Object.entries)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 9 -->
+      <div class="topic-card beginner" id="styling">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">09</span>
+            <span class="topic-title">Styling React Components</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Styling Approaches</div>
+            <ul class="subtopics-list">
+              <li>Inline Styles in JSX</li>
+              <li>Plain CSS Files (className)</li>
+              <li>CSS Modules (.module.css)</li>
+              <li>CSS Modules: composes keyword</li>
+              <li>Sass / SCSS in React</li>
+              <li>CSS-in-JS Overview</li>
+              <li>Styled Components Library</li>
+              <li>Emotion Library</li>
+              <li>Tailwind CSS with React</li>
+              <li>clsx / classnames Library</li>
+              <li>BEM Naming with React</li>
+              <li>Global Styles vs Scoped Styles</li>
+              <li>CSS Variables in React</li>
+              <li>Dynamic Styles with State</li>
+              <li>Conditional Class Application</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 10 -->
+      <div class="topic-card beginner" id="lifecycle">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">10</span>
+            <span class="topic-title">Component Lifecycle & useEffect</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">useEffect Hook</div>
+            <ul class="subtopics-list">
+              <li>What is a Side Effect?</li>
+              <li>useEffect Syntax</li>
+              <li>Dependency Array — Empty, None, Values</li>
+              <li>Run on Mount ([])</li>
+              <li>Run on Every Render (no deps)</li>
+              <li>Run on Specific State/Prop Change</li>
+              <li>Cleanup Function (Return from useEffect)</li>
+              <li>Data Fetching in useEffect</li>
+              <li>Subscriptions & Event Listeners</li>
+              <li>Timers: setTimeout & setInterval in Effects</li>
+              <li>Avoiding Infinite Loops</li>
+              <li>useEffect vs useLayoutEffect</li>
+              <li>Stale Closures in Effects</li>
+              <li>Abort Controller for Fetch Cleanup</li>
+              <li>Race Conditions in Async Effects</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Class Lifecycle Methods (Legacy)</div>
+            <ul class="subtopics-list">
+              <li>componentDidMount</li>
+              <li>componentDidUpdate</li>
+              <li>componentWillUnmount</li>
+              <li>shouldComponentUpdate</li>
+              <li>getSnapshotBeforeUpdate</li>
+              <li>getDerivedStateFromProps</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 11 -->
+      <div class="topic-card beginner" id="forms">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">11</span>
+            <span class="topic-title">Forms & User Input Handling</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Controlled Components</div>
+            <ul class="subtopics-list">
+              <li>Controlled Input Pattern</li>
+              <li>Controlled Textarea & Select</li>
+              <li>Controlled Checkbox & Radio</li>
+              <li>Form Submission Handling</li>
+              <li>Resetting Forms</li>
+              <li>Multi-field Form with Single State Object</li>
+              <li>Real-time Validation</li>
+              <li>Submit Button Disable on Invalid</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Uncontrolled Components</div>
+            <ul class="subtopics-list">
+              <li>useRef for Uncontrolled Inputs</li>
+              <li>defaultValue & defaultChecked</li>
+              <li>File Input Handling</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Form Libraries</div>
+            <ul class="subtopics-list">
+              <li>React Hook Form — Basics</li>
+              <li>register, handleSubmit, formState</li>
+              <li>Formik — Basics</li>
+              <li>Yup Schema Validation</li>
+              <li>Zod Schema Validation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid -->
+  </div><!-- end beginner section -->
+
+  <div class="glow-divider"></div>
+
+  <!-- ===== INTERMEDIATE SECTION ===== -->
+  <div class="section" id="intermediate">
+    <div class="section-header intermediate section-anchor">
+      <div class="section-icon">🔥</div>
+      <div>
+        <div class="section-title intermediate">INTERMEDIATE</div>
+        <div class="section-desc">Deepen your React knowledge with hooks, patterns & routing</div>
+      </div>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 12 -->
+      <div class="topic-card intermediate" id="hooks">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">12</span>
+            <span class="topic-title">React Hooks — Complete Deep Dive</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Core Hooks</div>
+            <ul class="subtopics-list">
+              <li>useState — Deep Dive</li>
+              <li>useEffect — Deep Dive</li>
+              <li>useContext — Usage & Patterns</li>
+              <li>useRef — DOM & Mutable Values</li>
+              <li>useReducer — Basics & Advanced</li>
+              <li>useMemo — Memoizing Values</li>
+              <li>useCallback — Memoizing Functions</li>
+              <li>useLayoutEffect — Sync DOM Reads</li>
+              <li>useId — Unique IDs for Accessibility</li>
+              <li>useImperativeHandle — Custom Ref API</li>
+              <li>useDebugValue — DevTools Label</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React 18 New Hooks</div>
+            <ul class="subtopics-list">
+              <li>useTransition — Non-urgent Updates</li>
+              <li>useDeferredValue — Deferred Rendering</li>
+              <li>useSyncExternalStore — External Store Sync</li>
+              <li>useInsertionEffect — CSS-in-JS</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React 19 New Hooks</div>
+            <ul class="subtopics-list">
+              <li>use() Hook — Promises & Context</li>
+              <li>useOptimistic — Optimistic UI Updates</li>
+              <li>useFormStatus — Form Pending State</li>
+              <li>useActionState — Form Actions</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Hooks Rules & Internals</div>
+            <ul class="subtopics-list">
+              <li>Rules of Hooks (Top Level, Function Components)</li>
+              <li>Hooks Call Order Consistency</li>
+              <li>ESLint Rules for Hooks</li>
+              <li>Hooks Linked List Internals</li>
+              <li>useState vs useReducer — When to Use</li>
+              <li>useMemo vs useCallback Differences</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 13 -->
+      <div class="topic-card intermediate" id="custom-hooks">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">13</span>
+            <span class="topic-title">Custom Hooks</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Building Custom Hooks</div>
+            <ul class="subtopics-list">
+              <li>What are Custom Hooks?</li>
+              <li>Naming Convention (use prefix)</li>
+              <li>Extracting Logic into Custom Hooks</li>
+              <li>Returning Values from Custom Hooks</li>
+              <li>Sharing State Logic Between Components</li>
+              <li>Composing Hooks with Hooks</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Common Custom Hook Patterns</div>
+            <ul class="subtopics-list">
+              <li>useFetch — Data Fetching Hook</li>
+              <li>useLocalStorage — Persist State</li>
+              <li>useDebounce — Debounced Values</li>
+              <li>useThrottle — Throttled Callbacks</li>
+              <li>useToggle — Boolean Toggle</li>
+              <li>useCounter — Counter Logic</li>
+              <li>useOnClickOutside — Outside Clicks</li>
+              <li>useMediaQuery — Responsive Logic</li>
+              <li>usePrevious — Track Previous Value</li>
+              <li>useWindowSize — Window Dimensions</li>
+              <li>useIntersectionObserver</li>
+              <li>useEventListener Hook</li>
+              <li>useClipboard — Copy to Clipboard</li>
+              <li>useForm — Form State Management</li>
+              <li>useScrollPosition</li>
+              <li>useKeyPress</li>
+              <li>useLockBodyScroll</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 14 -->
+      <div class="topic-card intermediate" id="context">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">14</span>
+            <span class="topic-title">React Context API</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Context Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>What is Context? Why Use It?</li>
+              <li>createContext() API</li>
+              <li>Context.Provider Usage</li>
+              <li>useContext() Hook</li>
+              <li>Default Context Values</li>
+              <li>Multiple Contexts</li>
+              <li>Updating Context Values</li>
+              <li>Context with State (useState + Context)</li>
+              <li>Context with useReducer</li>
+              <li>Context Performance — Re-render Issues</li>
+              <li>Splitting Contexts for Performance</li>
+              <li>Memoizing Context Values</li>
+              <li>Context.Consumer (Legacy Pattern)</li>
+              <li>When NOT to Use Context</li>
+              <li>Context vs Redux — When to Choose</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Common Context Use Cases</div>
+            <ul class="subtopics-list">
+              <li>Theme Context (Dark/Light Mode)</li>
+              <li>Authentication Context</li>
+              <li>Language/i18n Context</li>
+              <li>User Preferences Context</li>
+              <li>Shopping Cart Context</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 15 -->
+      <div class="topic-card intermediate" id="react-router">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">15</span>
+            <span class="topic-title">React Router v6 / v7 — Client-side Routing</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Setup & Core Concepts</div>
+            <ul class="subtopics-list">
+              <li>Installing React Router DOM</li>
+              <li>BrowserRouter vs HashRouter vs MemoryRouter</li>
+              <li>Routes & Route Components</li>
+              <li>Path Matching</li>
+              <li>Exact Matching (v5 vs v6)</li>
+              <li>Nested Routes</li>
+              <li>Outlet Component</li>
+              <li>Index Routes</li>
+              <li>Layout Routes</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Navigation</div>
+            <ul class="subtopics-list">
+              <li>Link & NavLink Components</li>
+              <li>NavLink Active Styling</li>
+              <li>useNavigate Hook</li>
+              <li>Programmatic Navigation</li>
+              <li>Navigate Component (Redirect)</li>
+              <li>Back/Forward Navigation</li>
+              <li>navigate with State</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Route Params & Query</div>
+            <ul class="subtopics-list">
+              <li>URL Parameters (:id)</li>
+              <li>useParams Hook</li>
+              <li>Query Strings</li>
+              <li>useSearchParams Hook</li>
+              <li>Location Object (useLocation)</li>
+              <li>useMatch Hook</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Advanced Routing</div>
+            <ul class="subtopics-list">
+              <li>Protected/Private Routes</li>
+              <li>Route Guards</li>
+              <li>404 Not Found Page</li>
+              <li>Wildcard Routes (*)</li>
+              <li>Lazy Loading Routes</li>
+              <li>Route Loaders (v6.4+)</li>
+              <li>Route Actions (v6.4+)</li>
+              <li>errorElement (v6.4+)</li>
+              <li>createBrowserRouter (v6.4+)</li>
+              <li>RouterProvider</li>
+              <li>Scroll Restoration</li>
+              <li>Animated Route Transitions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 16 -->
+      <div class="topic-card intermediate" id="state-management">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">16</span>
+            <span class="topic-title">State Management Libraries</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Redux Toolkit (RTK)</div>
+            <ul class="subtopics-list">
+              <li>Redux Core Concepts: Store, Action, Reducer</li>
+              <li>Redux Data Flow</li>
+              <li>Installing Redux Toolkit</li>
+              <li>configureStore</li>
+              <li>createSlice — Reducers & Actions</li>
+              <li>createReducer</li>
+              <li>createAction</li>
+              <li>useSelector Hook</li>
+              <li>useDispatch Hook</li>
+              <li>createAsyncThunk — Async Actions</li>
+              <li>extraReducers & Builder Callbacks</li>
+              <li>RTK Query — Data Fetching</li>
+              <li>RTK Query: createApi, fetchBaseQuery</li>
+              <li>RTK Query: Auto-generated Hooks</li>
+              <li>RTK Query: Caching & Invalidation</li>
+              <li>RTK Query: Mutations</li>
+              <li>Redux DevTools Extension</li>
+              <li>Middleware in Redux</li>
+              <li>Selectors & createSelector (Reselect)</li>
+              <li>Normalization with createEntityAdapter</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Zustand</div>
+            <ul class="subtopics-list">
+              <li>What is Zustand?</li>
+              <li>Creating a Store with create()</li>
+              <li>Reading State</li>
+              <li>Updating State (Actions)</li>
+              <li>Async Actions in Zustand</li>
+              <li>Slices Pattern in Zustand</li>
+              <li>Zustand Middlewares: persist, devtools, immer</li>
+              <li>Zustand vs Redux Comparison</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Jotai</div>
+            <ul class="subtopics-list">
+              <li>Atoms — Primitive State Units</li>
+              <li>useAtom Hook</li>
+              <li>Derived Atoms</li>
+              <li>Async Atoms</li>
+              <li>Atom Families</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Recoil</div>
+            <ul class="subtopics-list">
+              <li>RecoilRoot Setup</li>
+              <li>atom() — State Units</li>
+              <li>selector() — Derived State</li>
+              <li>useRecoilState, useRecoilValue, useSetRecoilState</li>
+              <li>Async Selectors</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">MobX</div>
+            <ul class="subtopics-list">
+              <li>Observable State</li>
+              <li>Actions</li>
+              <li>Computed Values</li>
+              <li>Reactions (autorun, reaction, when)</li>
+              <li>MobX-React-Lite Integration</li>
+              <li>makeAutoObservable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 17 -->
+      <div class="topic-card intermediate" id="data-fetching">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">17</span>
+            <span class="topic-title">Data Fetching & Server State</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Fetching Approaches</div>
+            <ul class="subtopics-list">
+              <li>fetch() API in React</li>
+              <li>Axios Library</li>
+              <li>Axios Interceptors</li>
+              <li>Axios Instances & Base URLs</li>
+              <li>Loading, Error, Data States Pattern</li>
+              <li>Race Conditions & AbortController</li>
+              <li>Request Cancellation</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">TanStack Query (React Query)</div>
+            <ul class="subtopics-list">
+              <li>What is Server State vs Client State?</li>
+              <li>Installing TanStack Query</li>
+              <li>QueryClient & QueryClientProvider</li>
+              <li>useQuery — Fetching Data</li>
+              <li>Query Keys</li>
+              <li>Stale Time & Cache Time</li>
+              <li>Background Refetching</li>
+              <li>useMutation — POST/PUT/DELETE</li>
+              <li>Invalidate Queries on Mutation</li>
+              <li>Optimistic Updates</li>
+              <li>Pagination with useQuery</li>
+              <li>useInfiniteQuery — Infinite Scroll</li>
+              <li>Dependent Queries (enabled option)</li>
+              <li>Parallel Queries</li>
+              <li>Prefetching Data</li>
+              <li>QueryClient.prefetchQuery</li>
+              <li>Select Option (Transform Data)</li>
+              <li>Global Error/Loading Handling</li>
+              <li>React Query DevTools</li>
+              <li>Suspense Mode in React Query</li>
+              <li>RTK Query vs React Query</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">SWR (Stale-While-Revalidate)</div>
+            <ul class="subtopics-list">
+              <li>useSWR Basic Usage</li>
+              <li>SWR Configuration</li>
+              <li>useSWRMutation</li>
+              <li>Global Config with SWRConfig</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 18 -->
+      <div class="topic-card intermediate" id="performance">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">18</span>
+            <span class="topic-title">Performance Optimization</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Memoization</div>
+            <ul class="subtopics-list">
+              <li>React.memo — Prevent Re-renders</li>
+              <li>useMemo — Expensive Calculations</li>
+              <li>useCallback — Stable Function References</li>
+              <li>When NOT to Memoize</li>
+              <li>Referential Equality in React</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Code Splitting & Lazy Loading</div>
+            <ul class="subtopics-list">
+              <li>React.lazy() — Dynamic Imports</li>
+              <li>Suspense Component</li>
+              <li>Suspense Fallback UI</li>
+              <li>Route-based Code Splitting</li>
+              <li>Component-based Code Splitting</li>
+              <li>Webpack Bundle Splitting</li>
+              <li>Vite Code Splitting</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Rendering Optimization</div>
+            <ul class="subtopics-list">
+              <li>Avoiding Unnecessary Re-renders</li>
+              <li>State Colocation</li>
+              <li>Moving State Down</li>
+              <li>Moving Content Up (Children Pattern)</li>
+              <li>Virtualization: react-window, react-virtual</li>
+              <li>Windowing for Large Lists</li>
+              <li>Debouncing & Throttling Renders</li>
+              <li>Avoiding Anonymous Functions in JSX</li>
+              <li>Stable Keys in Lists</li>
+              <li>Profiler API</li>
+              <li>React DevTools Profiler</li>
+              <li>Why Did You Render Library</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Concurrent Mode & Transitions</div>
+            <ul class="subtopics-list">
+              <li>React 18 Concurrent Features</li>
+              <li>startTransition API</li>
+              <li>useTransition Hook</li>
+              <li>useDeferredValue Hook</li>
+              <li>Time Slicing Concept</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 19 -->
+      <div class="topic-card intermediate" id="refs-dom">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">19</span>
+            <span class="topic-title">Refs & DOM Interaction</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">useRef</div>
+            <ul class="subtopics-list">
+              <li>useRef for DOM References</li>
+              <li>Accessing DOM Nodes</li>
+              <li>Focusing Elements Imperatively</li>
+              <li>Scrolling with Refs</li>
+              <li>Measuring DOM Elements</li>
+              <li>useRef for Mutable Non-state Values</li>
+              <li>Storing Previous Values</li>
+              <li>Storing Timer IDs</li>
+              <li>Ref Callbacks</li>
+              <li>Refs and Re-renders (No Trigger)</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">forwardRef & useImperativeHandle</div>
+            <ul class="subtopics-list">
+              <li>forwardRef — Passing Refs to Children</li>
+              <li>useImperativeHandle — Customizing Ref API</li>
+              <li>Exposing Custom Methods to Parents</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Portals</div>
+            <ul class="subtopics-list">
+              <li>ReactDOM.createPortal</li>
+              <li>Use Cases: Modals, Tooltips, Dropdowns</li>
+              <li>Event Bubbling with Portals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 20 -->
+      <div class="topic-card intermediate" id="error-boundaries">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">20</span>
+            <span class="topic-title">Error Boundaries & Suspense</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Error Boundaries</div>
+            <ul class="subtopics-list">
+              <li>What are Error Boundaries?</li>
+              <li>componentDidCatch Lifecycle</li>
+              <li>getDerivedStateFromError</li>
+              <li>Creating Custom Error Boundary</li>
+              <li>react-error-boundary Library</li>
+              <li>ErrorBoundary Component</li>
+              <li>onError & fallback Props</li>
+              <li>resetKeys for Recovery</li>
+              <li>useErrorBoundary Hook</li>
+              <li>Error Boundary Limitations</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Suspense</div>
+            <ul class="subtopics-list">
+              <li>Suspense for Lazy Components</li>
+              <li>Suspense for Data Fetching</li>
+              <li>Nested Suspense Boundaries</li>
+              <li>SuspenseList (Experimental)</li>
+              <li>Streaming with Suspense (SSR)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 21 -->
+      <div class="topic-card intermediate" id="component-patterns">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">21</span>
+            <span class="topic-title">Advanced Component Patterns</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Design Patterns</div>
+            <ul class="subtopics-list">
+              <li>Higher-Order Components (HOC)</li>
+              <li>HOC Naming Convention</li>
+              <li>HOC Pitfalls</li>
+              <li>Render Props Pattern</li>
+              <li>Compound Components Pattern</li>
+              <li>Compound Components with Context</li>
+              <li>Controlled vs Uncontrolled Components</li>
+              <li>Provider Pattern</li>
+              <li>Container/Presentational Pattern</li>
+              <li>Observer Pattern</li>
+              <li>Strategy Pattern</li>
+              <li>Factory Pattern</li>
+              <li>Slots Pattern (Children as Props)</li>
+              <li>Polymorphic Components (as prop)</li>
+              <li>Headless Components</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid -->
+  </div><!-- end intermediate section -->
+
+  <div class="glow-divider"></div>
+
+  <!-- ===== ADVANCED SECTION ===== -->
+  <div class="section" id="advanced">
+    <div class="section-header advanced section-anchor">
+      <div class="section-icon">🚀</div>
+      <div>
+        <div class="section-title advanced">ADVANCED</div>
+        <div class="section-desc">Production-ready React: SSR, testing, architecture & ecosystem</div>
+      </div>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Topic 22 -->
+      <div class="topic-card advanced" id="typescript">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">22</span>
+            <span class="topic-title">TypeScript with React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">TypeScript Essentials for React</div>
+            <ul class="subtopics-list">
+              <li>TypeScript Setup in React (Vite / CRA)</li>
+              <li>tsconfig.json Configuration</li>
+              <li>Basic Types: string, number, boolean, array, object</li>
+              <li>Interface vs Type Alias</li>
+              <li>Union & Intersection Types</li>
+              <li>Generic Types</li>
+              <li>Utility Types: Partial, Required, Pick, Omit, Record, Readonly</li>
+              <li>Discriminated Unions</li>
+              <li>Type Narrowing & Type Guards</li>
+              <li>Enums vs as const</li>
+              <li>Template Literal Types</li>
+              <li>Conditional Types</li>
+              <li>Mapped Types</li>
+              <li>Infer Keyword</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React-Specific TypeScript</div>
+            <ul class="subtopics-list">
+              <li>Typing Function Components (React.FC vs explicit)</li>
+              <li>Typing Props Interfaces</li>
+              <li>Typing children Prop</li>
+              <li>Typing Event Handlers</li>
+              <li>Typing useRef (HTMLElement)</li>
+              <li>Typing useState</li>
+              <li>Typing useReducer</li>
+              <li>Typing useContext</li>
+              <li>Typing Custom Hooks</li>
+              <li>Typing HOCs</li>
+              <li>Typing Render Props</li>
+              <li>Typing forwardRef</li>
+              <li>Generic Components</li>
+              <li>Typing API Responses</li>
+              <li>React.ComponentProps & HTMLAttributes</li>
+              <li>React.ElementType & Polymorphic Components</li>
+              <li>@types/react Package</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 23 -->
+      <div class="topic-card advanced" id="ssr-ssg">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">23</span>
+            <span class="topic-title">Server-Side Rendering, SSG & Meta-frameworks</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Rendering Strategies</div>
+            <ul class="subtopics-list">
+              <li>CSR vs SSR vs SSG vs ISR</li>
+              <li>Hydration Concept</li>
+              <li>Partial Hydration</li>
+              <li>Progressive Hydration</li>
+              <li>Selective Hydration (React 18)</li>
+              <li>Streaming SSR with Suspense</li>
+              <li>React Server Components (RSC)</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Next.js (App Router)</div>
+            <ul class="subtopics-list">
+              <li>Next.js Project Setup</li>
+              <li>App Router vs Pages Router</li>
+              <li>File-based Routing</li>
+              <li>layout.tsx & page.tsx</li>
+              <li>Loading & Error Files</li>
+              <li>Server Components vs Client Components</li>
+              <li>"use client" Directive</li>
+              <li>Server Actions</li>
+              <li>Data Fetching in Server Components</li>
+              <li>fetch() Caching in Next.js</li>
+              <li>generateStaticParams (SSG)</li>
+              <li>revalidatePath & revalidateTag (ISR)</li>
+              <li>Route Groups</li>
+              <li>Parallel Routes & Intercepting Routes</li>
+              <li>Middleware in Next.js</li>
+              <li>API Routes (Route Handlers)</li>
+              <li>Image Component (next/image)</li>
+              <li>Link Component & Prefetching</li>
+              <li>Font Optimization (next/font)</li>
+              <li>Metadata API (SEO)</li>
+              <li>next/headers & next/cookies</li>
+              <li>Environment Variables in Next.js</li>
+              <li>Deployment on Vercel</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Remix</div>
+            <ul class="subtopics-list">
+              <li>Remix Project Setup</li>
+              <li>File-based Routing</li>
+              <li>Loaders — Server Data Fetching</li>
+              <li>Actions — Form Mutations</li>
+              <li>useFetcher Hook</li>
+              <li>Nested Routes & Outlets</li>
+              <li>Error Boundaries in Remix</li>
+              <li>Links & Meta Functions</li>
+              <li>Optimistic UI in Remix</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Gatsby (SSG)</div>
+            <ul class="subtopics-list">
+              <li>Gatsby Project Setup</li>
+              <li>GraphQL Layer in Gatsby</li>
+              <li>gatsby-config & Plugins</li>
+              <li>Static Page Generation</li>
+              <li>Gatsby Image Plugin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 24 -->
+      <div class="topic-card advanced" id="testing">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">24</span>
+            <span class="topic-title">Testing React Applications</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Unit Testing</div>
+            <ul class="subtopics-list">
+              <li>Testing Pyramid Concept</li>
+              <li>Jest Setup & Configuration</li>
+              <li>Vitest Setup (Vite-based)</li>
+              <li>describe, it/test, expect</li>
+              <li>Matchers: toBe, toEqual, toContain, etc.</li>
+              <li>Mocking Functions: jest.fn()</li>
+              <li>Mocking Modules: jest.mock()</li>
+              <li>Spies: jest.spyOn()</li>
+              <li>beforeEach, afterEach, beforeAll, afterAll</li>
+              <li>Snapshot Testing</li>
+              <li>Async Tests: async/await in Tests</li>
+              <li>Timer Mocks: jest.useFakeTimers</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React Testing Library</div>
+            <ul class="subtopics-list">
+              <li>@testing-library/react Setup</li>
+              <li>render() & screen</li>
+              <li>Queries: getBy, findBy, queryBy</li>
+              <li>ByRole, ByText, ByLabelText, ByTestId</li>
+              <li>userEvent Library</li>
+              <li>Firing Events: fireEvent vs userEvent</li>
+              <li>Testing User Interactions</li>
+              <li>waitFor & findBy for Async</li>
+              <li>Testing Forms</li>
+              <li>Testing API Calls (Mock Service Worker)</li>
+              <li>MSW (Mock Service Worker) Setup</li>
+              <li>Testing Custom Hooks (renderHook)</li>
+              <li>Testing Context Providers</li>
+              <li>Testing Router (MemoryRouter)</li>
+              <li>Testing Redux (renderWithProviders)</li>
+              <li>Accessibility Testing (jest-axe)</li>
+              <li>Testing Loading & Error States</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">End-to-End Testing</div>
+            <ul class="subtopics-list">
+              <li>Cypress — Setup & Configuration</li>
+              <li>Cypress: cy.visit, cy.get, cy.click, cy.type</li>
+              <li>Cypress: Intercept Network Requests</li>
+              <li>Cypress: Fixtures & Commands</li>
+              <li>Cypress Component Testing</li>
+              <li>Playwright — Setup & Configuration</li>
+              <li>Playwright: page.goto, locators</li>
+              <li>Playwright: Screenshots & Videos</li>
+              <li>Playwright: Multiple Browsers</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Other Testing</div>
+            <ul class="subtopics-list">
+              <li>Storybook for Component Development</li>
+              <li>Storybook: Writing Stories</li>
+              <li>Storybook: Controls & Args</li>
+              <li>Storybook: Play Functions (Interaction Tests)</li>
+              <li>Visual Regression Testing (Chromatic)</li>
+              <li>Code Coverage Reports</li>
+              <li>TDD & BDD Approaches</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 25 -->
+      <div class="topic-card advanced" id="rsc">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">25</span>
+            <span class="topic-title">React Server Components (RSC)</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">RSC Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>What are React Server Components?</li>
+              <li>Server vs Client Component Distinction</li>
+              <li>Zero Bundle Size for Server Components</li>
+              <li>No Hooks in Server Components</li>
+              <li>Accessing Server Resources Directly</li>
+              <li>Passing Data from Server to Client Components</li>
+              <li>Serializable Props Constraint</li>
+              <li>Async Server Components</li>
+              <li>Server Component + Suspense Integration</li>
+              <li>RSC Payload Format</li>
+              <li>Composition Patterns: Server Wrapping Client</li>
+              <li>When to Use Client vs Server Components</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Server Actions</div>
+            <ul class="subtopics-list">
+              <li>"use server" Directive</li>
+              <li>Form Actions with Server Actions</li>
+              <li>Calling Server Actions from Client</li>
+              <li>Mutations with Server Actions</li>
+              <li>Revalidation After Server Actions</li>
+              <li>Progressive Enhancement with Server Actions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 26 -->
+      <div class="topic-card advanced" id="architecture">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">26</span>
+            <span class="topic-title">Project Architecture & Folder Structure</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Folder Structure Patterns</div>
+            <ul class="subtopics-list">
+              <li>Feature-based Structure</li>
+              <li>Domain-driven Structure</li>
+              <li>Atomic Design: Atoms, Molecules, Organisms</li>
+              <li>Colocation Principle</li>
+              <li>Barrel Files (index.ts exports)</li>
+              <li>Absolute Imports & Path Aliases</li>
+              <li>Monorepo Structure (Turborepo, Nx)</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Code Quality & Tooling</div>
+            <ul class="subtopics-list">
+              <li>ESLint Configuration & Rules</li>
+              <li>Prettier Setup</li>
+              <li>Husky (Git Hooks)</li>
+              <li>lint-staged</li>
+              <li>Commitlint & Conventional Commits</li>
+              <li>TypeScript Strict Mode</li>
+              <li>Absolute Imports Configuration</li>
+              <li>Module Federation (Micro-frontend)</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Design Patterns & Best Practices</div>
+            <ul class="subtopics-list">
+              <li>Single Responsibility Principle</li>
+              <li>DRY Principle in React</li>
+              <li>Separation of Concerns</li>
+              <li>Inversion of Control</li>
+              <li>Component Composition over Inheritance</li>
+              <li>Feature Flags</li>
+              <li>Dependency Injection in React</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 27 -->
+      <div class="topic-card advanced" id="animation">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">27</span>
+            <span class="topic-title">Animation & Motion in React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Animation Libraries</div>
+            <ul class="subtopics-list">
+              <li>CSS Transitions & Animations (Baseline)</li>
+              <li>Framer Motion — motion Components</li>
+              <li>Framer Motion — Variants</li>
+              <li>Framer Motion — AnimatePresence</li>
+              <li>Framer Motion — Layout Animations</li>
+              <li>Framer Motion — Gestures (drag, tap, hover)</li>
+              <li>Framer Motion — Scroll Animations</li>
+              <li>Framer Motion — useAnimation Hook</li>
+              <li>Framer Motion — useScroll & useTransform</li>
+              <li>React Spring — Basics</li>
+              <li>React Spring — useSpring, useSprings</li>
+              <li>React Spring — useTrail, useChain</li>
+              <li>React Transition Group</li>
+              <li>GSAP with React</li>
+              <li>Auto Animate Library</li>
+              <li>View Transitions API</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 28 -->
+      <div class="topic-card advanced" id="accessibility">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">28</span>
+            <span class="topic-title">Accessibility (a11y) in React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Accessibility Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>WCAG Guidelines Overview</li>
+              <li>Semantic HTML in JSX</li>
+              <li>ARIA Roles, States & Properties</li>
+              <li>aria-label, aria-labelledby, aria-describedby</li>
+              <li>aria-live Regions</li>
+              <li>Keyboard Navigation</li>
+              <li>Focus Management with useRef</li>
+              <li>Focus Trapping in Modals</li>
+              <li>Skip Navigation Links</li>
+              <li>Color Contrast</li>
+              <li>Accessible Forms</li>
+              <li>Accessible Images (alt text)</li>
+              <li>Screen Reader Testing</li>
+              <li>eslint-plugin-jsx-a11y</li>
+              <li>jest-axe for Accessibility Tests</li>
+              <li>Radix UI / Headless UI for Accessible Primitives</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 29 -->
+      <div class="topic-card advanced" id="internationalization">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">29</span>
+            <span class="topic-title">Internationalization (i18n) & Localization (l10n)</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">i18n in React</div>
+            <ul class="subtopics-list">
+              <li>i18n Concepts: Translations, Locales, Plurals</li>
+              <li>react-i18next Library Setup</li>
+              <li>i18next Configuration</li>
+              <li>useTranslation Hook</li>
+              <li>Trans Component for JSX Translations</li>
+              <li>Namespaces in i18next</li>
+              <li>Pluralization</li>
+              <li>Interpolation & Variables</li>
+              <li>Lazy Loading Translations</li>
+              <li>Language Detection</li>
+              <li>RTL Support (Right-to-Left)</li>
+              <li>Date, Time & Number Formatting (Intl API)</li>
+              <li>react-intl (FormatJS) Library</li>
+              <li>Next.js i18n Routing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 30 -->
+      <div class="topic-card advanced" id="security">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">30</span>
+            <span class="topic-title">Security in React Applications</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Security Best Practices</div>
+            <ul class="subtopics-list">
+              <li>XSS Prevention in React</li>
+              <li>dangerouslySetInnerHTML Risks & Safety</li>
+              <li>DOMPurify for Sanitizing HTML</li>
+              <li>CSRF Protection</li>
+              <li>Content Security Policy (CSP)</li>
+              <li>Sensitive Data in Environment Variables</li>
+              <li>Never Expose API Keys in Frontend</li>
+              <li>JWT Storage: localStorage vs Cookies vs Memory</li>
+              <li>HttpOnly Cookies</li>
+              <li>Authentication Best Practices</li>
+              <li>CORS Configuration</li>
+              <li>Rate Limiting</li>
+              <li>Dependency Security Audits (npm audit)</li>
+              <li>HTTPS Everywhere</li>
+              <li>Clickjacking Prevention</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 31 -->
+      <div class="topic-card advanced" id="deployment">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">31</span>
+            <span class="topic-title">Build, Bundling & Deployment</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Build Tools & Bundlers</div>
+            <ul class="subtopics-list">
+              <li>Webpack — Core Concepts</li>
+              <li>Webpack: Entry, Output, Loaders, Plugins</li>
+              <li>Webpack: Code Splitting & Tree Shaking</li>
+              <li>Vite — Configuration & Plugins</li>
+              <li>Vite: vite.config.ts</li>
+              <li>Rollup for Libraries</li>
+              <li>esbuild Overview</li>
+              <li>Turbopack (Experimental)</li>
+              <li>tsup for TypeScript Libraries</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Deployment Platforms</div>
+            <ul class="subtopics-list">
+              <li>Vercel Deployment</li>
+              <li>Netlify Deployment</li>
+              <li>AWS S3 + CloudFront (Static)</li>
+              <li>AWS Amplify</li>
+              <li>Railway / Render</li>
+              <li>GitHub Pages</li>
+              <li>Docker Containerization of React App</li>
+              <li>Nginx Config for SPA (Try Files)</li>
+              <li>CDN Configuration</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">CI/CD Pipelines</div>
+            <ul class="subtopics-list">
+              <li>GitHub Actions for React</li>
+              <li>GitLab CI/CD</li>
+              <li>Automated Testing in CI</li>
+              <li>Build Caching in CI</li>
+              <li>Environment-specific Builds</li>
+              <li>Automatic Deploy on Push</li>
+              <li>Preview Deployments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 32 -->
+      <div class="topic-card advanced" id="monitoring">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">32</span>
+            <span class="topic-title">Monitoring, Analytics & Web Vitals</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Performance Monitoring</div>
+            <ul class="subtopics-list">
+              <li>Core Web Vitals: LCP, FID/INP, CLS</li>
+              <li>web-vitals Library</li>
+              <li>Lighthouse Audits</li>
+              <li>Chrome Performance Tab</li>
+              <li>React Profiler API</li>
+              <li>onRenderCallback</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Error & Analytics</div>
+            <ul class="subtopics-list">
+              <li>Sentry for Error Tracking</li>
+              <li>Sentry: Source Maps</li>
+              <li>LogRocket Session Recording</li>
+              <li>Datadog RUM</li>
+              <li>Google Analytics 4 with React</li>
+              <li>Custom Analytics Events</li>
+              <li>Feature Flags (LaunchDarkly, Unleash)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 33 -->
+      <div class="topic-card advanced" id="microfrontends">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">33</span>
+            <span class="topic-title">Micro-frontends & Module Federation</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Micro-frontend Architecture</div>
+            <ul class="subtopics-list">
+              <li>What are Micro-frontends?</li>
+              <li>When to Use Micro-frontends</li>
+              <li>iFrame-based Approach</li>
+              <li>Web Components Approach</li>
+              <li>Module Federation (Webpack 5)</li>
+              <li>Module Federation: Host & Remote Apps</li>
+              <li>Shared Dependencies in Module Federation</li>
+              <li>@module-federation/vite</li>
+              <li>Single-SPA Framework</li>
+              <li>Turborepo for Monorepos</li>
+              <li>Nx for Monorepos</li>
+              <li>Shared Design Systems</li>
+              <li>Communication Between Micro-frontends</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 34 -->
+      <div class="topic-card advanced" id="react-native">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">34</span>
+            <span class="topic-title">React Native — Cross-platform Mobile</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React Native Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>React Native Setup (Expo vs CLI)</li>
+              <li>Core Components: View, Text, Image, ScrollView</li>
+              <li>StyleSheet API</li>
+              <li>Flexbox in React Native</li>
+              <li>Platform-specific Code</li>
+              <li>Navigation: React Navigation Library</li>
+              <li>Stack, Tab & Drawer Navigators</li>
+              <li>Native APIs: Camera, Location, Contacts</li>
+              <li>Async Storage</li>
+              <li>Push Notifications</li>
+              <li>Expo SDK Modules</li>
+              <li>React Native New Architecture (Fabric, JSI)</li>
+              <li>Building & Publishing to App Stores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 35 -->
+      <div class="topic-card advanced" id="graphql">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">35</span>
+            <span class="topic-title">GraphQL with React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">GraphQL Fundamentals</div>
+            <ul class="subtopics-list">
+              <li>GraphQL vs REST</li>
+              <li>Queries, Mutations & Subscriptions</li>
+              <li>Schema & Types</li>
+              <li>Resolvers Concept</li>
+              <li>Fragments</li>
+              <li>Variables in GraphQL</li>
+              <li>Directives</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Apollo Client</div>
+            <ul class="subtopics-list">
+              <li>Apollo Client Setup</li>
+              <li>ApolloProvider</li>
+              <li>useQuery Hook</li>
+              <li>useMutation Hook</li>
+              <li>useSubscription Hook</li>
+              <li>Apollo Cache</li>
+              <li>Cache Normalization</li>
+              <li>optimisticResponse</li>
+              <li>Apollo Reactive Variables</li>
+              <li>Apollo DevTools</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Other GraphQL Clients</div>
+            <ul class="subtopics-list">
+              <li>urql — Lightweight GraphQL Client</li>
+              <li>TanStack Query + GraphQL</li>
+              <li>graphql-request Library</li>
+              <li>Code Generation (graphql-codegen)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 36 -->
+      <div class="topic-card advanced" id="design-systems">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">36</span>
+            <span class="topic-title">UI Libraries, Design Systems & Component Libraries</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Popular UI Libraries</div>
+            <ul class="subtopics-list">
+              <li>Material UI (MUI) v5/v6</li>
+              <li>MUI: sx Prop & Theme</li>
+              <li>MUI: Components: Button, TextField, Dialog</li>
+              <li>Ant Design (antd)</li>
+              <li>Chakra UI v3</li>
+              <li>shadcn/ui — Copy-paste Components</li>
+              <li>Radix UI — Headless Primitives</li>
+              <li>Headless UI by Tailwind</li>
+              <li>React Aria by Adobe</li>
+              <li>Mantine UI</li>
+              <li>NextUI</li>
+              <li>DaisyUI with Tailwind</li>
+            </ul>
+          </div>
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">Building a Design System</div>
+            <ul class="subtopics-list">
+              <li>Design Tokens</li>
+              <li>Typography Scale</li>
+              <li>Color Palette & Theming</li>
+              <li>Spacing & Sizing System</li>
+              <li>Component API Design</li>
+              <li>Publishing npm Packages</li>
+              <li>Storybook as Documentation</li>
+              <li>Semantic Versioning</li>
+              <li>Changesets for Versioning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 37 -->
+      <div class="topic-card advanced" id="pwa">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">37</span>
+            <span class="topic-title">Progressive Web Apps (PWA) with React</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">PWA Concepts</div>
+            <ul class="subtopics-list">
+              <li>What is a PWA?</li>
+              <li>Web App Manifest (manifest.json)</li>
+              <li>Service Workers — Lifecycle</li>
+              <li>Caching Strategies: Cache-First, Network-First, Stale-While-Revalidate</li>
+              <li>Workbox Library</li>
+              <li>vite-plugin-pwa</li>
+              <li>Offline Support</li>
+              <li>Push Notifications (Web Push API)</li>
+              <li>Background Sync</li>
+              <li>Install Prompt (beforeinstallprompt)</li>
+              <li>Lighthouse PWA Audit</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 38 -->
+      <div class="topic-card advanced" id="react-internals">
+        <div class="topic-header" onclick="toggle(this)">
+          <div class="topic-left">
+            <span class="topic-num">38</span>
+            <span class="topic-title">React Internals & Deep Concepts</span>
+          </div>
+          <span class="toggle-icon">▾</span>
+        </div>
+        <div class="topic-body">
+          <div class="subtopic-group">
+            <div class="subtopic-group-title">React Internals</div>
+            <ul class="subtopics-list">
+              <li>Fiber Architecture Deep Dive</li>
+              <li>Work Loop & Scheduler</li>
+              <li>Reconciliation & Diffing Algorithm</li>
+              <li>Commit Phase vs Render Phase</li>
+              <li>Effects Queue</li>
+              <li>Lane Model (Priority System)</li>
+              <li>Concurrent Mode Internals</li>
+              <li>Suspense Internals</li>
+              <li>React Event System Internals</li>
+              <li>How Hooks Work Internally (Linked List)</li>
+              <li>React DevTools Source</li>
+              <li>Reading React Source Code</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end topics-grid -->
+  </div><!-- end advanced section -->
+
+  <div class="progress-dots">
+    <div class="dot beginner"></div>
+    <div class="dot beginner"></div>
+    <div class="dot intermediate"></div>
+    <div class="dot intermediate"></div>
+    <div class="dot advanced"></div>
+    <div class="dot advanced"></div>
+  </div>
+
+</div><!-- end container -->
+
+<footer>
+  ⚛ REACT JS COMPLETE ROADMAP &nbsp;•&nbsp; 38 TOPICS &nbsp;•&nbsp; 500+ SUBTOPICS
+</footer>
+
+<script>
+  // Generate stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    star.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      --dur: ${Math.random() * 4 + 2}s;
+      --delay: ${Math.random() * 5}s;
+      --op: ${Math.random() * 0.5 + 0.2};
+    `;
+    starsEl.appendChild(star);
+  }
+
+  // Toggle accordion
+  function toggle(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  // Download function
+  function downloadPage(e) {
+    e.preventDefault();
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ReactJS-Complete-Roadmap.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Open all cards by default for first section
+  document.querySelectorAll('.topic-card').forEach((card, i) => {
+    if (i < 2) card.classList.add('open');
+  });
+</script>
+</body>
+</html>

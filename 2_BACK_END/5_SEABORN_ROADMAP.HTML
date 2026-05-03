@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seaborn Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a1a;
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.12);
+    --glass-hover: rgba(255,255,255,0.09);
+    --accent1: #00f5ff;
+    --accent2: #7b2fff;
+    --accent3: #ff6b6b;
+    --accent4: #ffd93d;
+    --accent5: #6bcb77;
+    --beginner: #00f5ff;
+    --intermediate: #ffd93d;
+    --advanced: #ff6b6b;
+    --h1-color: #00f5ff;
+    --h2-color: #b97eff;
+    --h3-color: #ffd93d;
+    --h4-color: #6bcb77;
+    --text: rgba(255,255,255,0.88);
+    --subtext: rgba(255,255,255,0.58);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 20%, rgba(0,245,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 80%, rgba(123,47,255,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255,107,107,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 70px 20px 50px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,245,255,0.1);
+    border: 1px solid rgba(0,245,255,0.3);
+    border-radius: 100px;
+    padding: 6px 20px;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--accent1);
+    font-family: 'Fira Code', monospace;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00f5ff 0%, #7b2fff 50%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero p {
+    color: var(--subtext);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* Download btn */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(123,47,255,0.15));
+    border: 1px solid rgba(0,245,255,0.4);
+    color: var(--accent1);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(123,47,255,0.2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .download-btn:hover::before { opacity: 1; }
+  .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,245,255,0.25); }
+
+  .download-btn svg { width: 18px; height: 18px; }
+
+  /* TOC */
+  .toc-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 48px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .toc-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toc-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,245,255,0.3), transparent);
+  }
+
+  .toc-sections {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 700px) { .toc-sections { grid-template-columns: 1fr; } }
+
+  .toc-section h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid;
+  }
+
+  .toc-section.beg h4 { color: var(--beginner); border-color: rgba(0,245,255,0.25); }
+  .toc-section.int h4 { color: var(--intermediate); border-color: rgba(255,217,61,0.25); }
+  .toc-section.adv h4 { color: var(--advanced); border-color: rgba(255,107,107,0.25); }
+
+  .toc-section ul { list-style: none; }
+  .toc-section ul li { margin-bottom: 6px; }
+  .toc-section ul li a {
+    color: var(--subtext);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 300;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .toc-section.beg ul li a:hover { color: var(--beginner); }
+  .toc-section.int ul li a:hover { color: var(--intermediate); }
+  .toc-section.adv ul li a:hover { color: var(--advanced); }
+
+  .toc-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .beg .toc-dot { background: var(--beginner); }
+  .int .toc-dot { background: var(--intermediate); }
+  .adv .toc-dot { background: var(--advanced); }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 60px 0 32px;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+  }
+
+  .section-label.beg { color: var(--beginner); text-shadow: 0 0 30px rgba(0,245,255,0.4); }
+  .section-label.int { color: var(--intermediate); text-shadow: 0 0 30px rgba(255,217,61,0.4); }
+  .section-label.adv { color: var(--advanced); text-shadow: 0 0 30px rgba(255,107,107,0.4); }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+  }
+  .beg .section-line { background: linear-gradient(90deg, rgba(0,245,255,0.5), transparent); }
+  .int .section-line { background: linear-gradient(90deg, rgba(255,217,61,0.5), transparent); }
+  .adv .section-line { background: linear-gradient(90deg, rgba(255,107,107,0.5), transparent); }
+
+  .section-pill {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    padding: 4px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.1em;
+  }
+  .beg .section-pill { background: rgba(0,245,255,0.1); color: var(--beginner); border: 1px solid rgba(0,245,255,0.25); }
+  .int .section-pill { background: rgba(255,217,61,0.1); color: var(--intermediate); border: 1px solid rgba(255,217,61,0.25); }
+  .adv .section-pill { background: rgba(255,107,107,0.1); color: var(--advanced); border: 1px solid rgba(255,107,107,0.25); }
+
+  /* TOPIC CARD */
+  .topic-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+    transition: width 0.3s;
+  }
+
+  .beg-card::before { background: linear-gradient(180deg, var(--beginner), rgba(0,245,255,0.2)); }
+  .int-card::before { background: linear-gradient(180deg, var(--intermediate), rgba(255,217,61,0.2)); }
+  .adv-card::before { background: linear-gradient(180deg, var(--advanced), rgba(255,107,107,0.2)); }
+
+  .topic-card:hover { background: var(--glass-hover); transform: translateX(4px); }
+  .topic-card:hover::before { width: 4px; }
+
+  /* HEADINGS */
+  .h1-style {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--h1-color);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .h1-style .hash { color: rgba(0,245,255,0.45); font-size: 0.9em; }
+
+  .h2-style {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--h2-color);
+    margin: 20px 0 12px;
+    padding-left: 14px;
+    border-left: 2px solid rgba(123,47,255,0.5);
+    letter-spacing: 0.03em;
+  }
+
+  .h3-style {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--h3-color);
+    margin: 14px 0 8px;
+    padding-left: 28px;
+    letter-spacing: 0.02em;
+  }
+
+  .h4-style {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--h4-color);
+    margin: 10px 0 6px;
+    padding-left: 42px;
+  }
+
+  /* SUB ITEMS */
+  .sub-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .sub-list li {
+    font-size: 0.84rem;
+    color: var(--subtext);
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 3px 0 3px 48px;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .sub-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 32px;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.7em;
+  }
+
+  .sub-list li:hover { color: var(--text); }
+
+  .sub-list.l2 li { padding-left: 62px; }
+  .sub-list.l2 li::before { left: 46px; }
+  .sub-list.l3 li { padding-left: 76px; }
+  .sub-list.l3 li::before { left: 60px; }
+
+  /* Anchor */
+  .anchor { display: block; position: relative; top: -80px; visibility: hidden; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--subtext);
+    font-size: 0.78rem;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 40px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,245,255,0.4); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">◈ Complete Learning Roadmap</div>
+    <h1>SEABORN<br>MASTERY MAP</h1>
+    <p>The definitive visual guide to mastering Seaborn — from first plots to production-grade statistical visualizations.</p>
+    <a class="download-btn" id="downloadBtn" href="#" onclick="downloadPage(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      DOWNLOAD ROADMAP
+    </a>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc-card">
+    <div class="toc-title">◈ Table of Contents</div>
+    <div class="toc-sections">
+      <div class="toc-section beg">
+        <h4>◈ BEGINNER</h4>
+        <ul>
+          <li><a href="#intro"><span class="toc-dot"></span>Introduction to Seaborn</a></li>
+          <li><a href="#setup"><span class="toc-dot"></span>Installation & Setup</a></li>
+          <li><a href="#datasets"><span class="toc-dot"></span>Datasets & DataFrames</a></li>
+          <li><a href="#basic-plots"><span class="toc-dot"></span>Basic Plot Types</a></li>
+          <li><a href="#relational"><span class="toc-dot"></span>Relational Plots</a></li>
+          <li><a href="#distribution"><span class="toc-dot"></span>Distribution Plots</a></li>
+          <li><a href="#categorical"><span class="toc-dot"></span>Categorical Plots</a></li>
+          <li><a href="#styling"><span class="toc-dot"></span>Styling & Themes</a></li>
+          <li><a href="#color"><span class="toc-dot"></span>Color Palettes</a></li>
+        </ul>
+      </div>
+      <div class="toc-section int">
+        <h4>◈ INTERMEDIATE</h4>
+        <ul>
+          <li><a href="#axes"><span class="toc-dot"></span>Axes-Level Functions</a></li>
+          <li><a href="#figure"><span class="toc-dot"></span>Figure-Level Functions</a></li>
+          <li><a href="#facetgrid"><span class="toc-dot"></span>FacetGrid & Subplots</a></li>
+          <li><a href="#regression"><span class="toc-dot"></span>Regression Plots</a></li>
+          <li><a href="#matrix"><span class="toc-dot"></span>Matrix Plots</a></li>
+          <li><a href="#customization"><span class="toc-dot"></span>Deep Customization</a></li>
+          <li><a href="#annotations"><span class="toc-dot"></span>Annotations & Text</a></li>
+          <li><a href="#matplotlib"><span class="toc-dot"></span>Matplotlib Integration</a></li>
+        </ul>
+      </div>
+      <div class="toc-section adv">
+        <h4>◈ ADVANCED</h4>
+        <ul>
+          <li><a href="#objects"><span class="toc-dot"></span>Objects Interface</a></li>
+          <li><a href="#statistical"><span class="toc-dot"></span>Statistical Methods</a></li>
+          <li><a href="#multidim"><span class="toc-dot"></span>Multi-Dimensional Data</a></li>
+          <li><a href="#performance"><span class="toc-dot"></span>Performance & Scale</a></li>
+          <li><a href="#pairplot"><span class="toc-dot"></span>PairGrid & PairPlot</a></li>
+          <li><a href="#publication"><span class="toc-dot"></span>Publication-Quality</a></li>
+          <li><a href="#real-world"><span class="toc-dot"></span>Real-World Projects</a></li>
+          <li><a href="#ecosystem"><span class="toc-dot"></span>Ecosystem Integration</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       BEGINNER SECTION
+  ============================= -->
+  <div class="section-header beg">
+    <div class="section-label beg">BEGINNER</div>
+    <div class="section-line"></div>
+    <div class="section-pill">Foundation Level</div>
+  </div>
+
+  <!-- 1. Introduction -->
+  <span class="anchor" id="intro"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Introduction to Seaborn</div>
+    <div class="h2-style">## What is Seaborn?</div>
+    <ul class="sub-list">
+      <li>Definition and purpose of Seaborn</li>
+      <li>Statistical data visualization library built on Matplotlib</li>
+      <li>High-level API for drawing attractive and informative statistical graphics</li>
+      <li>Seaborn vs Matplotlib — differences and when to use each</li>
+      <li>Seaborn vs Plotly — comparison of static vs interactive</li>
+    </ul>
+    <div class="h2-style">## History & Versioning</div>
+    <ul class="sub-list">
+      <li>Origin and development history of Seaborn</li>
+      <li>Seaborn version 0.12+ changes (Objects API introduction)</li>
+      <li>Seaborn v0.13+ updates and deprecations</li>
+      <li>Checking current installed version</li>
+    </ul>
+    <div class="h2-style">## Core Philosophy</div>
+    <ul class="sub-list">
+      <li>Tight integration with pandas DataFrames</li>
+      <li>Statistical estimation and aggregation built-in</li>
+      <li>Grammar of graphics concepts in Seaborn</li>
+      <li>Axes-level vs Figure-level functions distinction</li>
+    </ul>
+    <div class="h2-style">## Importing Seaborn</div>
+    <ul class="sub-list">
+      <li>Standard import convention: <code>import seaborn as sns</code></li>
+      <li>Commonly paired imports (matplotlib, numpy, pandas)</li>
+      <li>Jupyter notebook setup for inline plotting</li>
+      <li>Configuring matplotlib backend for different environments</li>
+    </ul>
+  </div>
+
+  <!-- 2. Installation -->
+  <span class="anchor" id="setup"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Installation & Environment Setup</div>
+    <div class="h2-style">## Installation Methods</div>
+    <ul class="sub-list">
+      <li>Installing via pip: <code>pip install seaborn</code></li>
+      <li>Installing via conda: <code>conda install seaborn</code></li>
+      <li>Installing specific versions</li>
+      <li>Installing from source / GitHub</li>
+      <li>Upgrading existing installation</li>
+    </ul>
+    <div class="h2-style">## Dependencies</div>
+    <ul class="sub-list">
+      <li>matplotlib — core rendering engine</li>
+      <li>numpy — numerical arrays</li>
+      <li>pandas — DataFrame integration</li>
+      <li>scipy — statistical computations</li>
+      <li>statsmodels — advanced regression (optional)</li>
+    </ul>
+    <div class="h2-style">## Development Environments</div>
+    <ul class="sub-list">
+      <li>Setting up Jupyter Notebook</li>
+      <li>Setting up JupyterLab</li>
+      <li>Using VS Code with Jupyter extension</li>
+      <li>Google Colab setup</li>
+      <li>Setting up virtual environments (venv, conda env)</li>
+      <li>Using <code>%matplotlib inline</code> and <code>%matplotlib widget</code></li>
+    </ul>
+    <div class="h2-style">## Verifying Installation</div>
+    <ul class="sub-list">
+      <li>Running <code>sns.__version__</code></li>
+      <li>Running a test plot to confirm setup</li>
+      <li>Common installation errors and fixes</li>
+    </ul>
+  </div>
+
+  <!-- 3. Datasets -->
+  <span class="anchor" id="datasets"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Datasets & DataFrames</div>
+    <div class="h2-style">## Built-in Seaborn Datasets</div>
+    <ul class="sub-list">
+      <li>Listing all available datasets: <code>sns.get_dataset_names()</code></li>
+      <li>Loading datasets: <code>sns.load_dataset()</code></li>
+      <li>tips — restaurant tipping data</li>
+      <li>titanic — survival data</li>
+      <li>iris — flower measurements</li>
+      <li>penguins — Palmer penguins dataset</li>
+      <li>flights — airline passenger time-series</li>
+      <li>fmri — brain imaging data</li>
+      <li>diamonds — gemstone data</li>
+      <li>mpg — car fuel efficiency data</li>
+      <li>planets — exoplanet discovery data</li>
+      <li>exercise — exercise and heart rate data</li>
+      <li>geyser — Old Faithful eruption data</li>
+    </ul>
+    <div class="h2-style">## Working with Pandas DataFrames</div>
+    <ul class="sub-list">
+      <li>Tidy (long-form) vs wide-form data</li>
+      <li>Why Seaborn prefers tidy data</li>
+      <li>Converting wide to long format with <code>pd.melt()</code></li>
+      <li>Passing DataFrames directly to plot functions</li>
+      <li>Using the <code>data</code>, <code>x</code>, <code>y</code>, <code>hue</code> parameters</li>
+    </ul>
+    <div class="h2-style">## Using External Data</div>
+    <ul class="sub-list">
+      <li>Loading CSV files with pandas</li>
+      <li>Loading Excel files</li>
+      <li>Cleaning and preprocessing data before plotting</li>
+      <li>Handling missing values (NaN) in Seaborn plots</li>
+      <li>Data type requirements (numeric vs categorical)</li>
+    </ul>
+    <div class="h2-style">## Understanding Data Variables</div>
+    <ul class="sub-list">
+      <li>Numeric (continuous) variables</li>
+      <li>Categorical variables</li>
+      <li>Ordinal categorical data</li>
+      <li>Boolean / binary variables</li>
+      <li>Datetime variables</li>
+    </ul>
+  </div>
+
+  <!-- 4. Basic Plots -->
+  <span class="anchor" id="basic-plots"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Basic Plot Types</div>
+    <div class="h2-style">## Scatter Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.scatterplot()</code> — basic usage</li>
+      <li>Parameters: <code>x</code>, <code>y</code>, <code>data</code>, <code>hue</code>, <code>size</code>, <code>style</code></li>
+      <li>Encoding a third variable with color (hue)</li>
+      <li>Encoding a fourth variable with size</li>
+      <li>Encoding a fifth variable with marker style</li>
+      <li>Adjusting transparency with <code>alpha</code></li>
+      <li>Marker customization</li>
+    </ul>
+    <div class="h2-style">## Line Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.lineplot()</code> — basic usage</li>
+      <li>Plotting time-series data</li>
+      <li>Confidence interval bands (bootstrapped CI)</li>
+      <li>Multiple lines with <code>hue</code></li>
+      <li>Controlling line style with <code>style</code></li>
+      <li>Aggregation behavior (mean ± CI by default)</li>
+      <li><code>estimator</code> parameter — changing aggregation function</li>
+      <li><code>units</code> parameter for individual unit lines</li>
+    </ul>
+    <div class="h2-style">## Bar Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.barplot()</code> — basic usage</li>
+      <li>Showing mean with confidence intervals</li>
+      <li>Changing orientation (vertical vs horizontal)</li>
+      <li>Grouping bars with <code>hue</code></li>
+      <li><code>estimator</code> parameter (mean, median, sum)</li>
+      <li><code>errorbar</code> parameter options</li>
+      <li>Capsize of error bars</li>
+    </ul>
+    <div class="h2-style">## Count Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.countplot()</code> — basic usage</li>
+      <li>Counting observations in each category</li>
+      <li>Ordering categories with <code>order</code> parameter</li>
+      <li>Horizontal count plots</li>
+      <li>Grouping with <code>hue</code></li>
+    </ul>
+  </div>
+
+  <!-- 5. Relational -->
+  <span class="anchor" id="relational"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Relational Plots</div>
+    <div class="h2-style">## relplot() — Figure-Level Relational</div>
+    <ul class="sub-list">
+      <li><code>sns.relplot()</code> overview and purpose</li>
+      <li><code>kind</code> parameter: <code>"scatter"</code> and <code>"line"</code></li>
+      <li>Creating multi-panel relational plots</li>
+      <li><code>col</code> and <code>row</code> parameters for faceting</li>
+      <li><code>col_wrap</code> for automatic wrapping</li>
+      <li>Controlling figure size with <code>height</code> and <code>aspect</code></li>
+      <li>Accessing underlying FacetGrid object</li>
+    </ul>
+    <div class="h2-style">## scatterplot() Deep Dive</div>
+    <ul class="sub-list">
+      <li>Plotting relationships between two numeric variables</li>
+      <li>Overplotting problem and solutions</li>
+      <li>Jittering for categorical axis values</li>
+      <li><code>hue_norm</code> parameter for continuous hue normalization</li>
+      <li>Custom color palettes for hue</li>
+      <li>Size normalization with <code>size_norm</code></li>
+    </ul>
+    <div class="h2-style">## lineplot() Deep Dive</div>
+    <ul class="sub-list">
+      <li>Sorting behavior for line plots</li>
+      <li>Handling duplicate x-values with aggregation</li>
+      <li>Disabling CI with <code>errorbar=None</code></li>
+      <li>Using <code>dashes</code> parameter</li>
+      <li>Using <code>markers</code> parameter</li>
+      <li>Plotting raw data vs estimates</li>
+    </ul>
+  </div>
+
+  <!-- 6. Distribution -->
+  <span class="anchor" id="distribution"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Distribution Plots</div>
+    <div class="h2-style">## histplot() — Histograms</div>
+    <ul class="sub-list">
+      <li><code>sns.histplot()</code> — basic histogram</li>
+      <li><code>bins</code> parameter — number of bins</li>
+      <li><code>binwidth</code> parameter — bin width</li>
+      <li><code>stat</code> parameter: count, frequency, density, probability</li>
+      <li>Cumulative histograms with <code>cumulative=True</code></li>
+      <li>Multiple histograms with <code>hue</code></li>
+      <li><code>multiple</code> parameter: layer, dodge, stack, fill</li>
+      <li>Discrete histogram with <code>discrete=True</code></li>
+      <li>2D histograms (bivariate)</li>
+    </ul>
+    <div class="h2-style">## kdeplot() — Kernel Density Estimation</div>
+    <ul class="sub-list">
+      <li><code>sns.kdeplot()</code> — univariate KDE</li>
+      <li>Bandwidth selection with <code>bw_adjust</code></li>
+      <li>Kernel types and smoothing</li>
+      <li>Filling area under KDE with <code>fill=True</code></li>
+      <li>Multiple KDEs with <code>hue</code></li>
+      <li>Bivariate KDE (2D density plot)</li>
+      <li>Contour levels with <code>levels</code> parameter</li>
+      <li>Cumulative KDE</li>
+      <li>Clipping KDE to data range with <code>clip</code></li>
+    </ul>
+    <div class="h2-style">## ecdfplot() — Empirical CDF</div>
+    <ul class="sub-list">
+      <li><code>sns.ecdfplot()</code> — empirical cumulative distribution</li>
+      <li>Comparing distributions with ECDF</li>
+      <li><code>stat</code> parameter: proportion vs count</li>
+      <li>Complementary ECDF with <code>complementary=True</code></li>
+    </ul>
+    <div class="h2-style">## rugplot() — Rug Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.rugplot()</code> — showing marginal distributions</li>
+      <li>Combining rugplot with KDE or histogram</li>
+      <li>Height and expand margins options</li>
+    </ul>
+    <div class="h2-style">## displot() — Figure-Level Distribution</div>
+    <ul class="sub-list">
+      <li><code>sns.displot()</code> overview</li>
+      <li><code>kind</code> parameter: hist, kde, ecdf</li>
+      <li>Faceting distribution plots with col/row</li>
+      <li>Combining hist and KDE with <code>kde=True</code></li>
+    </ul>
+  </div>
+
+  <!-- 7. Categorical -->
+  <span class="anchor" id="categorical"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Categorical Plots</div>
+    <div class="h2-style">## catplot() — Figure-Level Categorical</div>
+    <ul class="sub-list">
+      <li><code>sns.catplot()</code> overview</li>
+      <li><code>kind</code> parameter options overview</li>
+      <li>Faceting categorical plots</li>
+      <li>Ordering categories with <code>order</code></li>
+    </ul>
+    <div class="h2-style">## Strip Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.stripplot()</code> — basic usage</li>
+      <li>Jitter parameter for avoiding overplotting</li>
+      <li>Combining with box or violin plots</li>
+      <li>Dodge parameter for grouped strip plots</li>
+    </ul>
+    <div class="h2-style">## Swarm Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.swarmplot()</code> — non-overlapping strip plot</li>
+      <li>Adjusting point size</li>
+      <li>Combining with box/violin plots</li>
+      <li>Performance considerations for large datasets</li>
+    </ul>
+    <div class="h2-style">## Box Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.boxplot()</code> — basic usage</li>
+      <li>Reading quartiles, median, whiskers, outliers</li>
+      <li>Notched box plots</li>
+      <li>Grouped box plots with <code>hue</code></li>
+      <li>Flier (outlier) customization</li>
+      <li>Horizontal box plots</li>
+      <li>Width parameter</li>
+    </ul>
+    <div class="h2-style">## Violin Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.violinplot()</code> — basic usage</li>
+      <li>Inner options: box, quart, point, stick, None</li>
+      <li>Split violins for two hue levels</li>
+      <li>Bandwidth adjustment</li>
+      <li>Density normalization options</li>
+      <li>Grouped violin plots</li>
+    </ul>
+    <div class="h2-style">## Boxen Plot (Letter-Value Plot)</div>
+    <ul class="sub-list">
+      <li><code>sns.boxenplot()</code> — enhanced box plot for large data</li>
+      <li>Understanding letter-value statistics</li>
+      <li><code>k_depth</code> parameter</li>
+      <li>When to use boxen over box plots</li>
+    </ul>
+    <div class="h2-style">## Point Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.pointplot()</code> — basic usage</li>
+      <li>Showing estimates with confidence intervals</li>
+      <li>Connecting groups with lines</li>
+      <li>Dodge parameter for grouped points</li>
+      <li>Comparing to bar plot</li>
+    </ul>
+  </div>
+
+  <!-- 8. Styling -->
+  <span class="anchor" id="styling"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Styling & Themes</div>
+    <div class="h2-style">## Built-in Themes</div>
+    <ul class="sub-list">
+      <li><code>sns.set_theme()</code> — main theming function</li>
+      <li>darkgrid — dark background with grid lines</li>
+      <li>whitegrid — white background with grid lines</li>
+      <li>dark — dark background without grid</li>
+      <li>white — white background without grid</li>
+      <li>ticks — white background with ticks</li>
+    </ul>
+    <div class="h2-style">## set_style() and axes_style()</div>
+    <ul class="sub-list">
+      <li><code>sns.set_style()</code> — setting global style</li>
+      <li><code>sns.axes_style()</code> — context manager for temporary style</li>
+      <li>Customizing style parameters dictionary</li>
+      <li>Overriding default style parameters</li>
+    </ul>
+    <div class="h2-style">## Context Settings</div>
+    <ul class="sub-list">
+      <li><code>sns.set_context()</code> — scaling for output</li>
+      <li>paper — smallest scale for printed papers</li>
+      <li>notebook — default scale for notebooks</li>
+      <li>talk — scale for presentations</li>
+      <li>poster — largest scale for posters</li>
+      <li><code>font_scale</code> parameter</li>
+      <li><code>sns.plotting_context()</code> — temporary context</li>
+    </ul>
+    <div class="h2-style">## Despine</div>
+    <ul class="sub-list">
+      <li><code>sns.despine()</code> — removing spines</li>
+      <li>Removing specific spines (top, right, left, bottom)</li>
+      <li>Offset parameter for gap between axes and spines</li>
+      <li>Trimming spines to data range</li>
+    </ul>
+    <div class="h2-style">## Figure Size and DPI</div>
+    <ul class="sub-list">
+      <li>Setting figure size via matplotlib (<code>plt.figure(figsize=...)</code>)</li>
+      <li>Using <code>height</code> and <code>aspect</code> in figure-level functions</li>
+      <li>Setting DPI for high-resolution output</li>
+    </ul>
+  </div>
+
+  <!-- 9. Color -->
+  <span class="anchor" id="color"></span>
+  <div class="topic-card beg-card">
+    <div class="h1-style"><span class="hash">#</span> Color Palettes</div>
+    <div class="h2-style">## Understanding Palette Types</div>
+    <ul class="sub-list">
+      <li>Qualitative (categorical) palettes — for distinct categories</li>
+      <li>Sequential palettes — for ordered numeric data (low to high)</li>
+      <li>Diverging palettes — for data that diverges from a midpoint</li>
+    </ul>
+    <div class="h2-style">## Built-in Seaborn Palettes</div>
+    <ul class="sub-list">
+      <li>deep, muted, bright, pastel, dark, colorblind</li>
+      <li>tab10, tab20, tab20b, tab20c</li>
+      <li>Set1, Set2, Set3, Paired</li>
+      <li>Blues, Greens, Reds, Purples, Oranges, Greys (sequential)</li>
+      <li>RdBu, RdYlGn, BrBG, coolwarm (diverging)</li>
+      <li>rocket, mako, flare, crest, magma, viridis (perceptually uniform)</li>
+      <li>Viewing palettes: <code>sns.palplot()</code></li>
+    </ul>
+    <div class="h2-style">## color_palette() Function</div>
+    <ul class="sub-list">
+      <li><code>sns.color_palette()</code> — creating custom palettes</li>
+      <li>Passing a list of colors</li>
+      <li>Number of colors with <code>n_colors</code></li>
+      <li>Using as context manager</li>
+      <li>Reverse palette with <code>_r</code> suffix</li>
+    </ul>
+    <div class="h2-style">## set_palette()</div>
+    <ul class="sub-list">
+      <li><code>sns.set_palette()</code> — setting global default palette</li>
+      <li>Resetting to default palette</li>
+      <li>Using palettes within specific plots</li>
+    </ul>
+    <div class="h2-style">## Colorblind-Friendly Design</div>
+    <ul class="sub-list">
+      <li>Using the colorblind palette</li>
+      <li>Combining color with shape/linestyle for accessibility</li>
+      <li>Viridis and cividis for perceptual uniformity</li>
+    </ul>
+  </div>
+
+  <!-- ============================
+       INTERMEDIATE SECTION
+  ============================= -->
+  <div class="section-header int">
+    <div class="section-label int">INTERMEDIATE</div>
+    <div class="section-line"></div>
+    <div class="section-pill">Proficiency Level</div>
+  </div>
+
+  <!-- Axes Level -->
+  <span class="anchor" id="axes"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Axes-Level Functions In Depth</div>
+    <div class="h2-style">## Understanding Axes-Level Functions</div>
+    <ul class="sub-list">
+      <li>What axes-level functions return (matplotlib Axes object)</li>
+      <li>Plotting onto existing Axes with <code>ax=</code> parameter</li>
+      <li>Complete list of all axes-level functions in Seaborn</li>
+      <li>When to prefer axes-level over figure-level</li>
+    </ul>
+    <div class="h2-style">## Combining Multiple Plots on One Axes</div>
+    <ul class="sub-list">
+      <li>Overlaying plots (e.g., stripplot + boxplot on same axes)</li>
+      <li>Layering histplot and kdeplot</li>
+      <li>Layering scatterplot and lineplot</li>
+      <li>Managing legend when combining plots</li>
+      <li>Z-order control</li>
+    </ul>
+    <div class="h2-style">## Using plt.subplots() with Seaborn</div>
+    <ul class="sub-list">
+      <li>Creating multi-panel layouts with <code>plt.subplots()</code></li>
+      <li>Passing <code>ax</code> parameter to axes-level functions</li>
+      <li>Sharing x and y axes across subplots</li>
+      <li>Adjusting layout with <code>plt.tight_layout()</code></li>
+      <li>Using <code>fig.subplots_adjust()</code></li>
+      <li>GridSpec for complex subplot layouts</li>
+    </ul>
+    <div class="h2-style">## Axes Customization after Plotting</div>
+    <ul class="sub-list">
+      <li>Setting axis labels with <code>ax.set_xlabel()</code> and <code>ax.set_ylabel()</code></li>
+      <li>Setting plot title with <code>ax.set_title()</code></li>
+      <li>Setting axis limits with <code>ax.set_xlim()</code> and <code>ax.set_ylim()</code></li>
+      <li>Modifying tick marks and tick labels</li>
+      <li>Rotating tick labels</li>
+      <li>Controlling grid visibility</li>
+      <li>Customizing legend position and appearance</li>
+    </ul>
+  </div>
+
+  <!-- Figure Level -->
+  <span class="anchor" id="figure"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Figure-Level Functions In Depth</div>
+    <div class="h2-style">## Understanding Figure-Level Functions</div>
+    <ul class="sub-list">
+      <li>What figure-level functions return (FacetGrid object)</li>
+      <li>Complete list: <code>relplot</code>, <code>displot</code>, <code>catplot</code>, <code>lmplot</code>, <code>pairplot</code>, <code>clustermap</code></li>
+      <li>Accessing the figure object from FacetGrid</li>
+      <li>Accessing individual Axes objects from FacetGrid</li>
+    </ul>
+    <div class="h2-style">## Figure-Level Parameters</div>
+    <ul class="sub-list">
+      <li><code>height</code> — height of each subplot facet</li>
+      <li><code>aspect</code> — width = height × aspect</li>
+      <li><code>col</code> and <code>row</code> parameters for faceting</li>
+      <li><code>col_wrap</code> for wrapping columns</li>
+      <li><code>col_order</code> and <code>row_order</code></li>
+      <li><code>margin_titles</code> for cleaner facet labels</li>
+      <li><code>sharex</code> and <code>sharey</code> parameters</li>
+    </ul>
+    <div class="h2-style">## Customizing Figure-Level Outputs</div>
+    <ul class="sub-list">
+      <li>Setting overall title with <code>g.fig.suptitle()</code></li>
+      <li>Modifying individual facet titles</li>
+      <li>Setting axis labels globally</li>
+      <li>Using <code>g.set_axis_labels()</code></li>
+      <li>Using <code>g.set_titles()</code></li>
+      <li>Using <code>g.set()</code> to apply properties to all axes</li>
+    </ul>
+  </div>
+
+  <!-- FacetGrid -->
+  <span class="anchor" id="facetgrid"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> FacetGrid & Subplots</div>
+    <div class="h2-style">## FacetGrid Basics</div>
+    <ul class="sub-list">
+      <li>Creating FacetGrid directly: <code>sns.FacetGrid(data, col=, row=)</code></li>
+      <li><code>FacetGrid.map()</code> — mapping a function to facets</li>
+      <li><code>FacetGrid.map_dataframe()</code> — mapping with DataFrame access</li>
+      <li>Using any matplotlib or seaborn function with FacetGrid</li>
+    </ul>
+    <div class="h2-style">## FacetGrid Configuration</div>
+    <ul class="sub-list">
+      <li>Setting hue within FacetGrid</li>
+      <li>Legend handling in FacetGrid</li>
+      <li><code>despine</code> parameter on FacetGrid</li>
+      <li>Setting axis labels and titles across all facets</li>
+      <li>Adjusting subplot spacing</li>
+      <li>Applying different limits to each facet</li>
+    </ul>
+    <div class="h2-style">## Advanced FacetGrid Techniques</div>
+    <ul class="sub-list">
+      <li>Using FacetGrid with custom plot functions</li>
+      <li>Mapping multiple variables</li>
+      <li>Adding reference lines across facets</li>
+      <li>Annotations on specific facets only</li>
+      <li>Combining FacetGrid with pandas groupby</li>
+    </ul>
+  </div>
+
+  <!-- Regression -->
+  <span class="anchor" id="regression"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Regression Plots</div>
+    <div class="h2-style">## lmplot() — Figure-Level Regression</div>
+    <ul class="sub-list">
+      <li><code>sns.lmplot()</code> — basic linear regression plot</li>
+      <li>Confidence interval for regression line</li>
+      <li>Faceting regression plots with col and row</li>
+      <li>Separate regression lines per hue group</li>
+      <li>Scatter plot customization options</li>
+      <li>Line customization options</li>
+    </ul>
+    <div class="h2-style">## regplot() — Axes-Level Regression</div>
+    <ul class="sub-list">
+      <li><code>sns.regplot()</code> — axes-level version</li>
+      <li>Fitting linear regression</li>
+      <li>Polynomial regression with <code>order</code> parameter</li>
+      <li>Logistic regression for binary outcomes with <code>logistic=True</code></li>
+      <li>Robust regression with <code>robust=True</code></li>
+      <li>Lowess smoothing with <code>lowess=True</code></li>
+      <li>Disabling confidence intervals</li>
+      <li>Customizing scatter and line appearance</li>
+    </ul>
+    <div class="h2-style">## residplot() — Residuals Plot</div>
+    <ul class="sub-list">
+      <li><code>sns.residplot()</code> — plotting residuals</li>
+      <li>Checking model fit quality</li>
+      <li>Lowess line on residuals</li>
+      <li>Interpreting residual patterns</li>
+    </ul>
+    <div class="h2-style">## Regression with Categorical Variables</div>
+    <ul class="sub-list">
+      <li>Including categorical x-variables in regression</li>
+      <li>Jitter for discrete x-values in regplot</li>
+      <li>Conditioning on categorical variables</li>
+    </ul>
+    <div class="h2-style">## Statistical Significance in Regression</div>
+    <ul class="sub-list">
+      <li>Bootstrapped confidence intervals</li>
+      <li>Changing CI level (default 95%)</li>
+      <li>Adding statistical annotation manually</li>
+    </ul>
+  </div>
+
+  <!-- Matrix -->
+  <span class="anchor" id="matrix"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Matrix Plots</div>
+    <div class="h2-style">## heatmap() — Heatmap</div>
+    <ul class="sub-list">
+      <li><code>sns.heatmap()</code> — basic usage</li>
+      <li>Passing a 2D array or pivot table</li>
+      <li>Annotations inside cells with <code>annot=True</code></li>
+      <li>Custom annotation format with <code>fmt</code></li>
+      <li>Custom annotation data with <code>annot</code> parameter</li>
+      <li>Choosing colormap with <code>cmap</code></li>
+      <li>Center value for diverging colormaps with <code>center</code></li>
+      <li>Value range with <code>vmin</code> and <code>vmax</code></li>
+      <li>Masking cells with <code>mask</code> parameter</li>
+      <li>Line widths between cells with <code>linewidths</code></li>
+      <li>Colorbar customization and removal</li>
+      <li>Square cells with <code>square=True</code></li>
+      <li>Row and column labels</li>
+    </ul>
+    <div class="h2-style">## Correlation Heatmap Patterns</div>
+    <ul class="sub-list">
+      <li>Computing correlation matrix with <code>df.corr()</code></li>
+      <li>Masking upper triangle for cleaner look</li>
+      <li>Pearson vs Spearman vs Kendall correlation</li>
+      <li>Annotating correlation values</li>
+    </ul>
+    <div class="h2-style">## clustermap() — Hierarchical Clustering Heatmap</div>
+    <ul class="sub-list">
+      <li><code>sns.clustermap()</code> — basic usage</li>
+      <li>Hierarchical clustering of rows and columns</li>
+      <li>Linkage methods: single, complete, average, ward</li>
+      <li>Distance metrics: euclidean, correlation, cosine</li>
+      <li>Standard scaling with <code>standard_scale</code></li>
+      <li>Z-score normalization with <code>z_score</code></li>
+      <li>Row and column color annotations</li>
+      <li>Disabling row or column clustering</li>
+      <li>Dendrogram customization</li>
+      <li>Accessing the ClusterGrid object</li>
+      <li>Re-ordering without clustering</li>
+    </ul>
+  </div>
+
+  <!-- Customization -->
+  <span class="anchor" id="customization"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Deep Customization</div>
+    <div class="h2-style">## set_theme() Advanced Usage</div>
+    <ul class="sub-list">
+      <li>Combining style, context, palette, and font in one call</li>
+      <li>Setting custom font with <code>font</code> parameter</li>
+      <li>rc parameter for fine-grained matplotlib rcParams</li>
+      <li>Resetting to defaults with <code>sns.reset_defaults()</code></li>
+      <li>Resetting original matplotlib settings with <code>sns.reset_orig()</code></li>
+    </ul>
+    <div class="h2-style">## Custom Color Palettes</div>
+    <ul class="sub-list">
+      <li>Creating palettes from hex color lists</li>
+      <li>Creating palettes from RGB tuples</li>
+      <li>Blending palettes with <code>sns.blend_palette()</code></li>
+      <li>Creating sequential palettes from a single color with <code>sns.light_palette()</code></li>
+      <li>Creating dark sequential palettes with <code>sns.dark_palette()</code></li>
+      <li>Creating diverging palettes with <code>sns.diverging_palette()</code></li>
+      <li>Using colormap from matplotlib in Seaborn</li>
+    </ul>
+    <div class="h2-style">## Line, Marker & Fill Customization</div>
+    <ul class="sub-list">
+      <li>Customizing line width, style, and color</li>
+      <li>Customizing marker size and style</li>
+      <li>Edge colors and fill colors for markers</li>
+      <li>Fill patterns with hatch (via matplotlib)</li>
+      <li>Transparency (alpha) control</li>
+    </ul>
+    <div class="h2-style">## Legend Customization</div>
+    <ul class="sub-list">
+      <li>Moving legend position (inside and outside plot)</li>
+      <li>Removing legend with <code>legend=False</code></li>
+      <li>Customizing legend title</li>
+      <li>Controlling number of legend columns</li>
+      <li>Frameon, framealpha parameters</li>
+      <li>Accessing and modifying legend handles and labels</li>
+      <li>Adding custom legend entries</li>
+    </ul>
+    <div class="h2-style">## Axis Formatting</div>
+    <ul class="sub-list">
+      <li>Custom tick formatters (PercentFormatter, ScalarFormatter)</li>
+      <li>Logarithmic scale axes</li>
+      <li>Datetime axis formatting</li>
+      <li>Setting major and minor tick locations</li>
+      <li>Using symlog scale</li>
+      <li>Hiding axes</li>
+    </ul>
+  </div>
+
+  <!-- Annotations -->
+  <span class="anchor" id="annotations"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Annotations & Text</div>
+    <div class="h2-style">## Adding Text to Plots</div>
+    <ul class="sub-list">
+      <li>Using <code>ax.text()</code> for arbitrary text</li>
+      <li>Adding plot title and subtitle</li>
+      <li>Adding value labels on bars</li>
+      <li>Adding data point labels on scatter plots</li>
+      <li>Using <code>ax.annotate()</code> with arrows</li>
+      <li>Annotation styles: arrow, curved arrow, fancy box</li>
+      <li>BboxProps for text background boxes</li>
+    </ul>
+    <div class="h2-style">## Reference Lines</div>
+    <ul class="sub-list">
+      <li>Horizontal reference lines with <code>ax.axhline()</code></li>
+      <li>Vertical reference lines with <code>ax.axvline()</code></li>
+      <li>Diagonal lines with <code>ax.axline()</code></li>
+      <li>Shaded regions with <code>ax.axhspan()</code> and <code>ax.axvspan()</code></li>
+    </ul>
+    <div class="h2-style">## Statistical Annotations</div>
+    <ul class="sub-list">
+      <li>Adding significance brackets manually</li>
+      <li>Using statannotations library for automatic p-value annotation</li>
+      <li>Adding correlation coefficient to scatter plots</li>
+      <li>Adding regression equation and R² to plots</li>
+    </ul>
+    <div class="h2-style">## Figure-Level Text</div>
+    <ul class="sub-list">
+      <li>Adding super title with <code>plt.suptitle()</code></li>
+      <li>Adding figure-level footnotes</li>
+      <li>Adding source attribution text</li>
+      <li>Watermarks using figure.text()</li>
+    </ul>
+  </div>
+
+  <!-- Matplotlib -->
+  <span class="anchor" id="matplotlib"></span>
+  <div class="topic-card int-card">
+    <div class="h1-style"><span class="hash">#</span> Matplotlib Integration</div>
+    <div class="h2-style">## How Seaborn Uses Matplotlib</div>
+    <ul class="sub-list">
+      <li>Seaborn figures are matplotlib figures</li>
+      <li>Accessing the current Figure and Axes with <code>plt.gcf()</code>, <code>plt.gca()</code></li>
+      <li>plt.show() vs fig.show()</li>
+      <li>Rendering pipeline overview</li>
+    </ul>
+    <div class="h2-style">## Saving Figures</div>
+    <ul class="sub-list">
+      <li><code>plt.savefig()</code> — saving to PNG, PDF, SVG, JPEG, TIFF</li>
+      <li>DPI setting for high resolution</li>
+      <li><code>bbox_inches='tight'</code> to avoid clipping</li>
+      <li>Transparent background with <code>transparent=True</code></li>
+      <li>Saving figure-level plots with <code>g.savefig()</code></li>
+      <li>Setting output file format</li>
+    </ul>
+    <div class="h2-style">## Hybrid Plots (Seaborn + Matplotlib)</div>
+    <ul class="sub-list">
+      <li>Mixing sns and plt calls on same figure</li>
+      <li>Adding matplotlib patches to seaborn plots</li>
+      <li>Adding matplotlib lines and shapes</li>
+      <li>Inset axes using <code>ax.inset_axes()</code></li>
+      <li>Using twin axes with <code>ax.twinx()</code> and <code>ax.twiny()</code></li>
+    </ul>
+    <div class="h2-style">## rcParams and Style Control</div>
+    <ul class="sub-list">
+      <li>Understanding matplotlib rcParams</li>
+      <li>Modifying rcParams alongside Seaborn themes</li>
+      <li>Using <code>plt.rcParams.update()</code></li>
+      <li>Using matplotlib style sheets alongside Seaborn</li>
+      <li>Context manager for temporary style changes</li>
+    </ul>
+  </div>
+
+  <!-- ============================
+       ADVANCED SECTION
+  ============================= -->
+  <div class="section-header adv">
+    <div class="section-label adv">ADVANCED</div>
+    <div class="section-line"></div>
+    <div class="section-pill">Expert Level</div>
+  </div>
+
+  <!-- Objects Interface -->
+  <span class="anchor" id="objects"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Objects Interface (so.Plot)</div>
+    <div class="h2-style">## Introduction to the Objects API</div>
+    <ul class="sub-list">
+      <li>History and motivation for the Objects API (v0.12+)</li>
+      <li>Grammar of graphics design in Seaborn objects</li>
+      <li>Declarative, composable, chainable API</li>
+      <li>Importing: <code>from seaborn import objects as so</code></li>
+      <li>Comparison to the classic API</li>
+    </ul>
+    <div class="h2-style">## so.Plot — Core Plot Object</div>
+    <ul class="sub-list">
+      <li><code>so.Plot(data, x=, y=)</code> — initializing a plot</li>
+      <li>Chaining methods: <code>.add()</code>, <code>.scale()</code>, <code>.facet()</code>, <code>.pair()</code>, <code>.layout()</code></li>
+      <li>Rendering with <code>.show()</code> and <code>.save()</code></li>
+      <li>Passing multiple datasets</li>
+      <li>Specifying variables (x, y, color, alpha, pointsize, marker, linestyle)</li>
+    </ul>
+    <div class="h2-style">## Marks — Visual Representations</div>
+    <ul class="sub-list">
+      <li><code>so.Dot</code> — scatter points</li>
+      <li><code>so.Line</code> — line marks</li>
+      <li><code>so.Path</code> — path connecting data points</li>
+      <li><code>so.Bar</code> — bar marks</li>
+      <li><code>so.Range</code> — range (error bar) marks</li>
+      <li><code>so.Band</code> — band/ribbon marks</li>
+      <li><code>so.Area</code> — area marks</li>
+      <li><code>so.Text</code> — text annotation marks</li>
+      <li><code>so.Dash</code> — dash/tick marks</li>
+      <li>Combining multiple marks in one plot</li>
+      <li>Mark-level aesthetic overrides</li>
+    </ul>
+    <div class="h2-style">## Stats — Statistical Transforms</div>
+    <ul class="sub-list">
+      <li><code>so.Agg</code> — aggregate with custom function</li>
+      <li><code>so.Est</code> — estimate with CI</li>
+      <li><code>so.Count</code> — count observations</li>
+      <li><code>so.Hist</code> — histogram binning transform</li>
+      <li><code>so.KDE</code> — kernel density estimate transform</li>
+      <li><code>so.ECDF</code> — empirical CDF transform</li>
+      <li><code>so.PolyFit</code> — polynomial regression transform</li>
+      <li><code>so.Perc</code> — percentile computation</li>
+      <li><code>so.Rolling</code> — rolling window statistics</li>
+    </ul>
+    <div class="h2-style">## Scales — Mapping Data to Visual Properties</div>
+    <ul class="sub-list">
+      <li><code>so.Nominal</code> — scale for categorical data</li>
+      <li><code>so.Continuous</code> — scale for continuous data</li>
+      <li><code>so.Temporal</code> — scale for datetime data</li>
+      <li><code>so.Boolean</code> — scale for boolean data</li>
+      <li>Customizing axis transforms (log, sqrt)</li>
+      <li>Customizing color scales</li>
+      <li>Customizing size and alpha scales</li>
+    </ul>
+    <div class="h2-style">## Moves — Adjusting Position</div>
+    <ul class="sub-list">
+      <li><code>so.Dodge</code> — dodge grouped elements</li>
+      <li><code>so.Jitter</code> — add random jitter</li>
+      <li><code>so.Stack</code> — stack elements</li>
+      <li><code>so.Shift</code> — shift position</li>
+      <li><code>so.Norm</code> — normalize within groups</li>
+    </ul>
+    <div class="h2-style">## Faceting and Pairing in Objects API</div>
+    <ul class="sub-list">
+      <li><code>.facet(col=, row=)</code> method</li>
+      <li><code>.pair(x=, y=)</code> for pair grids</li>
+      <li>Wrapping facets</li>
+      <li>Sharing axes across facets</li>
+    </ul>
+    <div class="h2-style">## Layout and Theming in Objects API</div>
+    <ul class="sub-list">
+      <li><code>.layout(size=, engine=)</code></li>
+      <li>Setting figure size directly</li>
+      <li>Theme parameter in Plot</li>
+      <li>Customizing via matplotlib rcParams</li>
+    </ul>
+    <div class="h2-style">## Saving Plots in Objects API</div>
+    <ul class="sub-list">
+      <li><code>.save(filename)</code> method</li>
+      <li>DPI and format options</li>
+      <li>Integrating with matplotlib subplots</li>
+    </ul>
+  </div>
+
+  <!-- Statistical Methods -->
+  <span class="anchor" id="statistical"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Statistical Methods & Estimation</div>
+    <div class="h2-style">## Bootstrapping in Seaborn</div>
+    <ul class="sub-list">
+      <li>How Seaborn uses bootstrapping for confidence intervals</li>
+      <li>Setting number of bootstrap iterations with <code>n_boot</code></li>
+      <li>Setting random seed for reproducibility with <code>seed</code></li>
+      <li>Performance implications of bootstrapping</li>
+    </ul>
+    <div class="h2-style">## Estimator Functions</div>
+    <ul class="sub-list">
+      <li>Using mean (default) estimator</li>
+      <li>Using median estimator</li>
+      <li>Using sum, min, max as estimators</li>
+      <li>Using custom lambda functions as estimators</li>
+      <li>Applying estimators per group</li>
+    </ul>
+    <div class="h2-style">## Error Bar Representations</div>
+    <ul class="sub-list">
+      <li>Confidence intervals (ci=95 legacy / errorbar=('ci', 95))</li>
+      <li>Standard deviation: errorbar='sd'</li>
+      <li>Standard error: errorbar='se'</li>
+      <li>Percentile intervals: errorbar=('pi', 95)</li>
+      <li>Removing error bars: errorbar=None</li>
+      <li>Capsize and linewidth of error bars</li>
+    </ul>
+    <div class="h2-style">## Distribution Statistics</div>
+    <ul class="sub-list">
+      <li>Kernel density estimation theory and parameters</li>
+      <li>Bandwidth selection methods (Scott, Silverman, custom)</li>
+      <li>Understanding histogram statistics (count, density, probability, frequency)</li>
+      <li>ECDF interpretation and comparisons</li>
+    </ul>
+    <div class="h2-style">## Integration with statsmodels</div>
+    <ul class="sub-list">
+      <li>Logistic regression in regplot/lmplot</li>
+      <li>Robust regression (Huber, etc.)</li>
+      <li>Polynomial regression</li>
+      <li>Lowess smoothing</li>
+    </ul>
+    <div class="h2-style">## Integration with scipy</div>
+    <ul class="sub-list">
+      <li>Fitting theoretical distributions for comparison</li>
+      <li>Overlay of fitted distribution on histogram</li>
+      <li>Q-Q plots manually constructed in Seaborn</li>
+    </ul>
+  </div>
+
+  <!-- Multi-Dimensional -->
+  <span class="anchor" id="multidim"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Multi-Dimensional Data Visualization</div>
+    <div class="h2-style">## Encoding Multiple Variables</div>
+    <ul class="sub-list">
+      <li>Simultaneous encoding of 5+ variables (x, y, hue, size, style)</li>
+      <li>Cognitive load considerations for multi-variable plots</li>
+      <li>Interaction effects visualization</li>
+      <li>Three-way interaction plots using faceting + hue</li>
+    </ul>
+    <div class="h2-style">## Faceting as Dimensionality Reduction in Visualization</div>
+    <ul class="sub-list">
+      <li>Row × Column faceting for three categorical variables</li>
+      <li>Combining col, row, and hue for four categorical variables</li>
+      <li>Choosing which variable to facet vs color</li>
+    </ul>
+    <div class="h2-style">## High-Dimensional Pattern Discovery</div>
+    <ul class="sub-list">
+      <li>Using clustermap for high-dimensional data exploration</li>
+      <li>Using pairplot for pairwise relationships in many variables</li>
+      <li>Dimensionality reduction (PCA/UMAP) results visualization with Seaborn</li>
+      <li>Visualizing cluster assignments on scatter plots</li>
+    </ul>
+    <div class="h2-style">## Time Series Visualization</div>
+    <ul class="sub-list">
+      <li>Plotting time-indexed data with lineplot</li>
+      <li>Multiple time series with hue</li>
+      <li>Confidence bands for time series</li>
+      <li>Seasonal decomposition plots</li>
+      <li>Rolling statistics visualization</li>
+      <li>Event annotation on time series</li>
+    </ul>
+  </div>
+
+  <!-- Performance -->
+  <span class="anchor" id="performance"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Performance & Scalability</div>
+    <div class="h2-style">## Large Dataset Challenges</div>
+    <ul class="sub-list">
+      <li>Overplotting — detection and mitigation</li>
+      <li>Performance degradation with >100K points</li>
+      <li>Memory considerations for large DataFrames</li>
+    </ul>
+    <div class="h2-style">## Strategies for Large Data</div>
+    <ul class="sub-list">
+      <li>Random sampling before plotting</li>
+      <li>Using 2D histograms (histplot 2D) instead of scatter</li>
+      <li>Using hexbin plots via matplotlib ax.hexbin()</li>
+      <li>Using KDE instead of scatter for density</li>
+      <li>Using boxenplot over strip/swarm for large datasets</li>
+      <li>Disabling bootstrapped CI for speed (n_boot=0)</li>
+    </ul>
+    <div class="h2-style">## Optimizing Rendering Speed</div>
+    <ul class="sub-list">
+      <li>Reducing DPI for interactive exploration</li>
+      <li>Disabling anti-aliasing via rcParams</li>
+      <li>Using Agg backend for faster non-interactive rendering</li>
+      <li>Batching multiple plots efficiently</li>
+      <li>Profiling plot generation with timeit</li>
+    </ul>
+    <div class="h2-style">## Seaborn with Dask and Chunked Data</div>
+    <ul class="sub-list">
+      <li>Converting Dask DataFrames to pandas for plotting</li>
+      <li>Incremental aggregation before visualization</li>
+      <li>Sampling strategies for distributed data</li>
+    </ul>
+  </div>
+
+  <!-- PairPlot -->
+  <span class="anchor" id="pairplot"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> PairGrid & PairPlot</div>
+    <div class="h2-style">## pairplot() — Quick Pairwise Visualization</div>
+    <ul class="sub-list">
+      <li><code>sns.pairplot()</code> — basic usage</li>
+      <li>Diagonal plot options: auto, hist, kde</li>
+      <li>Off-diagonal plot options: scatter, kde</li>
+      <li>Coloring by group with <code>hue</code></li>
+      <li>Selecting subset of variables with <code>vars</code></li>
+      <li>Separate x and y variables with <code>x_vars</code> and <code>y_vars</code></li>
+      <li>Customizing markers by hue</li>
+      <li>Corner parameter to show only lower triangle</li>
+    </ul>
+    <div class="h2-style">## PairGrid — Full Control Pair Grid</div>
+    <ul class="sub-list">
+      <li><code>sns.PairGrid(data)</code> — initializing PairGrid</li>
+      <li><code>PairGrid.map()</code> — same function everywhere</li>
+      <li><code>PairGrid.map_diag()</code> — diagonal plot function</li>
+      <li><code>PairGrid.map_offdiag()</code> — off-diagonal plot function</li>
+      <li><code>PairGrid.map_upper()</code> — upper triangle</li>
+      <li><code>PairGrid.map_lower()</code> — lower triangle</li>
+      <li>Using different plot types on upper vs lower triangle</li>
+      <li>PairGrid with hue</li>
+      <li>Legend customization in PairGrid</li>
+      <li>Diagonal KDE with hue</li>
+    </ul>
+    <div class="h2-style">## Advanced PairGrid Patterns</div>
+    <ul class="sub-list">
+      <li>Combining scatter + regression in the same PairGrid</li>
+      <li>Adding correlation coefficients in grid cells</li>
+      <li>Mapping custom functions with PairGrid.map_*</li>
+      <li>Configuring axis labels across all cells</li>
+    </ul>
+  </div>
+
+  <!-- Publication -->
+  <span class="anchor" id="publication"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Publication-Quality Figures</div>
+    <div class="h2-style">## Figure Design Principles</div>
+    <ul class="sub-list">
+      <li>Data-to-ink ratio principle</li>
+      <li>Chartjunk elimination</li>
+      <li>Color accessibility for colorblind readers</li>
+      <li>Grayscale compatibility testing</li>
+      <li>Typography consistency (fonts, sizes)</li>
+      <li>Alignment and whitespace discipline</li>
+    </ul>
+    <div class="h2-style">## Journal and Conference Figure Standards</div>
+    <ul class="sub-list">
+      <li>Column width figures (single vs double column)</li>
+      <li>Typical journal DPI requirements (300–600 DPI)</li>
+      <li>Accepted file formats (PDF, EPS, TIFF, PNG)</li>
+      <li>Figure size conventions (inches)</li>
+      <li>Font size minimums for legibility in print</li>
+    </ul>
+    <div class="h2-style">## Complete Publication Workflow</div>
+    <ul class="sub-list">
+      <li>Setting up a consistent figure style module</li>
+      <li>Using sns.set_theme() with custom rcParams for journal style</li>
+      <li>Creating figure panels (A, B, C, D) with subplot labels</li>
+      <li>Aligning multiple panels with GridSpec</li>
+      <li>Exporting vector graphics (SVG, PDF) for further editing</li>
+      <li>Post-processing in Inkscape or Illustrator</li>
+    </ul>
+    <div class="h2-style">## Reproducible Figure Code</div>
+    <ul class="sub-list">
+      <li>Seeding random operations for reproducible CI</li>
+      <li>Pinning library versions</li>
+      <li>Encapsulating figure code in functions</li>
+      <li>Parameterized figure scripts</li>
+      <li>Using configuration files for plot settings</li>
+    </ul>
+    <div class="h2-style">## Presentation Figures</div>
+    <ul class="sub-list">
+      <li>Using poster context for large-scale figures</li>
+      <li>High contrast colors for projector/screen</li>
+      <li>Minimal text, maximum clarity</li>
+      <li>Animated figures for presentations (Matplotlib animation)</li>
+    </ul>
+  </div>
+
+  <!-- Real World -->
+  <span class="anchor" id="real-world"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Real-World Projects & EDA</div>
+    <div class="h2-style">## Exploratory Data Analysis (EDA) Workflow</div>
+    <ul class="sub-list">
+      <li>Univariate analysis — distribution plots for each variable</li>
+      <li>Bivariate analysis — scatter, bar, box plots for pairs</li>
+      <li>Multivariate analysis — pairplot and heatmap</li>
+      <li>Categorical vs numeric analysis strategies</li>
+      <li>Outlier detection via box plots and scatter plots</li>
+      <li>Missing data visualization patterns</li>
+      <li>Class imbalance visualization for ML tasks</li>
+    </ul>
+    <div class="h2-style">## Domain-Specific Visualization</div>
+    <ul class="sub-list">
+      <li>Finance — returns distributions, rolling metrics, correlation heatmaps</li>
+      <li>Healthcare — survival curves, biomarker distributions</li>
+      <li>ML/DS — learning curves, confusion matrix heatmaps, feature importance</li>
+      <li>Social science — survey response distributions, Likert scale visualization</li>
+      <li>Genomics — gene expression heatmaps with clustermap</li>
+      <li>Time-series — trend and seasonality plots</li>
+    </ul>
+    <div class="h2-style">## Building Reusable Visualization Pipelines</div>
+    <ul class="sub-list">
+      <li>Wrapping Seaborn plots in reusable functions</li>
+      <li>Creating a custom visualization module</li>
+      <li>Config-driven figure generation</li>
+      <li>Automated EDA report generation</li>
+      <li>Integration with pandas-profiling / ydata-profiling</li>
+    </ul>
+    <div class="h2-style">## Dashboard Patterns with Seaborn</div>
+    <ul class="sub-list">
+      <li>Multi-panel dashboards using GridSpec</li>
+      <li>Color-coded KPI summary panels</li>
+      <li>Combining figure-level and axes-level plots in one figure</li>
+      <li>Adding table alongside plots with matplotlib</li>
+    </ul>
+  </div>
+
+  <!-- Ecosystem -->
+  <span class="anchor" id="ecosystem"></span>
+  <div class="topic-card adv-card">
+    <div class="h1-style"><span class="hash">#</span> Ecosystem Integration</div>
+    <div class="h2-style">## Seaborn + Pandas</div>
+    <ul class="sub-list">
+      <li>Chaining pandas operations before plotting</li>
+      <li>Using groupby aggregations as Seaborn input</li>
+      <li>Using pivot_table output in heatmaps</li>
+      <li>Plotting directly from DataFrame.plot() vs Seaborn</li>
+      <li>MultiIndex DataFrames in Seaborn</li>
+    </ul>
+    <div class="h2-style">## Seaborn + Scikit-learn</div>
+    <ul class="sub-list">
+      <li>Visualizing train-test splits</li>
+      <li>Confusion matrix heatmap</li>
+      <li>ROC curves and precision-recall curves</li>
+      <li>Cross-validation score distributions</li>
+      <li>Feature importance visualization</li>
+      <li>Residual plots for regression models</li>
+      <li>Cluster label visualization after KMeans/DBSCAN</li>
+      <li>PCA / t-SNE / UMAP scatter plots</li>
+    </ul>
+    <div class="h2-style">## Seaborn + Plotly (Bridging Static & Interactive)</div>
+    <ul class="sub-list">
+      <li>When to choose Seaborn vs Plotly</li>
+      <li>Recreating Seaborn aesthetics in Plotly</li>
+      <li>Exporting Seaborn to Plotly via chart image embedding</li>
+    </ul>
+    <div class="h2-style">## Seaborn + Streamlit & Dash</div>
+    <ul class="sub-list">
+      <li>Embedding Seaborn figures in Streamlit with <code>st.pyplot()</code></li>
+      <li>Dynamic Seaborn plots from user input in Streamlit</li>
+      <li>Using Dash with Seaborn images</li>
+      <li>Caching expensive Seaborn plots in Streamlit</li>
+    </ul>
+    <div class="h2-style">## Seaborn + Jupyter Widgets</div>
+    <ul class="sub-list">
+      <li>Using ipywidgets to create interactive Seaborn parameter exploration</li>
+      <li>Dropdown for hue variable selection</li>
+      <li>Slider for plot parameter control</li>
+      <li>interact() and interactive() with Seaborn</li>
+    </ul>
+    <div class="h2-style">## Seaborn + LaTeX & Typesetting</div>
+    <ul class="sub-list">
+      <li>Enabling LaTeX rendering in matplotlib for Seaborn labels</li>
+      <li>Using mathtext for mathematical symbols in labels</li>
+      <li>Exporting publication-ready PDFs for LaTeX inclusion</li>
+      <li>Font consistency between Seaborn figures and LaTeX documents</li>
+    </ul>
+    <div class="h2-style">## Extending Seaborn</div>
+    <ul class="sub-list">
+      <li>Writing custom plot functions compatible with FacetGrid.map()</li>
+      <li>Building on top of the Objects API</li>
+      <li>Creating custom statistical transforms</li>
+      <li>Wrapping Seaborn with a domain-specific plotting library</li>
+      <li>Contributing to Seaborn open source</li>
+    </ul>
+  </div>
+
+  <div class="footer">◈ SEABORN COMPLETE ROADMAP · BEGINNER → INTERMEDIATE → ADVANCED ◈</div>
+
+</div>
+
+<script>
+function downloadPage(e) {
+  e.preventDefault();
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Seaborn_Complete_Roadmap.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Entrance animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateX(0) translateY(0)';
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.topic-card').forEach(card => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(card);
+});
+</script>
+</body>
+</html>

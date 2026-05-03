@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete CSS Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #0a0a1a;
+    --bg2: #0d0d2b;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+    --glass-hover: rgba(255,255,255,0.1);
+    --beginner: #00ffd5;
+    --beginner-glow: rgba(0,255,213,0.3);
+    --intermediate: #ff6ef7;
+    --intermediate-glow: rgba(255,110,247,0.3);
+    --advanced: #ffd700;
+    --advanced-glow: rgba(255,215,0,0.3);
+    --h1-color: #00ffd5;
+    --h2-color: #ff6ef7;
+    --h3-color: #ffd700;
+    --h4-color: #7df9ff;
+    --text: rgba(255,255,255,0.88);
+    --muted: rgba(255,255,255,0.5);
+    --accent: #00ffd5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--bg1);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated mesh background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,255,213,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 80%, rgba(255,110,247,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255,215,0,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,213,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,213,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 60px 0 40px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--beginner);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 var(--beginner-glow); }
+    50% { box-shadow: 0 0 20px 4px var(--beginner-glow); }
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00ffd5, #ff6ef7, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(0,255,213,0.2), rgba(255,110,247,0.2));
+    border: 1px solid rgba(0,255,213,0.4);
+    backdrop-filter: blur(20px);
+    color: #fff;
+    padding: 13px 30px;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .btn-download:hover {
+    background: linear-gradient(135deg, rgba(0,255,213,0.35), rgba(255,110,247,0.35));
+    box-shadow: 0 0 30px rgba(0,255,213,0.3), 0 0 60px rgba(255,110,247,0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-download svg { width: 18px; height: 18px; }
+
+  /* BOOKMARKS NAV */
+  .nav-glass {
+    position: sticky;
+    top: 16px;
+    z-index: 100;
+    margin: 30px 0;
+  }
+
+  .nav-inner {
+    background: rgba(10,10,26,0.85);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(30px);
+    border-radius: 60px;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nav-inner a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+
+  .nav-inner a.beg { color: var(--beginner); border: 1px solid transparent; }
+  .nav-inner a.beg:hover { background: var(--beginner-glow); border-color: var(--beginner); }
+  .nav-inner a.int { color: var(--intermediate); border: 1px solid transparent; }
+  .nav-inner a.int:hover { background: var(--intermediate-glow); border-color: var(--intermediate); }
+  .nav-inner a.adv { color: var(--advanced); border: 1px solid transparent; }
+  .nav-inner a.adv:hover { background: var(--advanced-glow); border-color: var(--advanced); }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 24px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    opacity: 0.06;
+  }
+
+  .section-header.beginner {
+    background: linear-gradient(135deg, rgba(0,255,213,0.1), rgba(0,255,213,0.03));
+    border: 1px solid rgba(0,255,213,0.25);
+    box-shadow: 0 0 40px rgba(0,255,213,0.08), inset 0 1px 0 rgba(0,255,213,0.1);
+  }
+
+  .section-header.intermediate {
+    background: linear-gradient(135deg, rgba(255,110,247,0.1), rgba(255,110,247,0.03));
+    border: 1px solid rgba(255,110,247,0.25);
+    box-shadow: 0 0 40px rgba(255,110,247,0.08), inset 0 1px 0 rgba(255,110,247,0.1);
+  }
+
+  .section-header.advanced {
+    background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.03));
+    border: 1px solid rgba(255,215,0,0.25);
+    box-shadow: 0 0 40px rgba(255,215,0,0.08), inset 0 1px 0 rgba(255,215,0,0.1);
+  }
+
+  .section-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    opacity: 0.15;
+    line-height: 1;
+  }
+
+  .beginner .section-num { color: var(--beginner); }
+  .intermediate .section-num { color: var(--intermediate); }
+  .advanced .section-num { color: var(--advanced); }
+
+  .section-title-wrap h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .beginner .section-title-wrap h2 { color: var(--beginner); text-shadow: 0 0 20px var(--beginner-glow); }
+  .intermediate .section-title-wrap h2 { color: var(--intermediate); text-shadow: 0 0 20px var(--intermediate-glow); }
+  .advanced .section-title-wrap h2 { color: var(--advanced); text-shadow: 0 0 20px var(--advanced-glow); }
+
+  .section-title-wrap p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .level-badge {
+    margin-left: auto;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .beginner .level-badge { background: rgba(0,255,213,0.15); color: var(--beginner); border: 1px solid rgba(0,255,213,0.3); }
+  .intermediate .level-badge { background: rgba(255,110,247,0.15); color: var(--intermediate); border: 1px solid rgba(255,110,247,0.3); }
+  .advanced .level-badge { background: rgba(255,215,0,0.15); color: var(--advanced); border: 1px solid rgba(255,215,0,0.3); }
+
+  /* TOPIC CARD */
+  .topic-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .topic-card:hover {
+    background: var(--glass-hover);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .topic-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .beginner-card .topic-icon { background: rgba(0,255,213,0.15); }
+  .intermediate-card .topic-icon { background: rgba(255,110,247,0.15); }
+  .advanced-card .topic-icon { background: rgba(255,215,0,0.15); }
+
+  /* H3 styled topic titles */
+  .topic-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex: 1;
+  }
+
+  .beginner-card .topic-title { color: var(--h3-color); }
+  .intermediate-card .topic-title { color: var(--h2-color); }
+  .advanced-card .topic-title { color: var(--h1-color); }
+
+  .topic-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .topic-card.open .topic-toggle { transform: rotate(180deg); background: rgba(255,255,255,0.12); }
+
+  .topic-body {
+    display: none;
+    padding: 0 22px 20px 72px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 16px;
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  /* H4 styled subtopic groups */
+  .subtopic-group-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--h4-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 14px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subtopic-group-title::before {
+    content: '◆';
+    font-size: 0.5rem;
+    opacity: 0.6;
+  }
+
+  .subtopic-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px;
+  }
+
+  .subtopic-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.75);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+
+  .subtopic-list li:hover {
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .subtopic-list li::before {
+    content: '›';
+    font-size: 1rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .beginner-card .subtopic-list li::before { color: var(--beginner); }
+  .intermediate-card .subtopic-list li::before { color: var(--intermediate); }
+  .advanced-card .subtopic-list li::before { color: var(--advanced); }
+
+  /* Progress bar */
+  .section-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+  }
+
+  .progress-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .beginner .progress-fill { background: linear-gradient(90deg, var(--beginner), rgba(0,255,213,0.4)); }
+  .intermediate .progress-fill { background: linear-gradient(90deg, var(--intermediate), rgba(255,110,247,0.4)); }
+  .advanced .progress-fill { background: linear-gradient(90deg, var(--advanced), rgba(255,215,0,0.4)); }
+
+  .progress-pct {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .beginner .progress-pct { color: var(--beginner); }
+  .intermediate .progress-pct { color: var(--intermediate); }
+  .advanced .progress-pct { color: var(--advanced); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--glass-border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg1); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,255,213,0.3); border-radius: 3px; }
+
+  /* Anchor offset for sticky nav */
+  .section-anchor { scroll-margin-top: 90px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">✦ Complete Roadmap 2025 ✦</div>
+    <h1>CSS MASTERY<br>ROADMAP</h1>
+    <p>Beginner → Intermediate → Advanced — Every Topic, Every Subtopic</p>
+    <a href="#" class="btn-download" onclick="downloadPage(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download Roadmap
+    </a>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav-glass">
+    <div class="nav-inner">
+      <a href="#beginner" class="beg">⬡ Beginner</a>
+      <a href="#b-intro" class="beg">· Intro</a>
+      <a href="#b-selectors" class="beg">· Selectors</a>
+      <a href="#b-box" class="beg">· Box Model</a>
+      <a href="#b-typography" class="beg">· Typography</a>
+      <a href="#b-colors" class="beg">· Colors</a>
+      <a href="#b-backgrounds" class="beg">· Backgrounds</a>
+      <a href="#b-display" class="beg">· Display</a>
+      <a href="#b-positioning" class="beg">· Positioning</a>
+      <a href="#b-units" class="beg">· Units</a>
+      <a href="#intermediate" class="int">⬡ Intermediate</a>
+      <a href="#i-flexbox" class="int">· Flexbox</a>
+      <a href="#i-grid" class="int">· Grid</a>
+      <a href="#i-responsive" class="int">· Responsive</a>
+      <a href="#i-transforms" class="int">· Transforms</a>
+      <a href="#i-transitions" class="int">· Transitions</a>
+      <a href="#i-animations" class="int">· Animations</a>
+      <a href="#i-pseudo" class="int">· Pseudo</a>
+      <a href="#i-variables" class="int">· Variables</a>
+      <a href="#i-specificity" class="int">· Specificity</a>
+      <a href="#advanced" class="adv">⬡ Advanced</a>
+      <a href="#a-arch" class="adv">· Architecture</a>
+      <a href="#a-calc" class="adv">· Calc/Clamp</a>
+      <a href="#a-custom" class="adv">· Custom Props</a>
+      <a href="#a-shapes" class="adv">· Shapes</a>
+      <a href="#a-scroll" class="adv">· Scroll</a>
+      <a href="#a-containment" class="adv">· Containment</a>
+      <a href="#a-perf" class="adv">· Performance</a>
+      <a href="#a-modern" class="adv">· Modern</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BEGINNER SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section id="beginner" class="section section-anchor">
+    <div class="section-header beginner">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <h2># Beginner</h2>
+        <p>Foundations of CSS — Start Here</p>
+      </div>
+      <div class="level-badge">LEVEL 01</div>
+    </div>
+
+    <div class="section-progress beginner">
+      <span class="progress-label">Topics Covered</span>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <span class="progress-pct">9 Topics · 75+ Subtopics</span>
+    </div>
+
+    <!-- 1. Introduction to CSS -->
+    <div id="b-intro" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🎨</div>
+        <div class="topic-title">### Introduction to CSS</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### What is CSS?</div>
+        <ul class="subtopic-list">
+          <li>What is CSS and how it works</li>
+          <li>CSS: Cascading Style Sheets meaning</li>
+          <li>History and evolution of CSS</li>
+          <li>CSS versions (CSS1, CSS2, CSS3)</li>
+          <li>Role of CSS in web development</li>
+          <li>Relationship between HTML, CSS, JS</li>
+        </ul>
+        <div class="subtopic-group-title">#### Ways to Apply CSS</div>
+        <ul class="subtopic-list">
+          <li>Inline CSS (style attribute)</li>
+          <li>Internal CSS (&lt;style&gt; tag)</li>
+          <li>External CSS (link href)</li>
+          <li>Import CSS (@import rule)</li>
+          <li>Pros and cons of each method</li>
+          <li>Order of precedence</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Syntax</div>
+        <ul class="subtopic-list">
+          <li>CSS rule structure (selector, property, value)</li>
+          <li>CSS declarations and blocks</li>
+          <li>CSS comments (/* */)</li>
+          <li>Case sensitivity in CSS</li>
+          <li>Whitespace rules</li>
+          <li>Multiple declarations in one rule</li>
+        </ul>
+        <div class="subtopic-group-title">#### Browser & Tools</div>
+        <ul class="subtopic-list">
+          <li>How browsers parse CSS</li>
+          <li>Browser Developer Tools basics</li>
+          <li>Inspecting CSS in DevTools</li>
+          <li>CSS validation tools</li>
+          <li>Code editors and extensions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Selectors -->
+    <div id="b-selectors" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🎯</div>
+        <div class="topic-title">### CSS Selectors</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Basic Selectors</div>
+        <ul class="subtopic-list">
+          <li>Universal selector (*)</li>
+          <li>Type/element selector (div, p, h1)</li>
+          <li>Class selector (.class)</li>
+          <li>ID selector (#id)</li>
+          <li>Grouping selectors (A, B)</li>
+          <li>Descendant selector (A B)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Combinator Selectors</div>
+        <ul class="subtopic-list">
+          <li>Child combinator (A > B)</li>
+          <li>Adjacent sibling (A + B)</li>
+          <li>General sibling (A ~ B)</li>
+          <li>Column combinator (||)</li>
+          <li>Nesting selector (&)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Attribute Selectors</div>
+        <ul class="subtopic-list">
+          <li>[attr] — presence</li>
+          <li>[attr=value] — exact match</li>
+          <li>[attr~=value] — word in list</li>
+          <li>[attr|=value] — hyphen prefix</li>
+          <li>[attr^=value] — starts with</li>
+          <li>[attr$=value] — ends with</li>
+          <li>[attr*=value] — contains</li>
+          <li>Case-insensitive flag (i)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Pseudo-class Selectors</div>
+        <ul class="subtopic-list">
+          <li>:hover, :focus, :active</li>
+          <li>:link, :visited</li>
+          <li>:first-child, :last-child</li>
+          <li>:nth-child(), :nth-of-type()</li>
+          <li>:first-of-type, :last-of-type</li>
+          <li>:only-child, :only-of-type</li>
+          <li>:not(), :is(), :where()</li>
+          <li>:checked, :disabled, :enabled</li>
+          <li>:required, :optional, :valid, :invalid</li>
+          <li>:empty, :root</li>
+          <li>:target, :focus-within, :focus-visible</li>
+        </ul>
+        <div class="subtopic-group-title">#### Pseudo-element Selectors</div>
+        <ul class="subtopic-list">
+          <li>::before, ::after</li>
+          <li>::first-line, ::first-letter</li>
+          <li>::selection</li>
+          <li>::placeholder</li>
+          <li>::marker</li>
+          <li>::backdrop</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Box Model -->
+    <div id="b-box" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📦</div>
+        <div class="topic-title">### The Box Model</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Box Model Components</div>
+        <ul class="subtopic-list">
+          <li>Content area</li>
+          <li>Padding (inner spacing)</li>
+          <li>Border</li>
+          <li>Margin (outer spacing)</li>
+          <li>Box model diagram</li>
+        </ul>
+        <div class="subtopic-group-title">#### Width & Height</div>
+        <ul class="subtopic-list">
+          <li>width, height properties</li>
+          <li>min-width, max-width</li>
+          <li>min-height, max-height</li>
+          <li>auto values</li>
+          <li>Percentage values</li>
+        </ul>
+        <div class="subtopic-group-title">#### Padding</div>
+        <ul class="subtopic-list">
+          <li>padding-top, right, bottom, left</li>
+          <li>Padding shorthand</li>
+          <li>Padding and background color</li>
+          <li>Percentage padding</li>
+        </ul>
+        <div class="subtopic-group-title">#### Margin</div>
+        <ul class="subtopic-list">
+          <li>margin-top, right, bottom, left</li>
+          <li>Margin shorthand</li>
+          <li>Margin collapse</li>
+          <li>Negative margins</li>
+          <li>margin: auto (centering)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Border</div>
+        <ul class="subtopic-list">
+          <li>border-width, style, color</li>
+          <li>Border shorthand</li>
+          <li>border-radius (rounded corners)</li>
+          <li>Individual sides</li>
+          <li>Border styles: solid, dashed, dotted, double, groove, ridge, inset, outset</li>
+          <li>outline vs border</li>
+        </ul>
+        <div class="subtopic-group-title">#### Box Sizing</div>
+        <ul class="subtopic-list">
+          <li>content-box (default)</li>
+          <li>border-box</li>
+          <li>Global box-sizing reset</li>
+          <li>Inherit box-sizing</li>
+        </ul>
+        <div class="subtopic-group-title">#### Overflow</div>
+        <ul class="subtopic-list">
+          <li>overflow: visible, hidden, scroll, auto</li>
+          <li>overflow-x, overflow-y</li>
+          <li>overflow: clip</li>
+          <li>Text overflow (ellipsis)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. Typography -->
+    <div id="b-typography" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">✍️</div>
+        <div class="topic-title">### Typography & Fonts</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Font Properties</div>
+        <ul class="subtopic-list">
+          <li>font-family</li>
+          <li>Generic font families (serif, sans-serif, monospace, cursive, fantasy)</li>
+          <li>Font stacks and fallbacks</li>
+          <li>font-size</li>
+          <li>font-weight (100–900, bold, lighter)</li>
+          <li>font-style (normal, italic, oblique)</li>
+          <li>font-variant</li>
+          <li>font shorthand</li>
+        </ul>
+        <div class="subtopic-group-title">#### Web Fonts</div>
+        <ul class="subtopic-list">
+          <li>@font-face rule</li>
+          <li>Google Fonts integration</li>
+          <li>Font formats (woff, woff2, ttf, otf)</li>
+          <li>font-display property</li>
+          <li>Variable fonts (font-variation-settings)</li>
+          <li>System font stack</li>
+        </ul>
+        <div class="subtopic-group-title">#### Text Properties</div>
+        <ul class="subtopic-list">
+          <li>color</li>
+          <li>text-align (left, right, center, justify)</li>
+          <li>text-decoration (underline, overline, line-through)</li>
+          <li>text-transform (uppercase, lowercase, capitalize)</li>
+          <li>text-indent</li>
+          <li>text-shadow</li>
+          <li>letter-spacing</li>
+          <li>word-spacing</li>
+          <li>line-height</li>
+          <li>white-space</li>
+          <li>word-break, word-wrap, overflow-wrap</li>
+          <li>text-overflow</li>
+          <li>writing-mode</li>
+          <li>direction</li>
+          <li>text-rendering</li>
+          <li>font-smoothing (webkit)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. Colors -->
+    <div id="b-colors" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🌈</div>
+        <div class="topic-title">### Colors & Opacity</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Color Formats</div>
+        <ul class="subtopic-list">
+          <li>Named colors (red, blue, tomato…)</li>
+          <li>Hexadecimal (#rrggbb, #rgb)</li>
+          <li>Hex with alpha (#rrggbbaa)</li>
+          <li>RGB (rgb())</li>
+          <li>RGBA (rgba())</li>
+          <li>HSL (hsl())</li>
+          <li>HSLA (hsla())</li>
+          <li>HWB (hwb())</li>
+          <li>LAB & LCH (lab(), lch())</li>
+          <li>OKLCH, OKLAB</li>
+          <li>color() function</li>
+          <li>currentColor keyword</li>
+          <li>transparent keyword</li>
+        </ul>
+        <div class="subtopic-group-title">#### Opacity & Transparency</div>
+        <ul class="subtopic-list">
+          <li>opacity property (0–1)</li>
+          <li>rgba vs opacity difference</li>
+          <li>inherit opacity</li>
+          <li>Transparent backgrounds</li>
+        </ul>
+        <div class="subtopic-group-title">#### Color Mixing</div>
+        <ul class="subtopic-list">
+          <li>color-mix() function</li>
+          <li>Relative color syntax</li>
+          <li>Color contrast and accessibility (WCAG)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. Backgrounds -->
+    <div id="b-backgrounds" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🖼️</div>
+        <div class="topic-title">### Backgrounds</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Background Properties</div>
+        <ul class="subtopic-list">
+          <li>background-color</li>
+          <li>background-image</li>
+          <li>background-repeat (repeat, no-repeat, repeat-x, repeat-y, round, space)</li>
+          <li>background-position</li>
+          <li>background-size (cover, contain, auto, px/%)</li>
+          <li>background-attachment (fixed, scroll, local)</li>
+          <li>background-origin (border-box, padding-box, content-box)</li>
+          <li>background-clip</li>
+          <li>background-blend-mode</li>
+          <li>background shorthand</li>
+        </ul>
+        <div class="subtopic-group-title">#### Gradients</div>
+        <ul class="subtopic-list">
+          <li>linear-gradient()</li>
+          <li>radial-gradient()</li>
+          <li>conic-gradient()</li>
+          <li>repeating-linear-gradient()</li>
+          <li>repeating-radial-gradient()</li>
+          <li>repeating-conic-gradient()</li>
+          <li>Multiple backgrounds / gradients</li>
+          <li>Gradient direction and angle</li>
+          <li>Color stops and hints</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. Display & Visibility -->
+    <div id="b-display" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">👁️</div>
+        <div class="topic-title">### Display & Visibility</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Display Property</div>
+        <ul class="subtopic-list">
+          <li>display: block</li>
+          <li>display: inline</li>
+          <li>display: inline-block</li>
+          <li>display: none</li>
+          <li>display: flex (intro)</li>
+          <li>display: grid (intro)</li>
+          <li>display: inline-flex, inline-grid</li>
+          <li>display: table, table-cell, table-row</li>
+          <li>display: list-item</li>
+          <li>display: contents</li>
+          <li>Block vs inline behavior</li>
+        </ul>
+        <div class="subtopic-group-title">#### Visibility & Hiding</div>
+        <ul class="subtopic-list">
+          <li>visibility: visible, hidden, collapse</li>
+          <li>opacity: 0</li>
+          <li>display: none vs visibility: hidden</li>
+          <li>pointer-events: none</li>
+          <li>clip-path to hide</li>
+          <li>Accessibility considerations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. Positioning -->
+    <div id="b-positioning" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📌</div>
+        <div class="topic-title">### Positioning</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Position Values</div>
+        <ul class="subtopic-list">
+          <li>position: static (default)</li>
+          <li>position: relative</li>
+          <li>position: absolute</li>
+          <li>position: fixed</li>
+          <li>position: sticky</li>
+        </ul>
+        <div class="subtopic-group-title">#### Offset Properties</div>
+        <ul class="subtopic-list">
+          <li>top, right, bottom, left</li>
+          <li>inset shorthand</li>
+          <li>Containing block concept</li>
+          <li>Stacking context</li>
+          <li>z-index</li>
+        </ul>
+        <div class="subtopic-group-title">#### Float (Legacy)</div>
+        <ul class="subtopic-list">
+          <li>float: left, right, none</li>
+          <li>Clearing floats (clear property)</li>
+          <li>Clearfix hack</li>
+          <li>Float and flow behavior</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 9. Units -->
+    <div id="b-units" class="topic-card beginner-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📐</div>
+        <div class="topic-title">### CSS Units & Values</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Absolute Units</div>
+        <ul class="subtopic-list">
+          <li>px (pixels)</li>
+          <li>pt (points)</li>
+          <li>pc (picas)</li>
+          <li>cm, mm, in</li>
+          <li>Q (quarter millimeter)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Relative Units</div>
+        <ul class="subtopic-list">
+          <li>em (relative to parent font)</li>
+          <li>rem (relative to root font)</li>
+          <li>% (percentage of parent)</li>
+          <li>vw (viewport width)</li>
+          <li>vh (viewport height)</li>
+          <li>vmin, vmax</li>
+          <li>svh, svw, dvh, dvw, lvh, lvw</li>
+          <li>ch (character width)</li>
+          <li>ex (x-height)</li>
+          <li>cap (cap height)</li>
+          <li>ic (CJK character)</li>
+          <li>lh (line height)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Special Values</div>
+        <ul class="subtopic-list">
+          <li>auto</li>
+          <li>initial</li>
+          <li>inherit</li>
+          <li>unset</li>
+          <li>revert</li>
+          <li>revert-layer</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       INTERMEDIATE SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section id="intermediate" class="section section-anchor">
+    <div class="section-header intermediate">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <h2>## Intermediate</h2>
+        <p>Layout Systems, Animations & Responsive Design</p>
+      </div>
+      <div class="level-badge">LEVEL 02</div>
+    </div>
+
+    <div class="section-progress intermediate">
+      <span class="progress-label">Topics Covered</span>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <span class="progress-pct">9 Topics · 120+ Subtopics</span>
+    </div>
+
+    <!-- Flexbox -->
+    <div id="i-flexbox" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">↔️</div>
+        <div class="topic-title">### Flexbox Layout</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Flex Container Properties</div>
+        <ul class="subtopic-list">
+          <li>display: flex / inline-flex</li>
+          <li>flex-direction (row, column, row-reverse, column-reverse)</li>
+          <li>flex-wrap (nowrap, wrap, wrap-reverse)</li>
+          <li>flex-flow shorthand</li>
+          <li>justify-content (flex-start, flex-end, center, space-between, space-around, space-evenly)</li>
+          <li>align-items (stretch, flex-start, flex-end, center, baseline)</li>
+          <li>align-content (multi-line)</li>
+          <li>gap, row-gap, column-gap</li>
+          <li>place-content shorthand</li>
+        </ul>
+        <div class="subtopic-group-title">#### Flex Item Properties</div>
+        <ul class="subtopic-list">
+          <li>flex-grow</li>
+          <li>flex-shrink</li>
+          <li>flex-basis</li>
+          <li>flex shorthand (flex: 1, flex: auto, flex: none)</li>
+          <li>align-self</li>
+          <li>order</li>
+          <li>margin: auto trick</li>
+        </ul>
+        <div class="subtopic-group-title">#### Flexbox Patterns</div>
+        <ul class="subtopic-list">
+          <li>Centering content</li>
+          <li>Holy grail layout</li>
+          <li>Sticky footer</li>
+          <li>Navigation bars</li>
+          <li>Card layouts</li>
+          <li>Equal height columns</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div id="i-grid" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">⊞</div>
+        <div class="topic-title">### CSS Grid Layout</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Grid Container Properties</div>
+        <ul class="subtopic-list">
+          <li>display: grid / inline-grid</li>
+          <li>grid-template-columns</li>
+          <li>grid-template-rows</li>
+          <li>grid-template-areas</li>
+          <li>grid-template shorthand</li>
+          <li>grid-auto-columns</li>
+          <li>grid-auto-rows</li>
+          <li>grid-auto-flow (row, column, dense)</li>
+          <li>grid shorthand</li>
+          <li>gap, row-gap, column-gap</li>
+          <li>justify-items</li>
+          <li>align-items</li>
+          <li>place-items</li>
+          <li>justify-content</li>
+          <li>align-content</li>
+          <li>place-content</li>
+        </ul>
+        <div class="subtopic-group-title">#### Grid Item Properties</div>
+        <ul class="subtopic-list">
+          <li>grid-column-start, grid-column-end</li>
+          <li>grid-row-start, grid-row-end</li>
+          <li>grid-column shorthand</li>
+          <li>grid-row shorthand</li>
+          <li>grid-area (named areas)</li>
+          <li>justify-self</li>
+          <li>align-self</li>
+          <li>place-self</li>
+        </ul>
+        <div class="subtopic-group-title">#### Grid Functions & Units</div>
+        <ul class="subtopic-list">
+          <li>fr unit</li>
+          <li>repeat() function</li>
+          <li>minmax() function</li>
+          <li>auto-fill vs auto-fit</li>
+          <li>fit-content()</li>
+          <li>Named grid lines</li>
+          <li>Implicit vs explicit grid</li>
+          <li>Subgrid</li>
+          <li>masonry layout (experimental)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Grid Patterns</div>
+        <ul class="subtopic-list">
+          <li>12-column layout</li>
+          <li>Magazine layout</li>
+          <li>Dashboard layout</li>
+          <li>Responsive grid without media queries</li>
+          <li>Grid + Flexbox combination</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Responsive Design -->
+    <div id="i-responsive" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📱</div>
+        <div class="topic-title">### Responsive Design</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Media Queries</div>
+        <ul class="subtopic-list">
+          <li>@media rule syntax</li>
+          <li>Media types (screen, print, all)</li>
+          <li>Width breakpoints (min-width, max-width)</li>
+          <li>Height breakpoints</li>
+          <li>Orientation (portrait, landscape)</li>
+          <li>Resolution / DPI queries</li>
+          <li>hover, pointer media features</li>
+          <li>prefers-color-scheme</li>
+          <li>prefers-reduced-motion</li>
+          <li>prefers-contrast</li>
+          <li>forced-colors</li>
+          <li>Logical operators (and, or, not)</li>
+          <li>Range syntax (new media query)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Viewport & Meta</div>
+        <ul class="subtopic-list">
+          <li>viewport meta tag</li>
+          <li>initial-scale, user-scalable</li>
+          <li>Viewport units</li>
+          <li>Mobile-first vs desktop-first</li>
+          <li>Common breakpoints</li>
+        </ul>
+        <div class="subtopic-group-title">#### Responsive Techniques</div>
+        <ul class="subtopic-list">
+          <li>Fluid layouts</li>
+          <li>Responsive images (max-width: 100%)</li>
+          <li>Responsive typography</li>
+          <li>Responsive tables</li>
+          <li>Container queries (@container)</li>
+          <li>Intrinsic design</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Transforms -->
+    <div id="i-transforms" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🔄</div>
+        <div class="topic-title">### CSS Transforms</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### 2D Transform Functions</div>
+        <ul class="subtopic-list">
+          <li>translate(x, y) / translateX() / translateY()</li>
+          <li>scale(x, y) / scaleX() / scaleY()</li>
+          <li>rotate(angle)</li>
+          <li>skew(x, y) / skewX() / skewY()</li>
+          <li>matrix()</li>
+          <li>Multiple transforms</li>
+        </ul>
+        <div class="subtopic-group-title">#### 3D Transform Functions</div>
+        <ul class="subtopic-list">
+          <li>translate3d() / translateZ()</li>
+          <li>scale3d() / scaleZ()</li>
+          <li>rotate3d() / rotateX() / rotateY() / rotateZ()</li>
+          <li>perspective() function</li>
+          <li>matrix3d()</li>
+        </ul>
+        <div class="subtopic-group-title">#### Transform Properties</div>
+        <ul class="subtopic-list">
+          <li>transform</li>
+          <li>transform-origin</li>
+          <li>transform-style (flat, preserve-3d)</li>
+          <li>perspective property</li>
+          <li>perspective-origin</li>
+          <li>backface-visibility</li>
+          <li>Individual transform properties (translate, rotate, scale)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Transitions -->
+    <div id="i-transitions" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">⚡</div>
+        <div class="topic-title">### CSS Transitions</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Transition Properties</div>
+        <ul class="subtopic-list">
+          <li>transition-property</li>
+          <li>transition-duration</li>
+          <li>transition-timing-function</li>
+          <li>transition-delay</li>
+          <li>transition shorthand</li>
+          <li>Multiple transitions</li>
+          <li>transition: all (cautions)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Timing Functions</div>
+        <ul class="subtopic-list">
+          <li>ease (default)</li>
+          <li>linear</li>
+          <li>ease-in</li>
+          <li>ease-out</li>
+          <li>ease-in-out</li>
+          <li>cubic-bezier()</li>
+          <li>steps()</li>
+          <li>step-start, step-end</li>
+        </ul>
+        <div class="subtopic-group-title">#### Transitionable Properties</div>
+        <ul class="subtopic-list">
+          <li>Animatable vs non-animatable props</li>
+          <li>Color transitions</li>
+          <li>Size and layout transitions</li>
+          <li>Opacity transitions</li>
+          <li>Transform transitions</li>
+          <li>discrete transitions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Animations -->
+    <div id="i-animations" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🎬</div>
+        <div class="topic-title">### CSS Animations</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### @keyframes</div>
+        <ul class="subtopic-list">
+          <li>@keyframes syntax</li>
+          <li>from / to keywords</li>
+          <li>Percentage keyframes</li>
+          <li>Multiple keyframe stops</li>
+          <li>Duplicating keyframes</li>
+        </ul>
+        <div class="subtopic-group-title">#### Animation Properties</div>
+        <ul class="subtopic-list">
+          <li>animation-name</li>
+          <li>animation-duration</li>
+          <li>animation-timing-function</li>
+          <li>animation-delay</li>
+          <li>animation-iteration-count (infinite)</li>
+          <li>animation-direction (normal, reverse, alternate, alternate-reverse)</li>
+          <li>animation-fill-mode (none, forwards, backwards, both)</li>
+          <li>animation-play-state (running, paused)</li>
+          <li>animation shorthand</li>
+          <li>Multiple animations</li>
+        </ul>
+        <div class="subtopic-group-title">#### Animation Techniques</div>
+        <ul class="subtopic-list">
+          <li>Staggered animations (animation-delay)</li>
+          <li>Loading spinners</li>
+          <li>Pulse / breathing effects</li>
+          <li>Bouncing / elastic effects</li>
+          <li>Typing cursor animation</li>
+          <li>Flipping cards</li>
+          <li>prefers-reduced-motion</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pseudo-classes & Pseudo-elements Deep -->
+    <div id="i-pseudo" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🪄</div>
+        <div class="topic-title">### Advanced Pseudo Classes & Elements</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Functional Pseudo-classes</div>
+        <ul class="subtopic-list">
+          <li>:is() forgiving selector</li>
+          <li>:where() zero-specificity</li>
+          <li>:has() parent selector</li>
+          <li>:not() negation</li>
+          <li>:nth-child(An+B)</li>
+          <li>:nth-of-type(An+B)</li>
+          <li>:nth-last-child()</li>
+          <li>:nth-last-of-type()</li>
+        </ul>
+        <div class="subtopic-group-title">#### State Pseudo-classes</div>
+        <ul class="subtopic-list">
+          <li>:focus-visible</li>
+          <li>:focus-within</li>
+          <li>:placeholder-shown</li>
+          <li>:autofill</li>
+          <li>:in-range, :out-of-range</li>
+          <li>:user-invalid, :user-valid</li>
+          <li>:popover-open</li>
+          <li>:modal</li>
+          <li>:fullscreen</li>
+          <li>:picture-in-picture</li>
+          <li>:local-link</li>
+        </ul>
+        <div class="subtopic-group-title">#### Pseudo-element Techniques</div>
+        <ul class="subtopic-list">
+          <li>::before / ::after decorative use</li>
+          <li>content property tricks</li>
+          <li>Clearfix with ::after</li>
+          <li>Custom list markers (::marker)</li>
+          <li>::cue (WebVTT captions)</li>
+          <li>::slotted() (Shadow DOM)</li>
+          <li>::part() (Shadow DOM)</li>
+          <li>::spelling-error, ::grammar-error</li>
+          <li>::target-text</li>
+          <li>::highlight()</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div id="i-variables" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🔧</div>
+        <div class="topic-title">### CSS Custom Properties (Variables)</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Defining & Using Variables</div>
+        <ul class="subtopic-list">
+          <li>Defining with --property-name</li>
+          <li>Accessing with var()</li>
+          <li>Fallback values in var()</li>
+          <li>Global variables on :root</li>
+          <li>Scoped variables on elements</li>
+          <li>Variable inheritance</li>
+          <li>Variable overriding</li>
+        </ul>
+        <div class="subtopic-group-title">#### Advanced Variable Patterns</div>
+        <ul class="subtopic-list">
+          <li>Composing variables with calc()</li>
+          <li>Color palette systems</li>
+          <li>Spacing scales</li>
+          <li>Typography scales</li>
+          <li>Theme switching (dark/light mode)</li>
+          <li>Component-level theming</li>
+          <li>CSS variables in animations</li>
+          <li>@property registration (Houdini)</li>
+          <li>Animating custom properties</li>
+          <li>JavaScript interaction with CSS variables</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Specificity & Cascade -->
+    <div id="i-specificity" class="topic-card intermediate-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">⚖️</div>
+        <div class="topic-title">### Cascade, Specificity & Inheritance</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### The Cascade</div>
+        <ul class="subtopic-list">
+          <li>What is the cascade?</li>
+          <li>Origin layers (user-agent, author, user)</li>
+          <li>Important declarations (!important)</li>
+          <li>Cascade layers (@layer)</li>
+          <li>Layer ordering</li>
+          <li>Unlayered styles precedence</li>
+        </ul>
+        <div class="subtopic-group-title">#### Specificity</div>
+        <ul class="subtopic-list">
+          <li>Specificity scoring (0-0-0, 0-1-0, 1-0-0)</li>
+          <li>Inline styles specificity</li>
+          <li>ID specificity</li>
+          <li>Class/attribute/pseudo-class specificity</li>
+          <li>Element/pseudo-element specificity</li>
+          <li>Universal selector (*) specificity</li>
+          <li>:is(), :not(), :has() specificity</li>
+          <li>:where() zero specificity</li>
+          <li>Specificity calculation tools</li>
+        </ul>
+        <div class="subtopic-group-title">#### Inheritance</div>
+        <ul class="subtopic-list">
+          <li>Inherited vs non-inherited properties</li>
+          <li>inherit keyword</li>
+          <li>initial keyword</li>
+          <li>unset keyword</li>
+          <li>revert keyword</li>
+          <li>revert-layer keyword</li>
+          <li>all shorthand</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ADVANCED SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section id="advanced" class="section section-anchor">
+    <div class="section-header advanced">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <h2>### Advanced</h2>
+        <p>Architecture, Houdini, Performance & Modern CSS</p>
+      </div>
+      <div class="level-badge">LEVEL 03</div>
+    </div>
+
+    <div class="section-progress advanced">
+      <span class="progress-label">Topics Covered</span>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <span class="progress-pct">8 Topics · 100+ Subtopics</span>
+    </div>
+
+    <!-- CSS Architecture -->
+    <div id="a-arch" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🏗️</div>
+        <div class="topic-title">### CSS Architecture & Methodologies</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### BEM Methodology</div>
+        <ul class="subtopic-list">
+          <li>Block, Element, Modifier</li>
+          <li>BEM naming conventions</li>
+          <li>BEM with modifiers</li>
+          <li>BEM file structure</li>
+          <li>BEM pros and cons</li>
+        </ul>
+        <div class="subtopic-group-title">#### Other Methodologies</div>
+        <ul class="subtopic-list">
+          <li>OOCSS (Object-Oriented CSS)</li>
+          <li>SMACSS (Scalable Modular Architecture)</li>
+          <li>ITCSS (Inverted Triangle)</li>
+          <li>Atomic CSS / Utility-first</li>
+          <li>CUBE CSS</li>
+          <li>Tailwind CSS approach</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Cascade Layers</div>
+        <ul class="subtopic-list">
+          <li>@layer declaration</li>
+          <li>Layer ordering</li>
+          <li>Named layers</li>
+          <li>Anonymous layers</li>
+          <li>Nested layers</li>
+          <li>Layer with !important</li>
+          <li>Layer and specificity interaction</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Preprocessing</div>
+        <ul class="subtopic-list">
+          <li>Sass / SCSS: variables, nesting, mixins, functions</li>
+          <li>Less: variables, operations, mixins</li>
+          <li>Stylus syntax</li>
+          <li>PostCSS and plugins</li>
+          <li>Autoprefixer</li>
+          <li>CSS Modules (scoped styles)</li>
+          <li>CSS-in-JS concepts</li>
+          <li>Styled-components / Emotion overview</li>
+        </ul>
+        <div class="subtopic-group-title">#### Design Tokens</div>
+        <ul class="subtopic-list">
+          <li>What are design tokens?</li>
+          <li>Token categories (color, spacing, typography)</li>
+          <li>CSS variables as tokens</li>
+          <li>Token transformations</li>
+          <li>Style Dictionary</li>
+          <li>W3C Design Token format</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Calc / Clamp -->
+    <div id="a-calc" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🧮</div>
+        <div class="topic-title">### CSS Math Functions</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Core Math Functions</div>
+        <ul class="subtopic-list">
+          <li>calc() — arithmetic operations</li>
+          <li>Mixing units in calc()</li>
+          <li>Nested calc()</li>
+          <li>min() — minimum of values</li>
+          <li>max() — maximum of values</li>
+          <li>clamp(min, preferred, max)</li>
+          <li>Fluid typography with clamp()</li>
+          <li>Fluid spacing with clamp()</li>
+        </ul>
+        <div class="subtopic-group-title">#### Trigonometric Functions</div>
+        <ul class="subtopic-list">
+          <li>sin(), cos(), tan()</li>
+          <li>asin(), acos(), atan(), atan2()</li>
+          <li>Circular layouts with trig</li>
+        </ul>
+        <div class="subtopic-group-title">#### Other Math Functions</div>
+        <ul class="subtopic-list">
+          <li>abs() — absolute value</li>
+          <li>sign()</li>
+          <li>round()</li>
+          <li>mod()</li>
+          <li>rem()</li>
+          <li>pow()</li>
+          <li>sqrt()</li>
+          <li>log()</li>
+          <li>exp()</li>
+          <li>hypot()</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Custom Properties Advanced -->
+    <div id="a-custom" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🪛</div>
+        <div class="topic-title">### CSS Houdini & @property</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### @property Rule</div>
+        <ul class="subtopic-list">
+          <li>@property syntax</li>
+          <li>syntax descriptor</li>
+          <li>inherits descriptor</li>
+          <li>initial-value descriptor</li>
+          <li>Typed custom properties</li>
+          <li>Animating custom properties</li>
+          <li>Gradient animation via @property</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Houdini APIs</div>
+        <ul class="subtopic-list">
+          <li>Paint API (Worklet)</li>
+          <li>Layout API</li>
+          <li>Animation Worklet</li>
+          <li>CSS Typed OM</li>
+          <li>Properties & Values API</li>
+          <li>Font Metrics API</li>
+          <li>Registering properties with JS</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Nesting</div>
+        <ul class="subtopic-list">
+          <li>Native CSS nesting syntax</li>
+          <li>& nesting selector</li>
+          <li>Nesting media queries</li>
+          <li>Nesting container queries</li>
+          <li>Nesting vs Sass nesting</li>
+          <li>Nesting specificity rules</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CSS Shapes & Clipping -->
+    <div id="a-shapes" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">💎</div>
+        <div class="topic-title">### Shapes, Clipping & Masking</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Clip Path</div>
+        <ul class="subtopic-list">
+          <li>clip-path: inset()</li>
+          <li>clip-path: circle()</li>
+          <li>clip-path: ellipse()</li>
+          <li>clip-path: polygon()</li>
+          <li>clip-path: path()</li>
+          <li>clip-path: url() (SVG reference)</li>
+          <li>Animating clip-path</li>
+          <li>clip-path for image reveals</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Shapes</div>
+        <ul class="subtopic-list">
+          <li>shape-outside</li>
+          <li>shape-margin</li>
+          <li>shape-image-threshold</li>
+          <li>Float + shape-outside</li>
+        </ul>
+        <div class="subtopic-group-title">#### Masking</div>
+        <ul class="subtopic-list">
+          <li>mask-image</li>
+          <li>mask-mode</li>
+          <li>mask-repeat</li>
+          <li>mask-position</li>
+          <li>mask-size</li>
+          <li>mask-origin</li>
+          <li>mask-clip</li>
+          <li>mask-composite</li>
+          <li>mask shorthand</li>
+          <li>SVG mask reference</li>
+          <li>Gradient masks</li>
+          <li>-webkit-mask-image (Safari)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Filters & Effects</div>
+        <ul class="subtopic-list">
+          <li>filter: blur()</li>
+          <li>filter: brightness()</li>
+          <li>filter: contrast()</li>
+          <li>filter: grayscale()</li>
+          <li>filter: hue-rotate()</li>
+          <li>filter: invert()</li>
+          <li>filter: opacity()</li>
+          <li>filter: saturate()</li>
+          <li>filter: sepia()</li>
+          <li>filter: drop-shadow()</li>
+          <li>Multiple filters</li>
+          <li>backdrop-filter</li>
+          <li>filter vs box-shadow vs drop-shadow</li>
+          <li>SVG filters with feColorMatrix</li>
+          <li>mix-blend-mode</li>
+          <li>isolation: isolate</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scroll-driven Animations -->
+    <div id="a-scroll" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📜</div>
+        <div class="topic-title">### Scroll & View Transitions</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Scroll Behavior</div>
+        <ul class="subtopic-list">
+          <li>scroll-behavior: smooth</li>
+          <li>scroll-snap-type</li>
+          <li>scroll-snap-align</li>
+          <li>scroll-snap-stop</li>
+          <li>scroll-padding, scroll-margin</li>
+          <li>overscroll-behavior</li>
+        </ul>
+        <div class="subtopic-group-title">#### Scroll-Driven Animations</div>
+        <ul class="subtopic-list">
+          <li>animation-timeline</li>
+          <li>scroll() function (scroll timeline)</li>
+          <li>view() function (view timeline)</li>
+          <li>ScrollTimeline API</li>
+          <li>ViewTimeline API</li>
+          <li>animation-range</li>
+          <li>animation-range-start / end</li>
+          <li>Scroll progress indicators</li>
+          <li>Parallax effects</li>
+          <li>Image reveal on scroll</li>
+        </ul>
+        <div class="subtopic-group-title">#### View Transitions API</div>
+        <ul class="subtopic-list">
+          <li>@view-transition rule</li>
+          <li>view-transition-name</li>
+          <li>::view-transition pseudo-elements</li>
+          <li>Same-document view transitions</li>
+          <li>Cross-document view transitions</li>
+          <li>Animating page transitions</li>
+          <li>view-transition-class</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Containment -->
+    <div id="a-containment" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">📦</div>
+        <div class="topic-title">### CSS Containment & Container Queries</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### CSS Containment</div>
+        <ul class="subtopic-list">
+          <li>contain: layout</li>
+          <li>contain: paint</li>
+          <li>contain: size</li>
+          <li>contain: style</li>
+          <li>contain: inline-size</li>
+          <li>contain: strict / content</li>
+          <li>content-visibility property</li>
+          <li>contain-intrinsic-size</li>
+          <li>Performance benefits</li>
+        </ul>
+        <div class="subtopic-group-title">#### Container Queries</div>
+        <ul class="subtopic-list">
+          <li>container-type (inline-size, size, normal)</li>
+          <li>container-name</li>
+          <li>container shorthand</li>
+          <li>@container rule syntax</li>
+          <li>Container size queries</li>
+          <li>Container style queries</li>
+          <li>Named container queries</li>
+          <li>Container units (cqw, cqh, cqi, cqb, cqmin, cqmax)</li>
+          <li>Nested container queries</li>
+          <li>Container queries vs media queries</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Performance -->
+    <div id="a-perf" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🚀</div>
+        <div class="topic-title">### CSS Performance & Accessibility</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### CSS Performance</div>
+        <ul class="subtopic-list">
+          <li>Critical CSS and render-blocking</li>
+          <li>CSS minification</li>
+          <li>Selector efficiency</li>
+          <li>will-change property</li>
+          <li>GPU-accelerated properties</li>
+          <li>Reflow vs repaint vs composite</li>
+          <li>Avoiding layout thrashing</li>
+          <li>CSS contain for performance</li>
+          <li>content-visibility: auto</li>
+          <li>CSS bundling strategies</li>
+          <li>Code splitting CSS</li>
+          <li>Unused CSS removal (PurgeCSS)</li>
+          <li>Layer rendering optimization</li>
+          <li>CSS loading strategies (@import vs link)</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Accessibility</div>
+        <ul class="subtopic-list">
+          <li>Color contrast (WCAG 2.1, 3.0)</li>
+          <li>Focus styles (:focus-visible)</li>
+          <li>Visually hidden technique</li>
+          <li>Skip links</li>
+          <li>Reduced motion (@prefers-reduced-motion)</li>
+          <li>Forced colors / high contrast mode</li>
+          <li>prefers-contrast media query</li>
+          <li>Text resizing support</li>
+          <li>Touch target sizes</li>
+          <li>Accessible animations</li>
+        </ul>
+        <div class="subtopic-group-title">#### CSS Debugging</div>
+        <ul class="subtopic-list">
+          <li>DevTools computed styles</li>
+          <li>CSS overview panel</li>
+          <li>Layout inspection (flexbox/grid)</li>
+          <li>Layers panel</li>
+          <li>Specificity in DevTools</li>
+          <li>Animation debugging</li>
+          <li>CSS painting profiler</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Modern CSS -->
+    <div id="a-modern" class="topic-card advanced-card section-anchor" onclick="toggleCard(this)">
+      <div class="topic-header">
+        <div class="topic-icon">🌟</div>
+        <div class="topic-title">### Modern CSS Features (2024–2025)</div>
+        <div class="topic-toggle">▼</div>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group-title">#### Layout Innovations</div>
+        <ul class="subtopic-list">
+          <li>Subgrid (grid-template-columns: subgrid)</li>
+          <li>Masonry layout (@supports)</li>
+          <li>CSS anchor positioning</li>
+          <li>anchor() function</li>
+          <li>position-area property</li>
+          <li>anchor-name, anchor-scope</li>
+          <li>Logical properties (block/inline/start/end)</li>
+        </ul>
+        <div class="subtopic-group-title">#### Modern Selectors</div>
+        <ul class="subtopic-list">
+          <li>:has() — relational pseudo-class</li>
+          <li>:is() and :where() forgiving</li>
+          <li>CSS nesting (native)</li>
+          <li>:state() (custom elements)</li>
+          <li>@scope rule</li>
+          <li>Scope proximity</li>
+        </ul>
+        <div class="subtopic-group-title">#### Modern Color</div>
+        <ul class="subtopic-list">
+          <li>Wide-gamut color spaces (Display P3)</li>
+          <li>OKLCH and OKLAB</li>
+          <li>color-mix()</li>
+          <li>Relative color syntax (from keyword)</li>
+          <li>light-dark() function</li>
+          <li>color-contrast() function</li>
+          <li>CSS color level 5</li>
+        </ul>
+        <div class="subtopic-group-title">#### Modern At-Rules</div>
+        <ul class="subtopic-list">
+          <li>@layer</li>
+          <li>@scope</li>
+          <li>@property</li>
+          <li>@container</li>
+          <li>@starting-style</li>
+          <li>@view-transition</li>
+          <li>@font-palette-values</li>
+          <li>@font-feature-values</li>
+        </ul>
+        <div class="subtopic-group-title">#### Typography Advances</div>
+        <ul class="subtopic-list">
+          <li>Variable fonts deep dive</li>
+          <li>font-variant-* properties</li>
+          <li>text-wrap: balance, pretty</li>
+          <li>initial-letter (drop caps)</li>
+          <li>font-palette</li>
+          <li>color fonts</li>
+          <li>hyphenate-character</li>
+        </ul>
+        <div class="subtopic-group-title">#### Interactivity Without JS</div>
+        <ul class="subtopic-list">
+          <li>:has() for stateful UI</li>
+          <li>checkbox hack patterns</li>
+          <li>details/summary styling</li>
+          <li>CSS-only modals (dialog)</li>
+          <li>CSS-only tabs/accordions</li>
+          <li>Popover API + CSS</li>
+          <li>toggle() function (experimental)</li>
+          <li>CSS custom state (::--state)</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    ✦ COMPLETE CSS ROADMAP 2025 · Beginner → Intermediate → Advanced ✦
+  </div>
+
+</div>
+
+<script>
+  function toggleCard(card) {
+    card.classList.toggle('open');
+  }
+
+  function downloadPage(e) {
+    e.preventDefault();
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'CSS-Complete-Roadmap-2025.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Stagger card animations
+  document.querySelectorAll('.topic-card').forEach((card, i) => {
+    card.style.animationDelay = `${i * 0.05}s`;
+  });
+
+  // Auto-open first card of each section
+  document.querySelectorAll('.section').forEach(section => {
+    const first = section.querySelector('.topic-card');
+    if (first) first.classList.add('open');
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Auto-open card if clicked from nav
+        if (target.classList.contains('topic-card') && !target.classList.contains('open')) {
+          target.classList.add('open');
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

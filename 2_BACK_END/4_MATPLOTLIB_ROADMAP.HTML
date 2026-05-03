@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matplotlib Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #020817;
+    --bg-mid: #0a1628;
+    --glass-bg: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.12);
+    --glass-hover: rgba(255,255,255,0.08);
+    --neon-cyan: #00f5ff;
+    --neon-purple: #bf5fff;
+    --neon-pink: #ff3cac;
+    --neon-gold: #ffd700;
+    --neon-green: #39ff14;
+    --neon-orange: #ff6b35;
+    --text-primary: #e8f4fd;
+    --text-secondary: #94a3b8;
+    --beginner: #00f5ff;
+    --intermediate: #bf5fff;
+    --advanced: #ff3cac;
+    --h1-color: #00f5ff;
+    --h2-color: #ffd700;
+    --h3-color: #bf5fff;
+    --h4-color: #39ff14;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(0,245,255,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(191,95,255,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(255,60,172,0.04) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 50px 40px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-purple), var(--neon-pink), transparent);
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+  }
+
+  .header .badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 18px;
+    border-radius: 50px;
+    background: rgba(0,245,255,0.1);
+    border: 1px solid rgba(0,245,255,0.3);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--neon-cyan);
+    letter-spacing: 2px;
+  }
+
+  /* Download Button */
+  .download-btn {
+    display: block;
+    margin: 0 auto 40px;
+    width: fit-content;
+    padding: 14px 40px;
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(191,95,255,0.15));
+    border: 1px solid var(--neon-cyan);
+    border-radius: 50px;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-btn:hover {
+    background: linear-gradient(135deg, rgba(0,245,255,0.3), rgba(191,95,255,0.3));
+    box-shadow: 0 0 30px rgba(0,245,255,0.4), 0 0 60px rgba(0,245,255,0.2);
+    transform: translateY(-2px);
+  }
+
+  .download-btn span { margin-right: 8px; }
+
+  /* Nav Pills */
+  .nav-pills {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .nav-pill {
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 1px solid;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .pill-beginner {
+    color: var(--beginner);
+    border-color: var(--beginner);
+    background: rgba(0,245,255,0.08);
+  }
+  .pill-beginner:hover {
+    background: rgba(0,245,255,0.2);
+    box-shadow: 0 0 20px rgba(0,245,255,0.4);
+  }
+
+  .pill-intermediate {
+    color: var(--intermediate);
+    border-color: var(--intermediate);
+    background: rgba(191,95,255,0.08);
+  }
+  .pill-intermediate:hover {
+    background: rgba(191,95,255,0.2);
+    box-shadow: 0 0 20px rgba(191,95,255,0.4);
+  }
+
+  .pill-advanced {
+    color: var(--advanced);
+    border-color: var(--advanced);
+    background: rgba(255,60,172,0.08);
+  }
+  .pill-advanced:hover {
+    background: rgba(255,60,172,0.2);
+    box-shadow: 0 0 20px rgba(255,60,172,0.4);
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    padding: 20px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+  }
+
+  .section-beginner .section-header {
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.25);
+    box-shadow: 0 4px 30px rgba(0,245,255,0.1);
+  }
+
+  .section-intermediate .section-header {
+    background: rgba(191,95,255,0.08);
+    border: 1px solid rgba(191,95,255,0.25);
+    box-shadow: 0 4px 30px rgba(191,95,255,0.1);
+  }
+
+  .section-advanced .section-header {
+    background: rgba(255,60,172,0.08);
+    border: 1px solid rgba(255,60,172,0.25);
+    box-shadow: 0 4px 30px rgba(255,60,172,0.1);
+  }
+
+  .section-icon {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .section-beginner .section-title { color: var(--beginner); text-shadow: 0 0 20px rgba(0,245,255,0.5); }
+  .section-intermediate .section-title { color: var(--intermediate); text-shadow: 0 0 20px rgba(191,95,255,0.5); }
+  .section-advanced .section-title { color: var(--advanced); text-shadow: 0 0 20px rgba(255,60,172,0.5); }
+
+  .section-count {
+    margin-left: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+
+  .section-beginner .section-count { background: rgba(0,245,255,0.15); color: var(--beginner); border: 1px solid rgba(0,245,255,0.3); }
+  .section-intermediate .section-count { background: rgba(191,95,255,0.15); color: var(--intermediate); border: 1px solid rgba(191,95,255,0.3); }
+  .section-advanced .section-count { background: rgba(255,60,172,0.15); color: var(--advanced); border: 1px solid rgba(255,60,172,0.3); }
+
+  /* Topic Card */
+  .topic-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .topic-card:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+  }
+
+  .section-beginner .topic-card:hover { border-color: rgba(0,245,255,0.4); box-shadow: 0 8px 32px rgba(0,245,255,0.1); }
+  .section-intermediate .topic-card:hover { border-color: rgba(191,95,255,0.4); box-shadow: 0 8px 32px rgba(191,95,255,0.1); }
+  .section-advanced .topic-card:hover { border-color: rgba(255,60,172,0.4); box-shadow: 0 8px 32px rgba(255,60,172,0.1); }
+
+  .topic-card-header {
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+
+  .topic-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .section-beginner .topic-num { background: rgba(0,245,255,0.12); color: var(--beginner); border: 1px solid rgba(0,245,255,0.25); }
+  .section-intermediate .topic-num { background: rgba(191,95,255,0.12); color: var(--intermediate); border: 1px solid rgba(191,95,255,0.25); }
+  .section-advanced .topic-num { background: rgba(255,60,172,0.12); color: var(--advanced); border: 1px solid rgba(255,60,172,0.25); }
+
+  /* H2 style for topic headings */
+  .topic-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--h2-color);
+    font-family: 'Orbitron', monospace;
+    flex: 1;
+  }
+
+  .chevron {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+  }
+
+  .topic-card.open .chevron { transform: rotate(180deg); }
+
+  .topic-body {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 16px;
+  }
+
+  .topic-card.open .topic-body { display: block; }
+
+  /* H3 subtopic group */
+  .subtopic-group {
+    margin-bottom: 16px;
+  }
+
+  .subtopic-group-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--h3-color);
+    font-family: 'Orbitron', monospace;
+    margin-bottom: 10px;
+    padding: 6px 14px;
+    background: rgba(191,95,255,0.08);
+    border-left: 3px solid var(--h3-color);
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  /* H4 sub-subtopic */
+  .sub-subtopic-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--h4-color);
+    font-family: 'Fira Code', monospace;
+    margin: 8px 0 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sub-subtopic-title::before {
+    content: '◆';
+    font-size: 0.6rem;
+    color: var(--h4-color);
+  }
+
+  /* Subtopic items */
+  .subtopic-list {
+    list-style: none;
+    padding-left: 12px;
+  }
+
+  .subtopic-list li {
+    padding: 5px 0 5px 20px;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    border-left: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 3px;
+    position: relative;
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+
+  .subtopic-list li:hover { color: var(--text-primary); }
+
+  .subtopic-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.7rem;
+    top: 6px;
+  }
+
+  .section-beginner .subtopic-list li::before { color: rgba(0,245,255,0.3); }
+  .section-intermediate .subtopic-list li::before { color: rgba(191,95,255,0.3); }
+  .section-advanced .subtopic-list li::before { color: rgba(255,60,172,0.3); }
+
+  .subtopic-list.nested {
+    margin-left: 14px;
+    margin-top: 4px;
+  }
+
+  .subtopic-list.nested li {
+    font-size: 0.86rem;
+    color: rgba(148,163,184,0.8);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 12px 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
+
+  /* Anchor offset for sticky header */
+  .anchor { scroll-margin-top: 80px; }
+
+  @media (max-width: 600px) {
+    .topic-title { font-size: 0.9rem; }
+    .section-title { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>📊 MATPLOTLIB ROADMAP</h1>
+    <p>Complete Guide from Zero to Expert — Data Visualization Mastery</p>
+    <div class="badge">PYTHON · DATA VIZ · COMPLETE REFERENCE</div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <a class="download-btn" id="downloadBtn" href="#" onclick="downloadPage(event)">
+    <span>⬇</span> DOWNLOAD ROADMAP
+  </a>
+
+  <!-- NAV PILLS -->
+  <div class="nav-pills">
+    <a class="nav-pill pill-beginner" href="#beginner">🟢 Beginner</a>
+    <a class="nav-pill pill-intermediate" href="#intermediate">🟣 Intermediate</a>
+    <a class="nav-pill pill-advanced" href="#advanced">🔴 Advanced</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- BEGINNER SECTION                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="beginner" class="section section-beginner anchor">
+    <div class="section-header">
+      <span class="section-icon">🟢</span>
+      <span class="section-title">BEGINNER</span>
+      <span class="section-count">Topics 1–8</span>
+    </div>
+
+    <!-- 1 -->
+    <div class="topic-card open">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">01</span>
+        <span class="topic-title">Introduction to Matplotlib</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### What is Matplotlib?</div>
+          <ul class="subtopic-list">
+            <li>History and origin of Matplotlib</li>
+            <li>Matplotlib vs other visualization libraries (Seaborn, Plotly, Bokeh)</li>
+            <li>Use cases and applications</li>
+            <li>Matplotlib architecture overview</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Installation & Setup</div>
+          <ul class="subtopic-list">
+            <li>Installing via pip: <code>pip install matplotlib</code></li>
+            <li>Installing via conda: <code>conda install matplotlib</code></li>
+            <li>Verifying installation</li>
+            <li>Importing Matplotlib: <code>import matplotlib.pyplot as plt</code></li>
+            <li>Importing NumPy alongside Matplotlib</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Matplotlib Architecture</div>
+          <ul class="subtopic-list">
+            <li>Backend layer</li>
+            <li>Artist layer</li>
+            <li>Scripting layer (pyplot)</li>
+            <li>Figure, Axes, Axis hierarchy</li>
+            <li>Stateful vs Object-Oriented API</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Backends</div>
+          <ul class="subtopic-list">
+            <li>Interactive backends (TkAgg, Qt5Agg, WXAgg)</li>
+            <li>Non-interactive backends (Agg, PDF, SVG, PS)</li>
+            <li>Switching backends: <code>matplotlib.use()</code></li>
+            <li>Inline backend for Jupyter: <code>%matplotlib inline</code></li>
+            <li>Widget backend: <code>%matplotlib widget</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">02</span>
+        <span class="topic-title">Basic Plotting with pyplot</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### pyplot Interface</div>
+          <ul class="subtopic-list">
+            <li>Creating your first plot: <code>plt.plot()</code></li>
+            <li>Displaying plots: <code>plt.show()</code></li>
+            <li>Saving figures: <code>plt.savefig()</code></li>
+            <li>Clearing figures: <code>plt.clf()</code>, <code>plt.cla()</code>, <code>plt.close()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Line Plots</div>
+          <ul class="subtopic-list">
+            <li>Plotting single line</li>
+            <li>Plotting multiple lines</li>
+            <li>Line styles: solid, dashed, dotted, dash-dot</li>
+            <li>Line width and transparency (alpha)</li>
+            <li>Color specification (named, hex, RGB, RGBA)</li>
+            <li>Marker types: circle, square, triangle, star, diamond, etc.</li>
+            <li>Marker size and edge color</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Labels & Titles</div>
+          <ul class="subtopic-list">
+            <li>X-axis label: <code>plt.xlabel()</code></li>
+            <li>Y-axis label: <code>plt.ylabel()</code></li>
+            <li>Plot title: <code>plt.title()</code></li>
+            <li>Font size, font weight, color for labels</li>
+            <li>Title padding and location</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Legend</div>
+          <ul class="subtopic-list">
+            <li>Adding legends: <code>plt.legend()</code></li>
+            <li>Specifying labels in <code>plot()</code></li>
+            <li>Legend location parameter</li>
+            <li>Legend font size and frame</li>
+            <li>Custom legend entries</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Axis Limits & Ticks</div>
+          <ul class="subtopic-list">
+            <li>Setting axis limits: <code>plt.xlim()</code>, <code>plt.ylim()</code></li>
+            <li>Setting tick positions: <code>plt.xticks()</code>, <code>plt.yticks()</code></li>
+            <li>Tick labels rotation</li>
+            <li>Axis aspect ratio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">03</span>
+        <span class="topic-title">Basic Chart Types</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Bar Charts</div>
+          <ul class="subtopic-list">
+            <li>Vertical bar chart: <code>plt.bar()</code></li>
+            <li>Horizontal bar chart: <code>plt.barh()</code></li>
+            <li>Bar width, color, edgecolor, alpha</li>
+            <li>Grouped bar charts</li>
+            <li>Stacked bar charts</li>
+            <li>Adding value labels on bars</li>
+            <li>Error bars on bar charts</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Scatter Plots</div>
+          <ul class="subtopic-list">
+            <li>Basic scatter: <code>plt.scatter()</code></li>
+            <li>Marker size (s parameter)</li>
+            <li>Marker color (c parameter)</li>
+            <li>Color mapping with colormap</li>
+            <li>Transparency (alpha)</li>
+            <li>Edge colors and line widths</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Histograms</div>
+          <ul class="subtopic-list">
+            <li>Basic histogram: <code>plt.hist()</code></li>
+            <li>Bins parameter (int, sequence, string)</li>
+            <li>Density and cumulative histograms</li>
+            <li>Histogram orientation</li>
+            <li>Stacked histograms</li>
+            <li>Step and stepfilled styles</li>
+            <li>Multiple overlapping histograms</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Pie Charts</div>
+          <ul class="subtopic-list">
+            <li>Basic pie chart: <code>plt.pie()</code></li>
+            <li>Labels and autopct</li>
+            <li>Exploding slices</li>
+            <li>Shadow and startangle</li>
+            <li>Custom colors</li>
+            <li>Donut chart creation</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Area Plots</div>
+          <ul class="subtopic-list">
+            <li><code>plt.fill_between()</code></li>
+            <li><code>plt.fill_betweenx()</code></li>
+            <li>Stacked area charts</li>
+            <li>Alpha transparency for areas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">04</span>
+        <span class="topic-title">Figure & Axes Objects (OO API)</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Creating Figure & Axes</div>
+          <ul class="subtopic-list">
+            <li><code>fig = plt.figure()</code></li>
+            <li><code>fig, ax = plt.subplots()</code></li>
+            <li>Figure size: <code>figsize</code> parameter</li>
+            <li>DPI settings</li>
+            <li>Figure background color: <code>facecolor</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Axes Methods</div>
+          <ul class="subtopic-list">
+            <li><code>ax.plot()</code>, <code>ax.scatter()</code>, <code>ax.bar()</code></li>
+            <li><code>ax.set_xlabel()</code>, <code>ax.set_ylabel()</code>, <code>ax.set_title()</code></li>
+            <li><code>ax.set_xlim()</code>, <code>ax.set_ylim()</code></li>
+            <li><code>ax.set_xticks()</code>, <code>ax.set_yticks()</code></li>
+            <li><code>ax.set_xticklabels()</code>, <code>ax.set_yticklabels()</code></li>
+            <li><code>ax.legend()</code></li>
+            <li><code>ax.grid()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Multiple Subplots</div>
+          <ul class="subtopic-list">
+            <li><code>plt.subplots(nrows, ncols)</code></li>
+            <li>Accessing axes with indexing</li>
+            <li><code>plt.subplot()</code> — legacy method</li>
+            <li>Shared X and Y axes: <code>sharex</code>, <code>sharey</code></li>
+            <li>Subplot spacing: <code>plt.tight_layout()</code></li>
+            <li><code>plt.subplots_adjust()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Adding Elements to Axes</div>
+          <ul class="subtopic-list">
+            <li>Adding horizontal/vertical lines: <code>ax.axhline()</code>, <code>ax.axvline()</code></li>
+            <li>Adding spans: <code>ax.axhspan()</code>, <code>ax.axvspan()</code></li>
+            <li>Adding text: <code>ax.text()</code></li>
+            <li>Adding annotations: <code>ax.annotate()</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">05</span>
+        <span class="topic-title">Styling & Formatting</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Colors</div>
+          <ul class="subtopic-list">
+            <li>Named colors (red, blue, green, etc.)</li>
+            <li>Hex color codes (#RRGGBB)</li>
+            <li>RGB and RGBA tuples</li>
+            <li>CN notation (C0, C1, C2...)</li>
+            <li>Grayscale strings ('0.5')</li>
+            <li>X11/CSS4 colors</li>
+            <li>xkcd color names</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Colormaps</div>
+          <ul class="subtopic-list">
+            <li>Sequential colormaps (viridis, plasma, inferno, magma, cividis)</li>
+            <li>Diverging colormaps (RdBu, seismic, coolwarm)</li>
+            <li>Qualitative colormaps (tab10, tab20, Paired, Set1)</li>
+            <li>Cyclic colormaps (twilight, hsv)</li>
+            <li><code>plt.get_cmap()</code></li>
+            <li>Reverse colormaps (_r suffix)</li>
+            <li>Custom colormaps with <code>LinearSegmentedColormap</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Styles</div>
+          <ul class="subtopic-list">
+            <li>Built-in styles: <code>plt.style.available</code></li>
+            <li>Applying styles: <code>plt.style.use()</code></li>
+            <li>Popular styles: ggplot, seaborn, fivethirtyeight, bmh, dark_background, classic</li>
+            <li>Combining multiple styles</li>
+            <li>Temporary styles: <code>plt.style.context()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Typography</div>
+          <ul class="subtopic-list">
+            <li>Font family, size, weight, style</li>
+            <li>Using system fonts</li>
+            <li>LaTeX rendering: <code>usetex=True</code></li>
+            <li>Math text with dollar signs</li>
+            <li>Font properties with <code>FontProperties</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Grid & Spines</div>
+          <ul class="subtopic-list">
+            <li>Grid lines: <code>ax.grid()</code></li>
+            <li>Grid style, color, alpha, linestyle</li>
+            <li>Major vs minor grids</li>
+            <li>Spines: <code>ax.spines[]</code></li>
+            <li>Removing spines</li>
+            <li>Moving spines to center</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">06</span>
+        <span class="topic-title">Text, Annotations & Arrows</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Text Elements</div>
+          <ul class="subtopic-list">
+            <li><code>ax.text(x, y, s)</code> — basic text placement</li>
+            <li>Text alignment: <code>ha</code>, <code>va</code> parameters</li>
+            <li>Text rotation</li>
+            <li>Text bounding box (bbox parameter)</li>
+            <li>Text color, size, font</li>
+            <li>Transform parameter (data, axes, figure coordinates)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Annotations</div>
+          <ul class="subtopic-list">
+            <li><code>ax.annotate(text, xy, xytext)</code></li>
+            <li>Arrow properties: <code>arrowprops</code></li>
+            <li>Arrow styles: fancy, simple, wedge</li>
+            <li>Connection styles: arc3, angle3, angle</li>
+            <li>Annotation with bbox</li>
+            <li>Annotating with offset points</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Colorbar</div>
+          <ul class="subtopic-list">
+            <li>Adding colorbar: <code>plt.colorbar()</code></li>
+            <li>Colorbar orientation (vertical, horizontal)</li>
+            <li>Colorbar label and ticks</li>
+            <li>Colorbar shrink and aspect</li>
+            <li>Colorbar extend (min, max, both)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Math Expressions</div>
+          <ul class="subtopic-list">
+            <li>Inline math with $...$</li>
+            <li>Greek letters: \alpha, \beta, \gamma</li>
+            <li>Superscript and subscript</li>
+            <li>Fractions, integrals, summations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">07</span>
+        <span class="topic-title">Saving & Exporting Figures</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### File Formats</div>
+          <ul class="subtopic-list">
+            <li>PNG (raster, default)</li>
+            <li>PDF (vector)</li>
+            <li>SVG (vector, web-ready)</li>
+            <li>EPS (vector, for publications)</li>
+            <li>JPEG and TIFF</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### savefig() Parameters</div>
+          <ul class="subtopic-list">
+            <li>DPI (dots per inch)</li>
+            <li>bbox_inches='tight' for clipping</li>
+            <li>facecolor and edgecolor</li>
+            <li>transparent background</li>
+            <li>pad_inches</li>
+            <li>Saving to BytesIO (in-memory)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Jupyter Integration</div>
+          <ul class="subtopic-list">
+            <li>Inline display: <code>%matplotlib inline</code></li>
+            <li>Retina display: <code>%config InlineBackend.figure_format='retina'</code></li>
+            <li>Interactive widgets: <code>%matplotlib widget</code></li>
+            <li>ipympl integration</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">08</span>
+        <span class="topic-title">Working with Data Structures</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### NumPy Arrays</div>
+          <ul class="subtopic-list">
+            <li>Plotting 1D arrays</li>
+            <li>Plotting 2D arrays (rows as series)</li>
+            <li>linspace and arange for x values</li>
+            <li>Applying NumPy functions (sin, cos, exp)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Pandas Integration</div>
+          <ul class="subtopic-list">
+            <li>Plotting DataFrame columns directly</li>
+            <li><code>df.plot()</code> — Pandas built-in (uses Matplotlib)</li>
+            <li>Passing DataFrame columns to Matplotlib functions</li>
+            <li>Plotting with time series index</li>
+            <li>Categorical data plotting</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Python Lists & Dicts</div>
+          <ul class="subtopic-list">
+            <li>Plotting from plain Python lists</li>
+            <li>Using zip() for x/y pairs</li>
+            <li>Plotting dictionary values</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end beginner -->
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- INTERMEDIATE SECTION                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="intermediate" class="section section-intermediate anchor">
+    <div class="section-header">
+      <span class="section-icon">🟣</span>
+      <span class="section-title">INTERMEDIATE</span>
+      <span class="section-count">Topics 9–18</span>
+    </div>
+
+    <!-- 9 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">09</span>
+        <span class="topic-title">Advanced Subplots & Layouts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### GridSpec</div>
+          <ul class="subtopic-list">
+            <li><code>matplotlib.gridspec.GridSpec</code></li>
+            <li>Defining rows and columns</li>
+            <li>Spanning multiple rows/columns</li>
+            <li>Nested GridSpec</li>
+            <li>GridSpec with width_ratios and height_ratios</li>
+            <li>hspace and wspace for spacing</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### subplot_mosaic</div>
+          <ul class="subtopic-list">
+            <li><code>fig.subplot_mosaic()</code> — ASCII layout</li>
+            <li>Spanning axes with same label</li>
+            <li>Empty axes with "." character</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Inset Axes</div>
+          <ul class="subtopic-list">
+            <li><code>ax.inset_axes()</code></li>
+            <li><code>mpl_toolkits.axes_grid1.inset_locator</code></li>
+            <li>Zoomed inset with <code>mark_inset()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Twin Axes</div>
+          <ul class="subtopic-list">
+            <li><code>ax.twinx()</code> — second y-axis</li>
+            <li><code>ax.twiny()</code> — second x-axis</li>
+            <li>Dual-scale plots</li>
+            <li>Synchronizing twin axes limits</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Constrained Layout</div>
+          <ul class="subtopic-list">
+            <li><code>plt.subplots(layout='constrained')</code></li>
+            <li>Comparison with tight_layout</li>
+            <li>Padding and rect parameters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">10</span>
+        <span class="topic-title">Statistical & Distribution Plots</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Box Plots</div>
+          <ul class="subtopic-list">
+            <li><code>ax.boxplot()</code></li>
+            <li>Notched box plots</li>
+            <li>Whisker length (whis parameter)</li>
+            <li>Flier (outlier) styling</li>
+            <li>Horizontal box plots</li>
+            <li>Grouped box plots</li>
+            <li>Custom box plot patches</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Violin Plots</div>
+          <ul class="subtopic-list">
+            <li><code>ax.violinplot()</code></li>
+            <li>showmeans, showmedians, showextrema</li>
+            <li>Bandwidth (bw_method)</li>
+            <li>Positions and widths</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Error Bars</div>
+          <ul class="subtopic-list">
+            <li><code>ax.errorbar()</code></li>
+            <li>Symmetric vs asymmetric errors</li>
+            <li>Capsize parameter</li>
+            <li>Horizontal error bars</li>
+            <li>Combining with line and scatter plots</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### 2D Histograms</div>
+          <ul class="subtopic-list">
+            <li><code>ax.hist2d()</code></li>
+            <li>Bin specification in 2D</li>
+            <li>Colormap for density</li>
+            <li>Hexbin plot: <code>ax.hexbin()</code></li>
+            <li>Gridsize and reduce_C_function</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Stem & Step Plots</div>
+          <ul class="subtopic-list">
+            <li><code>ax.stem()</code></li>
+            <li>Stem formatting: markerfmt, linefmt, basefmt</li>
+            <li><code>ax.step()</code> — step function plots</li>
+            <li>Where parameter: pre, post, mid</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">11</span>
+        <span class="topic-title">2D Data & Image Plots</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### imshow</div>
+          <ul class="subtopic-list">
+            <li><code>ax.imshow()</code> — displaying 2D arrays</li>
+            <li>Colormap selection</li>
+            <li>Interpolation methods (nearest, bilinear, bicubic)</li>
+            <li>Aspect ratio (auto, equal)</li>
+            <li>Extent parameter (coordinate mapping)</li>
+            <li>Origin (upper, lower)</li>
+            <li>vmin and vmax clipping</li>
+            <li>Displaying RGB/RGBA images</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### pcolor & pcolormesh</div>
+          <ul class="subtopic-list">
+            <li><code>ax.pcolor()</code></li>
+            <li><code>ax.pcolormesh()</code> — faster version</li>
+            <li>Non-rectangular grids</li>
+            <li>Shading options (flat, gouraud)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### matshow</div>
+          <ul class="subtopic-list">
+            <li><code>plt.matshow()</code></li>
+            <li>Confusion matrix visualization</li>
+            <li>Correlation matrix heatmaps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">12</span>
+        <span class="topic-title">Contour & Vector Field Plots</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Contour Plots</div>
+          <ul class="subtopic-list">
+            <li><code>ax.contour()</code> — contour lines</li>
+            <li><code>ax.contourf()</code> — filled contours</li>
+            <li>Level specification</li>
+            <li>Colormap and alpha</li>
+            <li>Contour labels: <code>ax.clabel()</code></li>
+            <li>Inline labels</li>
+            <li>Combining contour and contourf</li>
+            <li>meshgrid for creating grids</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Quiver Plots (Vector Fields)</div>
+          <ul class="subtopic-list">
+            <li><code>ax.quiver()</code></li>
+            <li>Arrow scale, width, headwidth</li>
+            <li>Color mapping arrows by magnitude</li>
+            <li>Quiver key (legend): <code>ax.quiverkey()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Streamlines</div>
+          <ul class="subtopic-list">
+            <li><code>ax.streamplot()</code></li>
+            <li>Density and linewidth</li>
+            <li>Color by speed</li>
+            <li>Integration direction</li>
+            <li>Start points</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Barbs</div>
+          <ul class="subtopic-list">
+            <li><code>ax.barbs()</code> — meteorological wind barbs</li>
+            <li>Barb size and length</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">13</span>
+        <span class="topic-title">Tick Customization & Formatters</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Tick Locators</div>
+          <ul class="subtopic-list">
+            <li>AutoLocator</li>
+            <li>MultipleLocator</li>
+            <li>MaxNLocator</li>
+            <li>FixedLocator</li>
+            <li>IndexLocator</li>
+            <li>LinearLocator</li>
+            <li>LogLocator</li>
+            <li>NullLocator (no ticks)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Tick Formatters</div>
+          <ul class="subtopic-list">
+            <li>FormatStrFormatter</li>
+            <li>FuncFormatter — custom function</li>
+            <li>PercentFormatter</li>
+            <li>ScalarFormatter</li>
+            <li>LogFormatter</li>
+            <li>DateFormatter</li>
+            <li>NullFormatter (no labels)</li>
+            <li>EngFormatter (engineering notation)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Minor Ticks</div>
+          <ul class="subtopic-list">
+            <li>Enabling minor ticks: <code>ax.minorticks_on()</code></li>
+            <li>AutoMinorLocator</li>
+            <li>Styling minor ticks separately</li>
+            <li>Minor grid lines</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Tick Parameters</div>
+          <ul class="subtopic-list">
+            <li><code>ax.tick_params()</code></li>
+            <li>Direction (in, out, inout)</li>
+            <li>Length, width, color</li>
+            <li>Labelbottom, labeltop, labelleft, labelright</li>
+            <li>Rotation and pad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">14</span>
+        <span class="topic-title">Legends — Advanced</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Legend Placement</div>
+          <ul class="subtopic-list">
+            <li>Location codes and strings (best, upper right, etc.)</li>
+            <li>bbox_to_anchor for precise placement</li>
+            <li>Placing legend outside axes</li>
+            <li>Legend with multiple columns: <code>ncol</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Legend Styling</div>
+          <ul class="subtopic-list">
+            <li>Frame, framealpha, fancybox</li>
+            <li>Shadow and edge color</li>
+            <li>Handle length and label spacing</li>
+            <li>Title inside legend</li>
+            <li>Fontsize and title_fontsize</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Custom Legend Handles</div>
+          <ul class="subtopic-list">
+            <li>Patch, Line2D, Rectangle as handles</li>
+            <li>Custom handler classes</li>
+            <li>Combining multiple plots in one legend</li>
+            <li>Legend for scatter with size</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Multiple Legends</div>
+          <ul class="subtopic-list">
+            <li>Adding second legend with <code>ax.add_artist()</code></li>
+            <li>Legends for twin axes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">15</span>
+        <span class="topic-title">Scales & Transformations</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Axis Scales</div>
+          <ul class="subtopic-list">
+            <li>Linear scale (default)</li>
+            <li>Logarithmic scale: <code>ax.set_xscale('log')</code></li>
+            <li>Symmetric log scale: <code>'symlog'</code></li>
+            <li>Logit scale: <code>'logit'</code></li>
+            <li>Custom scale with <code>scale.register_scale()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Coordinate Transformations</div>
+          <ul class="subtopic-list">
+            <li>Data coordinates</li>
+            <li>Axes coordinates (0 to 1)</li>
+            <li>Figure coordinates</li>
+            <li>Display coordinates (pixels)</li>
+            <li><code>ax.transData</code>, <code>ax.transAxes</code>, <code>fig.transFigure</code></li>
+            <li>BlendedTransform</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Broken Axes</div>
+          <ul class="subtopic-list">
+            <li>Simulating broken y-axis</li>
+            <li>Using brokenaxes library</li>
+            <li>Displaying discontinuities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">16</span>
+        <span class="topic-title">Date & Time Plots</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Date Handling</div>
+          <ul class="subtopic-list">
+            <li>Plotting datetime objects</li>
+            <li>Plotting Pandas DatetimeIndex</li>
+            <li>Converting strings to dates</li>
+            <li>Epoch-based numeric dates</li>
+            <li><code>matplotlib.dates</code> module</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Date Formatters</div>
+          <ul class="subtopic-list">
+            <li>DateFormatter with strftime codes</li>
+            <li>AutoDateFormatter</li>
+            <li>ConciseDateFormatter</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Date Locators</div>
+          <ul class="subtopic-list">
+            <li>AutoDateLocator</li>
+            <li>YearLocator, MonthLocator, WeekdayLocator</li>
+            <li>DayLocator, HourLocator, MinuteLocator, SecondLocator</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Time Series Plots</div>
+          <ul class="subtopic-list">
+            <li>Financial OHLC-style plots</li>
+            <li>Rolling averages overlay</li>
+            <li>Shading date ranges</li>
+            <li>Auto-rotating date labels</li>
+            <li><code>fig.autofmt_xdate()</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">17</span>
+        <span class="topic-title">Patches & Shapes</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### matplotlib.patches</div>
+          <ul class="subtopic-list">
+            <li>Rectangle patch</li>
+            <li>Circle patch</li>
+            <li>Ellipse patch</li>
+            <li>Polygon patch</li>
+            <li>Arc patch</li>
+            <li>FancyBboxPatch (rounded corners)</li>
+            <li>Arrow patch</li>
+            <li>FancyArrowPatch</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Collections</div>
+          <ul class="subtopic-list">
+            <li>PatchCollection</li>
+            <li>LineCollection</li>
+            <li>PolyCollection</li>
+            <li>EllipseCollection</li>
+            <li>PathCollection (returned by scatter)</li>
+            <li>Using collections for performance</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Paths</div>
+          <ul class="subtopic-list">
+            <li><code>matplotlib.path.Path</code></li>
+            <li>Path verbs: MOVETO, LINETO, CURVE3, CURVE4, CLOSEPOLY</li>
+            <li>PathPatch</li>
+            <li>Custom shapes with Bezier curves</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">18</span>
+        <span class="topic-title">rcParams & Customization</title>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### rcParams</div>
+          <ul class="subtopic-list">
+            <li>What is <code>matplotlib.rcParams</code></li>
+            <li>Viewing all parameters: <code>plt.rcParams</code></li>
+            <li>Setting parameters globally</li>
+            <li>Resetting to defaults: <code>plt.rcdefaults()</code></li>
+            <li>Temporary context: <code>plt.rc_context()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### matplotlibrc File</div>
+          <ul class="subtopic-list">
+            <li>Location of matplotlibrc</li>
+            <li>Syntax and structure</li>
+            <li>User-level vs project-level config</li>
+            <li>Loading custom config files</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Creating Custom Styles</div>
+          <ul class="subtopic-list">
+            <li>Creating .mplstyle files</li>
+            <li>Registering and using custom styles</li>
+            <li>Sharing styles across projects</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Common rcParams Groups</div>
+          <ul class="subtopic-list">
+            <li>Figure settings (figsize, dpi, facecolor)</li>
+            <li>Font settings (family, size, weight)</li>
+            <li>Axes settings (grid, spines, labelsize)</li>
+            <li>Line settings (linewidth, markersize)</li>
+            <li>Legend settings</li>
+            <li>Savefig settings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end intermediate -->
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ADVANCED SECTION                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="advanced" class="section section-advanced anchor">
+    <div class="section-header">
+      <span class="section-icon">🔴</span>
+      <span class="section-title">ADVANCED</span>
+      <span class="section-count">Topics 19–30</span>
+    </div>
+
+    <!-- 19 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">19</span>
+        <span class="topic-title">3D Plotting (mpl_toolkits.mplot3d)</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Setup & Axes3D</div>
+          <ul class="subtopic-list">
+            <li>Importing: <code>from mpl_toolkits.mplot3d import Axes3D</code></li>
+            <li>Creating 3D axes: <code>projection='3d'</code></li>
+            <li>View angle: <code>ax.view_init(elev, azim)</code></li>
+            <li>Zoom (dist parameter)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### 3D Plot Types</div>
+          <ul class="subtopic-list">
+            <li>3D line plot: <code>ax.plot3D()</code></li>
+            <li>3D scatter: <code>ax.scatter3D()</code></li>
+            <li>3D surface: <code>ax.plot_surface()</code></li>
+            <li>Wireframe: <code>ax.plot_wireframe()</code></li>
+            <li>Trisurf: <code>ax.plot_trisurf()</code></li>
+            <li>3D bar chart: <code>ax.bar3d()</code></li>
+            <li>3D contour: <code>ax.contour3D()</code>, <code>ax.contourf(zdir)</code></li>
+            <li>3D quiver: <code>ax.quiver()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### 3D Customization</div>
+          <ul class="subtopic-list">
+            <li>Z-axis label and limits</li>
+            <li>Pane color (background planes)</li>
+            <li>Grid and axis lines in 3D</li>
+            <li>Color mapping for surfaces (rstride, cstride)</li>
+            <li>Lighting and shading (lightsource)</li>
+            <li>Alpha transparency for surfaces</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Projections onto Planes</div>
+          <ul class="subtopic-list">
+            <li>Projecting contours onto x, y, z planes</li>
+            <li>Shadow plots</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">20</span>
+        <span class="topic-title">Animation</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### FuncAnimation</div>
+          <ul class="subtopic-list">
+            <li><code>matplotlib.animation.FuncAnimation</code></li>
+            <li>init_func parameter</li>
+            <li>frames parameter (int, iterable, generator)</li>
+            <li>interval (milliseconds between frames)</li>
+            <li>blit parameter for performance</li>
+            <li>repeat and repeat_delay</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### ArtistAnimation</div>
+          <ul class="subtopic-list">
+            <li><code>matplotlib.animation.ArtistAnimation</code></li>
+            <li>List of artists per frame</li>
+            <li>When to use vs FuncAnimation</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Saving Animations</div>
+          <ul class="subtopic-list">
+            <li>Saving as GIF (Pillow writer)</li>
+            <li>Saving as MP4 (FFmpeg writer)</li>
+            <li>Saving as HTML (HTML5 video)</li>
+            <li>Writer classes: FFMpegWriter, PillowWriter, HTMLWriter</li>
+            <li>DPI and fps settings</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Animation Examples</div>
+          <ul class="subtopic-list">
+            <li>Animating a sine wave</li>
+            <li>Animating scatter data</li>
+            <li>Animating 3D rotation</li>
+            <li>Real-time data streaming animation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">21</span>
+        <span class="topic-title">Interactive Widgets & Events</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### matplotlib.widgets</div>
+          <ul class="subtopic-list">
+            <li>Slider widget: <code>matplotlib.widgets.Slider</code></li>
+            <li>RangeSlider</li>
+            <li>Button widget</li>
+            <li>CheckButtons</li>
+            <li>RadioButtons</li>
+            <li>TextBox</li>
+            <li>SpanSelector</li>
+            <li>RectangleSelector</li>
+            <li>EllipseSelector</li>
+            <li>LassoSelector</li>
+            <li>PolygonSelector</li>
+            <li>Cursor</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Event Handling</div>
+          <ul class="subtopic-list">
+            <li><code>fig.canvas.mpl_connect()</code></li>
+            <li>button_press_event</li>
+            <li>button_release_event</li>
+            <li>motion_notify_event</li>
+            <li>key_press_event</li>
+            <li>scroll_event</li>
+            <li>pick_event (picking artists)</li>
+            <li>resize_event</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Picking</div>
+          <ul class="subtopic-list">
+            <li>Enabling picking: <code>picker=True</code></li>
+            <li>picker tolerance</li>
+            <li>PickEvent attributes (artist, mouseevent, ind)</li>
+            <li>Interactive data selection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 22 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">22</span>
+        <span class="topic-title">Custom Artists & Renderers</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Artist Class</div>
+          <ul class="subtopic-list">
+            <li>Artist hierarchy: Figure → Axes → primitives</li>
+            <li>Common Artist attributes: visible, alpha, zorder, clip_on</li>
+            <li>set() and get() methods</li>
+            <li>setp() for batch property setting</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Creating Custom Artists</div>
+          <ul class="subtopic-list">
+            <li>Subclassing <code>Artist</code></li>
+            <li>Implementing <code>draw()</code> method</li>
+            <li>Using <code>RendererBase</code></li>
+            <li>Creating compound artists</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Transforms Deep Dive</div>
+          <ul class="subtopic-list">
+            <li>Affine2D transform</li>
+            <li>CompositeAffine2D</li>
+            <li>BboxTransform</li>
+            <li>Transform composition</li>
+            <li>Inverse transforms</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Clipping</div>
+          <ul class="subtopic-list">
+            <li>Clipping to axes boundary</li>
+            <li>Clipping to arbitrary patch</li>
+            <li><code>artist.set_clip_path()</code></li>
+            <li>clip_on and clip_box</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 23 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">23</span>
+        <span class="topic-title">Specialized Plot Types</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Polar Plots</div>
+          <ul class="subtopic-list">
+            <li>Creating polar axes: <code>projection='polar'</code></li>
+            <li>Polar line and scatter plots</li>
+            <li>Polar bar charts (wind rose)</li>
+            <li>Setting theta direction and offset</li>
+            <li>Radial gridlines and labels</li>
+            <li>r-axis limits and ticks</li>
+            <li>Spider/Radar charts</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Broken Bar Charts</div>
+          <ul class="subtopic-list">
+            <li><code>ax.broken_barh()</code></li>
+            <li>Gantt chart creation</li>
+            <li>Timeline visualization</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### EventPlot</div>
+          <ul class="subtopic-list">
+            <li><code>ax.eventplot()</code></li>
+            <li>Spike raster plots (neuroscience)</li>
+            <li>Multiple event sets</li>
+            <li>Orientation (horizontal, vertical)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Spectrogram & ACORR</div>
+          <ul class="subtopic-list">
+            <li>Spectrogram: <code>ax.specgram()</code></li>
+            <li>PSD: <code>ax.psd()</code></li>
+            <li>CSD: <code>ax.csd()</code></li>
+            <li>Autocorrelation: <code>ax.acorr()</code></li>
+            <li>Cross-correlation: <code>ax.xcorr()</code></li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Table</div>
+          <ul class="subtopic-list">
+            <li><code>ax.table()</code></li>
+            <li>Cell colors and alignment</li>
+            <li>Column and row labels</li>
+            <li>Scaling and font size</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 24 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">24</span>
+        <span class="topic-title">mpl_toolkits — Advanced Tools</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### axes_grid1</div>
+          <ul class="subtopic-list">
+            <li>ImageGrid for multiple image panels</li>
+            <li>make_axes_locatable</li>
+            <li>Divider for flexible axes layouts</li>
+            <li>Colorbar per axes with AxesDivider</li>
+            <li>AnchoredArtists</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### axisartist</div>
+          <ul class="subtopic-list">
+            <li>Custom axis directions</li>
+            <li>Curvilinear coordinate axes</li>
+            <li>axisartist.SubplotHost</li>
+            <li>Floating axes</li>
+            <li>Parasite axes</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Basemap (Legacy)</div>
+          <ul class="subtopic-list">
+            <li>Overview and deprecation notice</li>
+            <li>Migration to Cartopy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 25 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">25</span>
+        <span class="topic-title">Custom Projections & Non-Cartesian Axes</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Built-in Projections</div>
+          <ul class="subtopic-list">
+            <li>aitoff, hammer, lambert, mollweide (sky maps)</li>
+            <li>Rectilinear (default)</li>
+            <li>Polar projection</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Creating Custom Projections</div>
+          <ul class="subtopic-list">
+            <li>Subclassing <code>Axes</code></li>
+            <li>Subclassing <code>Transform</code></li>
+            <li>Registering a custom projection</li>
+            <li>Curvilinear grids with axisartist</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 26 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">26</span>
+        <span class="topic-title">Performance Optimization</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Rendering Speed</div>
+          <ul class="subtopic-list">
+            <li>Agg backend for fast rasterization</li>
+            <li>Blitting in animations</li>
+            <li>Rasterizing vector elements: <code>rasterized=True</code></li>
+            <li>Reducing artist count</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Large Datasets</div>
+          <ul class="subtopic-list">
+            <li>Using LineCollection instead of multiple plot() calls</li>
+            <li>Data downsampling before plotting</li>
+            <li>hexbin instead of scatter for dense data</li>
+            <li>Chunked rendering strategies</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Memory Management</div>
+          <ul class="subtopic-list">
+            <li>Properly closing figures: <code>plt.close('all')</code></li>
+            <li>Using <code>plt.close(fig)</code></li>
+            <li>Avoiding figure accumulation in loops</li>
+            <li>Weakref and garbage collection</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Profiling</div>
+          <ul class="subtopic-list">
+            <li>Timing individual rendering calls</li>
+            <li>Profiling with cProfile</li>
+            <li>Identifying bottlenecks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 27 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">27</span>
+        <span class="topic-title">Embedding Matplotlib in Applications</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Tkinter Integration</div>
+          <ul class="subtopic-list">
+            <li>FigureCanvasTkAgg</li>
+            <li>NavigationToolbar2Tk</li>
+            <li>Embedding in Tkinter window</li>
+            <li>Updating canvas on events</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### PyQt / PySide Integration</div>
+          <ul class="subtopic-list">
+            <li>FigureCanvasQTAgg</li>
+            <li>NavigationToolbar2QT</li>
+            <li>Embedding in QMainWindow</li>
+            <li>Signal-slot connections for updates</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### wxPython Integration</div>
+          <ul class="subtopic-list">
+            <li>FigureCanvasWxAgg</li>
+            <li>NavigationToolbar2Wx</li>
+            <li>Embedding in wx.Frame</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Web Frameworks</div>
+          <ul class="subtopic-list">
+            <li>Serving figures in Flask/Django (BytesIO + base64)</li>
+            <li>Matplotlib with Streamlit</li>
+            <li>Matplotlib with Dash</li>
+            <li>WebAgg backend for browser display</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 28 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">28</span>
+        <span class="topic-title">Publication-Quality Figures</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Figure Sizing for Publications</div>
+          <ul class="subtopic-list">
+            <li>Journal column widths (single, double)</li>
+            <li>Points vs inches vs cm conversion</li>
+            <li>High-DPI settings (300+ dpi)</li>
+            <li>Vector formats for publications (PDF, EPS, SVG)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Typography for Papers</div>
+          <ul class="subtopic-list">
+            <li>Matching paper font (Times, Helvetica)</li>
+            <li>Font sizes for readability after scaling</li>
+            <li>LaTeX integration: full LaTeX rendering</li>
+            <li>Custom LaTeX preamble</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Accessibility</div>
+          <ul class="subtopic-list">
+            <li>Colorblind-friendly palettes</li>
+            <li>Pattern fills in addition to color</li>
+            <li>High contrast designs</li>
+            <li>Alt text for figures</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Reproducibility</div>
+          <ul class="subtopic-list">
+            <li>Fixing random seeds for scatter jitter</li>
+            <li>Version pinning for consistent style</li>
+            <li>Saving rcParams used for a figure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 29 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">29</span>
+        <span class="topic-title">Integration with Scientific Libraries</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Seaborn</div>
+          <ul class="subtopic-list">
+            <li>Seaborn as a Matplotlib wrapper</li>
+            <li>Accessing underlying Matplotlib axes from Seaborn</li>
+            <li>Customizing Seaborn plots with Matplotlib methods</li>
+            <li>FacetGrid and Matplotlib subplots</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### SciPy & NumPy</div>
+          <ul class="subtopic-list">
+            <li>Plotting scipy distributions</li>
+            <li>Visualizing FFT results</li>
+            <li>Plotting numerical solutions (ODE, PDE)</li>
+            <li>Visualizing linear algebra (eigenvectors)</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Astropy & Scientific Domain Libraries</div>
+          <ul class="subtopic-list">
+            <li>WCS (World Coordinate System) plots</li>
+            <li>SpecUtils plots</li>
+            <li>Nilearn (neuroimaging) Matplotlib integration</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### NetworkX</div>
+          <ul class="subtopic-list">
+            <li>Drawing graphs with NetworkX + Matplotlib</li>
+            <li>Node and edge styling</li>
+            <li>Layout algorithms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30 -->
+    <div class="topic-card">
+      <div class="topic-card-header" onclick="toggleCard(this)">
+        <span class="topic-num">30</span>
+        <span class="topic-title">Extending Matplotlib — Plugins & Backend Dev</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="topic-body">
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Writing a Custom Backend</div>
+          <ul class="subtopic-list">
+            <li>RendererBase API</li>
+            <li>FigureCanvasBase API</li>
+            <li>Backend module structure</li>
+            <li>Registering a backend</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Custom Colormaps (Advanced)</div>
+          <ul class="subtopic-list">
+            <li>ListedColormap</li>
+            <li>LinearSegmentedColormap from dict</li>
+            <li>From list with <code>from_list()</code></li>
+            <li>BoundaryNorm for discrete coloring</li>
+            <li>TwoSlopeNorm</li>
+            <li>LogNorm, PowerNorm, SymLogNorm</li>
+            <li>Custom Normalize subclass</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Matplotlib Plugin Architecture</div>
+          <ul class="subtopic-list">
+            <li>matplotlib_scalebar plugin</li>
+            <li>mpl-interactions</li>
+            <li>mplcursors (interactive cursor labels)</li>
+            <li>matplotx (extra styles)</li>
+            <li>Writing your own plugin</li>
+          </ul>
+        </div>
+        <div class="subtopic-group">
+          <div class="subtopic-group-title">### Contributing to Matplotlib</div>
+          <ul class="subtopic-list">
+            <li>Project structure on GitHub</li>
+            <li>Building from source</li>
+            <li>Running tests</li>
+            <li>Writing tests for new features</li>
+            <li>Submitting pull requests</li>
+            <li>Writing documentation with Sphinx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end advanced -->
+
+  <div class="footer">
+    © Matplotlib Complete Roadmap · Built with ❤ · Python Data Visualization
+  </div>
+
+</div><!-- end container -->
+
+<script>
+  function toggleCard(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  function downloadPage(e) {
+    e.preventDefault();
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Matplotlib_Complete_Roadmap.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Smooth scroll for nav pills
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Open first card in each section by default
+  document.querySelectorAll('.topic-card').forEach((card, i) => {
+    if (!card.classList.contains('open') && i === 0) card.classList.add('open');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,2662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Complete Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #020b18;
+    --bg-mid: #041628;
+    --glass-bg: rgba(6, 30, 60, 0.45);
+    --glass-border: rgba(0, 200, 255, 0.18);
+    --glass-shine: rgba(255,255,255,0.07);
+    --neon-cyan: #00f0ff;
+    --neon-green: #00ff9d;
+    --neon-pink: #ff2ef7;
+    --neon-orange: #ff8c00;
+    --neon-yellow: #ffe600;
+    --neon-purple: #b060ff;
+    --text-main: #dff5ff;
+    --text-muted: #7ab8cc;
+    --beginner: #00ff9d;
+    --intermediate: #ff8c00;
+    --advanced: #ff2ef7;
+    --h1-color: #00f0ff;
+    --h2-color: #ffe600;
+    --h3-color: #ff8c00;
+    --h4-color: #b060ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,200,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 80%, rgba(176,96,255,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,255,157,0.04) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 60px 0 40px;
+    position: relative;
+  }
+  .header-badge {
+    display: inline-block;
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0,240,255,0.3);
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: rgba(0,240,255,0.05);
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--h1-color);
+    text-shadow: 0 0 30px rgba(0,240,255,0.6), 0 0 60px rgba(0,240,255,0.3);
+    line-height: 1.1;
+    letter-spacing: 2px;
+  }
+  header h1 span { color: var(--neon-yellow); }
+  .header-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-top: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* DOWNLOAD BTN */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 13px 34px;
+    background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(176,96,255,0.15));
+    border: 1px solid rgba(0,240,255,0.5);
+    border-radius: 50px;
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .download-btn:hover {
+    background: linear-gradient(135deg, rgba(0,240,255,0.3), rgba(176,96,255,0.3));
+    box-shadow: 0 0 30px rgba(0,240,255,0.4);
+    transform: translateY(-2px);
+  }
+  .download-btn svg { width:18px; height:18px; }
+
+  /* TOC */
+  .toc-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 36px 0;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 var(--glass-shine);
+  }
+  .toc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    color: var(--neon-yellow);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toc-title::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, rgba(255,230,0,0.3), transparent); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .toc-link {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.25s;
+    letter-spacing: 0.5px;
+  }
+  .toc-link:hover { color: var(--neon-cyan); border-color: rgba(0,240,255,0.3); background: rgba(0,240,255,0.06); }
+  .toc-link.beg { color: rgba(0,255,157,0.7); } .toc-link.beg:hover { color: var(--beginner); border-color: rgba(0,255,157,0.4); background: rgba(0,255,157,0.06); }
+  .toc-link.int { color: rgba(255,140,0,0.7); } .toc-link.int:hover { color: var(--intermediate); border-color: rgba(255,140,0,0.4); background: rgba(255,140,0,0.06); }
+  .toc-link.adv { color: rgba(255,46,247,0.7); } .toc-link.adv:hover { color: var(--advanced); border-color: rgba(255,46,247,0.4); background: rgba(255,46,247,0.06); }
+
+  /* SECTION HEADER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 56px 0 30px;
+  }
+  .section-badge {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    padding: 8px 22px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-beginner { background: rgba(0,255,157,0.1); border: 1px solid rgba(0,255,157,0.4); color: var(--beginner); box-shadow: 0 0 20px rgba(0,255,157,0.15); }
+  .badge-intermediate { background: rgba(255,140,0,0.1); border: 1px solid rgba(255,140,0,0.4); color: var(--intermediate); box-shadow: 0 0 20px rgba(255,140,0,0.15); }
+  .badge-advanced { background: rgba(255,46,247,0.1); border: 1px solid rgba(255,46,247,0.4); color: var(--advanced); box-shadow: 0 0 20px rgba(255,46,247,0.15); }
+  .section-line { flex: 1; height: 1px; }
+  .line-beginner { background: linear-gradient(90deg, rgba(0,255,157,0.5), transparent); }
+  .line-intermediate { background: linear-gradient(90deg, rgba(255,140,0,0.5), transparent); }
+  .line-advanced { background: linear-gradient(90deg, rgba(255,46,247,0.5), transparent); }
+  .section-icon { font-size: 1.8rem; }
+
+  /* TOPIC CARD */
+  .topic-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 var(--glass-shine);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .topic-card:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0,0,0,0.45); }
+  .card-beginner { border-left: 3px solid var(--beginner); }
+  .card-intermediate { border-left: 3px solid var(--intermediate); }
+  .card-advanced { border-left: 3px solid var(--advanced); }
+
+  .card-header {
+    padding: 20px 26px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  .card-header::after {
+    content:'';
+    position: absolute;
+    bottom: 0; left: 26px; right: 26px;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+  .card-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    min-width: 38px;
+    text-align: center;
+  }
+  .num-beginner { background: rgba(0,255,157,0.1); color: var(--beginner); border: 1px solid rgba(0,255,157,0.25); }
+  .num-intermediate { background: rgba(255,140,0,0.1); color: var(--intermediate); border: 1px solid rgba(255,140,0,0.25); }
+  .num-advanced { background: rgba(255,46,247,0.1); color: var(--advanced); border: 1px solid rgba(255,46,247,0.25); }
+
+  /* H2 styling */
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--h2-color);
+    text-shadow: 0 0 15px rgba(255,230,0,0.35);
+    flex: 1;
+    letter-spacing: 1px;
+  }
+  .toggle-icon {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+  }
+  .card-header.open .toggle-icon { transform: rotate(180deg); }
+
+  .card-body { padding: 22px 26px 26px; display: none; }
+  .card-body.open { display: block; }
+
+  /* H3 */
+  .subtopic-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--h3-color);
+    text-shadow: 0 0 10px rgba(255,140,0,0.3);
+    margin: 22px 0 10px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subtopic-title::before { content: '▶'; font-size: 0.6rem; color: var(--h3-color); opacity: 0.7; }
+
+  /* H4 */
+  .detail-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--h4-color);
+    margin: 14px 0 6px;
+    letter-spacing: 0.5px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(176,96,255,0.4);
+  }
+
+  /* LIST ITEMS */
+  .item-list { list-style: none; padding: 0; }
+  .item-list li {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text-main);
+    padding: 5px 0 5px 22px;
+    position: relative;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .item-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    font-size: 0.5rem;
+    top: 9px;
+    color: var(--neon-cyan);
+    opacity: 0.6;
+  }
+  .item-list li strong {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--neon-cyan);
+    background: rgba(0,240,255,0.07);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* Code pill */
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82rem;
+    background: rgba(0,240,255,0.08);
+    border: 1px solid rgba(0,240,255,0.15);
+    color: var(--neon-cyan);
+    padding: 1px 7px;
+    border-radius: 5px;
+  }
+
+  /* DESC TEXT */
+  .desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border-left: 2px solid rgba(0,240,255,0.2);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-family: 'Fira Code', monospace;
+  }
+  footer span { color: var(--neon-cyan); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.25); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .toc-grid { grid-template-columns: 1fr 1fr; }
+    .card-title { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-overlay"></div>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-badge">🐍 Complete Learning Guide 2025</div>
+    <h1>PYTHON <span>ROADMAP</span></h1>
+    <p class="header-sub">Beginner → Intermediate → Advanced · Every Topic · Every Subtopic</p>
+    <a class="download-btn" onclick="downloadHTML()" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      DOWNLOAD ROADMAP
+    </a>
+  </header>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc-glass">
+    <div class="toc-title">📌 Bookmarks — Quick Navigation</div>
+    <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted);font-family:'Fira Code',monospace;">🟢 BEGINNER</div>
+    <div class="toc-grid">
+      <a href="#b1" class="toc-link beg">01 · Introduction to Python</a>
+      <a href="#b2" class="toc-link beg">02 · Python Setup & Environment</a>
+      <a href="#b3" class="toc-link beg">03 · Variables & Data Types</a>
+      <a href="#b4" class="toc-link beg">04 · Operators</a>
+      <a href="#b5" class="toc-link beg">05 · Strings</a>
+      <a href="#b6" class="toc-link beg">06 · Input & Output</a>
+      <a href="#b7" class="toc-link beg">07 · Control Flow</a>
+      <a href="#b8" class="toc-link beg">08 · Loops</a>
+      <a href="#b9" class="toc-link beg">09 · Lists</a>
+      <a href="#b10" class="toc-link beg">10 · Tuples</a>
+      <a href="#b11" class="toc-link beg">11 · Sets</a>
+      <a href="#b12" class="toc-link beg">12 · Dictionaries</a>
+      <a href="#b13" class="toc-link beg">13 · Functions</a>
+      <a href="#b14" class="toc-link beg">14 · Modules & Packages</a>
+      <a href="#b15" class="toc-link beg">15 · File Handling</a>
+      <a href="#b16" class="toc-link beg">16 · Exception Handling</a>
+    </div>
+    <div style="margin:14px 0 10px;font-size:0.82rem;color:var(--text-muted);font-family:'Fira Code',monospace;">🟠 INTERMEDIATE</div>
+    <div class="toc-grid">
+      <a href="#i1" class="toc-link int">17 · OOP Fundamentals</a>
+      <a href="#i2" class="toc-link int">18 · OOP Advanced Concepts</a>
+      <a href="#i3" class="toc-link int">19 · Iterators & Generators</a>
+      <a href="#i4" class="toc-link int">20 · Comprehensions</a>
+      <a href="#i5" class="toc-link int">21 · Lambda & Functional</a>
+      <a href="#i6" class="toc-link int">22 · Decorators</a>
+      <a href="#i7" class="toc-link int">23 · Regular Expressions</a>
+      <a href="#i8" class="toc-link int">24 · Date & Time</a>
+      <a href="#i9" class="toc-link int">25 · Math & Statistics</a>
+      <a href="#i10" class="toc-link int">26 · OS & System</a>
+      <a href="#i11" class="toc-link int">27 · JSON & CSV & XML</a>
+      <a href="#i12" class="toc-link int">28 · Virtual Environments</a>
+      <a href="#i13" class="toc-link int">29 · Debugging & Testing</a>
+      <a href="#i14" class="toc-link int">30 · Comprehensions Advanced</a>
+      <a href="#i15" class="toc-link int">31 · Collections Module</a>
+      <a href="#i16" class="toc-link int">32 · Logging</a>
+    </div>
+    <div style="margin:14px 0 10px;font-size:0.82rem;color:var(--text-muted);font-family:'Fira Code',monospace;">🔴 ADVANCED</div>
+    <div class="toc-grid">
+      <a href="#a1" class="toc-link adv">33 · Multithreading & Multiprocessing</a>
+      <a href="#a2" class="toc-link adv">34 · Async Programming</a>
+      <a href="#a3" class="toc-link adv">35 · Memory Management & GC</a>
+      <a href="#a4" class="toc-link adv">36 · Metaclasses & Descriptors</a>
+      <a href="#a5" class="toc-link adv">37 · Context Managers</a>
+      <a href="#a6" class="toc-link adv">38 · Data Structures & Algorithms</a>
+      <a href="#a7" class="toc-link adv">39 · Networking & Sockets</a>
+      <a href="#a8" class="toc-link adv">40 · Database Connectivity</a>
+      <a href="#a9" class="toc-link adv">41 · Web Scraping</a>
+      <a href="#a10" class="toc-link adv">42 · APIs & REST</a>
+      <a href="#a11" class="toc-link adv">43 · Data Science Stack</a>
+      <a href="#a12" class="toc-link adv">44 · Machine Learning</a>
+      <a href="#a13" class="toc-link adv">45 · Web Frameworks</a>
+      <a href="#a14" class="toc-link adv">46 · Design Patterns</a>
+      <a href="#a15" class="toc-link adv">47 · Packaging & Deployment</a>
+      <a href="#a16" class="toc-link adv">48 · Performance & Optimization</a>
+    </div>
+  </div>
+
+  <!-- ===================== BEGINNER ===================== -->
+  <div class="section-divider">
+    <span class="section-icon">🟢</span>
+    <span class="section-badge badge-beginner">BEGINNER</span>
+    <div class="section-line line-beginner"></div>
+  </div>
+
+  <!-- B1 -->
+  <div class="topic-card card-beginner" id="b1">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">01</span>
+      <span class="card-title">Introduction to Python</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <p class="desc">Foundation knowledge about Python as a language — what it is, where it's used, and how it works.</p>
+      <div class="subtopic-title">What is Python?</div>
+      <ul class="item-list">
+        <li>History and origin of Python (Guido van Rossum, 1991)</li>
+        <li>Python 2 vs Python 3 differences and why Python 3 is standard</li>
+        <li>Python philosophy — The Zen of Python (<code>import this</code>)</li>
+        <li>Interpreted vs compiled languages</li>
+        <li>Dynamically typed vs statically typed</li>
+        <li>Python's role: scripting, automation, web, data science, AI/ML, IoT</li>
+      </ul>
+      <div class="subtopic-title">Python Features</div>
+      <ul class="item-list">
+        <li>Simple and readable syntax</li>
+        <li>High-level language</li>
+        <li>Platform independent (cross-platform)</li>
+        <li>Open source and community-driven</li>
+        <li>Extensive standard library</li>
+        <li>Large ecosystem (PyPI with 400,000+ packages)</li>
+        <li>Object-oriented, functional, and procedural paradigms</li>
+      </ul>
+      <div class="subtopic-title">Python Use Cases & Applications</div>
+      <ul class="item-list">
+        <li>Web development (Django, Flask, FastAPI)</li>
+        <li>Data science & analytics (Pandas, NumPy)</li>
+        <li>Machine learning & AI (TensorFlow, PyTorch, scikit-learn)</li>
+        <li>Automation & scripting</li>
+        <li>Cybersecurity & penetration testing</li>
+        <li>DevOps & cloud automation</li>
+        <li>Game development (Pygame)</li>
+        <li>Embedded systems & IoT (MicroPython)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B2 -->
+  <div class="topic-card card-beginner" id="b2">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">02</span>
+      <span class="card-title">Python Setup & Environment</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Installation</div>
+      <ul class="item-list">
+        <li>Downloading Python from python.org</li>
+        <li>Installing on Windows, macOS, Linux</li>
+        <li>Adding Python to PATH (Windows)</li>
+        <li>Verifying installation: <code>python --version</code>, <code>python3 --version</code></li>
+        <li>Python Launcher for Windows (<code>py</code>)</li>
+      </ul>
+      <div class="subtopic-title">Python Interpreter & REPL</div>
+      <ul class="item-list">
+        <li>Interactive Python shell (REPL — Read Eval Print Loop)</li>
+        <li>Running scripts: <code>python script.py</code></li>
+        <li>IPython — enhanced interactive shell</li>
+        <li>Jupyter Notebook / JupyterLab</li>
+        <li>Google Colab (cloud-based notebooks)</li>
+      </ul>
+      <div class="subtopic-title">IDEs & Code Editors</div>
+      <ul class="item-list">
+        <li>VS Code with Python extension</li>
+        <li>PyCharm (Community & Professional)</li>
+        <li>IDLE (Python's built-in editor)</li>
+        <li>Thonny (beginner-friendly)</li>
+        <li>Spyder (scientific computing)</li>
+        <li>Sublime Text, Atom, Vim with Python plugins</li>
+      </ul>
+      <div class="subtopic-title">pip Package Manager</div>
+      <ul class="item-list">
+        <li>What is pip and how it works</li>
+        <li><code>pip install package</code>, <code>pip uninstall package</code></li>
+        <li><code>pip list</code>, <code>pip show package</code></li>
+        <li><code>pip freeze &gt; requirements.txt</code></li>
+        <li><code>pip install -r requirements.txt</code></li>
+        <li>pip vs pip3</li>
+        <li>Upgrading pip: <code>pip install --upgrade pip</code></li>
+      </ul>
+      <div class="subtopic-title">Virtual Environments (Basic)</div>
+      <ul class="item-list">
+        <li>Why virtual environments are needed</li>
+        <li>Creating: <code>python -m venv env</code></li>
+        <li>Activating on Windows: <code>env\Scripts\activate</code></li>
+        <li>Activating on Mac/Linux: <code>source env/bin/activate</code></li>
+        <li>Deactivating: <code>deactivate</code></li>
+      </ul>
+      <div class="subtopic-title">Writing & Running First Program</div>
+      <ul class="item-list">
+        <li>Creating a <code>.py</code> file</li>
+        <li><strong>print("Hello, World!")</strong> — first program</li>
+        <li>Indentation rules in Python</li>
+        <li>Comments: single-line (<code>#</code>) and multi-line (<code>'''...'''</code>)</li>
+        <li>Python file encoding declaration</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B3 -->
+  <div class="topic-card card-beginner" id="b3">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">03</span>
+      <span class="card-title">Variables & Data Types</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Variables</div>
+      <ul class="item-list">
+        <li>What is a variable — naming and assignment</li>
+        <li>Variable naming rules and conventions (PEP 8)</li>
+        <li>Dynamic typing — no type declaration needed</li>
+        <li>Multiple assignment: <code>a = b = c = 5</code></li>
+        <li>Tuple unpacking: <code>x, y, z = 1, 2, 3</code></li>
+        <li><code>type()</code> function — checking variable type</li>
+        <li><code>id()</code> function — memory address of object</li>
+        <li>Constants (PEP 8 convention: ALL_CAPS)</li>
+        <li>Deleting variables: <code>del variable</code></li>
+      </ul>
+      <div class="subtopic-title">Numeric Types</div>
+      <ul class="item-list">
+        <li><strong>int</strong> — integers (arbitrary precision in Python 3)</li>
+        <li><strong>float</strong> — floating-point numbers (IEEE 754 double precision)</li>
+        <li><strong>complex</strong> — complex numbers (<code>3+4j</code>)</li>
+        <li>Integer bases: binary (<code>0b</code>), octal (<code>0o</code>), hexadecimal (<code>0x</code>)</li>
+        <li>Underscores in numeric literals: <code>1_000_000</code></li>
+        <li>Float precision issues and rounding</li>
+        <li>Type conversion: <code>int()</code>, <code>float()</code>, <code>complex()</code></li>
+      </ul>
+      <div class="subtopic-title">Boolean Type</div>
+      <ul class="item-list">
+        <li><strong>bool</strong> — <code>True</code> and <code>False</code></li>
+        <li>bool is subclass of int (True == 1, False == 0)</li>
+        <li>Truthy and falsy values</li>
+        <li><code>bool()</code> conversion function</li>
+      </ul>
+      <div class="subtopic-title">NoneType</div>
+      <ul class="item-list">
+        <li><code>None</code> — represents absence of value</li>
+        <li>Checking for None: <code>x is None</code> vs <code>x == None</code></li>
+        <li>None as default return value of functions</li>
+      </ul>
+      <div class="subtopic-title">Type Conversion (Casting)</div>
+      <ul class="item-list">
+        <li>Implicit type conversion (coercion)</li>
+        <li>Explicit type conversion: <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>, <code>list()</code>, <code>tuple()</code>, <code>set()</code></li>
+        <li>Converting between number bases: <code>bin()</code>, <code>oct()</code>, <code>hex()</code></li>
+        <li><code>ord()</code> and <code>chr()</code> — character/integer conversion</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B4 -->
+  <div class="topic-card card-beginner" id="b4">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">04</span>
+      <span class="card-title">Operators</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Arithmetic Operators</div>
+      <ul class="item-list">
+        <li><code>+</code> Addition, <code>-</code> Subtraction, <code>*</code> Multiplication, <code>/</code> Division</li>
+        <li><code>//</code> Floor division, <code>%</code> Modulus (remainder), <code>**</code> Exponentiation</li>
+        <li>Order of operations (PEMDAS/BODMAS)</li>
+        <li>Augmented assignment: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>//=</code>, <code>%=</code>, <code>**=</code></li>
+      </ul>
+      <div class="subtopic-title">Comparison (Relational) Operators</div>
+      <ul class="item-list">
+        <li><code>==</code> Equal to, <code>!=</code> Not equal to</li>
+        <li><code>&gt;</code> Greater than, <code>&lt;</code> Less than</li>
+        <li><code>&gt;=</code> Greater than or equal, <code>&lt;=</code> Less than or equal</li>
+        <li>Chained comparisons: <code>1 &lt; x &lt; 10</code></li>
+      </ul>
+      <div class="subtopic-title">Logical Operators</div>
+      <ul class="item-list">
+        <li><code>and</code> — both conditions true</li>
+        <li><code>or</code> — at least one condition true</li>
+        <li><code>not</code> — negation</li>
+        <li>Short-circuit evaluation</li>
+        <li>Logical operators with non-boolean values</li>
+      </ul>
+      <div class="subtopic-title">Identity & Membership Operators</div>
+      <ul class="item-list">
+        <li><code>is</code> and <code>is not</code> — identity comparison (same object)</li>
+        <li><code>in</code> and <code>not in</code> — membership test</li>
+        <li>Difference between <code>==</code> and <code>is</code></li>
+      </ul>
+      <div class="subtopic-title">Bitwise Operators</div>
+      <ul class="item-list">
+        <li><code>&amp;</code> AND, <code>|</code> OR, <code>^</code> XOR, <code>~</code> NOT</li>
+        <li><code>&lt;&lt;</code> Left shift, <code>&gt;&gt;</code> Right shift</li>
+        <li>Practical uses of bitwise operators</li>
+      </ul>
+      <div class="subtopic-title">Operator Precedence</div>
+      <ul class="item-list">
+        <li>Complete operator precedence table</li>
+        <li>Using parentheses to control evaluation order</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B5 -->
+  <div class="topic-card card-beginner" id="b5">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">05</span>
+      <span class="card-title">Strings</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">String Basics</div>
+      <ul class="item-list">
+        <li>Creating strings: single, double, triple quotes</li>
+        <li>Strings are immutable sequences</li>
+        <li>Raw strings: <code>r"path\to\file"</code></li>
+        <li>Byte strings: <code>b"bytes"</code></li>
+        <li>Unicode and <code>u""</code> strings</li>
+        <li>String length: <code>len()</code></li>
+      </ul>
+      <div class="subtopic-title">Escape Characters</div>
+      <ul class="item-list">
+        <li><code>\n</code> newline, <code>\t</code> tab, <code>\\</code> backslash, <code>\'</code> single quote, <code>\"</code> double quote</li>
+        <li><code>\r</code> carriage return, <code>\b</code> backspace, <code>\0</code> null character</li>
+        <li><code>\xhh</code> hex escape, <code>\uXXXX</code> Unicode escape</li>
+      </ul>
+      <div class="subtopic-title">String Indexing & Slicing</div>
+      <ul class="item-list">
+        <li>Positive indexing: <code>s[0]</code>, <code>s[1]</code></li>
+        <li>Negative indexing: <code>s[-1]</code>, <code>s[-2]</code></li>
+        <li>Slicing: <code>s[start:stop:step]</code></li>
+        <li>Reversing a string: <code>s[::-1]</code></li>
+        <li>String is immutable — items cannot be assigned</li>
+      </ul>
+      <div class="subtopic-title">String Operations</div>
+      <ul class="item-list">
+        <li>Concatenation: <code>+</code> operator</li>
+        <li>Repetition: <code>*</code> operator</li>
+        <li>Membership: <code>in</code>, <code>not in</code></li>
+        <li>String comparison (lexicographic)</li>
+      </ul>
+      <div class="subtopic-title">String Formatting</div>
+      <ul class="item-list">
+        <li>Old-style formatting: <code>%s</code>, <code>%d</code>, <code>%f</code></li>
+        <li><code>str.format()</code> method</li>
+        <li>f-strings (formatted string literals): <code>f"Hello {name}"</code></li>
+        <li>f-string expressions: <code>f"{2+2}"</code>, <code>f"{name!r}"</code></li>
+        <li>Format specifiers: width, precision, alignment, fill, type</li>
+      </ul>
+      <div class="subtopic-title">String Methods</div>
+      <ul class="item-list">
+        <li><strong>Case:</strong> <code>upper()</code>, <code>lower()</code>, <code>title()</code>, <code>capitalize()</code>, <code>swapcase()</code>, <code>casefold()</code></li>
+        <li><strong>Search:</strong> <code>find()</code>, <code>index()</code>, <code>rfind()</code>, <code>rindex()</code>, <code>count()</code></li>
+        <li><strong>Check:</strong> <code>startswith()</code>, <code>endswith()</code>, <code>isalpha()</code>, <code>isdigit()</code>, <code>isalnum()</code>, <code>isspace()</code>, <code>isupper()</code>, <code>islower()</code>, <code>istitle()</code>, <code>isnumeric()</code>, <code>isdecimal()</code></li>
+        <li><strong>Modify:</strong> <code>strip()</code>, <code>lstrip()</code>, <code>rstrip()</code>, <code>replace()</code>, <code>expandtabs()</code>, <code>zfill()</code>, <code>center()</code>, <code>ljust()</code>, <code>rjust()</code></li>
+        <li><strong>Split/Join:</strong> <code>split()</code>, <code>rsplit()</code>, <code>splitlines()</code>, <code>join()</code>, <code>partition()</code>, <code>rpartition()</code></li>
+        <li><strong>Encode/Decode:</strong> <code>encode()</code>, <code>decode()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B6 -->
+  <div class="topic-card card-beginner" id="b6">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">06</span>
+      <span class="card-title">Input & Output</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Standard Input</div>
+      <ul class="item-list">
+        <li><code>input()</code> function — reads a string from user</li>
+        <li>Displaying a prompt: <code>input("Enter: ")</code></li>
+        <li>Converting input to int/float: <code>int(input())</code></li>
+        <li>Multiple inputs on one line using <code>split()</code></li>
+        <li><code>map(int, input().split())</code> pattern</li>
+        <li>Reading multiple values: <code>a, b = map(int, input().split())</code></li>
+      </ul>
+      <div class="subtopic-title">Standard Output</div>
+      <ul class="item-list">
+        <li><code>print()</code> function — arguments, sep, end, file, flush</li>
+        <li>Printing multiple values</li>
+        <li>Custom separator: <code>print(a, b, sep=",")</code></li>
+        <li>Custom end character: <code>print("text", end="")</code></li>
+        <li>Printing to file: <code>print(..., file=f)</code></li>
+        <li>Pretty printing with <code>pprint</code> module</li>
+      </ul>
+      <div class="subtopic-title">Command Line Arguments</div>
+      <ul class="item-list">
+        <li><code>sys.argv</code> — list of command line arguments</li>
+        <li><code>argparse</code> module — structured argument parsing</li>
+        <li>Positional and optional arguments</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B7 -->
+  <div class="topic-card card-beginner" id="b7">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">07</span>
+      <span class="card-title">Control Flow</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">if / elif / else Statements</div>
+      <ul class="item-list">
+        <li>Basic <code>if</code> statement syntax</li>
+        <li><code>elif</code> — multiple conditions</li>
+        <li><code>else</code> — default branch</li>
+        <li>Nested <code>if</code> statements</li>
+        <li>One-liner if: <code>x = a if condition else b</code> (ternary operator)</li>
+        <li>Truthy/falsy evaluation in conditions</li>
+      </ul>
+      <div class="subtopic-title">Match Statement (Python 3.10+)</div>
+      <ul class="item-list">
+        <li>Structural pattern matching with <code>match / case</code></li>
+        <li>Matching literals, variables, sequences, mappings, classes</li>
+        <li>Guard conditions with <code>if</code> in case</li>
+        <li>Wildcard pattern: <code>case _:</code></li>
+        <li>OR patterns: <code>case A | B:</code></li>
+      </ul>
+      <div class="subtopic-title">Pass Statement</div>
+      <ul class="item-list">
+        <li><code>pass</code> — null operation / placeholder</li>
+        <li>Using pass in empty if, loops, functions, classes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B8 -->
+  <div class="topic-card card-beginner" id="b8">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">08</span>
+      <span class="card-title">Loops</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">for Loop</div>
+      <ul class="item-list">
+        <li>Iterating over sequences: list, tuple, string, range</li>
+        <li><code>range(stop)</code>, <code>range(start, stop)</code>, <code>range(start, stop, step)</code></li>
+        <li>Iterating with index: <code>enumerate()</code></li>
+        <li>Iterating multiple sequences: <code>zip()</code></li>
+        <li><code>zip_longest()</code> from itertools</li>
+        <li>Nested for loops</li>
+        <li>Iterating dictionaries: <code>.keys()</code>, <code>.values()</code>, <code>.items()</code></li>
+      </ul>
+      <div class="subtopic-title">while Loop</div>
+      <ul class="item-list">
+        <li>Basic while loop syntax</li>
+        <li>Infinite loops and how to avoid them</li>
+        <li><code>while True</code> pattern with break</li>
+        <li>Counter-controlled while loops</li>
+        <li>Sentinel value pattern</li>
+      </ul>
+      <div class="subtopic-title">Loop Control Statements</div>
+      <ul class="item-list">
+        <li><code>break</code> — exit the loop entirely</li>
+        <li><code>continue</code> — skip current iteration</li>
+        <li><code>pass</code> — no-op in loop body</li>
+        <li><code>else</code> clause on loops (executes if loop not broken)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B9 -->
+  <div class="topic-card card-beginner" id="b9">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">09</span>
+      <span class="card-title">Lists</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">List Basics</div>
+      <ul class="item-list">
+        <li>Creating lists: <code>[]</code>, <code>list()</code></li>
+        <li>Lists are ordered, mutable, allow duplicates</li>
+        <li>Heterogeneous items (mixed types)</li>
+        <li>Nested lists (2D/multi-dimensional)</li>
+        <li>Indexing and slicing (same as strings)</li>
+      </ul>
+      <div class="subtopic-title">List Methods</div>
+      <ul class="item-list">
+        <li><strong>Add:</strong> <code>append()</code>, <code>insert()</code>, <code>extend()</code></li>
+        <li><strong>Remove:</strong> <code>remove()</code>, <code>pop()</code>, <code>clear()</code>, <code>del</code></li>
+        <li><strong>Search:</strong> <code>index()</code>, <code>count()</code></li>
+        <li><strong>Sort:</strong> <code>sort()</code>, <code>sort(reverse=True)</code>, <code>sort(key=func)</code>, <code>reverse()</code></li>
+        <li><strong>Copy:</strong> <code>copy()</code> (shallow copy)</li>
+      </ul>
+      <div class="subtopic-title">List Functions</div>
+      <ul class="item-list">
+        <li><code>len()</code>, <code>min()</code>, <code>max()</code>, <code>sum()</code></li>
+        <li><code>sorted()</code> — returns new sorted list</li>
+        <li><code>reversed()</code> — returns iterator</li>
+        <li><code>list()</code> — convert iterable to list</li>
+        <li><code>any()</code>, <code>all()</code></li>
+      </ul>
+      <div class="subtopic-title">List Operations</div>
+      <ul class="item-list">
+        <li>Concatenation with <code>+</code></li>
+        <li>Repetition with <code>*</code></li>
+        <li>Membership with <code>in</code></li>
+        <li>List unpacking: <code>a, b, *rest = [1, 2, 3, 4]</code></li>
+        <li>Shallow vs deep copy (<code>copy</code> module)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B10 -->
+  <div class="topic-card card-beginner" id="b10">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">10</span>
+      <span class="card-title">Tuples</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Tuple Basics</div>
+      <ul class="item-list">
+        <li>Creating tuples: <code>()</code>, <code>tuple()</code></li>
+        <li>Single-element tuple: <code>(5,)</code> — the trailing comma</li>
+        <li>Tuples are ordered and immutable</li>
+        <li>Packing and unpacking tuples</li>
+        <li>Extended unpacking: <code>first, *rest = t</code></li>
+      </ul>
+      <div class="subtopic-title">Tuple Methods & Operations</div>
+      <ul class="item-list">
+        <li><code>count()</code> and <code>index()</code> methods</li>
+        <li>Indexing and slicing</li>
+        <li>Concatenation and repetition</li>
+        <li>Membership testing</li>
+      </ul>
+      <div class="subtopic-title">Tuple vs List</div>
+      <ul class="item-list">
+        <li>Immutability use cases — hashable, dict keys</li>
+        <li>Performance — tuples are faster than lists</li>
+        <li>When to use tuple vs list</li>
+        <li>Named tuples (<code>collections.namedtuple</code>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B11 -->
+  <div class="topic-card card-beginner" id="b11">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">11</span>
+      <span class="card-title">Sets</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Set Basics</div>
+      <ul class="item-list">
+        <li>Creating sets: <code>{1,2,3}</code>, <code>set()</code></li>
+        <li>Sets are unordered, no duplicates, mutable</li>
+        <li>Frozen sets: <code>frozenset()</code> — immutable sets</li>
+        <li>Empty set must use <code>set()</code> not <code>{}</code></li>
+      </ul>
+      <div class="subtopic-title">Set Methods</div>
+      <ul class="item-list">
+        <li><strong>Add/Remove:</strong> <code>add()</code>, <code>update()</code>, <code>remove()</code>, <code>discard()</code>, <code>pop()</code>, <code>clear()</code></li>
+        <li><strong>Set Operations:</strong> <code>union()</code> / <code>|</code>, <code>intersection()</code> / <code>&amp;</code>, <code>difference()</code> / <code>-</code>, <code>symmetric_difference()</code> / <code>^</code></li>
+        <li><strong>In-place:</strong> <code>update()</code>, <code>intersection_update()</code>, <code>difference_update()</code>, <code>symmetric_difference_update()</code></li>
+        <li><strong>Comparison:</strong> <code>issubset()</code>, <code>issuperset()</code>, <code>isdisjoint()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B12 -->
+  <div class="topic-card card-beginner" id="b12">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">12</span>
+      <span class="card-title">Dictionaries</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Dictionary Basics</div>
+      <ul class="item-list">
+        <li>Creating dicts: <code>{}</code>, <code>dict()</code></li>
+        <li>Key-value pairs — keys must be hashable</li>
+        <li>Ordered (Python 3.7+) insertion order</li>
+        <li>Accessing values: <code>d[key]</code>, <code>d.get(key, default)</code></li>
+        <li>Adding and updating: <code>d[key] = value</code></li>
+        <li>Nested dictionaries</li>
+      </ul>
+      <div class="subtopic-title">Dictionary Methods</div>
+      <ul class="item-list">
+        <li><code>keys()</code>, <code>values()</code>, <code>items()</code></li>
+        <li><code>get()</code>, <code>setdefault()</code></li>
+        <li><code>update()</code>, <code>pop()</code>, <code>popitem()</code>, <code>clear()</code></li>
+        <li><code>copy()</code> (shallow copy)</li>
+        <li><code>fromkeys()</code> — create dict from keys</li>
+      </ul>
+      <div class="subtopic-title">Dictionary Operations</div>
+      <ul class="item-list">
+        <li>Merging dicts: <code>{**d1, **d2}</code>, <code>d1 | d2</code> (Python 3.9+), <code>d1 |= d2</code></li>
+        <li>Checking key existence: <code>key in d</code></li>
+        <li>Iterating keys, values, items</li>
+        <li>Dictionary as switch/case alternative</li>
+        <li>Default dictionaries pattern</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B13 -->
+  <div class="topic-card card-beginner" id="b13">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">13</span>
+      <span class="card-title">Functions</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Defining & Calling Functions</div>
+      <ul class="item-list">
+        <li><code>def</code> keyword, function naming (PEP 8)</li>
+        <li>Calling a function</li>
+        <li>Docstrings (<code>"""..."""</code>) — <code>__doc__</code> attribute</li>
+        <li>Return values: <code>return</code> statement</li>
+        <li>Functions returning multiple values (tuple)</li>
+        <li>Functions without return — returns <code>None</code></li>
+      </ul>
+      <div class="subtopic-title">Parameters & Arguments</div>
+      <ul class="item-list">
+        <li>Positional arguments</li>
+        <li>Keyword arguments</li>
+        <li>Default parameter values</li>
+        <li>Mutable default argument pitfall</li>
+        <li><code>*args</code> — variable positional arguments (tuple)</li>
+        <li><code>**kwargs</code> — variable keyword arguments (dict)</li>
+        <li>Keyword-only arguments (after <code>*</code>)</li>
+        <li>Positional-only arguments (before <code>/</code>, Python 3.8+)</li>
+        <li>Argument ordering rules</li>
+      </ul>
+      <div class="subtopic-title">Scope & Namespaces</div>
+      <ul class="item-list">
+        <li>LEGB rule: Local, Enclosing, Global, Built-in</li>
+        <li><code>global</code> keyword</li>
+        <li><code>nonlocal</code> keyword</li>
+        <li><code>globals()</code> and <code>locals()</code> functions</li>
+      </ul>
+      <div class="subtopic-title">Function Objects</div>
+      <ul class="item-list">
+        <li>Functions are first-class objects</li>
+        <li>Assigning functions to variables</li>
+        <li>Passing functions as arguments</li>
+        <li>Returning functions from functions</li>
+        <li>Nested functions (inner functions)</li>
+      </ul>
+      <div class="subtopic-title">Built-in Functions</div>
+      <ul class="item-list">
+        <li><code>print()</code>, <code>input()</code>, <code>len()</code>, <code>range()</code>, <code>type()</code></li>
+        <li><code>abs()</code>, <code>round()</code>, <code>pow()</code>, <code>divmod()</code></li>
+        <li><code>min()</code>, <code>max()</code>, <code>sum()</code></li>
+        <li><code>sorted()</code>, <code>reversed()</code>, <code>enumerate()</code>, <code>zip()</code></li>
+        <li><code>map()</code>, <code>filter()</code>, <code>reduce()</code></li>
+        <li><code>open()</code>, <code>repr()</code>, <code>str()</code>, <code>int()</code>, <code>float()</code></li>
+        <li><code>isinstance()</code>, <code>issubclass()</code>, <code>callable()</code>, <code>hasattr()</code>, <code>getattr()</code>, <code>setattr()</code>, <code>delattr()</code></li>
+        <li><code>dir()</code>, <code>help()</code>, <code>id()</code>, <code>hash()</code></li>
+        <li><code>iter()</code>, <code>next()</code></li>
+        <li><code>any()</code>, <code>all()</code></li>
+        <li><code>chr()</code>, <code>ord()</code></li>
+        <li><code>bin()</code>, <code>oct()</code>, <code>hex()</code></li>
+        <li><code>format()</code>, <code>vars()</code></li>
+        <li><code>eval()</code>, <code>exec()</code>, <code>compile()</code></li>
+        <li><code>__import__()</code>, <code>globals()</code>, <code>locals()</code></li>
+        <li><code>staticmethod()</code>, <code>classmethod()</code>, <code>property()</code>, <code>super()</code></li>
+        <li><code>object()</code>, <code>type()</code> (as constructor)</li>
+        <li><code>memoryview()</code>, <code>bytearray()</code>, <code>bytes()</code></li>
+        <li><code>slice()</code>, <code>complex()</code>, <code>frozenset()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B14 -->
+  <div class="topic-card card-beginner" id="b14">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">14</span>
+      <span class="card-title">Modules & Packages</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Modules</div>
+      <ul class="item-list">
+        <li>What is a module — a <code>.py</code> file</li>
+        <li>Importing: <code>import module</code></li>
+        <li>From import: <code>from module import name</code></li>
+        <li>Aliases: <code>import numpy as np</code></li>
+        <li>Wildcard import: <code>from module import *</code></li>
+        <li><code>__name__ == "__main__"</code> guard</li>
+        <li><code>__all__</code> — controlling exports</li>
+        <li>Reloading modules: <code>importlib.reload()</code></li>
+      </ul>
+      <div class="subtopic-title">Packages</div>
+      <ul class="item-list">
+        <li>What is a package — directory with <code>__init__.py</code></li>
+        <li>Namespace packages (Python 3.3+)</li>
+        <li>Sub-packages and sub-modules</li>
+        <li>Relative vs absolute imports</li>
+        <li>Package structure best practices</li>
+      </ul>
+      <div class="subtopic-title">Standard Library Highlights</div>
+      <ul class="item-list">
+        <li><code>os</code>, <code>sys</code>, <code>math</code>, <code>random</code>, <code>datetime</code></li>
+        <li><code>collections</code>, <code>itertools</code>, <code>functools</code></li>
+        <li><code>json</code>, <code>csv</code>, <code>re</code>, <code>pathlib</code></li>
+        <li><code>time</code>, <code>shutil</code>, <code>copy</code>, <code>io</code></li>
+        <li><code>string</code>, <code>struct</code>, <code>array</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B15 -->
+  <div class="topic-card card-beginner" id="b15">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">15</span>
+      <span class="card-title">File Handling</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Opening & Closing Files</div>
+      <ul class="item-list">
+        <li><code>open(filename, mode, encoding)</code></li>
+        <li>File modes: <code>r</code>, <code>w</code>, <code>a</code>, <code>r+</code>, <code>w+</code>, <code>a+</code>, <code>b</code> (binary)</li>
+        <li>Always close files: <code>file.close()</code></li>
+        <li><code>with</code> statement (context manager) — auto close</li>
+        <li>Encoding: <code>utf-8</code>, <code>ascii</code>, <code>latin-1</code></li>
+      </ul>
+      <div class="subtopic-title">Reading Files</div>
+      <ul class="item-list">
+        <li><code>read()</code> — read entire file</li>
+        <li><code>read(n)</code> — read n characters</li>
+        <li><code>readline()</code> — read one line</li>
+        <li><code>readlines()</code> — read all lines as list</li>
+        <li>Iterating file object line by line</li>
+        <li><code>tell()</code> and <code>seek()</code> — file position</li>
+      </ul>
+      <div class="subtopic-title">Writing Files</div>
+      <ul class="item-list">
+        <li><code>write(string)</code></li>
+        <li><code>writelines(list)</code></li>
+        <li>Difference between <code>w</code> (overwrite) and <code>a</code> (append)</li>
+      </ul>
+      <div class="subtopic-title">Working with File Paths</div>
+      <ul class="item-list">
+        <li><code>os.path</code> module: <code>join()</code>, <code>exists()</code>, <code>isfile()</code>, <code>isdir()</code>, <code>dirname()</code>, <code>basename()</code>, <code>abspath()</code>, <code>splitext()</code></li>
+        <li><code>pathlib.Path</code> — object-oriented path handling</li>
+        <li>Listing directory contents: <code>os.listdir()</code>, <code>os.scandir()</code></li>
+        <li>Creating and removing directories: <code>os.mkdir()</code>, <code>os.makedirs()</code>, <code>os.rmdir()</code>, <code>shutil.rmtree()</code></li>
+        <li>Moving and copying files: <code>shutil.move()</code>, <code>shutil.copy()</code></li>
+        <li>Walking directory trees: <code>os.walk()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B16 -->
+  <div class="topic-card card-beginner" id="b16">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-beginner">16</span>
+      <span class="card-title">Exception Handling</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Errors & Exceptions</div>
+      <ul class="item-list">
+        <li>Syntax errors vs runtime exceptions</li>
+        <li>Exception hierarchy: BaseException → Exception → specific exceptions</li>
+        <li>Common exceptions: <code>ValueError</code>, <code>TypeError</code>, <code>IndexError</code>, <code>KeyError</code>, <code>AttributeError</code>, <code>NameError</code>, <code>FileNotFoundError</code>, <code>ZeroDivisionError</code>, <code>ImportError</code>, <code>RuntimeError</code>, <code>StopIteration</code>, <code>OverflowError</code>, <code>MemoryError</code>, <code>RecursionError</code>, <code>OSError</code>, <code>IOError</code>, <code>PermissionError</code>, <code>NotImplementedError</code>, <code>AssertionError</code>, <code>ArithmeticError</code>, <code>LookupError</code></li>
+      </ul>
+      <div class="subtopic-title">try / except / else / finally</div>
+      <ul class="item-list">
+        <li>Basic <code>try/except</code> block</li>
+        <li>Catching specific exceptions</li>
+        <li>Catching multiple exceptions: <code>except (TypeError, ValueError)</code></li>
+        <li>Catching all exceptions: <code>except Exception as e</code></li>
+        <li><code>else</code> block — runs when no exception</li>
+        <li><code>finally</code> block — always runs (cleanup)</li>
+        <li>Accessing exception info: <code>as e</code>, <code>str(e)</code>, <code>repr(e)</code></li>
+      </ul>
+      <div class="subtopic-title">Raising Exceptions</div>
+      <ul class="item-list">
+        <li><code>raise ExceptionType("message")</code></li>
+        <li>Re-raising: bare <code>raise</code></li>
+        <li>Raise from: <code>raise X from Y</code> (chained exceptions)</li>
+        <li><code>assert</code> statement — assertion errors</li>
+      </ul>
+      <div class="subtopic-title">Custom Exceptions</div>
+      <ul class="item-list">
+        <li>Creating custom exception classes</li>
+        <li>Inheriting from <code>Exception</code></li>
+        <li>Adding custom attributes and messages</li>
+        <li>Exception hierarchy design</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== INTERMEDIATE ===================== -->
+  <div class="section-divider">
+    <span class="section-icon">🟠</span>
+    <span class="section-badge badge-intermediate">INTERMEDIATE</span>
+    <div class="section-line line-intermediate"></div>
+  </div>
+
+  <!-- I1 -->
+  <div class="topic-card card-intermediate" id="i1">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">17</span>
+      <span class="card-title">OOP Fundamentals</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Classes & Objects</div>
+      <ul class="item-list">
+        <li><code>class</code> keyword — defining a class</li>
+        <li>Creating instances (objects)</li>
+        <li>Class vs instance attributes</li>
+        <li><code>__init__</code> — constructor / initializer</li>
+        <li><code>self</code> parameter — reference to instance</li>
+        <li><code>__repr__</code>, <code>__str__</code> — string representation</li>
+        <li><code>__del__</code> — destructor</li>
+      </ul>
+      <div class="subtopic-title">Instance Methods, Class Methods, Static Methods</div>
+      <ul class="item-list">
+        <li>Instance methods — <code>self</code> as first parameter</li>
+        <li>Class methods — <code>@classmethod</code>, <code>cls</code> parameter, alternative constructors</li>
+        <li>Static methods — <code>@staticmethod</code>, utility functions</li>
+        <li>When to use each type</li>
+      </ul>
+      <div class="subtopic-title">Encapsulation & Access Control</div>
+      <ul class="item-list">
+        <li>Public, protected (<code>_</code> prefix), private (<code>__</code> prefix)</li>
+        <li>Name mangling for private attributes</li>
+        <li>Properties with <code>@property</code>, <code>@setter</code>, <code>@deleter</code></li>
+        <li>Getters and setters pattern</li>
+        <li><code>__slots__</code> — restricting attributes and memory optimization</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I2 -->
+  <div class="topic-card card-intermediate" id="i2">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">18</span>
+      <span class="card-title">OOP Advanced Concepts</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Inheritance</div>
+      <ul class="item-list">
+        <li>Single inheritance</li>
+        <li>Multi-level inheritance</li>
+        <li>Multiple inheritance</li>
+        <li>Method Resolution Order (MRO) — C3 linearization, <code>__mro__</code></li>
+        <li><code>super()</code> — calling parent class methods</li>
+        <li>Overriding methods</li>
+        <li><code>isinstance()</code> and <code>issubclass()</code></li>
+      </ul>
+      <div class="subtopic-title">Polymorphism</div>
+      <ul class="item-list">
+        <li>Method overriding</li>
+        <li>Duck typing — "if it quacks like a duck…"</li>
+        <li>Operator overloading via dunder methods</li>
+        <li>Function polymorphism</li>
+      </ul>
+      <div class="subtopic-title">Dunder / Magic Methods</div>
+      <ul class="item-list">
+        <li><strong>Arithmetic:</strong> <code>__add__</code>, <code>__sub__</code>, <code>__mul__</code>, <code>__truediv__</code>, <code>__floordiv__</code>, <code>__mod__</code>, <code>__pow__</code></li>
+        <li><strong>Comparison:</strong> <code>__eq__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, <code>__ge__</code></li>
+        <li><strong>Unary:</strong> <code>__neg__</code>, <code>__pos__</code>, <code>__abs__</code></li>
+        <li><strong>Container:</strong> <code>__len__</code>, <code>__getitem__</code>, <code>__setitem__</code>, <code>__delitem__</code>, <code>__contains__</code>, <code>__iter__</code>, <code>__next__</code></li>
+        <li><strong>Context:</strong> <code>__enter__</code>, <code>__exit__</code></li>
+        <li><strong>Callable:</strong> <code>__call__</code></li>
+        <li><strong>Attribute:</strong> <code>__getattr__</code>, <code>__setattr__</code>, <code>__delattr__</code>, <code>__getattribute__</code></li>
+        <li><strong>Hashing:</strong> <code>__hash__</code></li>
+        <li><strong>Representation:</strong> <code>__repr__</code>, <code>__str__</code>, <code>__format__</code>, <code>__bytes__</code></li>
+        <li><strong>Copy:</strong> <code>__copy__</code>, <code>__deepcopy__</code></li>
+      </ul>
+      <div class="subtopic-title">Abstract Classes & Interfaces</div>
+      <ul class="item-list">
+        <li><code>abc</code> module — <code>ABC</code>, <code>ABCMeta</code></li>
+        <li><code>@abstractmethod</code> decorator</li>
+        <li><code>@abstractclassmethod</code>, <code>@abstractstaticmethod</code></li>
+        <li>Abstract properties</li>
+        <li>Concrete implementation requirement</li>
+      </ul>
+      <div class="subtopic-title">Dataclasses</div>
+      <ul class="item-list">
+        <li><code>@dataclass</code> decorator (Python 3.7+)</li>
+        <li>Auto-generated <code>__init__</code>, <code>__repr__</code>, <code>__eq__</code></li>
+        <li><code>field()</code> — custom field options</li>
+        <li><code>frozen=True</code> — immutable dataclass</li>
+        <li><code>post_init</code> method</li>
+        <li>Inheritance with dataclasses</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I3 -->
+  <div class="topic-card card-intermediate" id="i3">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">19</span>
+      <span class="card-title">Iterators & Generators</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Iterators</div>
+      <ul class="item-list">
+        <li>Iterable vs iterator distinction</li>
+        <li><code>__iter__()</code> and <code>__next__()</code> protocol</li>
+        <li>Creating custom iterators (classes)</li>
+        <li><code>iter()</code> and <code>next()</code> built-ins</li>
+        <li><code>StopIteration</code> exception</li>
+        <li>Infinite iterators</li>
+      </ul>
+      <div class="subtopic-title">Generators</div>
+      <ul class="item-list">
+        <li><code>yield</code> keyword — generator functions</li>
+        <li>Generator objects — lazy evaluation</li>
+        <li>Generator expressions: <code>(x**2 for x in range(10))</code></li>
+        <li><code>yield from</code> — delegating to sub-generator</li>
+        <li><code>send()</code> — sending values into generator</li>
+        <li><code>throw()</code> — throwing exceptions into generator</li>
+        <li><code>close()</code> — closing a generator</li>
+        <li>Generator state and memory efficiency</li>
+        <li>Infinite sequences with generators</li>
+      </ul>
+      <div class="subtopic-title">itertools Module</div>
+      <ul class="item-list">
+        <li><strong>Infinite:</strong> <code>count()</code>, <code>cycle()</code>, <code>repeat()</code></li>
+        <li><strong>Finite:</strong> <code>chain()</code>, <code>islice()</code>, <code>starmap()</code>, <code>takewhile()</code>, <code>dropwhile()</code>, <code>filterfalse()</code>, <code>compress()</code>, <code>accumulate()</code>, <code>zip_longest()</code>, <code>groupby()</code>, <code>tee()</code></li>
+        <li><strong>Combinatoric:</strong> <code>product()</code>, <code>permutations()</code>, <code>combinations()</code>, <code>combinations_with_replacement()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I4 -->
+  <div class="topic-card card-intermediate" id="i4">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">20</span>
+      <span class="card-title">Comprehensions</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">List Comprehensions</div>
+      <ul class="item-list">
+        <li>Basic syntax: <code>[expr for x in iterable]</code></li>
+        <li>With condition: <code>[expr for x in iterable if condition]</code></li>
+        <li>Nested comprehensions</li>
+        <li>Multiple for clauses</li>
+        <li>Walrus operator <code>:=</code> in comprehensions (Python 3.8+)</li>
+      </ul>
+      <div class="subtopic-title">Dictionary Comprehensions</div>
+      <ul class="item-list">
+        <li>Syntax: <code>{k: v for k, v in iterable}</code></li>
+        <li>Conditional dict comprehensions</li>
+        <li>Inverting a dictionary</li>
+      </ul>
+      <div class="subtopic-title">Set Comprehensions</div>
+      <ul class="item-list">
+        <li>Syntax: <code>{expr for x in iterable}</code></li>
+        <li>Removing duplicates with set comprehension</li>
+      </ul>
+      <div class="subtopic-title">Generator Expressions</div>
+      <ul class="item-list">
+        <li>Syntax: <code>(expr for x in iterable)</code></li>
+        <li>Memory efficiency vs list comprehension</li>
+        <li>Using in function calls: <code>sum(x**2 for x in range(10))</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I5 -->
+  <div class="topic-card card-intermediate" id="i5">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">21</span>
+      <span class="card-title">Lambda & Functional Programming</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Lambda Functions</div>
+      <ul class="item-list">
+        <li>Syntax: <code>lambda args: expression</code></li>
+        <li>Anonymous functions</li>
+        <li>Limitations (single expression, no statements)</li>
+        <li>Use with <code>sorted()</code>, <code>map()</code>, <code>filter()</code></li>
+      </ul>
+      <div class="subtopic-title">map, filter, reduce</div>
+      <ul class="item-list">
+        <li><code>map(func, iterable)</code> — apply function to each element</li>
+        <li><code>filter(func, iterable)</code> — filter elements</li>
+        <li><code>functools.reduce(func, iterable, initial)</code> — reduce to single value</li>
+      </ul>
+      <div class="subtopic-title">functools Module</div>
+      <ul class="item-list">
+        <li><code>partial()</code> — partial function application</li>
+        <li><code>lru_cache()</code> — memoization decorator</li>
+        <li><code>cache()</code> — unbounded memoization (3.9+)</li>
+        <li><code>wraps()</code> — preserving function metadata in decorators</li>
+        <li><code>total_ordering()</code> — fill in comparison methods</li>
+        <li><code>singledispatch()</code> — function overloading by type</li>
+        <li><code>cached_property()</code></li>
+      </ul>
+      <div class="subtopic-title">Closures</div>
+      <ul class="item-list">
+        <li>What is a closure — function with free variables</li>
+        <li>Free variables and <code>__closure__</code></li>
+        <li>Factory functions using closures</li>
+        <li>Closures vs classes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I6 -->
+  <div class="topic-card card-intermediate" id="i6">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">22</span>
+      <span class="card-title">Decorators</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Function Decorators</div>
+      <ul class="item-list">
+        <li>What is a decorator — wrapping a function</li>
+        <li><code>@decorator</code> syntax</li>
+        <li>Writing a basic decorator</li>
+        <li>Decorators with arguments (decorator factories)</li>
+        <li>Stacking multiple decorators</li>
+        <li><code>@functools.wraps</code> to preserve metadata</li>
+        <li>Decorator template pattern</li>
+      </ul>
+      <div class="subtopic-title">Class-Based Decorators</div>
+      <ul class="item-list">
+        <li>Using classes as decorators with <code>__call__</code></li>
+        <li>Stateful decorators</li>
+        <li>Class decorators for classes (not functions)</li>
+      </ul>
+      <div class="subtopic-title">Common Built-in Decorators</div>
+      <ul class="item-list">
+        <li><code>@staticmethod</code>, <code>@classmethod</code>, <code>@property</code></li>
+        <li><code>@functools.lru_cache</code>, <code>@functools.cached_property</code></li>
+        <li><code>@dataclass</code></li>
+        <li><code>@abstractmethod</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I7 -->
+  <div class="topic-card card-intermediate" id="i7">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">23</span>
+      <span class="card-title">Regular Expressions</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Regex Basics</div>
+      <ul class="item-list">
+        <li>The <code>re</code> module</li>
+        <li>Raw strings for patterns: <code>r"\d+"</code></li>
+        <li>Compiling patterns: <code>re.compile()</code></li>
+        <li><code>re.match()</code>, <code>re.search()</code>, <code>re.fullmatch()</code></li>
+        <li><code>re.findall()</code>, <code>re.finditer()</code></li>
+        <li><code>re.sub()</code>, <code>re.subn()</code></li>
+        <li><code>re.split()</code></li>
+      </ul>
+      <div class="subtopic-title">Regex Patterns</div>
+      <ul class="item-list">
+        <li><strong>Metacharacters:</strong> <code>.</code>, <code>^</code>, <code>$</code>, <code>*</code>, <code>+</code>, <code>?</code>, <code>{}</code>, <code>[]</code>, <code>()</code>, <code>|</code>, <code>\</code></li>
+        <li><strong>Character classes:</strong> <code>\d</code>, <code>\D</code>, <code>\w</code>, <code>\W</code>, <code>\s</code>, <code>\S</code>, <code>\b</code>, <code>\B</code></li>
+        <li>Custom character sets: <code>[aeiou]</code>, <code>[^aeiou]</code>, <code>[a-z]</code></li>
+        <li><strong>Quantifiers:</strong> <code>*</code> (0+), <code>+</code> (1+), <code>?</code> (0 or 1), <code>{n}</code>, <code>{n,}</code>, <code>{n,m}</code></li>
+        <li>Greedy vs non-greedy (lazy): <code>*?</code>, <code>+?</code>, <code>??</code></li>
+        <li>Anchors: <code>^</code>, <code>$</code>, <code>\A</code>, <code>\Z</code></li>
+        <li><strong>Groups:</strong> capturing <code>()</code>, non-capturing <code>(?:)</code>, named <code>(?P&lt;name&gt;)</code></li>
+        <li>Lookahead: <code>(?=...)</code>, negative <code>(?!...)</code></li>
+        <li>Lookbehind: <code>(?&lt;=...)</code>, negative <code>(?&lt;!...)</code></li>
+        <li>Backreferences: <code>\1</code>, <code>(?P=name)</code></li>
+      </ul>
+      <div class="subtopic-title">Flags</div>
+      <ul class="item-list">
+        <li><code>re.IGNORECASE</code> / <code>re.I</code></li>
+        <li><code>re.MULTILINE</code> / <code>re.M</code></li>
+        <li><code>re.DOTALL</code> / <code>re.S</code></li>
+        <li><code>re.VERBOSE</code> / <code>re.X</code></li>
+        <li><code>re.ASCII</code>, <code>re.UNICODE</code></li>
+      </ul>
+      <div class="subtopic-title">Match Objects</div>
+      <ul class="item-list">
+        <li><code>.group()</code>, <code>.groups()</code>, <code>.groupdict()</code></li>
+        <li><code>.start()</code>, <code>.end()</code>, <code>.span()</code></li>
+        <li><code>.string</code>, <code>.re</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I8 -->
+  <div class="topic-card card-intermediate" id="i8">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">24</span>
+      <span class="card-title">Date & Time</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">datetime Module</div>
+      <ul class="item-list">
+        <li><code>datetime.date</code> — year, month, day</li>
+        <li><code>datetime.time</code> — hour, minute, second, microsecond</li>
+        <li><code>datetime.datetime</code> — date + time combined</li>
+        <li><code>datetime.timedelta</code> — duration / difference</li>
+        <li><code>datetime.timezone</code>, <code>datetime.tzinfo</code></li>
+        <li><code>date.today()</code>, <code>datetime.now()</code>, <code>datetime.utcnow()</code></li>
+        <li>Formatting: <code>strftime()</code>, parsing: <code>strptime()</code></li>
+        <li>Date arithmetic with timedelta</li>
+        <li>Comparing dates and datetimes</li>
+        <li>ISO 8601 format: <code>isoformat()</code>, <code>fromisoformat()</code></li>
+      </ul>
+      <div class="subtopic-title">time Module</div>
+      <ul class="item-list">
+        <li><code>time.time()</code> — Unix timestamp</li>
+        <li><code>time.sleep()</code> — pause execution</li>
+        <li><code>time.perf_counter()</code> — high-resolution timer</li>
+        <li><code>time.process_time()</code></li>
+        <li><code>time.gmtime()</code>, <code>time.localtime()</code></li>
+        <li><code>time.mktime()</code>, <code>time.strftime()</code></li>
+      </ul>
+      <div class="subtopic-title">calendar Module</div>
+      <ul class="item-list">
+        <li><code>calendar.isleap()</code></li>
+        <li><code>calendar.month()</code>, <code>calendar.calendar()</code></li>
+        <li><code>calendar.weekday()</code>, <code>calendar.monthrange()</code></li>
+      </ul>
+      <div class="subtopic-title">Third-Party: dateutil & pytz</div>
+      <ul class="item-list">
+        <li><code>dateutil.relativedelta</code> — month/year arithmetic</li>
+        <li><code>dateutil.parser.parse()</code> — flexible parsing</li>
+        <li><code>pytz</code> — timezone handling</li>
+        <li>Timezone-aware vs naive datetimes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I9 -->
+  <div class="topic-card card-intermediate" id="i9">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">25</span>
+      <span class="card-title">Math & Statistics Modules</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">math Module</div>
+      <ul class="item-list">
+        <li>Constants: <code>math.pi</code>, <code>math.e</code>, <code>math.tau</code>, <code>math.inf</code>, <code>math.nan</code></li>
+        <li>Rounding: <code>floor()</code>, <code>ceil()</code>, <code>trunc()</code></li>
+        <li>Power & log: <code>sqrt()</code>, <code>pow()</code>, <code>exp()</code>, <code>log()</code>, <code>log2()</code>, <code>log10()</code></li>
+        <li>Trigonometry: <code>sin()</code>, <code>cos()</code>, <code>tan()</code>, <code>asin()</code>, <code>acos()</code>, <code>atan()</code>, <code>atan2()</code></li>
+        <li>Hyperbolic: <code>sinh()</code>, <code>cosh()</code>, <code>tanh()</code></li>
+        <li>Number theory: <code>gcd()</code>, <code>lcm()</code>, <code>factorial()</code>, <code>comb()</code>, <code>perm()</code></li>
+        <li><code>isnan()</code>, <code>isinf()</code>, <code>isfinite()</code>, <code>isclose()</code></li>
+        <li><code>fabs()</code>, <code>fmod()</code>, <code>modf()</code>, <code>frexp()</code>, <code>ldexp()</code></li>
+        <li><code>degrees()</code>, <code>radians()</code></li>
+        <li><code>hypot()</code>, <code>dist()</code></li>
+        <li><code>prod()</code> (3.8+), <code>isqrt()</code> (3.8+)</li>
+      </ul>
+      <div class="subtopic-title">random Module</div>
+      <ul class="item-list">
+        <li><code>random()</code>, <code>uniform(a, b)</code></li>
+        <li><code>randint(a, b)</code>, <code>randrange()</code></li>
+        <li><code>choice()</code>, <code>choices()</code></li>
+        <li><code>shuffle()</code>, <code>sample()</code></li>
+        <li><code>seed()</code> — reproducibility</li>
+        <li><code>gauss()</code>, <code>normalvariate()</code>, <code>expovariate()</code></li>
+        <li><code>secrets</code> module — cryptographically secure random</li>
+      </ul>
+      <div class="subtopic-title">statistics Module</div>
+      <ul class="item-list">
+        <li><code>mean()</code>, <code>fmean()</code>, <code>geometric_mean()</code>, <code>harmonic_mean()</code></li>
+        <li><code>median()</code>, <code>median_low()</code>, <code>median_high()</code>, <code>median_grouped()</code></li>
+        <li><code>mode()</code>, <code>multimode()</code></li>
+        <li><code>variance()</code>, <code>pvariance()</code>, <code>stdev()</code>, <code>pstdev()</code></li>
+        <li><code>quantiles()</code>, <code>covariance()</code>, <code>correlation()</code></li>
+        <li><code>NormalDist</code> class</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I10 -->
+  <div class="topic-card card-intermediate" id="i10">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">26</span>
+      <span class="card-title">OS & System Interaction</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">os Module</div>
+      <ul class="item-list">
+        <li><code>os.getcwd()</code>, <code>os.chdir()</code></li>
+        <li><code>os.listdir()</code>, <code>os.scandir()</code>, <code>os.walk()</code></li>
+        <li><code>os.mkdir()</code>, <code>os.makedirs()</code>, <code>os.rmdir()</code>, <code>os.removedirs()</code></li>
+        <li><code>os.rename()</code>, <code>os.replace()</code>, <code>os.remove()</code>, <code>os.unlink()</code></li>
+        <li><code>os.stat()</code> — file metadata</li>
+        <li><code>os.environ</code> — environment variables</li>
+        <li><code>os.getenv()</code>, <code>os.putenv()</code></li>
+        <li><code>os.getpid()</code>, <code>os.getppid()</code></li>
+        <li><code>os.cpu_count()</code></li>
+        <li><code>os.sep</code>, <code>os.linesep</code>, <code>os.pathsep</code></li>
+        <li><code>os.name</code> — 'nt', 'posix'</li>
+      </ul>
+      <div class="subtopic-title">sys Module</div>
+      <ul class="item-list">
+        <li><code>sys.argv</code> — command line arguments</li>
+        <li><code>sys.path</code> — module search path</li>
+        <li><code>sys.version</code>, <code>sys.version_info</code></li>
+        <li><code>sys.platform</code></li>
+        <li><code>sys.stdin</code>, <code>sys.stdout</code>, <code>sys.stderr</code></li>
+        <li><code>sys.exit()</code> — exit program</li>
+        <li><code>sys.getsizeof()</code> — object memory size</li>
+        <li><code>sys.getrecursionlimit()</code>, <code>sys.setrecursionlimit()</code></li>
+        <li><code>sys.modules</code> — imported modules</li>
+      </ul>
+      <div class="subtopic-title">subprocess Module</div>
+      <ul class="item-list">
+        <li><code>subprocess.run()</code> — recommended for most use cases</li>
+        <li><code>subprocess.call()</code>, <code>subprocess.check_call()</code>, <code>subprocess.check_output()</code></li>
+        <li><code>subprocess.Popen()</code> — full process control</li>
+        <li>Capturing stdout, stderr</li>
+        <li>Shell=True vs shell=False</li>
+        <li>Timeouts and process management</li>
+      </ul>
+      <div class="subtopic-title">pathlib Module</div>
+      <ul class="item-list">
+        <li><code>Path()</code> — creating paths</li>
+        <li>Path operations: <code>/</code> operator, <code>joinpath()</code></li>
+        <li><code>Path.cwd()</code>, <code>Path.home()</code></li>
+        <li><code>exists()</code>, <code>is_file()</code>, <code>is_dir()</code></li>
+        <li><code>stat()</code>, <code>mkdir()</code>, <code>rmdir()</code>, <code>unlink()</code></li>
+        <li><code>read_text()</code>, <code>write_text()</code>, <code>read_bytes()</code>, <code>write_bytes()</code></li>
+        <li><code>glob()</code>, <code>rglob()</code> — pattern matching</li>
+        <li><code>stem</code>, <code>suffix</code>, <code>name</code>, <code>parent</code>, <code>parts</code></li>
+        <li><code>rename()</code>, <code>replace()</code></li>
+        <li><code>iterdir()</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I11 -->
+  <div class="topic-card card-intermediate" id="i11">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">27</span>
+      <span class="card-title">JSON, CSV & XML</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">JSON Module</div>
+      <ul class="item-list">
+        <li><code>json.dumps()</code> — Python → JSON string</li>
+        <li><code>json.loads()</code> — JSON string → Python</li>
+        <li><code>json.dump()</code> — write to file</li>
+        <li><code>json.load()</code> — read from file</li>
+        <li>Formatting: <code>indent</code>, <code>sort_keys</code>, <code>separators</code></li>
+        <li>Custom encoder/decoder: <code>JSONEncoder</code>, <code>JSONDecoder</code></li>
+        <li>Handling non-serializable types</li>
+        <li><code>json.JSONDecodeError</code> exception</li>
+      </ul>
+      <div class="subtopic-title">CSV Module</div>
+      <ul class="item-list">
+        <li><code>csv.reader()</code> — reading CSV</li>
+        <li><code>csv.writer()</code> — writing CSV</li>
+        <li><code>csv.DictReader()</code> — rows as dicts</li>
+        <li><code>csv.DictWriter()</code> — write from dicts</li>
+        <li>Custom delimiters, quoting, dialect</li>
+        <li><code>csv.register_dialect()</code></li>
+        <li>Handling newlines: <code>newline=''</code></li>
+      </ul>
+      <div class="subtopic-title">XML Processing</div>
+      <ul class="item-list">
+        <li><code>xml.etree.ElementTree</code> — standard XML parsing</li>
+        <li><code>parse()</code>, <code>getroot()</code></li>
+        <li>Finding elements: <code>find()</code>, <code>findall()</code>, <code>iter()</code></li>
+        <li>Element attributes and text</li>
+        <li>Creating and modifying XML trees</li>
+        <li><code>tostring()</code>, <code>fromstring()</code></li>
+        <li><code>minidom</code> — pretty printing XML</li>
+        <li>SAX and DOM parsers</li>
+        <li>Third-party: <code>lxml</code>, <code>BeautifulSoup</code></li>
+      </ul>
+      <div class="subtopic-title">configparser & TOML</div>
+      <ul class="item-list">
+        <li><code>configparser</code> — reading/writing .ini files</li>
+        <li><code>tomllib</code> (Python 3.11+) — reading TOML files</li>
+        <li>Third-party: <code>tomli</code>, <code>toml</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I12 -->
+  <div class="topic-card card-intermediate" id="i12">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">28</span>
+      <span class="card-title">Virtual Environments & Package Management</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">venv (Standard)</div>
+      <ul class="item-list">
+        <li>Creating, activating, deactivating environments</li>
+        <li>Site-packages isolation</li>
+        <li>requirements.txt workflow</li>
+        <li>Sharing environments across machines</li>
+      </ul>
+      <div class="subtopic-title">pipenv</div>
+      <ul class="item-list">
+        <li><code>Pipfile</code> and <code>Pipfile.lock</code></li>
+        <li><code>pipenv install</code>, <code>pipenv run</code>, <code>pipenv shell</code></li>
+        <li>Dev vs production dependencies</li>
+      </ul>
+      <div class="subtopic-title">Poetry</div>
+      <ul class="item-list">
+        <li><code>pyproject.toml</code> based configuration</li>
+        <li><code>poetry new</code>, <code>poetry add</code>, <code>poetry install</code>, <code>poetry build</code>, <code>poetry publish</code></li>
+        <li>Dependency groups (dev, test, docs)</li>
+        <li>Lock file for reproducible installs</li>
+      </ul>
+      <div class="subtopic-title">conda</div>
+      <ul class="item-list">
+        <li>conda environments for data science</li>
+        <li><code>conda create</code>, <code>conda activate</code>, <code>conda install</code></li>
+        <li>conda vs pip packages</li>
+        <li>Anaconda vs Miniconda</li>
+      </ul>
+      <div class="subtopic-title">pyproject.toml & PEP 517/518</div>
+      <ul class="item-list">
+        <li>Modern Python packaging standard</li>
+        <li>Build backends: setuptools, flit, hatch, pdm</li>
+        <li>Project metadata in <code>pyproject.toml</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I13 -->
+  <div class="topic-card card-intermediate" id="i13">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">29</span>
+      <span class="card-title">Debugging & Testing</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Debugging Techniques</div>
+      <ul class="item-list">
+        <li>Using <code>print()</code> for debugging</li>
+        <li>pdb — Python Debugger: <code>breakpoint()</code>, <code>import pdb; pdb.set_trace()</code></li>
+        <li>pdb commands: <code>n</code>, <code>s</code>, <code>c</code>, <code>l</code>, <code>p</code>, <code>q</code>, <code>b</code>, <code>w</code>, <code>u</code>, <code>d</code></li>
+        <li>IDE debuggers (VS Code, PyCharm)</li>
+        <li><code>ipdb</code> — IPython-enhanced debugger</li>
+        <li><code>icecream</code> — better debugging output</li>
+      </ul>
+      <div class="subtopic-title">unittest (Built-in)</div>
+      <ul class="item-list">
+        <li>Test case classes inheriting <code>unittest.TestCase</code></li>
+        <li>Test methods starting with <code>test_</code></li>
+        <li>Assertions: <code>assertEqual</code>, <code>assertNotEqual</code>, <code>assertTrue</code>, <code>assertFalse</code>, <code>assertIsNone</code>, <code>assertIn</code>, <code>assertRaises</code>, <code>assertAlmostEqual</code></li>
+        <li>setUp and tearDown</li>
+        <li>setUpClass and tearDownClass</li>
+        <li>Test suites and test runners</li>
+        <li>Skipping tests: <code>@unittest.skip</code>, <code>@unittest.skipIf</code></li>
+        <li>Mock objects: <code>unittest.mock</code></li>
+        <li><code>MagicMock</code>, <code>patch()</code>, <code>patch.object()</code></li>
+      </ul>
+      <div class="subtopic-title">pytest</div>
+      <ul class="item-list">
+        <li>Test discovery — files named <code>test_*.py</code></li>
+        <li>Simple <code>assert</code> statements</li>
+        <li>Fixtures: <code>@pytest.fixture</code>, scope (function/class/module/session)</li>
+        <li>Parametrize: <code>@pytest.mark.parametrize</code></li>
+        <li>Marks: <code>@pytest.mark.skip</code>, <code>@pytest.mark.xfail</code></li>
+        <li>Plugins: pytest-cov, pytest-mock, pytest-asyncio</li>
+        <li>conftest.py</li>
+        <li>Running specific tests, verbose output</li>
+      </ul>
+      <div class="subtopic-title">Code Coverage</div>
+      <ul class="item-list">
+        <li><code>coverage.py</code> — measuring code coverage</li>
+        <li><code>pytest-cov</code> plugin</li>
+        <li>HTML coverage reports</li>
+        <li>Branch coverage</li>
+      </ul>
+      <div class="subtopic-title">Type Checking (mypy)</div>
+      <ul class="item-list">
+        <li>Type hints: <code>int</code>, <code>str</code>, <code>list[int]</code>, <code>dict[str, int]</code>, <code>Optional</code>, <code>Union</code>, <code>Tuple</code>, <code>Callable</code></li>
+        <li><code>typing</code> module: <code>Any</code>, <code>Optional</code>, <code>Union</code>, <code>List</code>, <code>Dict</code>, <code>Tuple</code>, <code>Set</code>, <code>TypeVar</code>, <code>Generic</code>, <code>Protocol</code>, <code>Literal</code>, <code>Final</code>, <code>ClassVar</code>, <code>TypedDict</code>, <code>NamedTuple</code>, <code>cast()</code>, <code>overload()</code></li>
+        <li><code>mypy</code> static type checker</li>
+        <li><code>pyright</code>, <code>pylance</code> type checkers</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I14 -->
+  <div class="topic-card card-intermediate" id="i14">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">30</span>
+      <span class="card-title">String Advanced & Encoding</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Unicode & Encoding</div>
+      <ul class="item-list">
+        <li>Unicode code points and characters</li>
+        <li>UTF-8, UTF-16, UTF-32 encodings</li>
+        <li>Encoding: <code>str.encode('utf-8')</code> → bytes</li>
+        <li>Decoding: <code>bytes.decode('utf-8')</code> → str</li>
+        <li><code>UnicodeEncodeError</code>, <code>UnicodeDecodeError</code></li>
+        <li>Error handlers: <code>strict</code>, <code>ignore</code>, <code>replace</code>, <code>backslashreplace</code></li>
+        <li>BOM (Byte Order Mark)</li>
+      </ul>
+      <div class="subtopic-title">Text Processing</div>
+      <ul class="item-list">
+        <li><code>textwrap</code> module — wrapping and filling text</li>
+        <li><code>difflib</code> — comparing sequences and text</li>
+        <li><code>unicodedata</code> — Unicode character properties</li>
+        <li><code>string</code> module constants: <code>ascii_letters</code>, <code>digits</code>, <code>punctuation</code>, <code>whitespace</code></li>
+        <li><code>string.Template</code> — simple string templates</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I15 -->
+  <div class="topic-card card-intermediate" id="i15">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">31</span>
+      <span class="card-title">Collections Module</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <ul class="item-list">
+        <li><strong>Counter</strong> — counting hashable objects, <code>most_common()</code>, arithmetic operations</li>
+        <li><strong>defaultdict</strong> — dict with default factory for missing keys</li>
+        <li><strong>OrderedDict</strong> — maintains insertion order (pre-3.7 compatibility), <code>move_to_end()</code></li>
+        <li><strong>namedtuple</strong> — tuple with named fields, <code>_make()</code>, <code>_asdict()</code>, <code>_replace()</code>, <code>_fields</code></li>
+        <li><strong>deque</strong> — double-ended queue, <code>appendleft()</code>, <code>popleft()</code>, <code>rotate()</code>, <code>maxlen</code></li>
+        <li><strong>ChainMap</strong> — multiple dicts as one view, <code>new_child()</code>, <code>parents</code></li>
+        <li><strong>UserDict</strong>, <strong>UserList</strong>, <strong>UserString</strong> — wrappers for subclassing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- I16 -->
+  <div class="topic-card card-intermediate" id="i16">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-intermediate">32</span>
+      <span class="card-title">Logging</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">logging Module</div>
+      <ul class="item-list">
+        <li>Log levels: <code>DEBUG</code>, <code>INFO</code>, <code>WARNING</code>, <code>ERROR</code>, <code>CRITICAL</code></li>
+        <li>Basic configuration: <code>logging.basicConfig()</code></li>
+        <li>Logger, Handler, Formatter, Filter components</li>
+        <li>Creating named loggers: <code>logging.getLogger(__name__)</code></li>
+        <li>Handlers: <code>StreamHandler</code>, <code>FileHandler</code>, <code>RotatingFileHandler</code>, <code>TimedRotatingFileHandler</code>, <code>SMTPHandler</code>, <code>SysLogHandler</code></li>
+        <li>Formatters — log format strings, datefmt</li>
+        <li>Filters — fine-grained control</li>
+        <li>Logger hierarchy and propagation</li>
+        <li>dictConfig and fileConfig</li>
+        <li>Exception logging: <code>logging.exception()</code></li>
+        <li>Extra fields in log records</li>
+        <li>Third-party: <code>loguru</code>, <code>structlog</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== ADVANCED ===================== -->
+  <div class="section-divider">
+    <span class="section-icon">🔴</span>
+    <span class="section-badge badge-advanced">ADVANCED</span>
+    <div class="section-line line-advanced"></div>
+  </div>
+
+  <!-- A1 -->
+  <div class="topic-card card-advanced" id="a1">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">33</span>
+      <span class="card-title">Multithreading & Multiprocessing</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Threading Module</div>
+      <ul class="item-list">
+        <li>Thread basics: <code>threading.Thread(target, args, kwargs)</code></li>
+        <li><code>start()</code>, <code>join()</code>, <code>is_alive()</code></li>
+        <li>Daemon threads: <code>daemon=True</code></li>
+        <li>Thread subclassing</li>
+        <li><code>threading.current_thread()</code>, <code>threading.enumerate()</code></li>
+        <li>Thread-local storage: <code>threading.local()</code></li>
+      </ul>
+      <div class="subtopic-title">Synchronization Primitives</div>
+      <ul class="item-list">
+        <li><code>Lock</code> — mutual exclusion</li>
+        <li><code>RLock</code> — reentrant lock</li>
+        <li><code>Semaphore</code>, <code>BoundedSemaphore</code></li>
+        <li><code>Event</code> — signaling between threads</li>
+        <li><code>Condition</code> — conditional waiting</li>
+        <li><code>Barrier</code> — rendezvous point</li>
+        <li><code>Timer</code> — delayed function call</li>
+      </ul>
+      <div class="subtopic-title">GIL (Global Interpreter Lock)</div>
+      <ul class="item-list">
+        <li>What is the GIL and why it exists</li>
+        <li>GIL impact on CPU-bound vs I/O-bound tasks</li>
+        <li>Threading for I/O-bound tasks</li>
+        <li>Multiprocessing for CPU-bound tasks</li>
+        <li>Python 3.13+ — optional GIL (free-threaded Python)</li>
+      </ul>
+      <div class="subtopic-title">multiprocessing Module</div>
+      <ul class="item-list">
+        <li><code>Process</code> — spawning processes</li>
+        <li><code>Pool</code> — process pool: <code>map()</code>, <code>starmap()</code>, <code>apply()</code>, <code>apply_async()</code></li>
+        <li>Inter-process communication: <code>Queue</code>, <code>Pipe</code></li>
+        <li>Shared memory: <code>Value</code>, <code>Array</code>, <code>Manager</code></li>
+        <li>Process synchronization: <code>Lock</code>, <code>Semaphore</code>, <code>Event</code>, <code>Barrier</code></li>
+        <li>Start methods: <code>fork</code>, <code>spawn</code>, <code>forkserver</code></li>
+        <li><code>multiprocessing.shared_memory</code> (Python 3.8+)</li>
+      </ul>
+      <div class="subtopic-title">concurrent.futures</div>
+      <ul class="item-list">
+        <li><code>ThreadPoolExecutor</code> — thread pool</li>
+        <li><code>ProcessPoolExecutor</code> — process pool</li>
+        <li><code>submit()</code>, <code>map()</code></li>
+        <li>Future objects: <code>result()</code>, <code>done()</code>, <code>cancel()</code>, <code>add_done_callback()</code></li>
+        <li><code>as_completed()</code>, <code>wait()</code></li>
+      </ul>
+      <div class="subtopic-title">Queue Module</div>
+      <ul class="item-list">
+        <li><code>Queue</code>, <code>LifoQueue</code>, <code>PriorityQueue</code></li>
+        <li><code>put()</code>, <code>get()</code>, <code>task_done()</code>, <code>join()</code></li>
+        <li>Producer-consumer pattern</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A2 -->
+  <div class="topic-card card-advanced" id="a2">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">34</span>
+      <span class="card-title">Async Programming (asyncio)</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">asyncio Fundamentals</div>
+      <ul class="item-list">
+        <li>Event loop — what it is and how it works</li>
+        <li><code>async def</code> — coroutine functions</li>
+        <li><code>await</code> — yielding control</li>
+        <li><code>asyncio.run()</code> — entry point (Python 3.7+)</li>
+        <li>Coroutine objects — calling vs awaiting</li>
+        <li>Tasks vs coroutines</li>
+      </ul>
+      <div class="subtopic-title">Tasks & Scheduling</div>
+      <ul class="item-list">
+        <li><code>asyncio.create_task()</code> — schedule coroutine</li>
+        <li><code>asyncio.gather()</code> — run coroutines concurrently</li>
+        <li><code>asyncio.wait()</code> — wait with conditions (ALL_COMPLETED, FIRST_COMPLETED, FIRST_EXCEPTION)</li>
+        <li><code>asyncio.as_completed()</code></li>
+        <li><code>asyncio.ensure_future()</code></li>
+        <li>Task cancellation: <code>task.cancel()</code>, <code>CancelledError</code></li>
+        <li>Task groups (Python 3.11+): <code>asyncio.TaskGroup</code></li>
+      </ul>
+      <div class="subtopic-title">Synchronization & Communication</div>
+      <ul class="item-list">
+        <li><code>asyncio.Lock</code>, <code>asyncio.Event</code>, <code>asyncio.Condition</code>, <code>asyncio.Semaphore</code>, <code>asyncio.BoundedSemaphore</code></li>
+        <li><code>asyncio.Queue</code>, <code>asyncio.PriorityQueue</code>, <code>asyncio.LifoQueue</code></li>
+      </ul>
+      <div class="subtopic-title">Streams & IO</div>
+      <ul class="item-list">
+        <li><code>asyncio.StreamReader</code>, <code>asyncio.StreamWriter</code></li>
+        <li><code>asyncio.open_connection()</code>, <code>asyncio.start_server()</code></li>
+        <li>Async file I/O with <code>aiofiles</code></li>
+      </ul>
+      <div class="subtopic-title">Advanced asyncio</div>
+      <ul class="item-list">
+        <li><code>asyncio.timeout()</code> (Python 3.11+)</li>
+        <li><code>asyncio.wait_for()</code> — timeout for coroutine</li>
+        <li><code>asyncio.shield()</code> — protect from cancellation</li>
+        <li><code>asyncio.sleep()</code></li>
+        <li>Running sync code in executor: <code>loop.run_in_executor()</code></li>
+        <li>Custom event loops</li>
+        <li>Protocols and Transports (low-level)</li>
+        <li>Subprocesses: <code>asyncio.create_subprocess_exec()</code></li>
+        <li>Async context managers: <code>async with</code></li>
+        <li>Async iterators and generators: <code>async for</code>, <code>__aiter__</code>, <code>__anext__</code>, <code>async yield</code></li>
+        <li>Third-party: <code>aiohttp</code>, <code>httpx</code>, <code>trio</code>, <code>anyio</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A3 -->
+  <div class="topic-card card-advanced" id="a3">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">35</span>
+      <span class="card-title">Memory Management & Garbage Collection</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Python Memory Model</div>
+      <ul class="item-list">
+        <li>Everything is an object — PyObject structure</li>
+        <li>Reference counting — <code>sys.getrefcount()</code></li>
+        <li>Memory allocation — small object allocator (obmalloc)</li>
+        <li>Python memory arenas, pools, blocks</li>
+        <li>Stack vs heap in Python</li>
+      </ul>
+      <div class="subtopic-title">Garbage Collection</div>
+      <ul class="item-list">
+        <li>Reference counting as primary GC</li>
+        <li>Cyclic garbage collector — <code>gc</code> module</li>
+        <li><code>gc.collect()</code>, <code>gc.get_count()</code>, <code>gc.set_threshold()</code></li>
+        <li>Generational garbage collection (gen 0, 1, 2)</li>
+        <li>Disabling GC: <code>gc.disable()</code></li>
+        <li>Finding reference cycles</li>
+        <li><code>weakref</code> module — weak references</li>
+        <li><code>weakref.ref()</code>, <code>weakref.WeakValueDictionary</code>, <code>weakref.WeakKeyDictionary</code></li>
+        <li>Finalizers: <code>weakref.finalize()</code></li>
+      </ul>
+      <div class="subtopic-title">Memory Optimization</div>
+      <ul class="item-list">
+        <li><code>__slots__</code> — reducing per-instance memory</li>
+        <li>Using generators instead of lists</li>
+        <li><code>array</code> module — typed arrays</li>
+        <li><code>memoryview</code> — zero-copy buffer</li>
+        <li><code>tracemalloc</code> — tracking memory allocations</li>
+        <li><code>sys.getsizeof()</code> — object size</li>
+        <li>Memory profiling with <code>memory_profiler</code></li>
+        <li>Object interning: small ints, string interning</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A4 -->
+  <div class="topic-card card-advanced" id="a4">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">36</span>
+      <span class="card-title">Metaclasses & Descriptors</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Metaclasses</div>
+      <ul class="item-list">
+        <li>Classes are objects — <code>type</code> is the metaclass of all classes</li>
+        <li><code>type(name, bases, dict)</code> — dynamic class creation</li>
+        <li>Custom metaclasses: inheriting from <code>type</code></li>
+        <li><code>__new__</code> vs <code>__init__</code> in metaclasses</li>
+        <li><code>metaclass=</code> keyword argument</li>
+        <li><code>__prepare__</code> — customizing class namespace</li>
+        <li>Use cases: singletons, ORMs, API validation, interface enforcement</li>
+        <li><code>ABCMeta</code> as a metaclass example</li>
+      </ul>
+      <div class="subtopic-title">Descriptors</div>
+      <ul class="item-list">
+        <li>Descriptor protocol: <code>__get__</code>, <code>__set__</code>, <code>__delete__</code></li>
+        <li>Data descriptors vs non-data descriptors</li>
+        <li>How <code>@property</code> is implemented as a descriptor</li>
+        <li>How <code>@classmethod</code> and <code>@staticmethod</code> are descriptors</li>
+        <li>Custom descriptor classes</li>
+        <li>Attribute lookup chain</li>
+      </ul>
+      <div class="subtopic-title">Class Creation Hooks</div>
+      <ul class="item-list">
+        <li><code>__init_subclass__</code> — hook on subclass creation</li>
+        <li><code>__set_name__</code> — descriptor name binding</li>
+        <li><code>__class_getitem__</code> — generic class subscript</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A5 -->
+  <div class="topic-card card-advanced" id="a5">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">37</span>
+      <span class="card-title">Context Managers</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Context Manager Protocol</div>
+      <ul class="item-list">
+        <li><code>__enter__</code> and <code>__exit__</code> methods</li>
+        <li><code>with statement</code> — automatic resource management</li>
+        <li>Exception handling in <code>__exit__</code></li>
+        <li>Returning True from <code>__exit__</code> — suppressing exceptions</li>
+        <li>Multiple context managers: <code>with A() as a, B() as b:</code></li>
+      </ul>
+      <div class="subtopic-title">contextlib Module</div>
+      <ul class="item-list">
+        <li><code>@contextmanager</code> decorator — generator-based CMs</li>
+        <li><code>contextlib.closing()</code></li>
+        <li><code>contextlib.suppress()</code> — suppress exceptions</li>
+        <li><code>contextlib.redirect_stdout()</code>, <code>redirect_stderr()</code></li>
+        <li><code>contextlib.ExitStack</code> — dynamic nesting</li>
+        <li><code>contextlib.nullcontext()</code></li>
+        <li><code>@asynccontextmanager</code></li>
+        <li><code>contextlib.AbstractContextManager</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A6 -->
+  <div class="topic-card card-advanced" id="a6">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">38</span>
+      <span class="card-title">Data Structures & Algorithms</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Built-in Data Structures (Advanced)</div>
+      <ul class="item-list">
+        <li>heapq module — heap queue / priority queue: <code>heappush()</code>, <code>heappop()</code>, <code>heapify()</code>, <code>nlargest()</code>, <code>nsmallest()</code></li>
+        <li>bisect module — binary search: <code>bisect_left()</code>, <code>bisect_right()</code>, <code>insort()</code></li>
+        <li>array module — typed arrays</li>
+      </ul>
+      <div class="subtopic-title">Algorithmic Complexity</div>
+      <ul class="item-list">
+        <li>Big-O notation: O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ)</li>
+        <li>Time complexity analysis of Python operations</li>
+        <li>Space complexity</li>
+        <li>Amortized analysis</li>
+      </ul>
+      <div class="subtopic-title">Sorting Algorithms (Implementation)</div>
+      <ul class="item-list">
+        <li>Bubble sort, Selection sort, Insertion sort</li>
+        <li>Merge sort, Quick sort, Heap sort</li>
+        <li>Tim sort (Python's built-in)</li>
+        <li>Counting sort, Radix sort, Bucket sort</li>
+        <li>Python's <code>sorted()</code> and <code>list.sort()</code> — Timsort</li>
+        <li>Custom sort keys, stable sorting</li>
+      </ul>
+      <div class="subtopic-title">Searching Algorithms</div>
+      <ul class="item-list">
+        <li>Linear search</li>
+        <li>Binary search — iterative and recursive</li>
+        <li>Binary search on answer</li>
+      </ul>
+      <div class="subtopic-title">Recursion & Dynamic Programming</div>
+      <ul class="item-list">
+        <li>Recursion — base case, recursive case</li>
+        <li>Tail recursion and Python's recursion limit</li>
+        <li>Memoization (top-down DP): <code>@lru_cache</code></li>
+        <li>Tabulation (bottom-up DP)</li>
+        <li>Classic DP problems: Fibonacci, knapsack, longest common subsequence, coin change</li>
+      </ul>
+      <div class="subtopic-title">Graph Algorithms</div>
+      <ul class="item-list">
+        <li>Graph representations: adjacency list, adjacency matrix</li>
+        <li>BFS (Breadth-First Search)</li>
+        <li>DFS (Depth-First Search)</li>
+        <li>Topological sort</li>
+        <li>Shortest path: Dijkstra's, Bellman-Ford</li>
+        <li>Minimum spanning tree: Kruskal's, Prim's</li>
+        <li>Union-Find / Disjoint Set</li>
+        <li>NetworkX library for graph operations</li>
+      </ul>
+      <div class="subtopic-title">Tree Data Structures</div>
+      <ul class="item-list">
+        <li>Binary tree implementation</li>
+        <li>Binary search tree (BST) — insert, search, delete</li>
+        <li>AVL trees (self-balancing)</li>
+        <li>Tree traversals: in-order, pre-order, post-order, level-order</li>
+        <li>Trie (prefix tree)</li>
+        <li>Segment tree and Fenwick tree (BIT)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A7 -->
+  <div class="topic-card card-advanced" id="a7">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">39</span>
+      <span class="card-title">Networking & Sockets</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">socket Module</div>
+      <ul class="item-list">
+        <li>TCP vs UDP sockets</li>
+        <li><code>socket.socket()</code> — creating sockets</li>
+        <li>TCP server: <code>bind()</code>, <code>listen()</code>, <code>accept()</code></li>
+        <li>TCP client: <code>connect()</code></li>
+        <li><code>send()</code>, <code>recv()</code>, <code>sendall()</code></li>
+        <li><code>close()</code> and socket reuse (<code>SO_REUSEADDR</code>)</li>
+        <li>Non-blocking sockets and <code>setblocking(False)</code></li>
+        <li>UDP sockets: <code>sendto()</code>, <code>recvfrom()</code></li>
+        <li>Socket families: <code>AF_INET</code>, <code>AF_INET6</code>, <code>AF_UNIX</code></li>
+        <li>Multiplexing with <code>select</code>, <code>selectors</code> module</li>
+      </ul>
+      <div class="subtopic-title">HTTP & URL Handling</div>
+      <ul class="item-list">
+        <li><code>urllib</code> — built-in HTTP: <code>urllib.request</code>, <code>urllib.parse</code>, <code>urllib.error</code></li>
+        <li><code>http.client</code> — low-level HTTP</li>
+        <li><code>http.server</code> — simple HTTP server</li>
+        <li>Third-party: <code>requests</code> library — GET, POST, PUT, DELETE, PATCH</li>
+        <li>Sessions, headers, params, authentication</li>
+        <li><code>httpx</code> — async HTTP client</li>
+      </ul>
+      <div class="subtopic-title">Email</div>
+      <ul class="item-list">
+        <li><code>smtplib</code> — sending emails</li>
+        <li><code>email</code> package — constructing MIME messages</li>
+        <li><code>imaplib</code>, <code>poplib</code> — reading emails</li>
+      </ul>
+      <div class="subtopic-title">FTP & Other Protocols</div>
+      <ul class="item-list">
+        <li><code>ftplib</code> — FTP protocol</li>
+        <li><code>telnetlib</code> — Telnet protocol</li>
+        <li>Third-party: <code>paramiko</code> — SSH/SFTP</li>
+        <li>WebSockets: <code>websockets</code> library</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A8 -->
+  <div class="topic-card card-advanced" id="a8">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">40</span>
+      <span class="card-title">Database Connectivity</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">SQLite (Built-in)</div>
+      <ul class="item-list">
+        <li><code>sqlite3</code> module</li>
+        <li><code>connect()</code>, <code>cursor()</code>, <code>execute()</code>, <code>fetchone()</code>, <code>fetchall()</code>, <code>fetchmany()</code></li>
+        <li><code>commit()</code>, <code>rollback()</code>, <code>close()</code></li>
+        <li>Parameter substitution — preventing SQL injection: <code>?</code> placeholders</li>
+        <li>Row factory: <code>sqlite3.Row</code></li>
+        <li>Transaction management</li>
+        <li>In-memory database: <code>connect(":memory:")</code></li>
+      </ul>
+      <div class="subtopic-title">SQLAlchemy (ORM)</div>
+      <ul class="item-list">
+        <li>Core vs ORM</li>
+        <li>Declarative base model definition</li>
+        <li>Mapped columns and relationships</li>
+        <li>Session management</li>
+        <li>CRUD operations</li>
+        <li>Query API and filter expressions</li>
+        <li>Migrations with Alembic</li>
+        <li>Async SQLAlchemy</li>
+        <li>Connection pooling</li>
+      </ul>
+      <div class="subtopic-title">Other Database Libraries</div>
+      <ul class="item-list">
+        <li><code>psycopg2</code> / <code>psycopg3</code> — PostgreSQL</li>
+        <li><code>mysql-connector-python</code>, <code>PyMySQL</code> — MySQL/MariaDB</li>
+        <li><code>pymongo</code> — MongoDB</li>
+        <li><code>redis-py</code> — Redis</li>
+        <li><code>elasticsearch-py</code> — Elasticsearch</li>
+        <li><code>motor</code> — async MongoDB</li>
+        <li><code>databases</code>, <code>tortoise-orm</code>, <code>peewee</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A9 -->
+  <div class="topic-card card-advanced" id="a9">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">41</span>
+      <span class="card-title">Web Scraping</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">requests + BeautifulSoup</div>
+      <ul class="item-list">
+        <li>Fetching HTML with <code>requests.get()</code></li>
+        <li>Parsing with <code>BeautifulSoup</code></li>
+        <li>Parsers: <code>html.parser</code>, <code>lxml</code>, <code>html5lib</code></li>
+        <li>Navigating the DOM: <code>find()</code>, <code>find_all()</code>, <code>select()</code>, <code>select_one()</code></li>
+        <li>Extracting text, attributes, links</li>
+        <li>Handling relative URLs: <code>urllib.parse.urljoin()</code></li>
+      </ul>
+      <div class="subtopic-title">Scrapy Framework</div>
+      <ul class="item-list">
+        <li>Scrapy project structure: spiders, items, pipelines, settings</li>
+        <li>Writing spiders: <code>start_urls</code>, <code>parse()</code> method</li>
+        <li>CSS and XPath selectors</li>
+        <li>Items and ItemLoaders</li>
+        <li>Pipelines for processing/storing data</li>
+        <li>Middlewares — request/response processing</li>
+        <li>CrawlerProcess and CrawlerRunner</li>
+        <li>Following links with <code>follow()</code></li>
+      </ul>
+      <div class="subtopic-title">Selenium & Playwright</div>
+      <ul class="item-list">
+        <li>Browser automation for dynamic/JS-heavy sites</li>
+        <li>WebDriver setup (Chrome, Firefox)</li>
+        <li>Locating elements: ID, name, CSS, XPath, link text</li>
+        <li>Interactions: click, send_keys, submit</li>
+        <li>Waits: explicit (<code>WebDriverWait</code>) and implicit</li>
+        <li>Playwright — faster, async browser automation</li>
+      </ul>
+      <div class="subtopic-title">Handling Scraping Challenges</div>
+      <ul class="item-list">
+        <li>Rate limiting and delays</li>
+        <li>User agent rotation</li>
+        <li>Proxy rotation</li>
+        <li>CAPTCHA handling</li>
+        <li>Session and cookie management</li>
+        <li>Robots.txt compliance</li>
+        <li>Handling pagination and infinite scroll</li>
+        <li>Async scraping with <code>aiohttp</code> + <code>asyncio</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A10 -->
+  <div class="topic-card card-advanced" id="a10">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">42</span>
+      <span class="card-title">APIs & REST</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Consuming APIs</div>
+      <ul class="item-list">
+        <li>RESTful API principles: resources, HTTP verbs, statelessness</li>
+        <li>HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS</li>
+        <li>Status codes: 1xx, 2xx, 3xx, 4xx, 5xx</li>
+        <li>Headers: Content-Type, Authorization, Accept</li>
+        <li>Authentication: Basic Auth, API Keys, Bearer tokens, OAuth 2.0</li>
+        <li>Handling pagination, rate limits, retries</li>
+        <li><code>requests</code> library deep dive</li>
+        <li>GraphQL APIs with Python</li>
+      </ul>
+      <div class="subtopic-title">Building REST APIs with FastAPI</div>
+      <ul class="item-list">
+        <li>Path operations: <code>@app.get()</code>, <code>@app.post()</code>, etc.</li>
+        <li>Path parameters, query parameters, request body</li>
+        <li>Pydantic models for validation and serialization</li>
+        <li>Dependency injection system</li>
+        <li>Background tasks</li>
+        <li>Middleware</li>
+        <li>OAuth2 and JWT authentication</li>
+        <li>OpenAPI/Swagger documentation (auto-generated)</li>
+        <li>WebSocket support</li>
+        <li>Testing FastAPI apps: <code>TestClient</code></li>
+        <li>CORS handling</li>
+        <li>Lifespan events (startup/shutdown)</li>
+      </ul>
+      <div class="subtopic-title">Building REST APIs with Flask</div>
+      <ul class="item-list">
+        <li>Routes and views</li>
+        <li>Request object and response object</li>
+        <li><code>flask-restful</code>, <code>flask-restx</code> extensions</li>
+        <li>Blueprints for modular apps</li>
+        <li>Marshmallow for serialization</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A11 -->
+  <div class="topic-card card-advanced" id="a11">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">43</span>
+      <span class="card-title">Data Science Stack</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">NumPy</div>
+      <ul class="item-list">
+        <li>ndarray — N-dimensional arrays</li>
+        <li>Creating arrays: <code>array()</code>, <code>zeros()</code>, <code>ones()</code>, <code>arange()</code>, <code>linspace()</code>, <code>eye()</code>, <code>random</code></li>
+        <li>Array attributes: <code>shape</code>, <code>dtype</code>, <code>ndim</code>, <code>size</code></li>
+        <li>Indexing, slicing, fancy indexing, boolean indexing</li>
+        <li>Reshaping: <code>reshape()</code>, <code>flatten()</code>, <code>ravel()</code>, <code>transpose()</code></li>
+        <li>Broadcasting rules</li>
+        <li>Universal functions (ufuncs)</li>
+        <li>Mathematical operations: <code>sum()</code>, <code>mean()</code>, <code>std()</code>, <code>min()</code>, <code>max()</code>, <code>cumsum()</code></li>
+        <li>Linear algebra: <code>np.linalg</code> — <code>dot()</code>, <code>matmul()</code>, <code>inv()</code>, <code>det()</code>, <code>eig()</code>, <code>svd()</code>, <code>solve()</code></li>
+        <li>Stacking and splitting arrays</li>
+        <li>Saving/loading: <code>np.save()</code>, <code>np.load()</code>, <code>np.savetxt()</code>, <code>np.loadtxt()</code></li>
+      </ul>
+      <div class="subtopic-title">Pandas</div>
+      <ul class="item-list">
+        <li>Series and DataFrame</li>
+        <li>Creating DataFrames: from dict, CSV, Excel, JSON, SQL</li>
+        <li>Reading: <code>read_csv()</code>, <code>read_excel()</code>, <code>read_json()</code>, <code>read_sql()</code>, <code>read_parquet()</code></li>
+        <li>Indexing: <code>loc[]</code>, <code>iloc[]</code>, <code>at[]</code>, <code>iat[]</code></li>
+        <li>Boolean indexing and filtering</li>
+        <li>Handling missing data: <code>isna()</code>, <code>fillna()</code>, <code>dropna()</code>, <code>interpolate()</code></li>
+        <li>Data transformation: <code>apply()</code>, <code>map()</code>, <code>applymap()</code></li>
+        <li>GroupBy: <code>groupby()</code>, aggregations, transforms, filters</li>
+        <li>Merging/joining: <code>merge()</code>, <code>join()</code>, <code>concat()</code></li>
+        <li>Reshaping: <code>pivot()</code>, <code>pivot_table()</code>, <code>melt()</code>, <code>stack()</code>, <code>unstack()</code></li>
+        <li>String methods: <code>str.contains()</code>, <code>str.split()</code>, etc.</li>
+        <li>Datetime handling: <code>pd.to_datetime()</code>, resample, date_range</li>
+        <li>Window functions: <code>rolling()</code>, <code>expanding()</code>, <code>ewm()</code></li>
+        <li>Multi-index (hierarchical indexing)</li>
+        <li>Performance: <code>eval()</code>, <code>query()</code>, categorical dtype</li>
+      </ul>
+      <div class="subtopic-title">Matplotlib</div>
+      <ul class="item-list">
+        <li><code>pyplot</code> interface: <code>plot()</code>, <code>scatter()</code>, <code>bar()</code>, <code>hist()</code>, <code>pie()</code>, <code>boxplot()</code></li>
+        <li>Figure and Axes objects</li>
+        <li>Subplots: <code>subplot()</code>, <code>subplots()</code></li>
+        <li>Labels, titles, legends, annotations</li>
+        <li>Styling: colors, markers, linestyles, colormaps</li>
+        <li>Saving figures: <code>savefig()</code></li>
+        <li>3D plotting: <code>mpl_toolkits.mplot3d</code></li>
+        <li>Animations: <code>FuncAnimation</code></li>
+      </ul>
+      <div class="subtopic-title">Seaborn & Plotly</div>
+      <ul class="item-list">
+        <li>Seaborn: statistical visualizations — <code>heatmap()</code>, <code>pairplot()</code>, <code>violinplot()</code>, <code>regplot()</code></li>
+        <li>Plotly — interactive charts: <code>plotly.express</code>, <code>plotly.graph_objects</code></li>
+        <li>Dash — web dashboards with Plotly</li>
+      </ul>
+      <div class="subtopic-title">SciPy</div>
+      <ul class="item-list">
+        <li><code>scipy.stats</code> — statistical tests, distributions</li>
+        <li><code>scipy.optimize</code> — optimization, curve fitting</li>
+        <li><code>scipy.integrate</code> — numerical integration</li>
+        <li><code>scipy.linalg</code> — linear algebra</li>
+        <li><code>scipy.signal</code> — signal processing</li>
+        <li><code>scipy.sparse</code> — sparse matrices</li>
+        <li><code>scipy.interpolate</code> — interpolation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A12 -->
+  <div class="topic-card card-advanced" id="a12">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">44</span>
+      <span class="card-title">Machine Learning</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">scikit-learn</div>
+      <ul class="item-list">
+        <li>Estimator API: <code>fit()</code>, <code>predict()</code>, <code>transform()</code>, <code>fit_transform()</code></li>
+        <li>Preprocessing: <code>StandardScaler</code>, <code>MinMaxScaler</code>, <code>RobustScaler</code>, <code>LabelEncoder</code>, <code>OneHotEncoder</code>, <code>PolynomialFeatures</code></li>
+        <li>Classification: <code>LogisticRegression</code>, <code>DecisionTreeClassifier</code>, <code>RandomForestClassifier</code>, <code>SVM</code>, <code>KNN</code>, <code>GradientBoostingClassifier</code></li>
+        <li>Regression: <code>LinearRegression</code>, <code>Ridge</code>, <code>Lasso</code>, <code>ElasticNet</code>, <code>RandomForestRegressor</code>, <code>SVR</code></li>
+        <li>Clustering: <code>KMeans</code>, <code>DBSCAN</code>, <code>AgglomerativeClustering</code></li>
+        <li>Dimensionality reduction: <code>PCA</code>, <code>TSNE</code>, <code>LDA</code></li>
+        <li>Model selection: <code>train_test_split</code>, <code>cross_val_score</code>, <code>GridSearchCV</code>, <code>RandomizedSearchCV</code></li>
+        <li>Pipelines: <code>Pipeline</code>, <code>ColumnTransformer</code></li>
+        <li>Metrics: <code>accuracy_score</code>, <code>f1_score</code>, <code>confusion_matrix</code>, <code>roc_auc_score</code>, <code>mean_squared_error</code>, <code>r2_score</code></li>
+      </ul>
+      <div class="subtopic-title">Deep Learning Frameworks</div>
+      <ul class="item-list">
+        <li><strong>TensorFlow / Keras:</strong> tensors, eager execution, Sequential model, Functional API, custom layers, callbacks, <code>model.fit()</code>, <code>model.evaluate()</code>, <code>model.predict()</code></li>
+        <li><strong>PyTorch:</strong> tensors, autograd, <code>nn.Module</code>, DataLoader, Dataset, training loop, optimizers, loss functions</li>
+        <li>Neural network types: Dense/FC, CNN, RNN, LSTM, GRU, Transformer</li>
+        <li>Transfer learning: pretrained models, fine-tuning</li>
+        <li>GPU acceleration with CUDA</li>
+      </ul>
+      <div class="subtopic-title">NLP Libraries</div>
+      <ul class="item-list">
+        <li><code>NLTK</code> — tokenization, stemming, lemmatization, POS tagging, chunking</li>
+        <li><code>spaCy</code> — industrial NLP pipeline</li>
+        <li><code>Hugging Face transformers</code> — BERT, GPT, etc.</li>
+        <li><code>Gensim</code> — Word2Vec, Doc2Vec</li>
+      </ul>
+      <div class="subtopic-title">MLOps Tools</div>
+      <ul class="item-list">
+        <li><code>MLflow</code> — experiment tracking, model registry</li>
+        <li><code>DVC</code> — data version control</li>
+        <li><code>Weights & Biases</code> (wandb) — experiment tracking</li>
+        <li><code>joblib</code>, <code>pickle</code> — model serialization</li>
+        <li><code>ONNX</code> — model interoperability</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A13 -->
+  <div class="topic-card card-advanced" id="a13">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">45</span>
+      <span class="card-title">Web Frameworks</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Django (Full-Stack)</div>
+      <ul class="item-list">
+        <li>MVT (Model-View-Template) architecture</li>
+        <li>Project and app structure</li>
+        <li>Models and ORM: <code>models.Model</code>, fields, relationships (<code>ForeignKey</code>, <code>ManyToManyField</code>, <code>OneToOneField</code>)</li>
+        <li>Migrations: <code>makemigrations</code>, <code>migrate</code></li>
+        <li>Views: function-based views (FBV), class-based views (CBV)</li>
+        <li>URLs and routing: <code>urlpatterns</code>, <code>path()</code>, <code>include()</code></li>
+        <li>Templates: Django template language, template inheritance, filters, tags</li>
+        <li>Forms: <code>forms.Form</code>, <code>ModelForm</code>, validation</li>
+        <li>Django admin interface</li>
+        <li>Authentication system: users, groups, permissions, <code>login()</code>, <code>logout()</code></li>
+        <li>Middleware</li>
+        <li>Static and media files</li>
+        <li>Settings and configuration</li>
+        <li>Management commands</li>
+        <li>Signals</li>
+        <li>Caching</li>
+        <li>Django REST Framework (DRF): serializers, viewsets, routers, authentication, permissions, throttling, pagination</li>
+        <li>Channels — WebSockets and real-time</li>
+        <li>Celery integration — async tasks</li>
+      </ul>
+      <div class="subtopic-title">Flask (Microframework)</div>
+      <ul class="item-list">
+        <li>Application factory pattern</li>
+        <li>Routing with <code>@app.route()</code></li>
+        <li>Request and response objects</li>
+        <li>Templates with Jinja2</li>
+        <li>Blueprints</li>
+        <li>Flask-SQLAlchemy, Flask-Migrate</li>
+        <li>Flask-Login, Flask-WTF</li>
+        <li>Error handling</li>
+        <li>Application context and request context</li>
+        <li>Configuration management</li>
+      </ul>
+      <div class="subtopic-title">FastAPI</div>
+      <ul class="item-list">
+        <li>(See section 42 — APIs & REST for full coverage)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A14 -->
+  <div class="topic-card card-advanced" id="a14">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">46</span>
+      <span class="card-title">Design Patterns</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Creational Patterns</div>
+      <ul class="item-list">
+        <li>Singleton — one instance globally</li>
+        <li>Factory Method — object creation via subclasses</li>
+        <li>Abstract Factory — families of related objects</li>
+        <li>Builder — step-by-step object construction</li>
+        <li>Prototype — cloning objects</li>
+      </ul>
+      <div class="subtopic-title">Structural Patterns</div>
+      <ul class="item-list">
+        <li>Adapter — incompatible interface bridge</li>
+        <li>Decorator — adding behavior dynamically</li>
+        <li>Facade — simplified interface to subsystem</li>
+        <li>Proxy — placeholder/surrogate</li>
+        <li>Composite — tree structures</li>
+        <li>Bridge — abstraction from implementation</li>
+        <li>Flyweight — sharing common state</li>
+      </ul>
+      <div class="subtopic-title">Behavioral Patterns</div>
+      <ul class="item-list">
+        <li>Observer — event/notification system</li>
+        <li>Strategy — interchangeable algorithms</li>
+        <li>Command — encapsulating requests</li>
+        <li>Iterator — sequential access</li>
+        <li>Template Method — skeleton algorithm</li>
+        <li>State — behavior based on state</li>
+        <li>Chain of Responsibility — passing requests along chain</li>
+        <li>Mediator — centralized communication</li>
+        <li>Memento — undo/redo</li>
+        <li>Visitor — operations on elements without changing them</li>
+      </ul>
+      <div class="subtopic-title">Python-Specific Patterns</div>
+      <ul class="item-list">
+        <li>Mixin classes</li>
+        <li>Borg pattern (shared state)</li>
+        <li>Lazy initialization</li>
+        <li>Dependency injection</li>
+        <li>Registry pattern</li>
+        <li>Plugin architecture</li>
+        <li>Event-driven patterns</li>
+        <li>SOLID principles applied in Python</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A15 -->
+  <div class="topic-card card-advanced" id="a15">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">47</span>
+      <span class="card-title">Packaging & Deployment</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Publishing to PyPI</div>
+      <ul class="item-list">
+        <li>Project structure: <code>src/</code> layout</li>
+        <li><code>pyproject.toml</code> configuration</li>
+        <li>Building distributions: <code>python -m build</code></li>
+        <li>Wheel and sdist formats</li>
+        <li>Uploading to PyPI: <code>twine upload</code></li>
+        <li>TestPyPI for testing</li>
+        <li>Versioning: SemVer, CalVer</li>
+        <li><code>bump2version</code>, <code>python-semantic-release</code></li>
+      </ul>
+      <div class="subtopic-title">Docker & Containerization</div>
+      <ul class="item-list">
+        <li>Writing Dockerfiles for Python apps</li>
+        <li>Multi-stage builds</li>
+        <li>Docker Compose for multi-service apps</li>
+        <li>Best practices: non-root user, layer caching, slim images</li>
+        <li>Environment variables and secrets</li>
+      </ul>
+      <div class="subtopic-title">CI/CD</div>
+      <ul class="item-list">
+        <li>GitHub Actions — workflows, jobs, steps</li>
+        <li>GitLab CI/CD pipelines</li>
+        <li>Automated testing, linting, type checking</li>
+        <li>Automated deployment</li>
+        <li>Pre-commit hooks: <code>pre-commit</code> library</li>
+      </ul>
+      <div class="subtopic-title">Code Quality Tools</div>
+      <ul class="item-list">
+        <li>Linting: <code>pylint</code>, <code>flake8</code>, <code>ruff</code></li>
+        <li>Formatting: <code>black</code>, <code>autopep8</code>, <code>isort</code></li>
+        <li>Security: <code>bandit</code></li>
+        <li>Docstring checks: <code>pydocstyle</code></li>
+        <li>PEP 8 compliance</li>
+      </ul>
+      <div class="subtopic-title">Creating Executables</div>
+      <ul class="item-list">
+        <li><code>PyInstaller</code> — single-file executables</li>
+        <li><code>cx_Freeze</code>, <code>py2exe</code>, <code>Nuitka</code></li>
+        <li>Cross-platform distribution</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- A16 -->
+  <div class="topic-card card-advanced" id="a16">
+    <div class="card-header" onclick="toggle(this)">
+      <span class="card-num num-advanced">48</span>
+      <span class="card-title">Performance & Optimization</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body open">
+      <div class="subtopic-title">Profiling</div>
+      <ul class="item-list">
+        <li><code>cProfile</code> — deterministic profiler</li>
+        <li><code>profile</code> — pure Python profiler</li>
+        <li><code>pstats</code> — analyzing cProfile output</li>
+        <li><code>line_profiler</code> — line-by-line profiling</li>
+        <li><code>memory_profiler</code> — memory usage per line</li>
+        <li><code>py-spy</code> — sampling profiler</li>
+        <li><code>timeit</code> — timing small code snippets</li>
+        <li><code>time.perf_counter()</code> — manual timing</li>
+      </ul>
+      <div class="subtopic-title">Python Optimization Techniques</div>
+      <ul class="item-list">
+        <li>Use local variables over global (LEGB lookup cost)</li>
+        <li>List comprehensions vs loops performance</li>
+        <li>String concatenation: <code>join()</code> vs <code>+</code></li>
+        <li>Use built-in functions (implemented in C)</li>
+        <li>Avoid unnecessary attribute lookup</li>
+        <li><code>__slots__</code> for memory optimization</li>
+        <li>Caching and memoization: <code>functools.lru_cache</code></li>
+        <li>Generators for memory efficiency</li>
+        <li>Set/dict for O(1) lookups</li>
+      </ul>
+      <div class="subtopic-title">C Extensions & Compilation</div>
+      <ul class="item-list">
+        <li><code>Cython</code> — Python to C compiler</li>
+        <li><code>ctypes</code> — calling C libraries</li>
+        <li><code>cffi</code> — C Foreign Function Interface</li>
+        <li><code>SWIG</code> — wrapping C/C++ libraries</li>
+        <li><code>PyBind11</code> — C++11 Python bindings</li>
+      </ul>
+      <div class="subtopic-title">Alternative Implementations</div>
+      <ul class="item-list">
+        <li><code>PyPy</code> — JIT-compiled Python (3-10x faster)</li>
+        <li><code>Numba</code> — JIT for numerical Python code (<code>@jit</code>, <code>@njit</code>)</li>
+        <li><code>Nuitka</code> — Python to C compiler</li>
+      </ul>
+      <div class="subtopic-title">Parallel & Distributed Computing</div>
+      <ul class="item-list">
+        <li><code>Dask</code> — parallel computing, big data</li>
+        <li><code>Ray</code> — distributed computing framework</li>
+        <li><code>Celery</code> — distributed task queue</li>
+        <li><code>joblib</code> — simple parallel loops</li>
+        <li>NumPy vectorization for parallel array operations</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    Built with ❤️ | <span>Python Complete Roadmap 2025</span> | All Rights Reserved
+  </footer>
+</div>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function downloadHTML() {
+  const content = document.documentElement.outerHTML;
+  const blob = new Blob([content], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Python_Complete_Roadmap_2025.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Open all cards by default for full preview
+document.querySelectorAll('.card-header').forEach(h => {
+  // already open
+});
+</script>
+</body>
+</html>

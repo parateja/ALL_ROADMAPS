@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 All Roadmaps — Navigation Hub</title>
+<meta name="description" content="Quick navigation hub for all developer roadmaps: Git, HTML, CSS, JavaScript, React, Python, NumPy, Pandas, Matplotlib, Seaborn, SQL">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06010f;
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.1);
+    --text: #e8e8ff;
+    --muted: #8888aa;
+    /* Category colors */
+    --vc:  #f5a623;
+    --fe:  #00d4ff;
+    --be:  #a259ff;
+    --db:  #00ffb3;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated BG */
+  .bg-mesh {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 10% 15%, rgba(162,89,255,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 45% at 90% 85%, rgba(0,212,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0,255,179,0.06) 0%, transparent 60%),
+      linear-gradient(135deg, #06010f 0%, #0a0020 50%, #020112 100%);
+    animation: bgpulse 14s ease-in-out infinite alternate;
+  }
+  @keyframes bgpulse {
+    0%   { filter: hue-rotate(0deg) brightness(1); }
+    100% { filter: hue-rotate(25deg) brightness(1.05); }
+  }
+
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%,  rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 38%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 83% 65%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 23% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 57% 88%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 4%  52%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 12%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 55%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 46% 32%, rgba(255,255,255,0.45) 0%, transparent 100%);
+  }
+
+  /* Progress bar */
+  #progressBar {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--vc), var(--fe), var(--be), var(--db));
+    z-index: 9999; transition: width 0.15s;
+  }
+
+  /* Back to top */
+  #backTop {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #a259ff, #00d4ff);
+    border: none; border-radius: 50%;
+    color: #fff; font-size: 1.2rem;
+    cursor: pointer; display: none; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(162,89,255,0.5);
+    z-index: 999; transition: transform 0.2s;
+  }
+  #backTop:hover { transform: scale(1.12); }
+  #backTop.show { display: flex; }
+
+  /* Layout */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 1140px; margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 80px 0 60px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(162,89,255,0.3), rgba(0,212,255,0.3));
+    border: 1px solid rgba(162,89,255,0.5);
+    color: #c4b5fd;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 7px 24px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    box-shadow: 0 0 30px rgba(162,89,255,0.2);
+  }
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #00d4ff 35%, #a259ff 70%, #ff6bdf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 40px rgba(162,89,255,0.25));
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.75;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+  .stat-chip {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    padding: 10px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    display: flex; align-items: center; gap: 10px;
+    backdrop-filter: blur(10px);
+  }
+  .stat-num {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+  }
+
+  /* Search */
+  .search-wrap {
+    position: relative; max-width: 520px; margin: 0 auto 60px;
+  }
+  .search-icon {
+    position: absolute; left: 18px; top: 50%;
+    transform: translateY(-50%); font-size: 1rem;
+    color: var(--muted); pointer-events: none;
+  }
+  #searchInput {
+    width: 100%;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    padding: 16px 22px 16px 50px;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    backdrop-filter: blur(14px);
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  #searchInput::placeholder { color: var(--muted); }
+  #searchInput:focus {
+    border-color: #a259ff;
+    box-shadow: 0 0 0 3px rgba(162,89,255,0.18);
+  }
+
+  /* Category section */
+  .cat-section { margin-bottom: 72px; }
+  .cat-header {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 28px;
+    padding: 22px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    position: relative; overflow: hidden;
+  }
+  .cat-header::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; border-radius: 4px 0 0 4px;
+    background: var(--cat-color);
+  }
+  .cat-icon { font-size: 2rem; }
+  .cat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cat-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--cat-color);
+  }
+  .cat-count {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; color: var(--muted);
+  }
+
+  /* Cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  /* Roadmap card */
+  .roadmap-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    padding: 28px 26px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex; flex-direction: column; gap: 14px;
+    backdrop-filter: blur(16px);
+    transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
+    position: relative; overflow: hidden;
+  }
+  .roadmap-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .roadmap-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cat-color), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .roadmap-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--cat-color);
+    border-color: var(--cat-color);
+  }
+  .roadmap-card:hover::after { opacity: 1; }
+
+  .card-emoji { font-size: 2.4rem; line-height: 1; }
+  .card-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--cat-color);
+    line-height: 1.25;
+  }
+  .card-desc {
+    font-size: 0.83rem; color: var(--muted);
+    line-height: 1.6; flex: 1;
+  }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 4px;
+  }
+  .card-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; padding: 4px 12px;
+    border-radius: 100px; text-transform: uppercase;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--muted); letter-spacing: 0.08em;
+  }
+  .card-arrow {
+    font-size: 1.1rem; color: var(--cat-color);
+    transition: transform 0.25s;
+  }
+  .roadmap-card:hover .card-arrow { transform: translateX(6px); }
+
+  /* No results */
+  #noResults {
+    display: none; text-align: center;
+    padding: 60px 20px; color: var(--muted);
+    font-family: 'Space Mono', monospace; font-size: 0.85rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 40px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.12em;
+    border-top: 1px solid var(--glass-border);
+    position: relative; z-index: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .cat-header { padding: 18px 20px; }
+    .stats-row { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+<div class="bg-mesh"></div>
+<div class="stars"></div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">⚡ Developer Roadmaps 2026</div>
+    <h1>All Roadmaps<br>Navigation Hub</h1>
+    <p>Every learning path in one place. Jump instantly to any roadmap — from Git basics to advanced SQL, front-end to data science.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-chip">
+      <span class="stat-num" style="color:var(--vc)">1</span>
+      <span>Version Control</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" style="color:var(--fe)">4</span>
+      <span>Front-End</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" style="color:var(--be)">5</span>
+      <span>Back-End</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" style="color:var(--db)">1</span>
+      <span>Databases</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-num" style="color:#fff">11</span>
+      <span>Total Roadmaps</span>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search roadmaps…" autocomplete="off">
+  </div>
+
+  <div id="noResults">😶 No roadmaps match your search.</div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- 0 · VERSION CONTROL                   -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="cat-section" id="cat-vc" style="--cat-color: var(--vc)">
+    <div class="cat-header">
+      <span class="cat-icon">🔀</span>
+      <div>
+        <div class="cat-label">Category 0</div>
+        <div class="cat-title">Version Control</div>
+      </div>
+      <div class="cat-count">1 Roadmap</div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="roadmap-card" href="0_VERSION_CONTROL/1_GIT&GITHUB.HTML" data-name="git github version control branching commits push pull">
+        <span class="card-emoji">🐙</span>
+        <span class="card-num">0 · 01</span>
+        <div class="card-title">Git &amp; GitHub</div>
+        <div class="card-desc">Complete command reference — config, staging, commits, branching, merging, remotes, stash, rebase &amp; GitHub workflows. 7-day structured plan.</div>
+        <div class="card-footer">
+          <span class="card-badge">7 Days</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- 1 · FRONT-END                         -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="cat-section" id="cat-fe" style="--cat-color: var(--fe)">
+    <div class="cat-header">
+      <span class="cat-icon">🖥️</span>
+      <div>
+        <div class="cat-label">Category 1</div>
+        <div class="cat-title">Front-End</div>
+      </div>
+      <div class="cat-count">4 Roadmaps</div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="roadmap-card" href="1_FRONT_END/1_HTML_ROADMAP.HTML" data-name="html markup structure tags forms tables semantic elements">
+        <span class="card-emoji">🌐</span>
+        <span class="card-num">1 · 01</span>
+        <div class="card-title">HTML</div>
+        <div class="card-desc">Every HTML element, attribute &amp; semantic concept. Beginner → Advanced covering forms, tables, media, accessibility &amp; modern HTML5 APIs.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="1_FRONT_END/2_CSS_ROADMAP.HTML" data-name="css styling flexbox grid animations responsive design selectors">
+        <span class="card-emoji">🎨</span>
+        <span class="card-num">1 · 02</span>
+        <div class="card-title">CSS</div>
+        <div class="card-desc">Complete CSS reference — selectors, box model, flexbox, grid, animations, transitions, responsive design, variables &amp; modern layout techniques.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="1_FRONT_END/3_JAVASCRIPT_ROADMAP.HTML" data-name="javascript js dom events async promises es6 closures">
+        <span class="card-emoji">⚡</span>
+        <span class="card-num">1 · 03</span>
+        <div class="card-title">JavaScript</div>
+        <div class="card-desc">Full JS roadmap — variables, functions, DOM, events, ES6+, async/await, closures, prototypes, modules &amp; browser APIs.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="1_FRONT_END/4_REACT_JS_ROADMAP.HTML" data-name="react reactjs components hooks state props jsx context redux">
+        <span class="card-emoji">⚛️</span>
+        <span class="card-num">1 · 04</span>
+        <div class="card-title">React JS</div>
+        <div class="card-desc">Complete React roadmap — JSX, components, props, state, hooks (useState, useEffect, useContext), routing, Redux &amp; performance optimization.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- 2 · BACK-END / DATA SCIENCE           -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="cat-section" id="cat-be" style="--cat-color: var(--be)">
+    <div class="cat-header">
+      <span class="cat-icon">🐍</span>
+      <div>
+        <div class="cat-label">Category 2</div>
+        <div class="cat-title">Back-End &amp; Data Science</div>
+      </div>
+      <div class="cat-count">5 Roadmaps</div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="roadmap-card" href="2_BACK_END/1_PYTHON_ROADMAP.HTML" data-name="python programming oop functions classes decorators generators">
+        <span class="card-emoji">🐍</span>
+        <span class="card-num">2 · 01</span>
+        <div class="card-title">Python</div>
+        <div class="card-desc">Complete Python guide — syntax, data types, OOP, file I/O, error handling, decorators, generators, comprehensions &amp; standard library.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="2_BACK_END/2_NUMPY_ROADMAP.HTML" data-name="numpy arrays math numerical computing ndarray broadcasting">
+        <span class="card-emoji">🔢</span>
+        <span class="card-num">2 · 02</span>
+        <div class="card-title">NumPy</div>
+        <div class="card-desc">Numerical computing with NumPy — ndarray creation, indexing, slicing, broadcasting, math operations, linear algebra &amp; random number generation.</div>
+        <div class="card-footer">
+          <span class="card-badge">Data Science</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="2_BACK_END/3_PANDAS_ROADMAP.HTML" data-name="pandas dataframe data analysis series csv merging groupby">
+        <span class="card-emoji">🐼</span>
+        <span class="card-num">2 · 03</span>
+        <div class="card-title">Pandas</div>
+        <div class="card-desc">Data manipulation with Pandas — DataFrame &amp; Series, reading data, filtering, groupby, merging, pivoting, time series &amp; data cleaning.</div>
+        <div class="card-footer">
+          <span class="card-badge">Data Science</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="2_BACK_END/4_MATPLOTLIB_ROADMAP.HTML" data-name="matplotlib plotting charts graphs visualization data science">
+        <span class="card-emoji">📊</span>
+        <span class="card-num">2 · 04</span>
+        <div class="card-title">Matplotlib</div>
+        <div class="card-desc">Data visualization with Matplotlib — line, bar, scatter, pie charts, subplots, figure styling, annotations, 3D plots &amp; customization.</div>
+        <div class="card-footer">
+          <span class="card-badge">Data Science</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="roadmap-card" href="2_BACK_END/5_SEABORN_ROADMAP.HTML" data-name="seaborn statistical visualization heatmap boxplot regression">
+        <span class="card-emoji">🌊</span>
+        <span class="card-num">2 · 05</span>
+        <div class="card-title">Seaborn</div>
+        <div class="card-desc">Statistical visualization with Seaborn — distribution plots, categorical plots, heatmaps, pairplots, regression &amp; themes on top of Matplotlib.</div>
+        <div class="card-footer">
+          <span class="card-badge">Data Science</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- 3 · DATABASES                         -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="cat-section" id="cat-db" style="--cat-color: var(--db)">
+    <div class="cat-header">
+      <span class="cat-icon">🗄️</span>
+      <div>
+        <div class="cat-label">Category 3</div>
+        <div class="cat-title">Databases</div>
+      </div>
+      <div class="cat-count">1 Roadmap</div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="roadmap-card" href="3_DATABASES/1_SQL_ROADMAP.HTML" data-name="sql database queries select join aggregate subquery normalization">
+        <span class="card-emoji">🗄️</span>
+        <span class="card-num">3 · 01</span>
+        <div class="card-title">SQL</div>
+        <div class="card-desc">Complete SQL reference — SELECT, WHERE, JOINs, GROUP BY, subqueries, window functions, indexes, normalization &amp; database design.</div>
+        <div class="card-footer">
+          <span class="card-badge">Beginner → Advanced</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</div><!-- /wrapper -->
+
+<button id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<footer>
+  <div class="bg-mesh" style="position:relative;display:inline;"></div>
+  🚀 Developer Roadmaps Hub &nbsp;·&nbsp; 11 Roadmaps &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+  // Progress bar + back to top
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('backTop').classList.toggle('show', el.scrollTop > 400);
+  });
+
+  // Search
+  const input = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.roadmap-card');
+  const sections = document.querySelectorAll('.cat-section');
+  const noResults = document.getElementById('noResults');
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    let anyVisible = false;
+
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name') || '';
+      const title = card.querySelector('.card-title').textContent.toLowerCase();
+      const desc  = card.querySelector('.card-desc').textContent.toLowerCase();
+      const match = !q || name.includes(q) || title.includes(q) || desc.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) anyVisible = true;
+    });
+
+    // Hide sections with no visible cards
+    sections.forEach(sec => {
+      const visible = [...sec.querySelectorAll('.roadmap-card')].some(c => c.style.display !== 'none');
+      sec.style.display = visible ? '' : 'none';
+    });
+
+    noResults.style.display = anyVisible ? 'none' : 'block';
+  });
+</script>
+</body>
+</html>
